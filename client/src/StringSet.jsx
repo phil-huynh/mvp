@@ -1,17 +1,18 @@
 import React from 'react';
 import String from './String.jsx';
 
-var StringSet = ({strings, allStrings})  => (
-  <div>
-    <div>
+var StringSet = ({strings, allStrings, scale})  => {
+  return (
+    <div className="neck">
       {strings.map((string) => (
         <String
-          allStrings={allStrings}
           string={string}
+          allStrings={allStrings}
+          scale={scale}
         />
       ))}
     </div>
-  </div>
-)
+  )
+}
 
 export default StringSet;

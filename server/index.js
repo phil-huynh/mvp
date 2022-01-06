@@ -25,12 +25,29 @@ app.get('/scales', (req, res) => {
       key = `${key[0]}\u266F`
     }
   let scale = req.query.scale
-  res.json(Music.scales[key][scale])
+  var objKey = scale.split(' ')
+  if (objKey.length > 1) {
+    for (var i = 1; i < objKey.length; i++) {
+      var capital = objKey[i].slice(0, 1)
+      var rest = objKey[i].slice(1)
+      capital = capital.toUpperCase();
+      objKey[i] = `${capital}${rest}`
+    }
+    objKey = objKey.join('')
+  } else {
+    objKey = scale;
+  }
+  res.json(Music.scales[key][objKey])
 })
 
 app.get('/strings', (req, res) => {
   res.json(Music.strings)
 })
+
+app.get('/choices', (req, res) => {
+  res.json(Music.scaleChoices)
+})
+
 
 app.post('/notes', (req, res) => {
   const { user, notes } = req.body

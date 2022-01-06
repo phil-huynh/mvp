@@ -21,20 +21,21 @@ class App extends React.Component {
     this.state = {
       strings: {},
       currentStrings: ['E', 'A', 'D', 'G', 'B', 'E'],
+      choices: [],
       scaleType:'major',
       tonic: '',
       scale: [],
       chords: {},
-      sevenths: true,
-      seventhsButton: 'Show Triads',
-      second: true,
-      secondButton: 'Just One Scale',
+      sevenths: false,
+      seventhsButton: 'Show 7th Chords',
+      second: false,
+      secondButton: 'Compare a scale',
       scaleType2: 'major',
       tonic2: '',
       scale2: [],
       chords2: {},
-      sevenths2: true,
-      moreSeventhsButton: 'Show Triads',
+      sevenths2: false,
+      moreSeventhsButton: 'Show 7th Chords',
       username: '',
       noteBody: ''
 
@@ -55,7 +56,7 @@ class App extends React.Component {
   componentDidMount () {
     this.getStrings();
     this.getScale('C', 'major')
-    this.getScale2('E', 'harmonicMinor')
+    this.getScale2('C', 'major')
   }
 
   getStrings () {
@@ -63,6 +64,18 @@ class App extends React.Component {
       .then((res) => {
         this.setState({
           strings: res.data
+        })
+      })
+      .catch((err) => {
+        console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err)
+      })
+  }
+
+  getChoices () {
+    axios.get('/choices')
+      .then((res) => {
+        this.setState({
+          choices: res.data
         })
       })
       .catch((err) => {
@@ -132,6 +145,7 @@ class App extends React.Component {
     })
     this.getScale(key, scale)
   }
+
   handleTonicChange2(e) {
     var key = e.target.value
     var scale = this.state.scaleType2
@@ -156,7 +170,6 @@ class App extends React.Component {
     this.setState({
       second: true,
       secondButton: 'Just One Scale'
-
     })
   }
 
@@ -212,6 +225,26 @@ class App extends React.Component {
                 <option value='lydian'>Lydian</option>
                 <option value='mixolydian'>Mixolydian</option>
                 <option value='locrian'>Locrian</option>
+                <option value='persian'>Persian</option>
+                <option value='byzantine'>Byzantine</option>
+                <option value='hungarian gypsy minor'>Hungarian Gypsy Minor</option>
+                <option value='romanian'>Romanian</option>
+                <option value='lydian dominant'>Lydian Dominant</option>
+                <option value='ukrainian dorian'>Ukrainian Dorian</option>
+                <option value='phrygian dominant'>Phrygian Dominant</option>
+                <option value='lydian augmented'>Lydian Augmented</option>
+                <option value='locrian sharp6'>Locrian #6</option>
+                <option value='ionian sharp5'>Ionian #5</option>
+                <option value='phrygian dorian'>Phrygian Dorian</option>
+                <option value='mixolydian flat13'>Mixolydian b13</option>
+                <option value='aeoleon flat5'>Aeoleon b13</option>
+                <option value='altered'>Altered Scale</option>
+                <option value='gypsy'>Gypsy Scale</option>
+                <option value='hungarian major'>Hungarian Major</option>
+                <option value='neapolitan major'>Neapolitan Major</option>
+                <option value='neapolitan minor'>Neapolitan</option>
+                <option value='arabian'>Arabian</option>
+                <option value='javanese'>Javanese</option>
               </select>
             </span>
           </div>
@@ -235,7 +268,7 @@ class App extends React.Component {
             </span>
           <span className="scale_options_right">
               <select onChange={(e) => {this.handleScaleChange2(e)}}>
-                <option selected value='major'>Major</option>
+              <option selected value='major'>Major</option>
                 <option value='naturalMinor'>Natural Minor</option>
                 <option value='harmonicMinor'>Harmonic Minor</option>
                 <option value='melodicMinor'>Melodic Minor</option>
@@ -244,6 +277,26 @@ class App extends React.Component {
                 <option value='lydian'>Lydian</option>
                 <option value='mixolydian'>Mixolydian</option>
                 <option value='locrian'>Locrian</option>
+                <option value='persian'>Persian</option>
+                <option value='byzantine'>Byzantine</option>
+                <option value='hungarian gypsy minor'>Hungarian Gypsy Minor</option>
+                <option value='romanian'>Romanian</option>
+                <option value='lydian dominant'>Lydian Dominant</option>
+                <option value='ukrainian dorian'>Ukrainian Dorian</option>
+                <option value='phrygian dominant'>Phrygian Dominant</option>
+                <option value='lydian augmented'>Lydian Augmented</option>
+                <option value='locrian sharp6'>Locrian #6</option>
+                <option value='ionian sharp5'>Ionian #5</option>
+                <option value='phrygian dorian'>Phrygian Dorian</option>
+                <option value='mixolydian flat13'>Mixolydian b13</option>
+                <option value='aeoleon flat5'>Aeoleon b13</option>
+                <option value='altered'>Altered Scale</option>
+                <option value='gypsy'>Gypsy Scale</option>
+                <option value='hungarian major'>Hungarian Major</option>
+                <option value='neapolitan major'>Neapolitan Major</option>
+                <option value='neapolitan minor'>Neapolitan</option>
+                <option value='arabian'>Arabian</option>
+                <option value='javanese'>Javanese</option>
               </select>
             </span>
           </div>
@@ -251,15 +304,11 @@ class App extends React.Component {
         <div className="middle">
           <div className="inner_middle">
             <div className="stringbox">
-              <div className="inner_stringbox">
-                <div className="neck">
-
-                <StringSet
-                  allStrings={this.state.strings}
-                  strings={this.state.currentStrings}
-                />
-              </div>
-            </div>
+              <StringSet
+                allStrings={this.state.strings}
+                strings={this.state.currentStrings}
+                scale={this.state.scale}
+              />
             </div>
           </div>
         </div>
@@ -333,36 +382,7 @@ class App extends React.Component {
             </React.Fragment>
           </div>
           <div className="bottom_right">
-            <form>
-              <h2 className="notes">Notes</h2>
-              <label className="user">
-                Username
-                <input
-                  className="user_name"
-                  type="text"
-                  maxLength="60"
-                  name="username"
-                  value={this.state.username}
-                  onChange={(e) => {this.handleChange(e)}}
-                />
-              </label>
-                <textarea
-                  className="notes_input"
-                  cols="25"
-                  rows="20"
-                  name="noteBody"
-                  value={this.state.noteBody}
-                  onChange={this.handleChange}>
-                </textarea>
-                <button onClick={(e) => this.handleSubmit(e)}
-                  className="notes_submit"
-                  id="submitNotes"
-                  >Submit
-                </button>
-            </form>
-
           </div>
-
         </div>
       </div>
     )

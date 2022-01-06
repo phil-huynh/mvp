@@ -6,12 +6,14 @@ const dblFlat = '\u{1D12B}';
 const whiteNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 
 const clockwise = ['G', 'D', 'A', 'E', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}`, `D${sharp}`, `A${sharp}`,
-    `E${sharp}`, `B${sharp}`];
+`E${sharp}`, `B${sharp}`];
 
 const counterClockwise = ["F", `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`,
-    `B${dblFlat}`, `E${dblFlat}`, `A${dblFlat}`, `D${dblFlat}`]
+`B${dblFlat}`, `E${dblFlat}`, `A${dblFlat}`, `D${dblFlat}`]
 
 var chromaticScale = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
+
+var allScales = {};
 
 var sharpNote = (note) => {
   if (note.length === 1 || note.slice(note.length -2) === `${dblSharp}`) {
@@ -120,7 +122,6 @@ var shiftNotes = (note, scale) => {
   return shiftedScale;
 }
 
-var allScales = {};
 
 var initiateScaleObjects = () => {
   allScales.C = {}
@@ -406,7 +407,7 @@ var findLabels  = (root, tonic) => {
   return labels;
 }
 
-var makeChordsFor7NoteScale = (scale, tonic, name) => {
+var makeChordsFor7NoteScale = (scale, tonic) => {
   let expand = scale.concat(scale.slice())
   let extended = expand.concat(scale.slice())
   var chords = {};
@@ -518,8 +519,8 @@ var makeChordsFor7NoteScale = (scale, tonic, name) => {
     }
 
     if (chordQ === 'augmented' && labelsSeven.seventhChordNotation === 'maj7' ) {
-      seventhName = `${chordName}maj7`
-      seventhLabel = `${chordLabel}maj7`
+      seventhName = `${chordName}(maj7)`
+      seventhLabel = `${chordLabel}(maj7)`
       seventhChord = ' augmented major 7'
     }
 
@@ -579,155 +580,79 @@ var makeChordsFor7NoteScale = (scale, tonic, name) => {
   return chords;
 }
 
-var addMajorScale = () => {
-  for (var tonic in allScales) {
-    allScales[tonic].major = {};
-    allScales[tonic].major.tonic = tonic
-    allScales[tonic].major.type = 'major'
-    allScales[tonic].major.scale = allScales[tonic].natScaleDegrees.slice()
-    allScales[tonic].major.chords = makeChordsFor7NoteScale(allScales[tonic].major.scale, tonic)
+var scaleChoices = [];
 
-  }
-}
 
-var addNatMinor = () => {
-  for (var tonic in allScales) {
-    allScales[tonic].naturalMinor = {};
-    allScales[tonic].naturalMinor.tonic = tonic;
-    allScales[tonic].naturalMinor.type = 'natural minor';
-    allScales[tonic].naturalMinor.scale = allScales[tonic].natScaleDegrees.map((note, index) => {
-      var flatten = {2: true, 5: true, 6:true}
-      if (flatten[index]) {
-        note = flatNote(note)
-      }
-      return note;
-    })
-    allScales[tonic].naturalMinor.chords = makeChordsFor7NoteScale(allScales[tonic].naturalMinor.scale, tonic)
+var add7NoteScale = (name, sharpen, flatten) => {
+  scaleChoices.push(name)
+  var objKey = name.split(' ')
+  if (objKey.length > 1) {
+    for (var i = 1; i < objKey.length; i++) {
+      var capital = objKey[i].slice(0, 1)
+      var rest = objKey[i].slice(1)
+      capital = capital.toUpperCase();
+      objKey[i] = `${capital}${rest}`
+    }
+    objKey = objKey.join('')
+  } else {
+    objKey = name;
   }
-}
-
-var addHarmonicMinor = () => {
   for (var tonic in allScales) {
-    allScales[tonic].harmonicMinor = {};
-    allScales[tonic].harmonicMinor.tonic = tonic;
-    allScales[tonic].harmonicMinor.type = 'harmonic minor';
-    allScales[tonic].harmonicMinor.scale = allScales[tonic].natScaleDegrees.map((note, index) => {
-      var flatten = {2: true, 5: true}
-      if (flatten[index]) {
-        note = flatNote(note)
-      }
-      return note;
-    })
-    allScales[tonic].harmonicMinor.chords = makeChordsFor7NoteScale(allScales[tonic].harmonicMinor.scale, tonic)
-  }
-}
-
-var addMelodicMinor = () => {
-  for (var tonic in allScales) {
-    allScales[tonic].melodicMinor = {};
-    allScales[tonic].melodicMinor.tonic = tonic;
-    allScales[tonic].melodicMinor.type = 'melodic minor';
-    allScales[tonic].melodicMinor.scale = allScales[tonic].natScaleDegrees.map((note, index) => {
-      var flatten = {2: true}
-      if (flatten[index]) {
-        note = flatNote(note)
-      }
-      return note;
-    })
-    allScales[tonic].melodicMinor.chords = makeChordsFor7NoteScale(allScales[tonic].melodicMinor.scale, tonic)
-  }
-}
-var addDorian = () => {
-  for (var tonic in allScales) {
-    allScales[tonic].dorian = {};
-    allScales[tonic].dorian.tonic = tonic;
-    allScales[tonic].dorian.type = 'dorian mode';
-    allScales[tonic].dorian.scale = allScales[tonic].natScaleDegrees.map((note, index) => {
-      var flatten = {2: true, 6: true}
-      if (flatten[index]) {
-        note = flatNote(note)
-      }
-      return note;
-    })
-    allScales[tonic].dorian.chords = makeChordsFor7NoteScale(allScales[tonic].dorian.scale, tonic)
-  }
-}
-
-var addPhrygian = () => {
-  for (var tonic in allScales) {
-    allScales[tonic].phrygian = {};
-    allScales[tonic].phrygian.tonic = tonic;
-    allScales[tonic].phrygian.type = 'phrygian mode';
-    allScales[tonic].phrygian.scale = allScales[tonic].natScaleDegrees.map((note, index) => {
-      var flatten = {1: true, 2: true, 5: true, 6:true}
-      if (flatten[index]) {
-        note = flatNote(note)
-      }
-      return note;
-    })
-    allScales[tonic].phrygian.chords = makeChordsFor7NoteScale(allScales[tonic].phrygian.scale, tonic)
-  }
-}
-
-var addLydian = () => {
-  for (var tonic in allScales) {
-    allScales[tonic].lydian = {};
-    allScales[tonic].lydian.tonic = tonic;
-    allScales[tonic].lydian.type = 'lydian mode';
-    allScales[tonic].lydian.scale = allScales[tonic].natScaleDegrees.map((note, index) => {
-      var sharpen = {3: true}
+    allScales[tonic][objKey] = {};
+    allScales[tonic][objKey].tonic = tonic
+    allScales[tonic][objKey].type = name
+    allScales[tonic][objKey].scale = allScales[tonic].natScaleDegrees.map((note, index) => {
       if (sharpen[index]) {
         note = sharpNote(note)
       }
-      return note;
-    })
-    allScales[tonic].lydian.chords = makeChordsFor7NoteScale(allScales[tonic].lydian.scale, tonic)
-  }
-}
-
-var addMixolydian = () => {
-  for (var tonic in allScales) {
-    allScales[tonic].mixolydian = {};
-    allScales[tonic].mixolydian.tonic = tonic;
-    allScales[tonic].mixolydian.type = 'mixolydian mode';
-    allScales[tonic].mixolydian.scale = allScales[tonic].natScaleDegrees.map((note, index) => {
-      var flatten = {6: true}
       if (flatten[index]) {
         note = flatNote(note)
       }
       return note;
     })
-    allScales[tonic].mixolydian.chords = makeChordsFor7NoteScale(allScales[tonic].mixolydian.scale, tonic)
+    allScales[tonic][objKey].chords = makeChordsFor7NoteScale(allScales[tonic][objKey].scale, tonic)
   }
 }
 
-var addLocrian = () => {
-  for (var tonic in allScales) {
-    allScales[tonic].locrian = {};
-    allScales[tonic].locrian.tonic = tonic;
-    allScales[tonic].locrian.type = 'locrian mode';
-    allScales[tonic].locrian.scale = allScales[tonic].natScaleDegrees.map((note, index) => {
-      var flatten = {1: true, 2: true, 4: true, 5: true, 6:true}
-      if (flatten[index]) {
-        note = flatNote(note)
-      }
-      return note;
-    })
-    allScales[tonic].locrian.chords = makeChordsFor7NoteScale(allScales[tonic].locrian.scale, tonic)
-  }
-}
-
-
-addMajorScale()
-addNatMinor()
-addHarmonicMinor()
-addMelodicMinor()
-addDorian()
-addPhrygian()
-addLydian()
-addMixolydian()
-addLocrian()
-
+add7NoteScale('natural minor', {}, {2: true, 5: true, 6:true})
+add7NoteScale('harmonic minor', {}, {2: true, 5: true})
+add7NoteScale('major', {}, {})
+add7NoteScale('melodic minor', {}, {2: true})
+add7NoteScale('dorian', {}, {2: true, 6: true})
+add7NoteScale('phrygian', {}, {1: true, 2: true, 5: true, 6:true})
+add7NoteScale('lydian', {3: true}, {})
+add7NoteScale('mixolydian', {}, {3: true})
+add7NoteScale('locrian', {}, {1: true, 2: true, 4: true, 5: true, 6:true})
+add7NoteScale('persian', {}, {1: true, 4: true, 5: true})
+add7NoteScale('byzantine', {}, {1: true, 5: true})
+add7NoteScale('hungarian gypsy minor', {3: true}, {2: true, 5: true})
+add7NoteScale('romanian', {3: true}, {2: true, 6: true})
+add7NoteScale('lydian dominant', {3: true}, {6: true})
+add7NoteScale('ukrainian dorian', {3: true}, {2: true, 6: true})
+add7NoteScale('phrygian dominant', {}, {1: true, 5: true, 6: true})
+add7NoteScale('lydian augmented', {3: true, 4: true}, {})
+add7NoteScale('locrian sharp6', {}, {1: true, 2: true, 4: true, 6: true})
+add7NoteScale('ionian sharp5', {4: true}, {})
+add7NoteScale('phrygian dorian', {}, {1: true, 2: true, 6: true})
+add7NoteScale('mixolydian flat13', {}, {5: true, 6: true})
+add7NoteScale('aeoleon flat5', {}, {2: true, 4: true, 5: true, 6: true})
+add7NoteScale('altered', {}, {1: true, 2: true, 3: true, 4: true, 5: true, 6:true})
+add7NoteScale('gypsy', {}, {1: true, 5: true})
+add7NoteScale('hungarian major', {1: true, 3: true}, {6: true})
+add7NoteScale('neapolitan major', {}, {1: true, 2: true})
+add7NoteScale('neapolitan minor', {}, {1: true, 2: true, 5: true})
+add7NoteScale('arabian', {}, {4: true, 5: true, 6: true})
+add7NoteScale('javanese', {}, {1: true, 2: true})
+// add7NoteScale('major', {}, {})
+// add7NoteScale('major', {}, {})
+// add7NoteScale('major', {}, {})
+// add7NoteScale('major', {}, {})
+// add7NoteScale('major', {}, {})
+// add7NoteScale('major', {}, {})
+// add7NoteScale('major', {}, {})
+// add7NoteScale('major', {}, {})
+// add7NoteScale('major', {}, {})
+// add7NoteScale('major', {}, {})
 
 var makeStrings = (array) => {
   var string = {};
@@ -748,3 +673,5 @@ var strings= makeStrings(chromaticScale);
 
   module.exports.scales = allScales
   module.exports.strings = strings
+  module.exports.intervals = intervals
+  module.exports.scaleChoices = scaleChoices
