@@ -52,10 +52,8 @@ var findEnharmonicEquivalent = (note) => {
   var indexOfNoteBase = chromaticScale.indexOf(noteBase);
   var distanceToMove = 0;
   var enharmonicEquivalent = ""
-  for (var i = 0; i < note.length; i++) {
-      if (i === 0) {
-          continue;
-      } else if (note[i] === `${flat}`) {
+  for (var i = 1; i < note.length; i++) {
+      if (note[i] === `${flat}`) {
           distanceToMove--;
       } else if (note[i] === `${sharp}`) {
           distanceToMove++;
@@ -97,6 +95,7 @@ var findEnharmonicEquivalent = (note) => {
   return enharmonicEquivalent;
 }
 
+
 var shiftNotes = (note, scale) => {
   var shiftedScale = [];
   if (scale[0] === note) {
@@ -121,7 +120,6 @@ var shiftNotes = (note, scale) => {
 
   return shiftedScale;
 }
-
 
 var initiateScaleObjects = () => {
   allScales.C = {}
@@ -675,3 +673,31 @@ var strings= makeStrings(chromaticScale);
   module.exports.strings = strings
   module.exports.intervals = intervals
   module.exports.scaleChoices = scaleChoices
+
+
+
+// console.log(C)
+// console.log(D)
+// console.log(E)
+// console.log(F)
+// console.log(G)
+// console.log(A)
+// console.log(B)
+// console.log(Fsharp)
+// console.log(Csharp)
+// console.log(Gsharp)
+// console.log(Dsharp)
+// console.log(Asharp)
+// console.log(Esharp)
+// console.log(Bsharp)
+// console.log(Bflat)
+// console.log(Eflat)
+// console.log(Aflat)
+// console.log(Dflat)
+// console.log(Gflat)
+// console.log(Cflat)
+// console.log(Fflat)
+// console.log(BdblFlat)
+// console.log(EdblFlat)
+// console.log(AdblFlat)
+// console.log(DdblFlat)
