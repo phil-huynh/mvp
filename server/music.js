@@ -701,3 +701,12 @@ var strings= makeStrings(chromaticScale);
 // console.log(EdblFlat)
 // console.log(AdblFlat)
 // console.log(DdblFlat)
+
+
+// todo function to read chords
+/*
+  spell chords types in C
+  funtion to invert
+  find intervals and push to an array
+  save array as a key in an object with the value being the name/type
+*/
