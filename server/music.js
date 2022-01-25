@@ -14,6 +14,7 @@ const counterClockwise = ["F", `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `
 var chromaticScale = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
 
 var allScales = {};
+var chordTypes = {};
 
 var sharpNote = (note) => {
   if (note.length === 1 || note.slice(note.length -2) === `${dblSharp}`) {
@@ -663,11 +664,7 @@ var makeStrings = (array) => {
 
 var strings= makeStrings(chromaticScale);
 
-// var {C, D, E, F, G, A, B, 'F\u266F': Fsharp, 'C\u266F': Csharp, 'G\u266F': Gsharp,
-//   'D\u266F': Dsharp, 'A\u266F': Asharp, 'E\u266F': Esharp, 'B\u266F': Bsharp,
-//   'B\u266D': Bflat, 'E\u266D': Eflat, 'A\u266D': Aflat, 'D\u266D': Dflat, 'G\u266D': Gflat,
-//   'C\u266D': Cflat, 'F\u266D': Fflat, 'B\u{1D12B}': BdblFlat, 'E\u{1D12B}': EdblFlat,
-//   'A\u{1D12B}': AdblFlat,'D\u{1D12B}': DdblFlat} = allScales;
+var {C, D, E, F, G, A, B, 'F\u266F': Fsharp, 'C\u266F': Csharp, 'G\u266F': Gsharp,'D\u266F': Dsharp, 'A\u266F': Asharp, 'E\u266F': Esharp, 'B\u266F': Bsharp,'B\u266D': Bflat, 'E\u266D': Eflat, 'A\u266D': Aflat, 'D\u266D': Dflat, 'G\u266D': Gflat,'C\u266D': Cflat, 'F\u266D': Fflat, 'B\u{1D12B}': BdblFlat, 'E\u{1D12B}': EdblFlat,'A\u{1D12B}': AdblFlat,'D\u{1D12B}': DdblFlat} = allScales;
 
   module.exports.scales = allScales
   module.exports.strings = strings
@@ -704,9 +701,30 @@ var strings= makeStrings(chromaticScale);
 
 
 // todo function to read chords
-/*
-  spell chords types in C
-  funtion to invert
-  find intervals and push to an array
-  save array as a key in an object with the value being the name/type
-*/
+// spell chords types in C
+// funtion to invert
+// find intervals and push to an array
+// save array as a key in an object with the value being the name/type
+
+var findChordSpellings = () => {
+  let chords = {
+    major: ['C', 'E', 'G'],
+    minor: ['C', `E${flat}`, 'G'],
+    diminishedTriad: ['C', `E${flat}`, `G${flat}`],
+    augmentedTriad: ['C', 'E', `G${sharp}`],
+    sus2: ['C', 'D', 'G'],
+    sus4: ['C', `F`, 'G'],
+    major7: ['C', 'E', 'G', 'B'],
+    dominant7: ['C', `E`, 'G', `B${flat}`],
+    minor7: ['C', `E${flat}`, 'G', `B${flat}`],
+    minMaj7: ['C', `E${flat}`, 'G', 'B'],
+    dominant7: ['C', `E`, 'G', `B${flat}`],
+    dominant7: ['C', `E`, 'G', `B${flat}`],
+    dominant7: ['C', `E`, 'G', `B${flat}`],
+    dominant7: ['C', `E`, 'G', `B${flat}`],
+    dominant7: ['C', `E`, 'G', `B${flat}`],
+    dominant7: ['C', `E`, 'G', `B${flat}`],
+    dominant7: ['C', `E`, 'G', `B${flat}`],
+  }
+}
+
