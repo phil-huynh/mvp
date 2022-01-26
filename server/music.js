@@ -719,12 +719,7 @@ var findChordSpellings = () => {
     minor7: ['C', `E${flat}`, 'G', `B${flat}`],
     minMaj7: ['C', `E${flat}`, 'G', 'B'],
     dominant7: ['C', `E`, 'G', `B${flat}`],
-    dominant7: ['C', `E`, 'G', `B${flat}`],
-    dominant7: ['C', `E`, 'G', `B${flat}`],
-    dominant7: ['C', `E`, 'G', `B${flat}`],
-    dominant7: ['C', `E`, 'G', `B${flat}`],
-    dominant7: ['C', `E`, 'G', `B${flat}`],
-    dominant7: ['C', `E`, 'G', `B${flat}`],
+
   }
 }
 
