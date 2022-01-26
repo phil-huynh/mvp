@@ -5,14 +5,32 @@ var String = ({ string, allStrings, scale }) => {
   console.log("🚀 ~ file: String.jsx ~ line 5 ~ String ~ notes", notes)
   return(
     <div className="string">
-      {notes ? notes.map((note) => (
-        scale.includes(note) ?
-          <span className="fret">{note}</span>:
-          scale.includes(note[0]) ?
-            <span className="fret">{note[0]}</span>:
-            scale.includes(note[1]) ?
-        <span className="fret">{note[1]}</span>:
-        <span className="fret"></span>
+      {notes ? notes.map((note, i) => (
+        scale.includes(note) && i === 0 ?
+          <span className="open">
+            <span className="openNote">
+              {note}
+            </span>
+          </span>:
+          scale.includes(note) ?
+            <span className="fret">
+              <span className="note">
+                {note}
+              </span>
+            </span>:
+            scale.includes(note[0]) ?
+              <span className="fret">
+                <span className="note">
+                  {note[0]}
+                </span>
+              </span>:
+              scale.includes(note[1]) ?
+                <span className="fret">
+                  <span className="note">
+                    {note[1]}
+                  </span>
+                </span>:
+                <span className="fret"></span>
       )): null}
     </div>
   )

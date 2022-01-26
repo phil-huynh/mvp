@@ -20,7 +20,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       strings: {},
-      currentStrings: ['E', 'A', 'D', 'G', 'B', 'E'],
+      currentStrings: ['E', 'B', 'G', 'D', 'A', 'E'],
       choices: [],
       scaleType:'major',
       tonic: '',

@@ -644,14 +644,7 @@ add7NoteScale('arabian', {}, {4: true, 5: true, 6: true})
 add7NoteScale('javanese', {}, {1: true, 2: true})
 // add7NoteScale('major', {}, {})
 // add7NoteScale('major', {}, {})
-// add7NoteScale('major', {}, {})
-// add7NoteScale('major', {}, {})
-// add7NoteScale('major', {}, {})
-// add7NoteScale('major', {}, {})
-// add7NoteScale('major', {}, {})
-// add7NoteScale('major', {}, {})
-// add7NoteScale('major', {}, {})
-// add7NoteScale('major', {}, {})
+
 
 var makeStrings = (array) => {
   var string = {};
