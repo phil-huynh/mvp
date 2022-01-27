@@ -15,6 +15,11 @@ import MoreSevenths from './MoreSevenths.jsx'
 import Dropdown from './Dropdown.jsx'
 import axios from 'axios';
 
+const sharp = '\u266F';
+const flat = '\u266D';
+const dblSharp = '\u{1D12A}';
+const dblFlat = '\u{1D12B}';
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -50,7 +55,8 @@ class App extends React.Component {
     this.handleTonicChange2 = this.handleTonicChange2.bind(this);
     this.handleScaleChange2 = this.handleScaleChange2.bind(this);
     this.handleSecondScale = this.handleSecondScale.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleStringChoice = this.handleStringChoice.bind(this);
   }
 
   componentDidMount () {
@@ -146,6 +152,14 @@ class App extends React.Component {
     this.getScale(key, scale)
   }
 
+  handleStringChoice(e) {
+    var strings = e.target.value
+    var stringArray = strings.split('.')
+    this.setState({
+      currentStrings: stringArray
+    })
+  }
+
   handleTonicChange2(e) {
     var key = e.target.value
     var scale = this.state.scaleType2
@@ -207,11 +221,11 @@ class App extends React.Component {
                 <option value='G'>G</option>
                 <option value='A'>A</option>
                 <option value='B'>B</option>
-                <option value='Bflat'>B&#x266d;</option>
-                <option value='Eflat'>E&#x266d;</option>
-                <option value='Aflat'>A&#x266d;</option>
-                <option value='Dflat'>D&#x266d;</option>
-                <option value='Fsharp'>F&#x266F;</option>
+                <option value={`B${flat}`}>{`B${flat}`}</option>
+                <option value={`E${flat}`}>{`E${flat}`}</option>
+                <option value={`A${flat}`}>{`A${flat}`}</option>
+                <option value={`D${flat}`}>{`D${flat}`}</option>
+                <option value={`F${sharp}`}>{`F${sharp}`}</option>
               </select>
             </span>
             <span className="scale_options_left">
@@ -247,23 +261,40 @@ class App extends React.Component {
                 <option value='javanese'>Javanese</option>
               </select>
             </span>
+            <span className="chooseStrings">
+              <select onChange={(e) => {this.handleStringChoice(e)}}>
+                <option selected value='E.B.G.D.A.E'>Guitar - Standard</option>
+                <option value='E.B.G.D.A.D'>Guitar - Drop D</option>
+                <option value='D.B.G.D.A.D'>Guitar - Double Drop D</option>
+                <option value='D.B.G.D.G.D'>Guitar - Open G</option>
+                <option value='E.C.G.C.A.C'>Guitar - Open C6</option>
+                <option value={`D.A.F${sharp},G${flat}.D.A.D`}>Guitar - Open D</option>
+                <option value='A.E.C.G'>Ukelele</option>
+                <option value='G.D.A.E'>Mandolin</option>
+                <option value='G.D.A.E'>4 String Bass</option>
+                <option value='G.D.A.E.B'>5 String Bass</option>
+                <option value='E.A.D.G'>Violin</option>
+                <option value='A.D.G.C'>Viola</option>
+                <option value='A.D.G.C'>Cello</option>
+              </select>
+            </span>
           </div>
           <div className="top_center">Strings Theory</div>
           <div className="top_right">
             <span className="tonic_options_right">
               <select onChange={(e) => {this.handleTonicChange2(e)}}>
-                <option selected value='C'>C</option>
+              <option selected value='C'>C</option>
                 <option value='D'>D</option>
                 <option value='E'>E</option>
                 <option value='F'>F</option>
                 <option value='G'>G</option>
                 <option value='A'>A</option>
                 <option value='B'>B</option>
-                <option value='Bflat'>B&#x266d;</option>
-                <option value='Eflat'>E&#x266d;</option>
-                <option value='Aflat'>A&#x266d;</option>
-                <option value='Dflat'>D&#x266d;</option>
-                <option value='Fsharp'>F&#x266F;</option>
+                <option value={`B${flat}`}>{`B${flat}`}</option>
+                <option value={`E${flat}`}>{`E${flat}`}</option>
+                <option value={`A${flat}`}>{`A${flat}`}</option>
+                <option value={`D${flat}`}>{`D${flat}`}</option>
+                <option value={`F${sharp}`}>{`F${sharp}`}</option>
               </select>
             </span>
           <span className="scale_options_right">

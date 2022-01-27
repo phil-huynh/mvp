@@ -12,25 +12,40 @@ var String = ({ string, allStrings, scale }) => {
               {note}
             </span>
           </span>:
-          scale.includes(note) ?
-            <span className="fret">
-              <span className="note">
-                {note}
+          scale.includes(note[0]) && i === 0 ?
+            <span className="open">
+              <span className="openNote">
+                {note[0]}
               </span>
             </span>:
-            scale.includes(note[0]) ?
-              <span className="fret">
-                <span className="note">
-                  {note[0]}
+            scale.includes(note[1]) && i === 0 ?
+              <span className="open">
+                <span className="openNote">
+                  {note[1]}
                 </span>
               </span>:
-              scale.includes(note[1]) ?
-                <span className="fret">
-                  <span className="note">
-                    {note[1]}
-                  </span>
+              scale.includes(note) === false && i === 0 ?
+                <span className="open">
                 </span>:
-                <span className="fret"></span>
+                scale.includes(note) ?
+                  <span className="fret">
+                    <span className="note">
+                      {note}
+                    </span>
+                  </span>:
+                  scale.includes(note[0]) ?
+                    <span className="fret">
+                      <span className="note">
+                        {note[0]}
+                      </span>
+                    </span>:
+                    scale.includes(note[1]) ?
+                      <span className="fret">
+                        <span className="note">
+                          {note[1]}
+                        </span>
+                      </span>:
+                      <span className="fret"></span>
       )): null}
     </div>
   )

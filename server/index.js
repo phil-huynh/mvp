@@ -18,12 +18,6 @@ app.use(morgan("dev"));
 
 app.get('/scales', (req, res) => {
   let key = req.query.key
-    if(key.substring(1) === 'flat') {
-      key = `${key[0]}\u266D`
-    }
-    if(key.substring(1) === 'sharp') {
-      key = `${key[0]}\u266F`
-    }
   let scale = req.query.scale
   var objKey = scale.split(' ')
   if (objKey.length > 1) {
