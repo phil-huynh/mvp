@@ -11,7 +11,7 @@ const clockwise = ['G', 'D', 'A', 'E', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}
 const counterClockwise = ["F", `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`,
 `B${dblFlat}`, `E${dblFlat}`, `A${dblFlat}`, `D${dblFlat}`]
 
-var chromaticScale = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
+var chromaticScale = [['C', `B${sharp}`], [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], ["E", `F${flat}`], ["F", `E${sharp}`], [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], ["B", `C${flat}`]];
 
 var allScales = {};
 var chordTypes = {};

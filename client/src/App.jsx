@@ -25,7 +25,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       strings: {},
-      currentStrings: ['E', 'B', 'G', 'D', 'A', 'E'],
+      currentStrings: [`E,F${flat}`, `B,C${flat}`, 'G', 'D', 'A', `E,F${flat}`],
       choices: [],
       scaleType:'major',
       tonic: '',
@@ -263,19 +263,19 @@ class App extends React.Component {
             </span>
             <span className="chooseStrings">
               <select onChange={(e) => {this.handleStringChoice(e)}}>
-                <option selected value='E.B.G.D.A.E'>Guitar - Standard</option>
-                <option value='E.B.G.D.A.D'>Guitar - Drop D</option>
-                <option value='D.B.G.D.A.D'>Guitar - Double Drop D</option>
-                <option value='D.B.G.D.G.D'>Guitar - Open G</option>
-                <option value='E.C.G.C.A.C'>Guitar - Open C6</option>
+                <option selected value={`E,F${flat}.B,C${flat}.G.D.A.E,F${flat}`}>Guitar - Standard</option>
+                <option value={`E,F${flat}.B,C${flat}.G.D.A.D`}>Guitar - Drop D</option>
+                <option value={`D.B,C${flat}.G.D.A.D`}>Guitar - Double Drop D</option>
+                <option value={`D.B,C${flat}.G.D.G.D`}>Guitar - Open G</option>
+                <option value={`E,F${flat}.C,B${sharp}.G.C,B${sharp}.A.C,B${sharp}`}>Guitar - Open C6</option>
                 <option value={`D.A.F${sharp},G${flat}.D.A.D`}>Guitar - Open D</option>
-                <option value='A.E.C.G'>Ukelele</option>
-                <option value='G.D.A.E'>Mandolin</option>
-                <option value='G.D.A.E'>4 String Bass</option>
-                <option value='G.D.A.E.B'>5 String Bass</option>
-                <option value='E.A.D.G'>Violin</option>
-                <option value='A.D.G.C'>Viola</option>
-                <option value='A.D.G.C'>Cello</option>
+                <option value={`A.E,F${flat}.C,B${sharp}.G`}>Ukelele</option>
+                <option value={`G.D.A.E,F${flat}`}>Mandolin</option>
+                <option value={`G.D.A.E,F${flat}`}>4 String Bass</option>
+                <option value={`G.D.A.E,F${flat}.B,C${flat}`}>5 String Bass</option>
+                <option value={`E,F${flat}.A.D.G`}>Violin</option>
+                <option value={`A.D.G.C,B${sharp}`}>Viola</option>
+                <option value={`A.D.G.C,B${sharp}`}>Cello</option>
               </select>
             </span>
           </div>
