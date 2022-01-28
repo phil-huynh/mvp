@@ -28,24 +28,24 @@ var String = ({ string, allStrings, scale }) => {
                 <span className="open">
                 </span>:
                 scale.includes(note) ?
-                  <span className="fret">
+                  <span className="fret">_______
                     <span className="note">
                       {note}
-                    </span>
+                    </span>_____
                   </span>:
                   scale.includes(note[0]) ?
-                    <span className="fret">
+                    <span className="fret">_______
                       <span className="note">
                         {note[0]}
-                      </span>
+                      </span>_____
                     </span>:
                     scale.includes(note[1]) ?
-                      <span className="fret">
+                      <span className="fret">_______
                         <span className="note">
                           {note[1]}
-                        </span>
+                        </span>_____
                       </span>:
-                      <span className="fret"></span>
+                      <span className="fret">______________</span>
       )): null}
     </div>
   )
