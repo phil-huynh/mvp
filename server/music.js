@@ -693,11 +693,6 @@ var {C, D, E, F, G, A, B, 'F\u266F': Fsharp, 'C\u266F': Csharp, 'G\u266F': Gshar
 // console.log(DdblFlat)
 
 
-// todo function to read chords
-// spell chords types in C
-// funtion to invert
-// find intervals and push to an array
-// save array as a key in an object with the value being the name/type
 
 var findChordSpellings = () => {
   let chords = {
