@@ -666,31 +666,7 @@ var {C, D, E, F, G, A, B, 'F\u266F': Fsharp, 'C\u266F': Csharp, 'G\u266F': Gshar
 
 
 
-// console.log(C)
-// console.log(D)
-// console.log(E)
-// console.log(F)
-// console.log(G)
-// console.log(A)
-// console.log(B)
-// console.log(Fsharp)
-// console.log(Csharp)
-// console.log(Gsharp)
-// console.log(Dsharp)
-// console.log(Asharp)
-// console.log(Esharp)
-// console.log(Bsharp)
-// console.log(Bflat)
-// console.log(Eflat)
-// console.log(Aflat)
-// console.log(Dflat)
-// console.log(Gflat)
-// console.log(Cflat)
-// console.log(Fflat)
-// console.log(BdblFlat)
-// console.log(EdblFlat)
-// console.log(AdblFlat)
-// console.log(DdblFlat)
+
 
 
 
