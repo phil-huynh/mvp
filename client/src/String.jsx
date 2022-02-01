@@ -24,28 +24,40 @@ var String = ({ string, allStrings, scale }) => {
                   {note[1]}
                 </span>
               </span>:
-              scale.includes(note) === false && i === 0 ?
+              scale.includes(note[2]) && i === 0 ?
                 <span className="open">
+                  <span className="openNote">
+                    {note[2]}
+                  </span>
                 </span>:
-                scale.includes(note) ?
-                  <span className="fret">_______
-                    <span className="note">
-                      {note}
-                    </span>_____
+                scale.includes(note) === false && i === 0 ?
+                  <span className="open">
                   </span>:
-                  scale.includes(note[0]) ?
+                  scale.includes(note) ?
                     <span className="fret">_______
                       <span className="note">
-                        {note[0]}
+                        {note}
                       </span>_____
                     </span>:
-                    scale.includes(note[1]) ?
+                    scale.includes(note[0]) ?
                       <span className="fret">_______
                         <span className="note">
-                          {note[1]}
+                          {note[0]}
                         </span>_____
                       </span>:
-                      <span className="fret">______________</span>
+                      scale.includes(note[1]) ?
+                        <span className="fret">_______
+                          <span className="note">
+                            {note[1]}
+                          </span>_____
+                        </span>:
+                        scale.includes(note[2]) ?
+                          <span className="fret">_______
+                            <span className="note">
+                              {note[2]}
+                            </span>_____
+                          </span>:
+                          <span className="fret">______________</span>
       )): null}
     </div>
   )

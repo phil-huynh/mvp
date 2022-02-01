@@ -11,7 +11,7 @@ const clockwise = ['G', 'D', 'A', 'E', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}
 const counterClockwise = ["F", `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`,
 `B${dblFlat}`, `E${dblFlat}`, `A${dblFlat}`, `D${dblFlat}`]
 
-var chromaticScale = [['C', `B${sharp}`], [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], ["E", `F${flat}`], ["F", `E${sharp}`], [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], ["B", `C${flat}`]];
+var chromaticScale = [['C', `B${sharp}`, `D${dblFlat}`], [`C${sharp}`, `D${flat}`, `B${dblSharp}`], ["D", `C${dblSharp}`, `E${dblFlat}`], [`D${sharp}`, `E${flat}`, `F${dblFlat}`], ["E", `F${flat}`, `D${dblSharp}`], ["F", `E${sharp}`, `G${dblFlat}`], [`F${sharp}`, `G${flat}`, `E${dblSharp}`], ["G", `F${dblSharp}`, `A${dblFlat}`], [`G${sharp}`, `A${flat}`], ["A", `G${dblSharp}`, `B${dblFlat}`], [`A${sharp}`, `B${flat}`, `C${dblFlat}`], ["B", `C${flat}`, `A${dblSharp}`]];
 
 var allScales = {};
 var chordTypes = {};
@@ -95,7 +95,6 @@ var findEnharmonicEquivalent = (note) => {
   }
   return enharmonicEquivalent;
 }
-
 
 var shiftNotes = (note, scale) => {
   var shiftedScale = [];
@@ -659,10 +658,10 @@ var strings= makeStrings(chromaticScale);
 
 var {C, D, E, F, G, A, B, 'F\u266F': Fsharp, 'C\u266F': Csharp, 'G\u266F': Gsharp,'D\u266F': Dsharp, 'A\u266F': Asharp, 'E\u266F': Esharp, 'B\u266F': Bsharp,'B\u266D': Bflat, 'E\u266D': Eflat, 'A\u266D': Aflat, 'D\u266D': Dflat, 'G\u266D': Gflat,'C\u266D': Cflat, 'F\u266D': Fflat, 'B\u{1D12B}': BdblFlat, 'E\u{1D12B}': EdblFlat,'A\u{1D12B}': AdblFlat,'D\u{1D12B}': DdblFlat} = allScales;
 
-  module.exports.scales = allScales
-  module.exports.strings = strings
-  module.exports.intervals = intervals
-  module.exports.scaleChoices = scaleChoices
+module.exports.scales = allScales
+module.exports.strings = strings
+module.exports.intervals = intervals
+module.exports.scaleChoices = scaleChoices
 
 
 

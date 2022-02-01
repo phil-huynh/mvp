@@ -25,7 +25,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       strings: {},
-      currentStrings: [`E,F${flat}`, `B,C${flat}`, 'G', 'D', 'A', `E,F${flat}`],
+      currentStrings: [`E,F${flat},D${dblSharp}`, `B,C${flat},A${dblSharp}`, `G,F${dblSharp},A${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `A,G${dblSharp},B${dblFlat}`, `E,F${flat},D${dblSharp}`],
       choices: [],
       scaleType:'major',
       tonic: '',
@@ -225,7 +225,20 @@ class App extends React.Component {
                 <option value={`E${flat}`}>{`E${flat}`}</option>
                 <option value={`A${flat}`}>{`A${flat}`}</option>
                 <option value={`D${flat}`}>{`D${flat}`}</option>
+                <option value={`G${flat}`}>{`G${flat}`}</option>
+                <option value={`C${flat}`}>{`C${flat}`}</option>
+                <option value={`F${flat}`}>{`F${flat}`}</option>
+                <option value={`B${dblFlat}`}>{`B${dblFlat}`}</option>
+                <option value={`E${dblFlat}`}>{`E${dblFlat}`}</option>
+                <option value={`A${dblFlat}`}>{`A${dblFlat}`}</option>
+                <option value={`D${dblFlat}`}>{`D${dblFlat}`}</option>
                 <option value={`F${sharp}`}>{`F${sharp}`}</option>
+                <option value={`C${sharp}`}>{`C${sharp}`}</option>
+                <option value={`G${sharp}`}>{`G${sharp}`}</option>
+                <option value={`D${sharp}`}>{`D${sharp}`}</option>
+                <option value={`A${sharp}`}>{`A${sharp}`}</option>
+                <option value={`E${sharp}`}>{`E${sharp}`}</option>
+                <option value={`B${sharp}`}>{`B${sharp}`}</option>
               </select>
             </span>
             <span className="scale_options_left">
@@ -263,19 +276,19 @@ class App extends React.Component {
             </span>
             <span className="chooseStrings">
               <select onChange={(e) => {this.handleStringChoice(e)}}>
-                <option selected value={`E,F${flat}.B,C${flat}.G.D.A.E,F${flat}`}>Guitar - Standard</option>
-                <option value={`E,F${flat}.B,C${flat}.G.D.A.D`}>Guitar - Drop D</option>
-                <option value={`D.B,C${flat}.G.D.A.D`}>Guitar - Double Drop D</option>
-                <option value={`D.B,C${flat}.G.D.G.D`}>Guitar - Open G</option>
-                <option value={`E,F${flat}.C,B${sharp}.G.C,B${sharp}.A.C,B${sharp}`}>Guitar - Open C6</option>
-                <option value={`D.A.F${sharp},G${flat}.D.A.D`}>Guitar - Open D</option>
-                <option value={`A.E,F${flat}.C,B${sharp}.G`}>Ukelele</option>
-                <option value={`G.D.A.E,F${flat}`}>Mandolin</option>
-                <option value={`G.D.A.E,F${flat}`}>4 String Bass</option>
-                <option value={`G.D.A.E,F${flat}.B,C${flat}`}>5 String Bass</option>
-                <option value={`E,F${flat}.A.D.G`}>Violin</option>
-                <option value={`A.D.G.C,B${sharp}`}>Viola</option>
-                <option value={`A.D.G.C,B${sharp}`}>Cello</option>
+                <option selected value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}`}>Guitar - Standard</option>
+                <option value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Drop D</option>
+                <option value={`D,C${dblSharp},E${dblFlat}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Double Drop D</option>
+                <option value={`D,C${dblSharp},E${dblFlat}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Open G</option>
+                <option value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.C,B${sharp},D${dblFlat}.A,G${dblSharp},B${dblFlat}.C,B${sharp},D${dblFlat}`}>Guitar - Open C6</option>
+                <option value={`D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.F${sharp},G${flat},E${dblSharp}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Open D</option>
+                <option value={`A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}.C,B${sharp},D${dblFlat}.G,F${dblSharp},A${dblFlat}`}>Ukelele</option>
+                <option value={`G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}`}>Mandolin</option>
+                <option value={`G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}`}>4 String Bass</option>
+                <option value={`G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}`}>5 String Bass</option>
+                <option value={`E,F${flat},D${dblSharp}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}.G,F${dblSharp},A${dblFlat}`}>Violin</option>
+                <option value={`A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}.G,F${dblSharp},A${dblFlat}.C,B${sharp},D${dblFlat}`}>Viola</option>
+                <option value={`A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}.G,F${dblSharp},A${dblFlat}.C,B${sharp},D${dblFlat}`}>Cello</option>
               </select>
             </span>
           </div>
@@ -283,7 +296,7 @@ class App extends React.Component {
           <div className="top_right">
             <span className="tonic_options_right">
               <select onChange={(e) => {this.handleTonicChange2(e)}}>
-              <option selected value='C'>C</option>
+                <option selected value='C'>C</option>
                 <option value='D'>D</option>
                 <option value='E'>E</option>
                 <option value='F'>F</option>
@@ -294,7 +307,20 @@ class App extends React.Component {
                 <option value={`E${flat}`}>{`E${flat}`}</option>
                 <option value={`A${flat}`}>{`A${flat}`}</option>
                 <option value={`D${flat}`}>{`D${flat}`}</option>
+                <option value={`G${flat}`}>{`G${flat}`}</option>
+                <option value={`C${flat}`}>{`C${flat}`}</option>
+                <option value={`F${flat}`}>{`F${flat}`}</option>
                 <option value={`F${sharp}`}>{`F${sharp}`}</option>
+                <option value={`C${sharp}`}>{`C${sharp}`}</option>
+                <option value={`G${sharp}`}>{`G${sharp}`}</option>
+                <option value={`D${sharp}`}>{`D${sharp}`}</option>
+                <option value={`A${sharp}`}>{`A${sharp}`}</option>
+                <option value={`E${sharp}`}>{`E${sharp}`}</option>
+                <option value={`B${sharp}`}>{`B${sharp}`}</option>
+                <option value={`B${dblFlat}`}>{`B${dblFlat}`}</option>
+                <option value={`E${dblFlat}`}>{`E${dblFlat}`}</option>
+                <option value={`A${dblFlat}`}>{`A${dblFlat}`}</option>
+                <option value={`D${dblFlat}`}>{`D${dblFlat}`}</option>
               </select>
             </span>
           <span className="scale_options_right">
