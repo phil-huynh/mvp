@@ -12,6 +12,9 @@ import MoreRoots from './MoreRoots.jsx'
 import MoreThirds from './MoreThirds.jsx'
 import MoreFifths from './MoreFifths.jsx'
 import MoreSevenths from './MoreSevenths.jsx'
+import StringsMenu from './StringsMenu.jsx'
+import TonicMenu from './TonicMenu.jsx'
+import ScalesMenu from './ScalesMenu.jsx'
 import Dropdown from './Dropdown.jsx'
 import axios from 'axios';
 
@@ -212,150 +215,28 @@ class App extends React.Component {
       <div className = "page">
         <div className="top">
           <div className="top_left">
-            <span className="tonic_options_left">
-              <select onChange={(e) => {this.handleTonicChange(e)}}>
-                <option selected value='C'>C</option>
-                <option value='D'>D</option>
-                <option value='E'>E</option>
-                <option value='F'>F</option>
-                <option value='G'>G</option>
-                <option value='A'>A</option>
-                <option value='B'>B</option>
-                <option value={`B${flat}`}>{`B${flat}`}</option>
-                <option value={`E${flat}`}>{`E${flat}`}</option>
-                <option value={`A${flat}`}>{`A${flat}`}</option>
-                <option value={`D${flat}`}>{`D${flat}`}</option>
-                <option value={`G${flat}`}>{`G${flat}`}</option>
-                <option value={`C${flat}`}>{`C${flat}`}</option>
-                <option value={`F${flat}`}>{`F${flat}`}</option>
-                <option value={`B${dblFlat}`}>{`B${dblFlat}`}</option>
-                <option value={`E${dblFlat}`}>{`E${dblFlat}`}</option>
-                <option value={`A${dblFlat}`}>{`A${dblFlat}`}</option>
-                <option value={`D${dblFlat}`}>{`D${dblFlat}`}</option>
-                <option value={`F${sharp}`}>{`F${sharp}`}</option>
-                <option value={`C${sharp}`}>{`C${sharp}`}</option>
-                <option value={`G${sharp}`}>{`G${sharp}`}</option>
-                <option value={`D${sharp}`}>{`D${sharp}`}</option>
-                <option value={`A${sharp}`}>{`A${sharp}`}</option>
-                <option value={`E${sharp}`}>{`E${sharp}`}</option>
-                <option value={`B${sharp}`}>{`B${sharp}`}</option>
-              </select>
-            </span>
-            <span className="scale_options_left">
-              <select onChange={(e) => {this.handleScaleChange(e)}}>
-                <option selected value='major'>Major</option>
-                <option value='naturalMinor'>Natural Minor</option>
-                <option value='harmonicMinor'>Harmonic Minor</option>
-                <option value='melodicMinor'>Melodic Minor</option>
-                <option value='dorian'>Dorian</option>
-                <option value='phrygian'>Phrygian</option>
-                <option value='lydian'>Lydian</option>
-                <option value='mixolydian'>Mixolydian</option>
-                <option value='locrian'>Locrian</option>
-                <option value='persian'>Persian</option>
-                <option value='byzantine'>Byzantine</option>
-                <option value='hungarian gypsy minor'>Hungarian Gypsy Minor</option>
-                <option value='romanian'>Romanian</option>
-                <option value='lydian dominant'>Lydian Dominant</option>
-                <option value='ukrainian dorian'>Ukrainian Dorian</option>
-                <option value='phrygian dominant'>Phrygian Dominant</option>
-                <option value='lydian augmented'>Lydian Augmented</option>
-                <option value='locrian sharp6'>Locrian #6</option>
-                <option value='ionian sharp5'>Ionian #5</option>
-                <option value='phrygian dorian'>Phrygian Dorian</option>
-                <option value='mixolydian flat13'>Mixolydian b13</option>
-                <option value='aeoleon flat5'>Aeoleon b13</option>
-                <option value='altered'>Altered Scale</option>
-                <option value='gypsy'>Gypsy Scale</option>
-                <option value='hungarian major'>Hungarian Major</option>
-                <option value='neapolitan major'>Neapolitan Major</option>
-                <option value='neapolitan minor'>Neapolitan</option>
-                <option value='arabian'>Arabian</option>
-                <option value='javanese'>Javanese</option>
-              </select>
-            </span>
-            <span className="chooseStrings">
-              <select onChange={(e) => {this.handleStringChoice(e)}}>
-                <option selected value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}`}>Guitar - Standard</option>
-                <option value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Drop D</option>
-                <option value={`D,C${dblSharp},E${dblFlat}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Double Drop D</option>
-                <option value={`D,C${dblSharp},E${dblFlat}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Open G</option>
-                <option value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.C,B${sharp},D${dblFlat}.A,G${dblSharp},B${dblFlat}.C,B${sharp},D${dblFlat}`}>Guitar - Open C6</option>
-                <option value={`D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.F${sharp},G${flat},E${dblSharp}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Open D</option>
-                <option value={`A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}.C,B${sharp},D${dblFlat}.G,F${dblSharp},A${dblFlat}`}>Ukelele</option>
-                <option value={`G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}`}>Mandolin</option>
-                <option value={`G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}`}>4 String Bass</option>
-                <option value={`G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}`}>5 String Bass</option>
-                <option value={`E,F${flat},D${dblSharp}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}.G,F${dblSharp},A${dblFlat}`}>Violin</option>
-                <option value={`A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}.G,F${dblSharp},A${dblFlat}.C,B${sharp},D${dblFlat}`}>Viola</option>
-                <option value={`A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}.G,F${dblSharp},A${dblFlat}.C,B${sharp},D${dblFlat}`}>Cello</option>
-              </select>
-            </span>
+            <TonicMenu
+              handleTonicChange={this.handleTonicChange}
+              name={'tonic_options_left'}
+            />
+            <ScalesMenu
+              handleScaleChange={this.handleScaleChange}
+              name={'scale_options_left'}
+            />
+            <StringsMenu
+              handleStringChoice={this.handleStringChoice}
+            />
           </div>
           <div className="top_center">Strings Theory</div>
           <div className="top_right">
-            <span className="tonic_options_right">
-              <select onChange={(e) => {this.handleTonicChange2(e)}}>
-                <option selected value='C'>C</option>
-                <option value='D'>D</option>
-                <option value='E'>E</option>
-                <option value='F'>F</option>
-                <option value='G'>G</option>
-                <option value='A'>A</option>
-                <option value='B'>B</option>
-                <option value={`B${flat}`}>{`B${flat}`}</option>
-                <option value={`E${flat}`}>{`E${flat}`}</option>
-                <option value={`A${flat}`}>{`A${flat}`}</option>
-                <option value={`D${flat}`}>{`D${flat}`}</option>
-                <option value={`G${flat}`}>{`G${flat}`}</option>
-                <option value={`C${flat}`}>{`C${flat}`}</option>
-                <option value={`F${flat}`}>{`F${flat}`}</option>
-                <option value={`F${sharp}`}>{`F${sharp}`}</option>
-                <option value={`C${sharp}`}>{`C${sharp}`}</option>
-                <option value={`G${sharp}`}>{`G${sharp}`}</option>
-                <option value={`D${sharp}`}>{`D${sharp}`}</option>
-                <option value={`A${sharp}`}>{`A${sharp}`}</option>
-                <option value={`E${sharp}`}>{`E${sharp}`}</option>
-                <option value={`B${sharp}`}>{`B${sharp}`}</option>
-                <option value={`B${dblFlat}`}>{`B${dblFlat}`}</option>
-                <option value={`E${dblFlat}`}>{`E${dblFlat}`}</option>
-                <option value={`A${dblFlat}`}>{`A${dblFlat}`}</option>
-                <option value={`D${dblFlat}`}>{`D${dblFlat}`}</option>
-              </select>
-            </span>
-          <span className="scale_options_right">
-              <select onChange={(e) => {this.handleScaleChange2(e)}}>
-              <option selected value='major'>Major</option>
-                <option value='naturalMinor'>Natural Minor</option>
-                <option value='harmonicMinor'>Harmonic Minor</option>
-                <option value='melodicMinor'>Melodic Minor</option>
-                <option value='dorian'>Dorian</option>
-                <option value='phrygian'>Phrygian</option>
-                <option value='lydian'>Lydian</option>
-                <option value='mixolydian'>Mixolydian</option>
-                <option value='locrian'>Locrian</option>
-                <option value='persian'>Persian</option>
-                <option value='byzantine'>Byzantine</option>
-                <option value='hungarian gypsy minor'>Hungarian Gypsy Minor</option>
-                <option value='romanian'>Romanian</option>
-                <option value='lydian dominant'>Lydian Dominant</option>
-                <option value='ukrainian dorian'>Ukrainian Dorian</option>
-                <option value='phrygian dominant'>Phrygian Dominant</option>
-                <option value='lydian augmented'>Lydian Augmented</option>
-                <option value='locrian sharp6'>Locrian #6</option>
-                <option value='ionian sharp5'>Ionian #5</option>
-                <option value='phrygian dorian'>Phrygian Dorian</option>
-                <option value='mixolydian flat13'>Mixolydian b13</option>
-                <option value='aeoleon flat5'>Aeoleon b13</option>
-                <option value='altered'>Altered Scale</option>
-                <option value='gypsy'>Gypsy Scale</option>
-                <option value='hungarian major'>Hungarian Major</option>
-                <option value='neapolitan major'>Neapolitan Major</option>
-                <option value='neapolitan minor'>Neapolitan</option>
-                <option value='arabian'>Arabian</option>
-                <option value='javanese'>Javanese</option>
-              </select>
-            </span>
+          <TonicMenu
+              handleTonicChange={this.handleTonicChange2}
+              name={'tonic_options_right'}
+            />
+            <ScalesMenu
+              handleScaleChange={this.handleScaleChange2}
+              name={'scale_options_right'}
+            />
           </div>
         </div>
         <div className="middle">

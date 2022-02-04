@@ -665,10 +665,6 @@ module.exports.scaleChoices = scaleChoices
 
 
 
-
-
-
-
 var findChordSpellings = () => {
   let chords = {
     major: ['C', 'E', 'G'],

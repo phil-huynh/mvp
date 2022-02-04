@@ -2,7 +2,6 @@ import React from 'react'
 
 var String = ({ string, allStrings, scale }) => {
   var notes = allStrings[string]
-  console.log("🚀 ~ file: String.jsx ~ line 5 ~ String ~ notes", notes)
   return(
     <div className="string">
       {notes ? notes.map((note, i) => (
@@ -34,33 +33,34 @@ var String = ({ string, allStrings, scale }) => {
                   <span className="open">
                   </span>:
                   scale.includes(note) ?
-                    <span className="fret">_______
+                    <span className="fret">__________
                       <span className="note">
                         {note}
-                      </span>_____
+                      </span>_______________
                     </span>:
                     scale.includes(note[0]) ?
-                      <span className="fret">_______
+                      <span className="fret">__________
                         <span className="note">
                           {note[0]}
-                        </span>_____
+                        </span>_______________
                       </span>:
                       scale.includes(note[1]) ?
-                        <span className="fret">_______
+                        <span className="fret">__________
                           <span className="note">
                             {note[1]}
-                          </span>_____
+                          </span>_______________
                         </span>:
                         scale.includes(note[2]) ?
-                          <span className="fret">_______
+                          <span className="fret">__________
                             <span className="note">
                               {note[2]}
-                            </span>_____
+                            </span>_______________
                           </span>:
-                          <span className="fret">______________</span>
+                          <span className="fret">_________________________________________</span>
       )): null}
     </div>
   )
 }
 
 export default String;
+
