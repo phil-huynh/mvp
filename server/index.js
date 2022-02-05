@@ -19,6 +19,7 @@ app.use(morgan("dev"));
 app.get('/scales', (req, res) => {
   let key = req.query.key
   let scale = req.query.scale
+  console.log("🚀 ~ file: index.js ~ line 22 ~ app.get ~ scale", scale)
   var objKey = scale.split(' ')
   if (objKey.length > 1) {
     for (var i = 1; i < objKey.length; i++) {

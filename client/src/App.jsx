@@ -1,20 +1,9 @@
 import React from 'react';
 import StringSet from './StringSet.jsx'
-import ChordLabels from './ChordLabels.jsx'
-import ChordNames from './ChordNames.jsx'
-import MoreChordLabels from './MoreChordLabels.jsx'
-import MoreChordNames from './MoreChordNames.jsx'
-import Roots from './Roots.jsx'
-import Thirds from './Thirds.jsx'
-import Fifths from './Fifths.jsx'
-import Sevenths from './Sevenths.jsx'
-import MoreRoots from './MoreRoots.jsx'
-import MoreThirds from './MoreThirds.jsx'
-import MoreFifths from './MoreFifths.jsx'
-import MoreSevenths from './MoreSevenths.jsx'
 import StringsMenu from './StringsMenu.jsx'
 import TonicMenu from './TonicMenu.jsx'
 import ScalesMenu from './ScalesMenu.jsx'
+import ScaleChords from './ScaleChords.jsx'
 import Dropdown from './Dropdown.jsx'
 import axios from 'axios';
 
@@ -35,6 +24,8 @@ class App extends React.Component {
       scale: [],
       chords: {},
       sevenths: false,
+      selectedChord:{},
+      currentChordTones: [],
       seventhsButton: 'Show 7th Chords',
       second: false,
       secondButton: 'Compare a scale',
@@ -44,8 +35,6 @@ class App extends React.Component {
       chords2: {},
       sevenths2: false,
       moreSeventhsButton: 'Show 7th Chords',
-      username: '',
-      noteBody: ''
 
     }
     this.getStrings = this.getStrings.bind(this);
@@ -60,6 +49,7 @@ class App extends React.Component {
     this.handleSecondScale = this.handleSecondScale.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleStringChoice = this.handleStringChoice.bind(this);
+    this.selectChord = this.selectChord.bind(this)
   }
 
   componentDidMount () {
@@ -98,7 +88,8 @@ class App extends React.Component {
         this.setState({
           tonic: res.data.tonic,
           scale: res.data.scale,
-          chords: res.data.chords
+          chords: res.data.chords,
+          selectedChord: []
         })
       })
   }
@@ -109,7 +100,8 @@ class App extends React.Component {
         this.setState({
           tonic2: res.data.tonic,
           scale2: res.data.scale,
-          chords2: res.data.chords
+          chords2: res.data.chords,
+          selectedChord: []
         })
       })
   }
@@ -210,33 +202,23 @@ class App extends React.Component {
     })
   }
 
+  selectChord (chord, tones) {
+    this.setState({
+      selectedChord: chord,
+      currentChordTones: tones
+    })
+  }
+
   render() {
     return (
       <div className = "page">
         <div className="top">
           <div className="top_left">
-            <TonicMenu
-              handleTonicChange={this.handleTonicChange}
-              name={'tonic_options_left'}
-            />
-            <ScalesMenu
-              handleScaleChange={this.handleScaleChange}
-              name={'scale_options_left'}
-            />
-            <StringsMenu
-              handleStringChoice={this.handleStringChoice}
-            />
+
           </div>
           <div className="top_center">Strings Theory</div>
           <div className="top_right">
-          <TonicMenu
-              handleTonicChange={this.handleTonicChange2}
-              name={'tonic_options_right'}
-            />
-            <ScalesMenu
-              handleScaleChange={this.handleScaleChange2}
-              name={'scale_options_right'}
-            />
+
           </div>
         </div>
         <div className="middle">
@@ -246,6 +228,7 @@ class App extends React.Component {
                 allStrings={this.state.strings}
                 strings={this.state.currentStrings}
                 scale={this.state.scale}
+                chord={this.state.currentChordTones}
               />
             </div>
           </div>
@@ -280,46 +263,39 @@ class App extends React.Component {
             }
           </div>
           <div className="bottom_center">
-            <ChordLabels
+            <ScaleChords
               chords={this.state.chords}
               sevenths={this.state.sevenths}
-              />
-            <ChordNames
-              chords={this.state.chords}
-              sevenths={this.state.sevenths}
-              />
-            <Roots chords={this.state.chords}/>
-            <Thirds chords={this.state.chords}/>
-            <Fifths chords={this.state.chords}/>
-            <React.Fragment>
-              {this.state.sevenths === true ?
-                <Sevenths chords={this.state.chords}/> : null
-              }
-            </React.Fragment>
+              selectChord={this.selectChord}
+            />
             <React.Fragment>
               {this.state.second === true ?
-                <React.Fragment>
-                  <MoreChordLabels
-                    chords={this.state.chords2}
-                    sevenths={this.state.sevenths2}
-                  />
-                  <MoreChordNames
-                    chords={this.state.chords2}
-                    sevenths={this.state.sevenths2}
-                  />
-                  <MoreRoots chords={this.state.chords2}/>
-                  <MoreThirds chords={this.state.chords2}/>
-                  <MoreFifths chords={this.state.chords2}/>
-                    <React.Fragment>
-                      {this.state.sevenths2 === true ?
-                        <MoreSevenths chords={this.state.chords2}/> : null
-                      }
-                    </React.Fragment>
-                </React.Fragment>: null
-              }
+                <ScaleChords
+                  chords={this.state.chords2}
+                  sevenths={this.state.sevenths2}
+                />: null}
             </React.Fragment>
           </div>
           <div className="bottom_right">
+          <TonicMenu
+              handleTonicChange={this.handleTonicChange}
+              name={'tonic_options_left'}
+            />
+            <ScalesMenu
+              handleScaleChange={this.handleScaleChange}
+              name={'scale_options_left'}
+            />
+            <StringsMenu
+              handleStringChoice={this.handleStringChoice}
+            />
+            <TonicMenu
+              handleTonicChange={this.handleTonicChange2}
+              name={'tonic_options_right'}
+            />
+            <ScalesMenu
+              handleScaleChange={this.handleScaleChange2}
+              name={'scale_options_right'}
+            />
           </div>
         </div>
       </div>
@@ -328,4 +304,3 @@ class App extends React.Component {
 }
 
 export default App;
-

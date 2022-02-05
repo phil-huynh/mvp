@@ -1,7 +1,7 @@
 import React from 'react';
 import String from './String.jsx';
 
-var StringSet = ({strings, allStrings, scale})  => {
+var StringSet = ({strings, allStrings, scale, chord})  => {
   return (
     <div className="neck">
       {strings.map((string) => (
@@ -9,6 +9,7 @@ var StringSet = ({strings, allStrings, scale})  => {
           string={string}
           allStrings={allStrings}
           scale={scale}
+          chord={chord}
         />
       ))}
     </div>

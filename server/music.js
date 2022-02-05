@@ -413,10 +413,11 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     let chordTones = [];
     let tensions = [];
     for (var j = i; j < extended.length; j += 2) {
-      if (chordTones.length >= 4) {
-        tensions.push(extended[j])
-      } else {
+      if(chordTones.length < 4) {
         chordTones.push(extended[j])
+      }
+      if (chordTones.length >= 4 && !chordTones.includes(extended[j])) {
+        tensions.push(extended[j])
       }
     }
 
@@ -431,6 +432,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     let key = labelsOne.objKeyChord
 
     chords[key] = {}
+    chords[key].chordTones = chordTones;
+
     chords[key].root = {}
     chords[key].root.note = chordTones[0]
     chords[key].root.chordDegree = 'root'
@@ -529,7 +532,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].seventhLabel = seventhLabel
     chords[key].seventhQuality = seventhChord
 
-    chords[key].tensions = {}
+    chords[key].tensions = {};
+    chords[key].tensions.notes = tensions;
 
     var labelsNine = findLabels(tensions[0], chordTones[0])
     var labelsNineTonic =  findLabels(tensions[0], tonic)
@@ -619,7 +623,7 @@ add7NoteScale('melodic minor', {}, {2: true})
 add7NoteScale('dorian', {}, {2: true, 6: true})
 add7NoteScale('phrygian', {}, {1: true, 2: true, 5: true, 6:true})
 add7NoteScale('lydian', {3: true}, {})
-add7NoteScale('mixolydian', {}, {3: true})
+add7NoteScale('mixolydian', {}, {6: true})
 add7NoteScale('locrian', {}, {1: true, 2: true, 4: true, 5: true, 6:true})
 add7NoteScale('persian', {}, {1: true, 4: true, 5: true})
 add7NoteScale('byzantine', {}, {1: true, 5: true})
@@ -648,7 +652,9 @@ add7NoteScale('javanese', {}, {1: true, 2: true})
 var makeStrings = (array) => {
   var string = {};
   for (var i = 0; i < array.length; i++) {
-    var newString = shiftNotes(array[i], array);
+    var firstOctave = shiftNotes(array[i], array);
+    var extraNotes = firstOctave.slice(0,6)
+    var newString = firstOctave.concat(extraNotes);
     string[array[i]] = newString
   }
   return string;
