@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card } from 'react-bootstrap'
 
-var Chord = ({chord, sevenths, selectChord, currentChord}) => {
+var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected}) => {
   var name;
   var label;
   var cardClass;
@@ -14,8 +14,12 @@ var Chord = ({chord, sevenths, selectChord, currentChord}) => {
     tones=[chord.chordTones[0], chord.chordTones[1], chord.chordTones[2]])
   }
 
-  if(currentChord && chord===currentChord) {
+  if(currentChord && chord===currentChord ) {
     cardClass = `${cardClass} selectedChord`
+  }
+
+  if(currentChord2 && chord===currentChord2) {
+    cardClass = `${cardClass} selectedChord2`
   }
 
   return (
@@ -26,7 +30,7 @@ var Chord = ({chord, sevenths, selectChord, currentChord}) => {
         bg='secondary'
         border='dark'
         text='white'
-        onClick={()=>{selectChord(chord, tones)}}
+        onClick={chordOneSelected ? ()=>{selectChord2(chord, tones)} : ()=>{selectChord(chord, tones)}}
         >
         <Card.Header className='triadLabel'>{label}</Card.Header>
         <Card.Body>

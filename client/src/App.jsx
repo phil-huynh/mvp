@@ -29,6 +29,10 @@ class App extends React.Component {
       sevenths: false,
       selectedChord:{},
       currentChordTones: [],
+      chordOneSelected: false,
+      chordTwoSelected: false,
+      selectedChord2:{},
+      currentChordTones2: [],
       seventhsButton: 'Show 7th Chords',
       second: false,
       secondButton: 'Compare a scale',
@@ -55,6 +59,7 @@ class App extends React.Component {
     this.handleStringChoice = this.handleStringChoice.bind(this);
     this.handleView = this.handleView.bind(this);
     this.selectChord = this.selectChord.bind(this)
+    this.selectChord2 = this.selectChord2.bind(this)
   }
 
   componentDidMount () {
@@ -96,7 +101,11 @@ class App extends React.Component {
           scale: res.data.scale,
           chords: res.data.chords,
           selectedChord: {},
-          currentChordTones: []
+          currentChordTones: [],
+          selectedChord2: {},
+          currentChordTones2: [],
+          chordOneSelected: false,
+          chordTwoSelected: false
         })
       })
   }
@@ -109,7 +118,11 @@ class App extends React.Component {
           scale2: res.data.scale,
           chords2: res.data.chords,
           selectedChord: {},
-          currentChordTones: []
+          currentChordTones: [],
+          selectedChord2: {},
+          currentChordTones2: [],
+          chordOneSelected: false,
+          chordTwoSelected: false
         })
       })
   }
@@ -220,10 +233,45 @@ class App extends React.Component {
   }
 
   selectChord (chord, tones) {
-    this.setState({
-      selectedChord: chord,
-      currentChordTones: tones
-    })
+    if(chord === this.state.selectedChord && this.state.chordTwoSelected === false) {
+      this.setState({
+        selectedChord: {},
+        currentChordTones: [],
+        chordOneSelected: false,
+      })
+    }
+    if(this.state.chordOneSelected === false) {
+      this.setState({
+        selectedChord: chord,
+        currentChordTones: tones,
+        chordOneSelected: true
+      })
+    }
+  }
+
+  selectChord2 (chord, tones) {
+    if (chord === this.state.selectedChord) {
+      this.setState({
+        selectedChord: {},
+        currentChordTones: [],
+        selectedChord2: {},
+        currentChordTones2: [],
+        chordOneSelected: false,
+        chordTwoSelected: false
+      })
+    } else if (chord === this.state.selectedChord2) {
+      this.setState({
+        selectedChord2: {},
+        currentChordTones2: [],
+        chordTwoSelected: false
+      })
+    } else {
+      this.setState({
+        selectedChord2: chord,
+        currentChordTones2: tones,
+        chordTwoSelected: true
+      })
+    }
   }
 
   render() {
@@ -244,7 +292,11 @@ class App extends React.Component {
                 stringsLeft={this.state.stringsLeft}
                 scale={this.state.scale}
                 chord={this.state.currentChordTones}
+                chord2={this.state.currentChordTones2}
                 view={this.state.view}
+                chordOneSelected={this.state.chordOneSelected}
+                chordTwoSelected={this.state.chordTwoSelected}
+
               />
             </div>
           </div>
@@ -283,7 +335,10 @@ class App extends React.Component {
               chords={this.state.chords}
               sevenths={this.state.sevenths}
               selectChord={this.selectChord}
+              selectChord2={this.selectChord2}
               currentChord={this.state.selectedChord}
+              currentChord2={this.state.selectedChord2}
+              chordOneSelected={this.state.chordOneSelected}
             />
             <React.Fragment>
               {this.state.second === true ?
