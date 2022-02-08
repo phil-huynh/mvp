@@ -4,6 +4,7 @@ import StringsMenu from './StringsMenu.jsx'
 import TonicMenu from './TonicMenu.jsx'
 import ScalesMenu from './ScalesMenu.jsx'
 import ScaleChords from './ScaleChords.jsx'
+import ViewMenu from './ViewMenu.jsx'
 import Dropdown from './Dropdown.jsx'
 import axios from 'axios';
 
@@ -17,7 +18,9 @@ class App extends React.Component {
     super(props)
     this.state = {
       strings: {},
+      stringsLeft: {},
       currentStrings: [`E,F${flat},D${dblSharp}`, `B,C${flat},A${dblSharp}`, `G,F${dblSharp},A${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `A,G${dblSharp},B${dblFlat}`, `E,F${flat},D${dblSharp}`],
+      currentStringsMirror: [`E,F${flat},D${dblSharp}`, `A,G${dblSharp},B${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `G,F${dblSharp},A${dblFlat}`, `B,C${flat},A${dblSharp}`, `E,F${flat},D${dblSharp}`],
       choices: [],
       scaleType:'major',
       tonic: '',
@@ -35,6 +38,7 @@ class App extends React.Component {
       chords2: {},
       sevenths2: false,
       moreSeventhsButton: 'Show 7th Chords',
+      view: 'Traditional'
 
     }
     this.getStrings = this.getStrings.bind(this);
@@ -49,6 +53,7 @@ class App extends React.Component {
     this.handleSecondScale = this.handleSecondScale.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleStringChoice = this.handleStringChoice.bind(this);
+    this.handleView = this.handleView.bind(this);
     this.selectChord = this.selectChord.bind(this)
   }
 
@@ -62,7 +67,8 @@ class App extends React.Component {
     axios.get('/strings')
       .then((res) => {
         this.setState({
-          strings: res.data
+          strings: res.data.right,
+          stringsLeft: res.data.left
         })
       })
       .catch((err) => {
@@ -89,7 +95,8 @@ class App extends React.Component {
           tonic: res.data.tonic,
           scale: res.data.scale,
           chords: res.data.chords,
-          selectedChord: []
+          selectedChord: {},
+          currentChordTones: []
         })
       })
   }
@@ -101,7 +108,8 @@ class App extends React.Component {
           tonic2: res.data.tonic,
           scale2: res.data.scale,
           chords2: res.data.chords,
-          selectedChord: []
+          selectedChord: {},
+          currentChordTones: []
         })
       })
   }
@@ -150,8 +158,10 @@ class App extends React.Component {
   handleStringChoice(e) {
     var strings = e.target.value
     var stringArray = strings.split('.')
+    var mirror = stringArray.reverse()
     this.setState({
-      currentStrings: stringArray
+      currentStrings: stringArray,
+      currentStringsMirror: mirror
     })
   }
 
@@ -202,6 +212,13 @@ class App extends React.Component {
     })
   }
 
+  handleView (e) {
+    var view = e.target.value
+    this.setState({
+      view: view
+    })
+  }
+
   selectChord (chord, tones) {
     this.setState({
       selectedChord: chord,
@@ -213,13 +230,9 @@ class App extends React.Component {
     return (
       <div className = "page">
         <div className="top">
-          <div className="top_left">
-
-          </div>
-          <div className="top_center">Strings Theory</div>
-          <div className="top_right">
-
-          </div>
+          <span className="navbar">
+            Strings Theory
+          </span>
         </div>
         <div className="middle">
           <div className="inner_middle">
@@ -227,8 +240,11 @@ class App extends React.Component {
               <StringSet
                 allStrings={this.state.strings}
                 strings={this.state.currentStrings}
+                stringsMirror={this.state.currentStringsMirror}
+                stringsLeft={this.state.stringsLeft}
                 scale={this.state.scale}
                 chord={this.state.currentChordTones}
+                view={this.state.view}
               />
             </div>
           </div>
@@ -267,6 +283,7 @@ class App extends React.Component {
               chords={this.state.chords}
               sevenths={this.state.sevenths}
               selectChord={this.selectChord}
+              currentChord={this.state.selectedChord}
             />
             <React.Fragment>
               {this.state.second === true ?
@@ -295,6 +312,10 @@ class App extends React.Component {
             <ScalesMenu
               handleScaleChange={this.handleScaleChange2}
               name={'scale_options_right'}
+            />
+            <ViewMenu
+              handleView={this.handleView}
+              name={'viewMenu'}
             />
           </div>
         </div>

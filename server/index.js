@@ -36,7 +36,10 @@ app.get('/scales', (req, res) => {
 })
 
 app.get('/strings', (req, res) => {
-  res.json(Music.strings)
+  let obj = {};
+  obj.right = Music.strings;
+  obj.left = Music.stringsLeft
+  res.json(obj)
 })
 
 app.get('/choices', (req, res) => {

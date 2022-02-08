@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card } from 'react-bootstrap'
 
-var Chord = ({chord, sevenths, selectChord}) => {
+var Chord = ({chord, sevenths, selectChord, currentChord}) => {
   var name;
   var label;
   var cardClass;
@@ -12,6 +12,10 @@ var Chord = ({chord, sevenths, selectChord}) => {
     (name=chord.seventhName, label=chord.seventhLabel, cardClass='text-center seventhChordCard', tones=chord.chordTones) :
     (name=chord.triadName, label=chord.triadLabel, cardClass='text-center chordCard',
     tones=[chord.chordTones[0], chord.chordTones[1], chord.chordTones[2]])
+  }
+
+  if(currentChord && chord===currentChord) {
+    cardClass = `${cardClass} selectedChord`
   }
 
   return (

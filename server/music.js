@@ -660,12 +660,26 @@ var makeStrings = (array) => {
   return string;
 }
 
+var makeStringsLeft = (array) => {
+  var string = {};
+  for (var i = 0; i < array.length; i++) {
+    var firstOctave = shiftNotes(array[i], array);
+    var extraNotes = firstOctave.slice(0,6)
+    var newString = firstOctave.concat(extraNotes);
+    newString.push('');
+    string[array[i]] = newString.reverse();
+  }
+  return string;
+}
+
 var strings= makeStrings(chromaticScale);
+var stringsLeft = makeStringsLeft(chromaticScale);
 
 var {C, D, E, F, G, A, B, 'F\u266F': Fsharp, 'C\u266F': Csharp, 'G\u266F': Gsharp,'D\u266F': Dsharp, 'A\u266F': Asharp, 'E\u266F': Esharp, 'B\u266F': Bsharp,'B\u266D': Bflat, 'E\u266D': Eflat, 'A\u266D': Aflat, 'D\u266D': Dflat, 'G\u266D': Gflat,'C\u266D': Cflat, 'F\u266D': Fflat, 'B\u{1D12B}': BdblFlat, 'E\u{1D12B}': EdblFlat,'A\u{1D12B}': AdblFlat,'D\u{1D12B}': DdblFlat} = allScales;
 
 module.exports.scales = allScales
 module.exports.strings = strings
+module.exports.stringsLeft = stringsLeft
 module.exports.intervals = intervals
 module.exports.scaleChoices = scaleChoices
 
