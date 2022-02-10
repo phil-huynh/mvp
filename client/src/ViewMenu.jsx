@@ -1,10 +1,6 @@
 import React from 'react';
 
 var ViewMenu = ({name, handleView})  => {
-  const sharp = '\u266F';
-  const flat = '\u266D';
-  const dblSharp = '\u{1D12A}';
-  const dblFlat = '\u{1D12B}';
 
   return (
     <span className={name}>

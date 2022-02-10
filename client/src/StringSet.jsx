@@ -1,7 +1,7 @@
 import React from 'react';
 import String from './String.jsx';
 
-var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected})  => {
+var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, keyCenter, labelType})  => {
   var list;
   if(view==='Mirror' || view==='Mirror-left') {
     list = stringsMirror
@@ -23,6 +23,11 @@ var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord,
           view={view}
           chordOneSelected={chordOneSelected}
           chordTwoSelected={chordTwoSelected}
+          hideScale={hideScale}
+          solfege={solfege}
+          scaleDegrees={scaleDegrees}
+          keyCenter={keyCenter}
+          labelType={labelType}
         />
       ))}
     </div>

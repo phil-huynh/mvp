@@ -5,6 +5,7 @@ import TonicMenu from './TonicMenu.jsx'
 import ScalesMenu from './ScalesMenu.jsx'
 import ScaleChords from './ScaleChords.jsx'
 import ViewMenu from './ViewMenu.jsx'
+import LabelMenu from './LabelMenu.jsx'
 import Dropdown from './Dropdown.jsx'
 import axios from 'axios';
 
@@ -23,6 +24,7 @@ class App extends React.Component {
       currentStringsMirror: [`E,F${flat},D${dblSharp}`, `A,G${dblSharp},B${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `G,F${dblSharp},A${dblFlat}`, `B,C${flat},A${dblSharp}`, `E,F${flat},D${dblSharp}`],
       choices: [],
       scaleType:'major',
+      keyCenter: {},
       tonic: '',
       scale: [],
       chords: {},
@@ -42,7 +44,12 @@ class App extends React.Component {
       chords2: {},
       sevenths2: false,
       moreSeventhsButton: 'Show 7th Chords',
-      view: 'Traditional'
+      view: 'Traditional',
+      hideScale: false,
+      hideScaleButton: 'hide scale',
+      solfege: {},
+      scaleDegrees: {},
+      labelType: 'Note Names'
 
     }
     this.getStrings = this.getStrings.bind(this);
@@ -58,14 +65,32 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleStringChoice = this.handleStringChoice.bind(this);
     this.handleView = this.handleView.bind(this);
-    this.selectChord = this.selectChord.bind(this)
-    this.selectChord2 = this.selectChord2.bind(this)
+    this.selectChord = this.selectChord.bind(this);
+    this.selectChord2 = this.selectChord2.bind(this);
+    this.handleHide = this.handleHide.bind(this);
+    this.getDegrees = this.getDegrees.bind(this);
+    this.handleNeckNotes = this.handleNeckNotes.bind(this);
+
   }
 
   componentDidMount () {
     this.getStrings();
+    this.getDegrees();
     this.getScale('C', 'major')
     this.getScale2('C', 'major')
+  }
+
+  getDegrees () {
+    axios.get('/degrees')
+      .then((res) => {
+        this.setState({
+          solfege: res.data.solfege,
+          scaleDegrees: res.data.scaleDegrees
+        })
+      })
+      .catch((err) => {
+      console.log("🚀 ~ file: App.jsx ~ line 85 ~ App ~ getDegrees ~ err", err)
+      })
   }
 
   getStrings () {
@@ -97,6 +122,7 @@ class App extends React.Component {
     axios.get('/scales', { params: { key: key, scale: scale } })
       .then((res) => {
         this.setState({
+          keyCenter: res.data,
           tonic: res.data.tonic,
           scale: res.data.scale,
           chords: res.data.chords,
@@ -169,9 +195,12 @@ class App extends React.Component {
   }
 
   handleStringChoice(e) {
+    var mirror=[];
     var strings = e.target.value
     var stringArray = strings.split('.')
-    var mirror = stringArray.reverse()
+    stringArray.forEach((string) => {
+      mirror.unshift(string)
+    })
     this.setState({
       currentStrings: stringArray,
       currentStringsMirror: mirror
@@ -229,6 +258,28 @@ class App extends React.Component {
     var view = e.target.value
     this.setState({
       view: view
+    })
+  }
+
+  handleHide(e) {
+    if(this.state.hideScale) {
+      this.setState({
+        hideScale: false,
+        hideScaleButton: 'hide scale'
+      })
+    }
+    if(!this.state.hideScale) {
+      this.setState({
+        hideScale: true,
+        hideScaleButton: 'show scale'
+      })
+    }
+  }
+
+  handleNeckNotes (e) {
+    var labelType = e.target.value
+    this.setState({
+      labelType: labelType
     })
   }
 
@@ -296,7 +347,11 @@ class App extends React.Component {
                 view={this.state.view}
                 chordOneSelected={this.state.chordOneSelected}
                 chordTwoSelected={this.state.chordTwoSelected}
-
+                hideScale={this.state.hideScale}
+                solfege={this.state.solfege}
+                scaleDegrees={this.state.scaleDegrees}
+                keyCenter={this.state.keyCenter}
+                labelType={this.state.labelType}
               />
             </div>
           </div>
@@ -332,7 +387,7 @@ class App extends React.Component {
           </div>
           <div className="bottom_center">
             <ScaleChords
-              chords={this.state.chords}
+              keyCenter={this.state.keyCenter}
               sevenths={this.state.sevenths}
               selectChord={this.selectChord}
               selectChord2={this.selectChord2}
@@ -372,6 +427,16 @@ class App extends React.Component {
               handleView={this.handleView}
               name={'viewMenu'}
             />
+            <LabelMenu
+              handleNeckNotes={this.handleNeckNotes}
+              name={'labelMenu'}
+            />
+            <button
+                onClick={(e) => this.handleHide(e)}
+                className="seventh_button"
+                id="sevenths_button">
+                {this.state.hideScaleButton}
+              </button>
           </div>
         </div>
       </div>

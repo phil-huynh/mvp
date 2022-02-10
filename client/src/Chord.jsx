@@ -2,7 +2,8 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card } from 'react-bootstrap'
 
-var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected}) => {
+
+var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, keyCenter}) => {
   var name;
   var label;
   var cardClass;
@@ -40,7 +41,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
             </Card.Text> : null}
           <Card.Text>{chord.fifth.note}</Card.Text>
           <Card.Text>{chord.third.note}</Card.Text>
-          <Card.Text>{chord.root.note}</Card.Text>
+          <Card.Text className= 'rootNote'>{chord.root.note}</Card.Text>
         </Card.Body>
         <Card.Footer className='triadName'>{name}</Card.Footer>
       </Card>:null

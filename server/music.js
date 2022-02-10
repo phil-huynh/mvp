@@ -16,6 +16,46 @@ var chromaticScale = [['C', `B${sharp}`, `D${dblFlat}`], [`C${sharp}`, `D${flat}
 var allScales = {};
 var chordTypes = {};
 
+var solfege = {
+  one: 'Do',
+  sharpOne: 'Di',
+  flatTwo: 'Ra',
+  two: 'Re',
+  sharpTwo: 'Ri',
+  flatThree: 'Me',
+  three: 'Mi',
+  four: 'Fa',
+  sharpFour: 'Fi',
+  flatFive: 'Se',
+  five: 'sol',
+  sharpFive: 'Si',
+  flatSix: 'Le',
+  six: 'La',
+  sharpSix: 'Li',
+  flatSeven: 'Te',
+  seven: 'Ti'
+}
+
+var scaleDegrees = {
+  one: '1',
+  sharpOne: `${sharp}1`,
+  flatTwo: `${flat}2`,
+  two: '2',
+  sharpTwo: `${sharp}2`,
+  flatThree: `${flat}3`,
+  three: '3',
+  four: '4',
+  sharpFour: `${sharp}4`,
+  flatFive: `${flat}5`,
+  five: '5',
+  sharpFive: `${sharp}5`,
+  flatSix: `${flat}6`,
+  six: '6',
+  sharpSix: `${sharp}6`,
+  flatSeven: `${flat}7`,
+  seven: '7'
+}
+
 var sharpNote = (note) => {
   if (note.length === 1 || note.slice(note.length -2) === `${dblSharp}`) {
     note = `${note}${sharp}`;
@@ -126,6 +166,7 @@ var initiateScaleObjects = () => {
   allScales.C.tonic = "C";
   allScales.C.natScaleDegrees = whiteNotes;
   allScales.C.scaleDegrees = {};
+  allScales.C.notesToDegrees = {};
   var sd = allScales.C.scaleDegrees
   var scaleDegree = allScales.C.natScaleDegrees
 
@@ -147,6 +188,7 @@ var initiateScaleObjects = () => {
   sd.flatSeven = flatNote(scaleDegree[6]);
   sd.seven = scaleDegree[6];
 
+
   var clockwiseScale = whiteNotes.slice();
   for (var i = 0; i < clockwise.length; i++) {
     clockwiseScale = shiftNotes(clockwise[i], clockwiseScale);
@@ -154,10 +196,11 @@ var initiateScaleObjects = () => {
     allScales[`${clockwise[i]}`] = {};
     allScales[`${clockwise[i]}`].tonic = `${clockwise[i]}`;
     allScales[`${clockwise[i]}`].scaleDegrees = {};
+    allScales[`${clockwise[i]}`].notesToDegrees = {};
     allScales[`${clockwise[i]}`].natScaleDegrees = clockwiseScale;
 
-    var currentSD = allScales[`${clockwise[i]}`].scaleDegrees
-    var scaleDegree = allScales[`${clockwise[i]}`].natScaleDegrees;
+    let currentSD = allScales[`${clockwise[i]}`].scaleDegrees
+    let scaleDegree = allScales[`${clockwise[i]}`].natScaleDegrees;
 
     currentSD.one = scaleDegree[0];
     currentSD.sharpOne = sharpNote(scaleDegree[0]);
@@ -176,6 +219,7 @@ var initiateScaleObjects = () => {
     currentSD.sharpSix = sharpNote(scaleDegree[5]);
     currentSD.flatSeven = flatNote(scaleDegree[6]);
     currentSD.seven = scaleDegree[6];
+
   }
 
   var counterClockwiseScale = whiteNotes.slice();
@@ -185,10 +229,11 @@ var initiateScaleObjects = () => {
     allScales[`${counterClockwise[i]}`] = {};
     allScales[`${counterClockwise[i]}`].tonic = `${counterClockwise[i]}`;
     allScales[`${counterClockwise[i]}`].scaleDegrees = {};
+    allScales[`${counterClockwise[i]}`].notesToDegrees = {};
     allScales[`${counterClockwise[i]}`].natScaleDegrees = counterClockwiseScale;
 
-    currentSD = allScales[`${counterClockwise[i]}`].scaleDegrees
-    var scaleDegree = allScales[`${counterClockwise[i]}`].natScaleDegrees;
+    let currentSD = allScales[`${counterClockwise[i]}`].scaleDegrees
+    let scaleDegree = allScales[`${counterClockwise[i]}`].natScaleDegrees;
 
     currentSD.one = scaleDegree[0];
     currentSD.sharpOne = sharpNote(scaleDegree[0]);
@@ -207,6 +252,7 @@ var initiateScaleObjects = () => {
     currentSD.sharpSix = sharpNote(scaleDegree[5]);
     currentSD.flatSeven = flatNote(scaleDegree[6]);
     currentSD.seven = scaleDegree[6];
+
   }
   return allScales;
 }
@@ -603,12 +649,25 @@ var add7NoteScale = (name, sharpen, flatten) => {
     allScales[tonic][objKey] = {};
     allScales[tonic][objKey].tonic = tonic
     allScales[tonic][objKey].type = name
+    allScales[tonic][objKey].tonicScaleDegrees = allScales[tonic].scaleDegrees
+    allScales[tonic][objKey].scaleDegrees = []
+    allScales[tonic][objKey].notesToDegrees = {}
+
+    for (var key in allScales[tonic].scaleDegrees) {
+      allScales[tonic][objKey].notesToDegrees[allScales[tonic].scaleDegrees[key]] = key
+    }
+
     allScales[tonic][objKey].scale = allScales[tonic].natScaleDegrees.map((note, index) => {
       if (sharpen[index]) {
         note = sharpNote(note)
       }
       if (flatten[index]) {
         note = flatNote(note)
+      }
+      for (var key in allScales[tonic].scaleDegrees) {
+        if(allScales[tonic].scaleDegrees[key] === note) {
+          allScales[tonic][objKey].scaleDegrees.push(key)
+        }
       }
       return note;
     })
@@ -682,6 +741,8 @@ module.exports.strings = strings
 module.exports.stringsLeft = stringsLeft
 module.exports.intervals = intervals
 module.exports.scaleChoices = scaleChoices
+module.exports.solfege = solfege
+module.exports.scaleDegrees = scaleDegrees
 
 
 
