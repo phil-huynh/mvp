@@ -3,7 +3,7 @@ import Chord from './Chord.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col } from 'react-bootstrap'
 
-var ScaleChords = ({keyCenter, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected}) => {
+var ScaleChords = ({keyCenter, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, compareChords}) => {
 
   var chords = keyCenter.chords
   if(chords) {
@@ -23,6 +23,7 @@ var ScaleChords = ({keyCenter, sevenths, selectChord, selectChord2, currentChord
             currentChord2={currentChord2}
             chordOneSelected={chordOneSelected}
             keyCenter={keyCenter}
+            compareChords={compareChords}
           />
         </Col>
       )): null}

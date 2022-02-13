@@ -25,6 +25,7 @@ class App extends React.Component {
       choices: [],
       scaleType:'major',
       keyCenter: {},
+      keyCenter2: {},
       tonic: '',
       scale: [],
       chords: {},
@@ -49,9 +50,12 @@ class App extends React.Component {
       hideScaleButton: 'hide scale',
       solfege: {},
       scaleDegrees: {},
-      labelType: 'Note Names'
+      labelType: 'Note Names',
+      singleOrCompareButton: 'Single Chord',
+      compare: false
 
     }
+
     this.getStrings = this.getStrings.bind(this);
     this.getScale = this.getScale.bind(this);
     this.getScale2 = this.getScale2.bind(this);
@@ -70,6 +74,7 @@ class App extends React.Component {
     this.handleHide = this.handleHide.bind(this);
     this.getDegrees = this.getDegrees.bind(this);
     this.handleNeckNotes = this.handleNeckNotes.bind(this);
+    this.handleSingleOrCompare = this.handleSingleOrCompare.bind(this);
 
   }
 
@@ -140,15 +145,10 @@ class App extends React.Component {
     axios.get('/scales', { params: { key: key, scale: scale } })
       .then((res) => {
         this.setState({
+          keyCenter2: res.data,
           tonic2: res.data.tonic,
           scale2: res.data.scale,
-          chords2: res.data.chords,
-          selectedChord: {},
-          currentChordTones: [],
-          selectedChord2: {},
-          currentChordTones2: [],
-          chordOneSelected: false,
-          chordTwoSelected: false
+          chords2: res.data.chords
         })
       })
   }
@@ -276,6 +276,24 @@ class App extends React.Component {
     }
   }
 
+  handleSingleOrCompare (e) {
+    if(this.state.compare) {
+      this.setState({
+        compare: false,
+        singleOrCompareButton: 'Single Chord',
+        selectedChord2: {},
+        currentChordTones2: [],
+        chordTwoSelected: false
+      })
+    }
+    if(!this.state.compare) {
+      this.setState({
+        compare: true,
+        singleOrCompareButton: 'Compare Chords',
+      })
+    }
+  }
+
   handleNeckNotes (e) {
     var labelType = e.target.value
     this.setState({
@@ -284,23 +302,38 @@ class App extends React.Component {
   }
 
   selectChord (chord, tones) {
-    if(chord === this.state.selectedChord && this.state.chordTwoSelected === false) {
+    if(chord === this.state.selectedChord && this.state.compare && this.state.chordTwoSelected === false) {
       this.setState({
         selectedChord: {},
         currentChordTones: [],
         chordOneSelected: false,
       })
     }
-    if(this.state.chordOneSelected === false) {
+    if(!this.state.chordOneSelected || !this.state.compare) {
       this.setState({
         selectedChord: chord,
         currentChordTones: tones,
         chordOneSelected: true
       })
     }
+    if (chord === this.state.selectedChord && !this.state.compare && this.state.chordOneSelected) {
+      this.setState({
+        selectedChord: {},
+        currentChordTones: [],
+        chordOneSelected: false,
+      })
+    }
+
   }
 
   selectChord2 (chord, tones) {
+    if(this.state.compare === false) {
+      this.setState({
+        selectedChord2: {},
+        currentChordTones2: [],
+        chordTwoSelected: false
+      })
+    }
     if (chord === this.state.selectedChord) {
       this.setState({
         selectedChord: {},
@@ -394,11 +427,12 @@ class App extends React.Component {
               currentChord={this.state.selectedChord}
               currentChord2={this.state.selectedChord2}
               chordOneSelected={this.state.chordOneSelected}
+              compareChords={this.state.compare}
             />
             <React.Fragment>
               {this.state.second === true ?
                 <ScaleChords
-                  chords={this.state.chords2}
+                  keyCenter={this.state.keyCenter2}
                   sevenths={this.state.sevenths2}
                 />: null}
             </React.Fragment>
@@ -432,11 +466,15 @@ class App extends React.Component {
               name={'labelMenu'}
             />
             <button
-                onClick={(e) => this.handleHide(e)}
-                className="seventh_button"
-                id="sevenths_button">
-                {this.state.hideScaleButton}
-              </button>
+              onClick={(e) => this.handleHide(e)}
+              className="seventh_button">
+              {this.state.hideScaleButton}
+            </button>
+            <button
+              onClick={(e) => this.handleSingleOrCompare(e)}
+              className="seventh_button">
+              {this.state.singleOrCompareButton}
+            </button>
           </div>
         </div>
       </div>

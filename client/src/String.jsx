@@ -13,30 +13,32 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
   if (labelType === 'Note Names') {
     labelContainer = keyCenter.tonicScaleDegrees
   }
+
   if (labelType === 'Scale Degrees') {
     labelContainer = scaleDegrees
   }
+
   if (labelType === 'Solfege') {
     labelContainer = solfege
   }
 
-  if(view==='Mirror' || view==='Traditional') {
+  if (view === 'Mirror' || view === 'Traditional') {
     currentString = allStrings[string]
     name = 'string'
-    open = 0
     openClass = 'open'
     openNoteClass = 'openNote'
     noteClass = 'note'
   }
-  if(view==='Mirror-left' || view==='Traditional-left') {
+
+  if (view === 'Mirror-left' || view === 'Traditional-left') {
     currentString = stringsLeft[string]
     name = 'string-left'
-    open = notes.length - 1
     openClass = 'open-left'
     openNoteClass = 'openNoteLeft'
     noteClass = 'noteLeft'
   }
-  if(currentString) {
+
+  if (currentString) {
     console.log('string', currentString)
     for(var i = 0; i < currentString.length; i++) {
       var containsNote = false;
@@ -51,10 +53,8 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
       }
     }
   }
-  console.log('scale', scale)
-  console.log('notes', notes)
-  console.log('labels',labelContainer)
 
+  (view ==='Mirror-left' || view ==='Traditional-left') ? open = notes.length - 1 : open = 0;
 
   return(
       <div className={`${name}`}>

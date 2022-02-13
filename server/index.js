@@ -31,7 +31,7 @@ app.get('/scales', (req, res) => {
   } else {
     objKey = scale;
   }
-  console.log(Music.scales[key][objKey])
+  // console.log(Music.scales[key][objKey])
   res.json(Music.scales[key][objKey])
 })
 
