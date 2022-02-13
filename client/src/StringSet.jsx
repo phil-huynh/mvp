@@ -11,6 +11,7 @@ var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord,
   }
 
   return (
+
     <div className='neck'>
       {list.map((string) => (
         <String
@@ -31,6 +32,7 @@ var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord,
         />
       ))}
     </div>
+
   )
 }
 
