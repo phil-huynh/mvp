@@ -33,6 +33,7 @@ app.get('/scales', (req, res) => {
   }
   // console.log(Music.scales[key][objKey])
   res.json(Music.scales[key][objKey])
+
 })
 
 app.get('/strings', (req, res) => {
