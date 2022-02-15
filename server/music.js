@@ -697,12 +697,7 @@ var add7NoteScale = (name, sharpen, flatten) => {
       if(chrd[root].chordQuality==='major') {
         chrd[root].pentatonic = {}
         chrd[root].pentatonic.degrees = ['R', '2','3','5','6']
-        chrd[root].pentatonic.notes = []
-        chrd[root].pentatonic.notes.push(chrd[root].chordTones[0])
-        chrd[root].pentatonic.notes.push(chrd[root].tensions.notes[0])
-        chrd[root].pentatonic.notes.push(chrd[root].chordTones[1])
-        chrd[root].pentatonic.notes.push(chrd[root].chordTones[2])
-        chrd[root].pentatonic.notes.push(chrd[root].tensions.notes[2])
+        chrd[root].pentatonic.notes = [chrd[root].chordTones[0], chrd[root].tensions.notes[0], chrd[root].chordTones[1], chrd[root].chordTones[2], chrd[root].tensions.notes[2]]
 
       }
       if(chrd[root].chordQuality==='minor') {

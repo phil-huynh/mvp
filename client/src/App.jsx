@@ -7,6 +7,8 @@ import ScaleChords from './ScaleChords.jsx'
 import ViewMenu from './ViewMenu.jsx'
 import LabelMenu from './LabelMenu.jsx'
 import Dropdown from './Dropdown.jsx'
+import FretGuide from './FretGuide.jsx'
+import AlterChordOpt from './AlterChordOpt.jsx'
 import axios from 'axios';
 
 const sharp = '\u266F';
@@ -52,8 +54,23 @@ class App extends React.Component {
       scaleDegrees: {},
       labelType: 'Note Names',
       singleOrCompareButton: 'Single Chord',
-      compare: false
-
+      compare: false,
+      ch0: 'triad',
+      ch1: 'triad',
+      ch2: 'triad',
+      ch3: 'triad',
+      ch4: 'triad',
+      ch5: 'triad',
+      ch6: 'triad',
+      ch0Alt: false,
+      ch1Alt: false,
+      ch2Alt: false,
+      ch3Alt: false,
+      ch4Alt: false,
+      ch5Alt: false,
+      ch6Alt: false,
+      showAlter: false,
+      currentCard: '',
     }
 
     this.getStrings = this.getStrings.bind(this);
@@ -75,7 +92,8 @@ class App extends React.Component {
     this.getDegrees = this.getDegrees.bind(this);
     this.handleNeckNotes = this.handleNeckNotes.bind(this);
     this.handleSingleOrCompare = this.handleSingleOrCompare.bind(this);
-
+    this.handleAlterChord = this.handleAlterChord.bind(this);
+    this.handleAlterChordWindow = this.handleAlterChordWindow.bind(this);
   }
 
   componentDidMount () {
@@ -323,7 +341,6 @@ class App extends React.Component {
         chordOneSelected: false,
       })
     }
-
   }
 
   selectChord2 (chord, tones) {
@@ -358,6 +375,31 @@ class App extends React.Component {
     }
   }
 
+  handleAlterChord (e) {
+    let type = e.target.innerText
+    let typeKey = this.state.currentCard
+    let alterKey = `${typeKey}Alt`
+    this.setState({
+      [typeKey]: type,
+      [alterKey]: true
+    })
+  }
+
+  handleAlterChordWindow (chord) {
+    if(this.state.showAlter===false) {
+      this.setState({
+        showAlter: true,
+        currentCard: chord
+      })
+    }
+    if(this.state.showAlter===true) {
+      this.setState({
+        showAlter: false,
+        currentCard: ''
+      })
+    }
+  }
+
   render() {
     return (
       <div className = "page">
@@ -367,28 +409,10 @@ class App extends React.Component {
           </span>
         </div>
         <div className="middle">
-          <div className='guideContainerUpper'>
-            {(this.state.view === 'Traditional-left' || this.state.view === 'Mirror-left') ?
-            <div className='guideLeft'>
-              <span className='guidebox leftyFret17'> &#183;</span>
-              <span className='guidebox leftyFret15'> &#183;</span>
-              <span className='guidebox leftyFret12'>:</span>
-              <span className='guidebox leftyFret9'> &#183;</span>
-              <span className='guidebox leftyFret7'> &#183;</span>
-              <span className='guidebox leftyFret5'> &#183;</span>
-              <span className='guidebox leftyFret3'> &#183;</span>
-            </div>:
-            <div className='guide'>
-              <span className='guidebox fret3'> &#183;</span>
-              <span className='guidebox fret5'> &#183;</span>
-              <span className='guidebox fret7'> &#183;</span>
-              <span className='guidebox fret9'> &#183;</span>
-              <span className='guidebox fret12'>:</span>
-              <span className='guidebox fret15'> &#183;</span>
-              <span className='guidebox fret17'> &#183;</span>
-            </div>
-            }
-          </div>
+          <FretGuide
+            name ={'guideContainerUpper'}
+            view={this.state.view}
+          />
           <div className="inner_middle">
             <div className="stringbox">
               <StringSet
@@ -410,28 +434,10 @@ class App extends React.Component {
               />
             </div>
           </div>
-          <div className='guideContainerLower'>
-           {(this.state.view === 'Traditional-left' || this.state.view === 'Mirror-left') ?
-             <div className='guideLeft'>
-               <span className='guidebox leftyFret17'> &#183;</span>
-               <span className='guidebox leftyFret15'> &#183;</span>
-               <span className='guidebox leftyFret12'>:</span>
-               <span className='guidebox leftyFret9'> &#183;</span>
-               <span className='guidebox leftyFret7'> &#183;</span>
-               <span className='guidebox leftyFret5'> &#183;</span>
-               <span className='guidebox leftyFret3'> &#183;</span>
-             </div>:
-             <div className='guide'>
-               <span className='guidebox fret3'> &#183;</span>
-               <span className='guidebox fret5'> &#183;</span>
-               <span className='guidebox fret7'> &#183;</span>
-               <span className='guidebox fret9'> &#183;</span>
-               <span className='guidebox fret12'>:</span>
-               <span className='guidebox fret15'> &#183;</span>
-               <span className='guidebox fret17'> &#183;</span>
-             </div>
-             }
-          </div>
+          <FretGuide
+            name ={'guideContainerLower'}
+            view={this.state.view}
+          />
         </div>
         <div className="bottom">
           <div className="bottom_left">
@@ -463,6 +469,12 @@ class App extends React.Component {
             }
           </div>
           <div className="bottom_center">
+            <AlterChordOpt
+              showAlter={this.state.showAlter}
+              handleAlterChord={this.handleAlterChord}
+              handleAlterChordWindow={this.handleAlterChordWindow}
+              currentCard={this.state.currentCard}
+            />
             <ScaleChords
               keyCenter={this.state.keyCenter}
               sevenths={this.state.sevenths}
@@ -472,6 +484,21 @@ class App extends React.Component {
               currentChord2={this.state.selectedChord2}
               chordOneSelected={this.state.chordOneSelected}
               compareChords={this.state.compare}
+              handleAlterChordWindow={this.handleAlterChordWindow}
+              ch0={this.state.ch0}
+              ch1={this.state.ch1}
+              ch2={this.state.ch2}
+              ch3={this.state.ch3}
+              ch4={this.state.ch4}
+              ch5={this.state.ch5}
+              ch6={this.state.ch6}
+              ch0Alt={this.state.ch0Alt}
+              ch1Alt={this.state.ch1Alt}
+              ch2Alt={this.state.ch2Alt}
+              ch3Alt={this.state.ch3Alt}
+              ch4Alt={this.state.ch4Alt}
+              ch5Alt={this.state.ch5Alt}
+              ch6Alt={this.state.ch6Alt}
             />
             <React.Fragment>
               {this.state.second === true ?
