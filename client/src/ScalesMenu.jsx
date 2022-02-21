@@ -5,6 +5,7 @@ var ScalesMenu = ({name, handleScaleChange})  => {
   const flat = '\u266D';
   const dblSharp = '\u{1D12A}';
   const dblFlat = '\u{1D12B}';
+  const natural = '\u266E'
 
   return (
     <span className="scale_options_left">
@@ -19,14 +20,15 @@ var ScalesMenu = ({name, handleScaleChange})  => {
       <option value='mixolydian'>Mixolydian</option>
       <option value='locrian'>Locrian</option>
       <option value='persian'>Persian</option>
-      <option value='byzantine'>Byzantine</option>
+      <option value='double harmonic major'>Double Harmonic Major</option>
       <option value='hungarian gypsy minor'>Hungarian Gypsy Minor</option>
-      <option value='romanian'>Romanian</option>
+      <option value='romanian major'>Romanian Major</option>
+      <option value='romanian minor'>Romanian Minor</option>
       <option value='lydian dominant'>Lydian Dominant</option>
       <option value='ukrainian dorian'>Ukrainian Dorian</option>
       <option value='phrygian dominant'>Phrygian Dominant</option>
       <option value='lydian augmented'>Lydian Augmented</option>
-      <option value='locrian sharp6'>Locrian #6</option>
+      <option value='locrian natural6'>Locrian #6</option>
       <option value='ionian sharp5'>Ionian #5</option>
       <option value='phrygian dorian'>Phrygian Dorian</option>
       <option value='mixolydian flat13'>Mixolydian b13</option>
@@ -37,7 +39,6 @@ var ScalesMenu = ({name, handleScaleChange})  => {
       <option value='neapolitan major'>Neapolitan Major</option>
       <option value='neapolitan minor'>Neapolitan</option>
       <option value='arabian'>Arabian</option>
-      <option value='javanese'>Javanese</option>
     </select>
   </span>
   )

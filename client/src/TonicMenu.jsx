@@ -5,6 +5,7 @@ var TonicMenu = ({name, handleTonicChange})  => {
   const flat = '\u266D';
   const dblSharp = '\u{1D12A}';
   const dblFlat = '\u{1D12B}';
+  const natural = '\u266E';
 
   return (
     <span className={name}>

@@ -22,9 +22,11 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
   if(currentChord2 && chord===currentChord2) {
     cardClass = `${cardClass} selectedChord2`
   }
-  if(type==='Pentatonic Scale') {
+  if(type==='Pentatonic Scale' && chord.pentatonic) {
     tones=chord.pentatonic.notes
   }
+
+
 
   return (
     <React.Fragment>

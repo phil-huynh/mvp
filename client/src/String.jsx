@@ -123,7 +123,7 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
 export default String;
 
 // return(
-//   <div className={`${name}`}>
+//   < className={`${name}`}>
 //     {notes ? notes.map((note, i) => (
 //       scale.includes(note[0]) && chord.includes(note[0]) && chord2.includes(note[0]) && (i === open || i === 0)  ?
 //         <span className={`${openClass}`}>
@@ -283,5 +283,3 @@ export default String;
 //                                                               </span>:
 //                                                               <span className="fret">________________________________________________________________________________________</span>
 //       )): null}
-//   </div>
-// )
