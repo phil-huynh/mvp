@@ -16,6 +16,7 @@ const flat = '\u266D';
 const dblSharp = '\u{1D12A}';
 const dblFlat = '\u{1D12B}';
 const natural = '\u266E';
+const dim = '\u00B0'
 
 class App extends React.Component {
   constructor(props) {
@@ -56,13 +57,13 @@ class App extends React.Component {
       labelType: 'Note Names',
       singleOrCompareButton: 'Single Chord',
       compare: false,
-      ch0: 'triad',
-      ch1: 'triad',
-      ch2: 'triad',
-      ch3: 'triad',
-      ch4: 'triad',
-      ch5: 'triad',
-      ch6: 'triad',
+      ch0: 'Triad',
+      ch1: 'Triad',
+      ch2: 'Triad',
+      ch3: 'Triad',
+      ch4: 'Triad',
+      ch5: 'Triad',
+      ch6: 'Triad',
       ch0Alt: false,
       ch1Alt: false,
       ch2Alt: false,
@@ -95,6 +96,8 @@ class App extends React.Component {
     this.handleSingleOrCompare = this.handleSingleOrCompare.bind(this);
     this.handleAlterChord = this.handleAlterChord.bind(this);
     this.handleAlterChordWindow = this.handleAlterChordWindow.bind(this);
+    this.setTones = this.setTones.bind(this);
+    this.setTones2 = this.setTones2.bind(this);
   }
 
   componentDidMount () {
@@ -376,6 +379,18 @@ class App extends React.Component {
     }
   }
 
+  setTones (tones) {
+    this.setState({
+      currentChordTones: tones
+    })
+  }
+
+  setTones2 (tones) {
+    this.setState({
+      currentChordTones2: tones
+    })
+  }
+
   handleAlterChord (e) {
     let type = e.target.innerText
     let typeKey = this.state.currentCard
@@ -484,8 +499,12 @@ class App extends React.Component {
               currentChord={this.state.selectedChord}
               currentChord2={this.state.selectedChord2}
               chordOneSelected={this.state.chordOneSelected}
+              currentChordTones={this.state.currentChordTones}
+              currentChordTones2={this.state.currentChordTones2}
               compareChords={this.state.compare}
               handleAlterChordWindow={this.handleAlterChordWindow}
+              setTones={this.setTones}
+              setTones2={this.setTones2}
               ch0={this.state.ch0}
               ch1={this.state.ch1}
               ch2={this.state.ch2}

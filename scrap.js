@@ -443,20 +443,29 @@ var findLabels  = (root, tonic) => {
 
 
 var makeChordsFor7NoteScale = (scale, tonic, name) => {
-    let extended = scale.concat(scale.slice())
-    allScales[tonic][name].chords = {}
-    var chords = allScales[tonic][name].chords
+    var chords = {};
+    var failed = []
     for (var i = 0; i < scale.length; i++) {
-      let chordTones = [];
-      let tensions = [];
-      for (var j = 0; j < extended.length; j += 2) {
-          if (chordTones.length >= 4) {
-              tensions.push(extended[j])
-          } else {
-              chordTones.push(extended[j])
-          }
+      let mode = shiftNotes(scale[i], scale)
+      let chordTones = [mode[0], mode[2], mode[4], mode[6]];
+      let tensions = [mode[1], mode[3], mode[5]];
+      let quartalVoicing = [mode[0], mode[3], mode[6], mode[2]]
+      let fifthsVoicing = [mode[0], mode[4], mode[1], mode[5]]
+
+
+      chords[key] = {}
+      if (allScales[chordTones[0]]){
+        chords[key].relativeDegrees = allScales[chordTones[0]].scaleDegrees
+        chords[key].notesToDegrees = {}
+        for (var degr in chords[key].relativeDegrees) {
+          chords[key].notesToDegrees[chords[key].relativeDegrees[degr]] = degr
+        }
+
+      } else {
+        failed.push(chordTones[0])
       }
-      //var findLabels  = (root, tonic)
+
+
       var chordName = ''
       var chordLabel = ''
       var chordQ = ''
@@ -465,96 +474,155 @@ var makeChordsFor7NoteScale = (scale, tonic, name) => {
       var seventhChord = ''
 
 
-    var labelsOne = findLabels(chordTones[0], tonic)
-    var key = labelsOne.objKeyChord
+      var labelsOne = findLabels(chordTones[0], tonic)
+      var key = labelsOne.objKeyChord
 
-    chords[key] = {}
-    chords[key].root = {}
-    chords[key].root.note = chordTones[0]
-    chords[key].root.chordDegree = 'root'
-    chords[key].root.scaleDegree = labelsOne.scaleDegree
-    chordName += chordTones[0]
-    chordLabel += labelsOne.roman
+      chords[key] = {}
+      chords[key].root = {}
+      chords[key].root.note = chordTones[0]
+      chords[key].root.chordDegree = 'root'
+      chords[key].root.scaleDegree = labelsOne.scaleDegree
+      chordName += chordTones[0]
+      chordLabel += labelsOne.roman
 
-    var labelsThree = findLabels(chordTones[1], chordTones[0])
-    var labelsThreeTonic = findLabels(chordTones[1], tonic)
-    chords[key].third = {}
-    chords[key].third.note = chordTones[1]
-    chords[key].third.chordDegree = labelsThree.chordDegree
-    chords[key].third.scaleDegree = labelsThreeTonic.scaleDegree
+      var labelsThree = findLabels(chordTones[1], chordTones[0])
+      var labelsThreeTonic = findLabels(chordTones[1], tonic)
+      chords[key].third = {}
+      chords[key].third.note = chordTones[1]
+      chords[key].third.chordDegree = labelsThree.chordDegree
+      chords[key].third.scaleDegree = labelsThreeTonic.scaleDegree
 
-    var labelsFive = findLabels(chordTones[2], chordTones[0])
-    var labelsFiveTonic = findLabels(chordTones[2], tonic)
-    chords[key].fifth = {}
-    chords[key].fifth.note = chordTones[2]
-    chords[key].fifth.chordDegree = labelsFive.chordDegree
-    chords[key].fifth.scaleDegree = labelsFiveTonic.scaleDegree
+      var labelsFive = findLabels(chordTones[2], chordTones[0])
+      var labelsFiveTonic = findLabels(chordTones[2], tonic)
+      chords[key].fifth = {}
+      chords[key].fifth.note = chordTones[2]
+      chords[key].fifth.chordDegree = labelsFive.chordDegree
+      chords[key].fifth.scaleDegree = labelsFiveTonic.scaleDegree
 
-    if (labelsThree.chordQuality === 'min' && labelsFive.chordDegree === '5') {
-    chordQ = 'minor'
-    chordName += 'min'
-    chordLabel += 'min'
-    }
-    if (labelsThree.chordQuality === 'min' && labelsFive.chordQuality === 'dim') {
-        chordQ = 'diminished'
-        chordName += 'dim'
-        chordLabel += 'dim'
-    }
-    if (labelsThree.chordQuality === 'maj' && labelsFive.chordQuality === 'aug') {
-        chordQ = 'augmented'
-        chordName += 'aug'
-        chordLabel += 'aug'
-    }
-    if (labelsThree.chordQuality === 'maj' && labelsFive.chordDegree === '5') {
-        chordQ = 'major'
-    }
+      var labelsSeven = findLabels(chordTones[3], chordTones[0])
+      var labelsSevenTonic = findLabels(chordTones[3], tonic)
+      chords[key].seventh = {}
+      chords[key].seventh.note = chordTones[3]
+      chords[key].seventh.chordDegree = labelsSeven.chordDegree
+      chords[key].seventh.scaleDegree = labelsFiveTonic.scaleDegree
 
-    var labelsSeven = findLabels(chordTones[3], chordTones[0])
-    var labelsSevenTonic = findLabels(chordTones[3], tonic)
-    chords[key].seventh = {}
-    chords[key].seventh.note = chordTones[3]
-    chords[key].seventh.chordDegree = labelsSeven.chordDegree
-    chords[key].seventh.scaleDegree = labelsFiveTonic.scaleDegree
+      chords[key].tensions = {}
 
-    if (chordQ === 'major' && labelsSeven.seventhChordNotation === 'maj7' ) {
-        seventhName = `${chordName}maj7`
-        seventhLabel = `${chordLabel}maj7`
-        seventhChord = 'major 7'
-    }
-    if (chordQ === 'major' && labelsSeven.seventhChordNotation === '7' ) {
-        seventhName = `${chordName}7`
-        seventhLabel = `${chordLabel}7`
-        seventhChord = 'dominant 7'
-    }
-    if (chordQ === 'minor' && labelsSeven.seventhChordNotation === '7' ) {
-        seventhName = `${chordName}7`
-        seventhLabel = `${chordLabel}7`
-        seventhChord = 'minor 7'
-    }
-    if (chordQ === 'minor' && labelsSeven.seventhChordNotation === 'maj7' ) {
-        seventhName = `${chordName}(maj7)`
-        seventhLabel = `${chordLabel}(maj7)`
-        seventhChord = 'minor(major 7)'
-    }
+      var labelsNine = findLabels(tensions[0], chordTones[0])
+      var labelsNineTonic =  findLabels(tensions[0], tonic)
 
-    if (chordQ === 'diminished' && labelsSeven.seventhChordNotation === '7' ) {
-        seventhName = `${chordName}7(${flat}5)`
-        seventhLabel = `${chordLabel}7(${flat}5)`
-        seventhChord = [`minor 7(${flat}5)`, 'half diminished']
-    }
+      chords[key].tensions.nine = {}
+      chords[key].tensions.nine.note = tensions[0]
+      chords[key].tensions.nine.chordDegree = labelsNine.chordDegree
+      chords[key].tensions.nine.scaleDegree = labelsNineTonic.scaleDegree
+      if (labelsNine.interval === 'min2') {
+          chords[key].tensions.nine.avoid = true
+      } else {
+          chords[key].tensions.nine.avoid = false
+      }
 
-    var dimCheck = findLabels(chordTones[0], chordTones[3])
-    if (chordQ === 'diminished' && (dimCheck.interval === 'aug2' || dimCheck.interval === 'min3')) {
-        seventhName = `${chordName}7`
-        seventhLabel = `${chordLabel}7`
-        seventhChord = 'full diminished 7'
-    }
+      var labelsEleven = findLabels(tensions[1], chordTones[0])
+      var labelsElevenTonic =  findLabels(tensions[1], tonic)
+      var checkAvoid = findLabels(tensions[1], chordTones[1])
+      chords[key].tensions.eleven = {}
+      chords[key].tensions.eleven.note = tensions[0]
+      chords[key].tensions.eleven.chordDegree = labelsEleven.chordDegree
+      chords[key].tensions.eleven.scaleDegree = labelsElevenTonic.scaleDegree
+      if (checkAvoid.interval === 'min2') {
+          chords[key].tensions.eleven.avoid = true
+      } else {
+          chords[key].tensions.eleven.avoid = false
+      }
 
-    if (chordQ === 'augmented' && labelsSeven.seventhChordNotation === 'maj7' ) {
-        seventhName = `${chordName}maj7`
-        seventhLabel = `${chordLabel}maj7`
-        seventhChord = ' augmented major 7'
-    }
+      var labelsThirteen = findLabels(tensions[2], chordTones[0])
+      var labelsThirteenTonic =  findLabels(tensions[2], tonic)
+      checkAvoid = findLabels(tensions[2], chordTones[2])
+      chords[key].tensions.thirteen = {}
+      chords[key].tensions.thirteen.note = tensions[0]
+      chords[key].tensions.thirteen.chordDegree = labelsThirteen.chordDegree
+      chords[key].tensions.thirteen.scaleDegree = labelsThirteenTonic.scaleDegree
+      if (checkAvoid.interval === 'min2') {
+          chords[key].tensions.thirteen.avoid = true
+      } else {
+          chords[key].tensions.thirteen.avoid = false
+            }
+
+
+    // if (labelsThree.chordQuality === 'min' && labelsFive.chordDegree === '5') {
+        // chordQ = 'minor'
+        // chordName += 'min'
+        // chordLabel += 'min'
+    // }
+    // if (labelsThree.chordQuality === 'min' && labelsFive.chordQuality === 'dim') {
+    //     chordQ = 'diminished'
+    //     chordName += 'dim'
+    //     chordLabel += 'dim'
+    // }
+    // if (labelsThree.chordQuality === 'maj' && labelsFive.chordQuality === 'aug') {
+    //     chordQ = 'augmented'
+    //     chordName += 'aug'
+    //     chordLabel += 'aug'
+    // }
+    // if (labelsThree.chordQuality === 'maj' && labelsFive.chordDegree === '5') {
+    //     chordQ = 'major'
+    // }
+
+
+    // if (chordQ === 'major' && labelsSeven.seventhChordNotation === 'maj7' ) {
+    //     seventhName = `${chordName}maj7`
+    //     seventhLabel = `${chordLabel}maj7`
+    //     seventhChord = 'major 7'
+    // }
+    // if (chordQ === 'major' && labelsSeven.seventhChordNotation === '7' ) {
+    //     seventhName = `${chordName}7`
+    //     seventhLabel = `${chordLabel}7`
+    //     seventhChord = 'dominant 7'
+    // }
+    // if (chordQ === 'minor' && labelsSeven.seventhChordNotation === '7' ) {
+    //     seventhName = `${chordName}7`
+    //     seventhLabel = `${chordLabel}7`
+    //     seventhChord = 'minor 7'
+    // }
+    // if (chordQ === 'minor' && labelsSeven.seventhChordNotation === 'maj7' ) {
+    //     seventhName = `${chordName}(maj7)`
+    //     seventhLabel = `${chordLabel}(maj7)`
+    //     seventhChord = 'minor(major 7)'
+    // }
+
+    // if (chordQ === 'diminished' && labelsSeven.seventhChordNotation === '7' ) {
+    //     seventhName = `${chordName}7(${flat}5)`
+    //     seventhLabel = `${chordLabel}7(${flat}5)`
+    //     seventhChord = [`minor 7(${flat}5)`, 'half diminished']
+    // }
+
+    // var dimCheck = findLabels(chordTones[0], chordTones[3])
+    // if (chordQ === 'diminished' && (dimCheck.interval === 'aug2' || dimCheck.interval === 'min3')) {
+    //     seventhName = `${chordName}7`
+    //     seventhLabel = `${chordLabel}7`
+    //     seventhChord = 'full diminished 7'
+    // }
+
+    // if (chordQ === 'augmented' && labelsSeven.seventhChordNotation === 'maj7' ) {
+    //     seventhName = `${chordName}maj7`
+    //     seventhLabel = `${chordLabel}maj7`
+    //     seventhChord = ' augmented major 7'
+    // }
+
+    /*
+
+    */
+
+
+
+
+
+
+
+
+
+
+
+
 
     chords[key].triadName = chordName
     chords[key].triadLabel = chordLabel
@@ -562,47 +630,6 @@ var makeChordsFor7NoteScale = (scale, tonic, name) => {
     chords[key].seventhName = seventhName
     chords[key].seventhLabel = seventhLabel
     chords[key].seventhQuality = seventhChord
-
-    chords[key].tensions = {}
-
-    var labelsNine = findLabels(tensions[0], chordTones[0])
-    var labelsNineTonic =  findLabels(tensions[0], tonic)
-
-    chords[key].tensions.nine = {}
-    chords[key].tensions.nine.note = tensions[0]
-    chords[key].tensions.nine.chordDegree = labelsNine.chordDegree
-    chords[key].tensions.nine.scaleDegree = labelsNineTonic.scaleDegree
-    if (labelsNine.interval === 'min2') {
-        chords[key].tensions.nine.avoid = true
-    } else {
-        chords[key].tensions.nine.avoid = false
-    }
-
-    var labelsEleven = findLabels(tensions[1], chordTones[0])
-    var labelsElevenTonic =  findLabels(tensions[1], tonic)
-    var checkAvoid = findLabels(tensions[1], chordTones[1])
-    chords[key].tensions.eleven = {}
-    chords[key].tensions.eleven.note = tensions[0]
-    chords[key].tensions.eleven.chordDegree = labelsEleven.chordDegree
-    chords[key].tensions.eleven.scaleDegree = labelsElevenTonic.scaleDegree
-    if (checkAvoid.interval === 'min2') {
-        chords[key].tensions.eleven.avoid = true
-    } else {
-        chords[key].tensions.eleven.avoid = false
-    }
-
-    var labelsThirteen = findLabels(tensions[2], chordTones[0])
-    var labelsThirteenTonic =  findLabels(tensions[2], tonic)
-    checkAvoid = findLabels(tensions[2], chordTones[2])
-    chords[key].tensions.thirteen = {}
-    chords[key].tensions.thirteen.note = tensions[0]
-    chords[key].tensions.thirteen.chordDegree = labelsThirteen.chordDegree
-    chords[key].tensions.thirteen.scaleDegree = labelsThirteenTonic.scaleDegree
-    if (checkAvoid.interval === 'min2') {
-        chords[key].tensions.thirteen.avoid = true
-    } else {
-        chords[key].tensions.thirteen.avoid = false
-    }
 }
 
 var solfege = {

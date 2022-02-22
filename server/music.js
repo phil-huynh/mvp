@@ -3,6 +3,7 @@ const flat = '\u266D';
 const dblSharp = '\u{1D12A}';
 const dblFlat = '\u{1D12B}';
 const natural = '\u266E'
+const dim = '\u00B0'
 
 const whiteNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 
@@ -461,7 +462,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     let chordTones = [mode[0], mode[2], mode[4], mode[6]];
     let tensions = [mode[1], mode[3], mode[5]];
     let quartalVoicing = [mode[5], mode[1], mode[4], mode[0]]
-    let fifthsVoicing = [mode[0], mode[4], mode[1], mode[5]]
+    let fifthsVoicing = [mode[0], mode[4], mode[1]]
 
     let labelsOne = findLabels(chordTones[0], tonic)
     let key = labelsOne.objKeyChord
@@ -516,18 +517,18 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
 
     if (labelsThree.chordQuality === 'min' && labelsFive.chordDegree === '5') {
     chordQ = 'minor'
-    chordName += 'min'
-    chordLabel += 'min'
+    chordName += 'm'
+    chordLabel += 'm'
     }
     if (labelsThree.chordQuality === 'min' && labelsFive.chordQuality === 'dim') {
       chordQ = 'diminished'
-      chordName += 'dim'
-      chordLabel += 'dim'
+      chordName += `${dim}`
+      chordLabel += `${dim}`
     }
     if (labelsThree.chordQuality === 'maj' && labelsFive.chordQuality === 'aug') {
       chordQ = 'augmented'
-      chordName += 'aug'
-      chordLabel += 'aug'
+      chordName += '+'
+      chordLabel += '+'
     }
     if (labelsThree.chordQuality === 'maj' && labelsFive.chordQuality === 'dim') {
       chordQ = `major(${flat}5)`
@@ -578,8 +579,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     }
 
     if (chordQ === 'diminished' && labelsSeven.seventhChordNotation === '7' ) {
-      seventhName = `${chordTones[0]}min7(${flat}5)`
-      seventhLabel = `${labelsSeven.roman}min7(${flat}5)`
+      seventhName = `${chordTones[0]}m7(${flat}5)`
+      seventhLabel = `${labelsSeven.roman}m7(${flat}5)`
       seventhChord = [`minor 7(${flat}5)`, 'half diminished']
     }
 
@@ -601,14 +602,28 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhChord = `dominant 7(${sharp}5)`
     }
 
-    chords[key].triadName = chordName
-    chords[key].triadLabel = chordLabel
-    chords[key].chordQuality = chordQ
-    chords[key].seventhName = seventhName
-    chords[key].seventhLabel = seventhLabel
-    chords[key].seventhQuality = seventhChord
-    chords[key].quartalVoicing =  quartalVoicing
-    chords[key].fifthsVoicing = fifthsVoicing
+    chords[key].options = {}
+    chords[key].options.triad = {}
+    chords[key].options.triad.name = chordName
+    chords[key].options.triad.notes = [chordTones[0], chordTones[1], chordTones[2]]
+    chords[key].options.triad.label = chordLabel
+    chords[key].options.triad.quality= chordQ
+    chords[key].options.seventhChord = {}
+    chords[key].options.seventhChord.name = seventhName
+    chords[key].options.seventhChord.notes = [chordTones[0], chordTones[1], chordTones[2], chordTones[3]]
+    chords[key].options.seventhChord.label = seventhLabel
+    chords[key].options.seventhChord.quality = seventhChord
+    chords[key].options.shell = {}
+    chords[key].options.shell.name = `${seventhName}(shell)`
+    chords[key].options.shell.notes = [chordTones[0], chordTones[1], chordTones[3]]
+    chords[key].options.shell.label = `${seventhLabel}(shell)`
+    chords[key].options.shell.quality = seventhChord
+    chords[key].options.quartalVoicing = {}
+    chords[key].options.quartalVoicing.notes =  quartalVoicing
+    chords[key].options.quartalVoicing.label = '4ths voicing'
+    chords[key].options.fifthsVoicing = {}
+    chords[key].options.fifthsVoicing.notes = fifthsVoicing
+    chords[key].options.fifthsVoicing.label = '5ths voicing'
 
     chords[key].tensions = {};
     chords[key].tensions.notes = tensions;
@@ -699,16 +714,16 @@ var add7NoteScale = (name, degrees) => {
     allScales[tonic][objKey].chords = makeChordsFor7NoteScale(allScales[tonic][objKey].scale, tonic)
     var chrd = allScales[tonic][objKey].chords
     for(var root in chrd) {
-      if(chrd[root].chordQuality==='major') {
-        chrd[root].pentatonic = {}
-        chrd[root].pentatonic.degrees = ['R', '2','3','5','6']
-        chrd[root].pentatonic.notes = [chrd[root].chordTones[0], chrd[root].tensions.notes[0], chrd[root].chordTones[1], chrd[root].chordTones[2], chrd[root].tensions.notes[2]]
+      if(chrd[root].options.triad.quality==='major') {
+        chrd[root].options.pentatonic = {}
+        chrd[root].options.pentatonic.degrees = ['R', '2','3','5','6']
+        chrd[root].options.pentatonic.notes = [chrd[root].chordTones[0], chrd[root].tensions.notes[0], chrd[root].chordTones[1], chrd[root].chordTones[2], chrd[root].tensions.notes[2]]
 
       }
-      if(chrd[root].chordQuality==='minor') {
-        chrd[root].pentatonic = {}
-        chrd[root].pentatonic.degrees = ['R', `${flat}3`,'4','5',`${flat}7`]
-        chrd[root].pentatonic.notes = [chrd[root].chordTones[0], chrd[root].chordTones[1], chrd[root].tensions.notes[1], chrd[root].chordTones[2], chrd[root].chordTones[3]]
+      if(chrd[root].options.triad.quality==='minor') {
+        chrd[root].options.pentatonic = {}
+        chrd[root].options.pentatonic.degrees = ['R', `${flat}3`,'4','5',`${flat}7`]
+        chrd[root].options.pentatonic.notes = [chrd[root].chordTones[0], chrd[root].chordTones[1], chrd[root].tensions.notes[1], chrd[root].chordTones[2], chrd[root].chordTones[3]]
       }
     }
   }

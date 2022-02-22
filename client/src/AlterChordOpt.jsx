@@ -19,6 +19,7 @@ var AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterChord}) => {
       <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Hello World</div>
       <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Power Chord</div>
       <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Triad</div>
+      <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Shell Voicing</div>
       <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Sus2</div>
       <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Sus4</div>
       <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Six</div>
@@ -30,6 +31,8 @@ var AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterChord}) => {
       <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Thirteen</div>
       <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Add Thirteen</div>
       <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Pentatonic Scale</div>
+      <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Quartal Voicing</div>
+      <div className='chordChoice' onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}>Fifths Voicing</div>
     </Modal>
   )
 }
