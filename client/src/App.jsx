@@ -98,6 +98,9 @@ class App extends React.Component {
     this.handleAlterChordWindow = this.handleAlterChordWindow.bind(this);
     this.setTones = this.setTones.bind(this);
     this.setTones2 = this.setTones2.bind(this);
+    this.resetCard = this.resetCard.bind(this)
+    this.resetChords = this.resetChords.bind(this)
+    this.resetAll = this.resetAll.bind(this)
   }
 
   componentDidMount () {
@@ -416,6 +419,59 @@ class App extends React.Component {
     }
   }
 
+  resetCard(chord) {
+    let typeKey = chord
+    let alterKey = `${typeKey}Alt`
+    this.setState({
+      [typeKey]: 'Triad',
+      [alterKey]: false
+    })
+  }
+
+  resetChords() {
+    this.setState({
+      ch0: 'Triad',
+      ch1: 'Triad',
+      ch2: 'Triad',
+      ch3: 'Triad',
+      ch4: 'Triad',
+      ch5: 'Triad',
+      ch6: 'Triad',
+      ch0Alt: false,
+      ch1Alt: false,
+      ch2Alt: false,
+      ch3Alt: false,
+      ch4Alt: false,
+      ch5Alt: false,
+      ch6Alt: false,
+    })
+  }
+
+  resetAll() {
+    this.setState({
+      ch0: 'Triad',
+      ch1: 'Triad',
+      ch2: 'Triad',
+      ch3: 'Triad',
+      ch4: 'Triad',
+      ch5: 'Triad',
+      ch6: 'Triad',
+      ch0Alt: false,
+      ch1Alt: false,
+      ch2Alt: false,
+      ch3Alt: false,
+      ch4Alt: false,
+      ch5Alt: false,
+      ch6Alt: false,
+      selectedChord:{},
+      selectedChord2:{},
+      currentChordTones: [],
+      currentChordTones2: [],
+      chordOneSelected: false,
+      chordTwoSelected: false,
+    })
+  }
+
   render() {
     return (
       <div className = "page">
@@ -503,6 +559,7 @@ class App extends React.Component {
               currentChordTones2={this.state.currentChordTones2}
               compareChords={this.state.compare}
               handleAlterChordWindow={this.handleAlterChordWindow}
+              resetCard={this.resetCard}
               setTones={this.setTones}
               setTones2={this.setTones2}
               ch0={this.state.ch0}
@@ -565,6 +622,18 @@ class App extends React.Component {
               onClick={(e) => this.handleSingleOrCompare(e)}
               className="seventh_button">
               {this.state.singleOrCompareButton}
+            </button>
+            <button
+              onClick={() => this.resetChords()}
+              className="seventh_button"
+              >
+              Reset Chords
+            </button>
+            <button
+              onClick={() => this.resetAll()}
+              className="seventh_button"
+              >
+              Reset All
             </button>
           </div>
         </div>

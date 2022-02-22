@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, Button } from 'react-bootstrap'
 
 
-var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2}) => {
+var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2, resetCard}) => {
   var name;
   var label;
   var cardClass='text-center chordCard'
@@ -105,15 +105,17 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
         border='dark'
         text='white'
         >
-        <div className='cardNameLabel'>
+        <div
+          className='cardNameLabel'
+          onClick={chordOneSelected && compareChords ? ()=>{selectChord2(chord, tones)} : ()=>{selectChord(chord, tones)}}>
           <Card.Header
             className='triadLabel'
-            onClick={chordOneSelected && compareChords ? ()=>{selectChord2(chord, tones)} : ()=>{selectChord(chord, tones)}}>
+          >
             {label}
           </Card.Header>
           <Card.Header
             className='triadName'
-            onClick={chordOneSelected && compareChords ? ()=>{selectChord2(chord, tones)} : ()=>{selectChord(chord, tones)}}>
+          >
             {name}
           </Card.Header>
         </div>
@@ -129,6 +131,16 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
           >
             Alter Me
           </Card.Footer>
+          <Card.Footer></Card.Footer>
+          {wasAltered ?
+            <Card.Footer
+              className='alterChordButton'
+              onClick={()=>{resetCard(whichChordAmI)}}
+            >
+              Reset Me
+            </Card.Footer>
+            : null
+          }
         </Card.Body>
       </Card>:null
       }
