@@ -462,6 +462,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
   var failed = []
   for (var i = 0; i < scale.length; i++) {
     let mode = shiftNotes(scale[i], scale)
+
     let chordTones = [mode[0], mode[2], mode[4], mode[6]];
     let tensions = [mode[1], mode[3], mode[5]];
     let quartalVoicing = [mode[5], mode[1], mode[4], mode[0]]
@@ -483,9 +484,15 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     }
 
     let notesToDegrees = chords[key].notesToDegrees
+    let modeObj = {}
+
+
     if (notesToDegrees) {
       var chordTonesRef = [notesToDegrees[mode[0]], notesToDegrees[mode[2]], notesToDegrees[mode[4]], notesToDegrees[mode[6]]];
       var tensionsRef = [notesToDegrees[mode[1]], notesToDegrees[mode[3]], notesToDegrees[mode[5]]];
+      for (var j = 0; j < mode.length; j++) {
+        modeObj[notesToDegrees[mode[j]]] = true
+      }
     }
 
     let chordName = ''
@@ -504,6 +511,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].root.solfege = labelsOne.solfege
     chordName += chordTones[0]
     chordLabel += labelsOne.roman
+    chName = chordName.slice()
+    chLabel = chordLabel.slice()
 
     var labelsThree = findLabels(chordTones[1], chordTones[0])
     var labelsThreeTonic = findLabels(chordTones[1], tonic)
@@ -537,6 +546,10 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].options.seventhChord.notes = [chordTones[0], chordTones[1], chordTones[2], chordTones[3]]
     chords[key].options.shell = {}
     chords[key].options.shell.notes = [chordTones[0], chordTones[1], chordTones[3]]
+    chords[key].options.octaves = {}
+    chords[key].options.octaves.notes = [chordTones[0]]
+    chords[key].options.octaves.name = `${chordName} Octaves`
+    chords[key].options.octaves.label = `${chordLabel} Octaves`
 
     chordTonesRef= JSON.stringify(chordTonesRef)
 
@@ -627,6 +640,10 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhChord = `major 7(${flat}5)`
     } // maj7 (b5)
 
+    chords[key].options.list.push('Octaves')
+    chords[key].options.list.push('Triad')
+    chords[key].options.list.push('Seventh')
+    chords[key].options.list.push('Shell Voicing')
     chords[key].options.triad.name = chordName
     chords[key].options.triad.label = chordLabel
     chords[key].options.triad.quality= chordQ
@@ -637,7 +654,41 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].options.shell.label = `${seventhLabel}(shell)`
     chords[key].options.shell.quality = seventhChord
 
+    var addVoicing = (voicing, objKey, listName, name, label, quality) => {
+      let notes = []
+      var check = (voicing) => {
+        for (var k = 0; k < voicing.length; k++) {
+          if(chords[key].relativeDegrees) {
+            let conversion = chords[key].relativeDegrees[voicing[k]]
+            notes.push(conversion)
+          }
+          if (!modeObj[voicing[k]]) {
+            return false
+          }
+        }
+        return true
+      }
+      if(check(voicing)) {
+        chords[key].options[objKey] = {}
+        chords[key].options[objKey].notes = notes
+        if (name == null) {chords[key].options[objKey].name = `${chName}${quality}`;}
+        if (name != null) {chords[key].options[objKey].name = `${name}`;}
+        if (label == null) {chords[key].options[objKey].label = `${chLabel}${quality}`;}
+        if (label != null) {chords[key].options[objKey].label = `${label}`;}
+        chords[key].options.list.push(`${listName}`)
+      }
+    }
 
+    addVoicing(['one', 'five'], 'powerChord', 'Power Chord', null, null, '5');
+    addVoicing(['one', 'four', 'five'], 'sus4', 'sus4', null, null, 'sus4');
+    addVoicing(['one', 'two', 'five'], 'sus2', 'sus2', null, null, 'sus2');
+    addVoicing(['one', 'three','five', 'two'], 'add9', 'add9', null, null, 'add9');
+    addVoicing(['one', 'three', 'five', 'six'], 'major6', 'Major 6', null, null, '6');
+    addVoicing(['one', 'flatThree', 'five', 'six'], 'minor6', 'Minor 6', null, null, '6');
+    addVoicing(['one', 'flatFive'], 'tritone', 'Tritone', 'tritone', 'tritone', 'tritone');
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two'], 'dominant9', 'Dominant 9', null, null, '9');
+    addVoicing(['one', 'two', 'three', 'five', 'six'], 'majorPentatonic', 'Major Pentatonic', null, 'Major Pentatonic', 'maj Pentatonic');
+    addVoicing(['one', 'flatThree', 'four', 'five', 'flatSeven'], 'minorPentatonic', 'Minor Pentatonic', null, 'Minor Pentatonic', 'min Pentatonic');
 
 
     chords[key].options.quartalVoicing = {}
@@ -733,20 +784,7 @@ var add7NoteScale = (name, degrees) => {
     }
 
     allScales[tonic][objKey].chords = makeChordsFor7NoteScale(allScales[tonic][objKey].scale, tonic)
-    var chrd = allScales[tonic][objKey].chords
-    for(var root in chrd) {
-      if(chrd[root].options.triad.quality==='major') {
-        chrd[root].options.pentatonic = {}
-        chrd[root].options.pentatonic.degrees = ['R', '2','3','5','6']
-        chrd[root].options.pentatonic.notes = [chrd[root].chordTones[0], chrd[root].tensions.notes[0], chrd[root].chordTones[1], chrd[root].chordTones[2], chrd[root].tensions.notes[2]]
 
-      }
-      if(chrd[root].options.triad.quality==='minor') {
-        chrd[root].options.pentatonic = {}
-        chrd[root].options.pentatonic.degrees = ['R', `${flat}3`,'4','5',`${flat}7`]
-        chrd[root].options.pentatonic.notes = [chrd[root].chordTones[0], chrd[root].chordTones[1], chrd[root].tensions.notes[1], chrd[root].chordTones[2], chrd[root].chordTones[3]]
-      }
-    }
   }
 }
 

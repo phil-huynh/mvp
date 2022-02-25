@@ -73,6 +73,7 @@ class App extends React.Component {
       ch6Alt: false,
       showAlter: false,
       currentCard: '',
+      currentList: '',
     }
 
     this.getStrings = this.getStrings.bind(this);
@@ -402,17 +403,19 @@ class App extends React.Component {
     })
   }
 
-  handleAlterChordWindow (chord) {
+  handleAlterChordWindow (chord, list) {
     if(this.state.showAlter===false) {
       this.setState({
         showAlter: true,
-        currentCard: chord
+        currentCard: chord,
+        currentList: list
       })
     }
     if(this.state.showAlter===true) {
       this.setState({
         showAlter: false,
-        currentCard: ''
+        currentCard: '',
+        currentList: ''
       })
     }
   }
@@ -544,6 +547,7 @@ class App extends React.Component {
               handleAlterChord={this.handleAlterChord}
               handleAlterChordWindow={this.handleAlterChordWindow}
               currentCard={this.state.currentCard}
+              list={this.state.currentList}
             />
             <ScaleChords
               keyCenter={this.state.keyCenter}
