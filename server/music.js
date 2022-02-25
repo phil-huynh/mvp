@@ -530,6 +530,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].seventh.solfege = labelsSevenTonic.solfege
 
     chords[key].options = {}
+    chords[key].options.list = []
     chords[key].options.triad = {}
     chords[key].options.triad.notes = [chordTones[0], chordTones[1], chordTones[2]]
     chords[key].options.seventhChord = {}
@@ -635,6 +636,10 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].options.shell.name = `${seventhName}(shell)`
     chords[key].options.shell.label = `${seventhLabel}(shell)`
     chords[key].options.shell.quality = seventhChord
+
+
+
+
     chords[key].options.quartalVoicing = {}
     chords[key].options.quartalVoicing.notes =  quartalVoicing
     chords[key].options.quartalVoicing.label = '4ths voicing'

@@ -125,6 +125,8 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
               {chord.seventh.note}
             </Card.Text> : null}
           <Card.Text>{tones}</Card.Text>
+        </Card.Body>
+        <div className='footerButton'>
           <Card.Footer
             className='alterChordButton'
             onClick={()=>{handleAlterChordWindow(whichChordAmI)}}
@@ -141,7 +143,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
             </Card.Footer>
             : null
           }
-        </Card.Body>
+        </div>
       </Card>:null
       }
     </React.Fragment>
