@@ -200,7 +200,6 @@ class App extends React.Component {
     this.setState({
       sevenths2: true,
       moreSeventhsButton: 'Show Triads'
-
     })
   }
 

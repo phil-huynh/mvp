@@ -187,6 +187,7 @@ var initiateScaleObjects = () => {
   sd.flatSix = flatNote(scaleDegree[5]);
   sd.six = scaleDegree[5];
   sd.sharpSix = sharpNote(scaleDegree[5]);
+  sd.dblFlatSeven = flatNote(flatNote(scaleDegree[6]))
   sd.flatSeven = flatNote(scaleDegree[6]);
   sd.seven = scaleDegree[6];
 
@@ -219,6 +220,7 @@ var initiateScaleObjects = () => {
     currentSD.flatSix = flatNote(scaleDegree[5]);
     currentSD.six = scaleDegree[5];
     currentSD.sharpSix = sharpNote(scaleDegree[5]);
+    currentSD.dblFlatSeven = flatNote(flatNote(scaleDegree[6]))
     currentSD.flatSeven = flatNote(scaleDegree[6]);
     currentSD.seven = scaleDegree[6];
 
@@ -252,6 +254,7 @@ var initiateScaleObjects = () => {
     currentSD.flatSix = flatNote(scaleDegree[5]);
     currentSD.six = scaleDegree[5];
     currentSD.sharpSix = sharpNote(scaleDegree[5]);
+    currentSD.dblFlatSeven = flatNote(flatNote(scaleDegree[6]))
     currentSD.flatSeven = flatNote(scaleDegree[6]);
     currentSD.seven = scaleDegree[6];
 
@@ -479,15 +482,18 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       failed.push(chordTones[0])
     }
 
+    let notesToDegrees = chords[key].notesToDegrees
+    if (notesToDegrees) {
+      var chordTonesRef = [notesToDegrees[mode[0]], notesToDegrees[mode[2]], notesToDegrees[mode[4]], notesToDegrees[mode[6]]];
+      var tensionsRef = [notesToDegrees[mode[1]], notesToDegrees[mode[3]], notesToDegrees[mode[5]]];
+    }
+
     let chordName = ''
     let chordLabel = ''
     let chordQ = ''
     let seventhName = ''
     let seventhLabel = ''
     let seventhChord = ''
-
-
-
 
     chords[key].chordTones = chordTones;
 
@@ -515,30 +521,6 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].fifth.scaleDegree = labelsFiveTonic.scaleDegree
     chords[key].fifth.solfege = labelsFiveTonic.solfege
 
-    if (labelsThree.chordQuality === 'min' && labelsFive.chordDegree === '5') {
-    chordQ = 'minor'
-    chordName += 'm'
-    chordLabel += 'm'
-    }
-    if (labelsThree.chordQuality === 'min' && labelsFive.chordQuality === 'dim') {
-      chordQ = 'diminished'
-      chordName += `${dim}`
-      chordLabel += `${dim}`
-    }
-    if (labelsThree.chordQuality === 'maj' && labelsFive.chordQuality === 'aug') {
-      chordQ = 'augmented'
-      chordName += '+'
-      chordLabel += '+'
-    }
-    if (labelsThree.chordQuality === 'maj' && labelsFive.chordQuality === 'dim') {
-      chordQ = `major(${flat}5)`
-      chordName += `maj(${flat}5)`
-      chordLabel += `maj(${flat}5)`
-    }
-    if (labelsThree.chordQuality === 'maj' && labelsFive.chordDegree === '5') {
-      chordQ = 'major'
-    }
-
     var labelsSeven = findLabels(chordTones[3], chordTones[0])
     var labelsSevenTonic = findLabels(chordTones[3], tonic)
     chords[key].seventh = {}
@@ -547,75 +529,110 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].seventh.scaleDegree = labelsSevenTonic.scaleDegree
     chords[key].seventh.solfege = labelsSevenTonic.solfege
 
-    if (chordQ === 'major' && labelsSeven.seventhChordNotation === 'maj7' ) {
+    chords[key].options = {}
+    chords[key].options.triad = {}
+    chords[key].options.triad.notes = [chordTones[0], chordTones[1], chordTones[2]]
+    chords[key].options.seventhChord = {}
+    chords[key].options.seventhChord.notes = [chordTones[0], chordTones[1], chordTones[2], chordTones[3]]
+    chords[key].options.shell = {}
+    chords[key].options.shell.notes = [chordTones[0], chordTones[1], chordTones[3]]
+
+    chordTonesRef= JSON.stringify(chordTonesRef)
+
+    if (chordTonesRef === JSON.stringify(['one', 'three', 'five', 'seven'])) {
+      chordQ = 'major'
       seventhName = `${chordName}maj7`
       seventhLabel = `${chordLabel}maj7`
       seventhChord = 'major 7'
-    }
-    if (chordQ === `major(${flat}5)` && labelsSeven.seventhChordNotation === `maj7(${flat}5)` ) {
-      seventhName = `${chordName}maj7(${flat}5)`
-      seventhLabel = `${chordLabel}maj7(${flat}5)`
-      seventhChord = `major 7(${flat}5)`
-    }
-    if (chordQ === 'major' && labelsSeven.seventhChordNotation === '7' ) {
+    } // maj7
+
+    if (chordTonesRef === JSON.stringify(['one', 'three', 'five', 'flatSeven'])) {
+      chordQ = 'major'
       seventhName = `${chordName}7`
       seventhLabel = `${chordLabel}7`
       seventhChord = 'dominant 7'
-    }
-    if (chordQ === `major(${flat}5)` && labelsSeven.seventhChordNotation === '7' ) {
-      seventhName = `${chordName}7(${flat}5)`
-      seventhLabel = `${chordLabel}7(${flat}5)`
-      seventhChord = `dominant 7(${flat}5)`
-    }
-    if (chordQ === 'minor' && labelsSeven.seventhChordNotation === '7' ) {
-      seventhName = `${chordName}7`
-      seventhLabel = `${chordLabel}7`
-      seventhChord = 'minor 7'
-    }
-    if (chordQ === 'minor' && labelsSeven.seventhChordNotation === 'maj7' ) {
-      seventhName = `${chordName}(maj7)`
-      seventhLabel = `${chordLabel}(maj7)`
-      seventhChord = 'minor(major 7)'
-    }
+    } //dom7
 
-    if (chordQ === 'diminished' && labelsSeven.seventhChordNotation === '7' ) {
-      seventhName = `${chordTones[0]}m7(${flat}5)`
-      seventhLabel = `${labelsSeven.roman}m7(${flat}5)`
-      seventhChord = [`minor 7(${flat}5)`, 'half diminished']
-    }
-
-    var dimCheck = findLabels(chordTones[0], chordTones[3])
-    if (chordQ === 'diminished' && (dimCheck.interval === 'aug2' || dimCheck.interval === 'min3')) {
-      seventhName = `${chordName}7`
-      seventhLabel = `${chordLabel}7`
-      seventhChord = 'full diminished 7'
-    }
-
-    if (chordQ === 'augmented' && labelsSeven.seventhChordNotation === 'maj7' ) {
+    if (chordTonesRef === JSON.stringify(['one', 'three', 'sharpFive', 'seven'])) {
+      chordQ = 'augmented'
+      chordName += '+'
+      chordLabel += '+'
       seventhName = `${chordName}(maj7)`
       seventhLabel = `${chordLabel}(maj7)`
       seventhChord = ' augmented major 7'
-    }
-    if (chordQ === 'augmented' && labelsSeven.seventhChordNotation === '7' ) {
+    } //aug(maj7)
+
+    if (chordTonesRef === JSON.stringify(['one', 'three', 'sharpFive', 'flatSeven'])) {
+      chordQ = 'augmented'
+      chordName += '+'
+      chordLabel += '+'
       seventhName = `${chordName}7(${sharp}5)`
       seventhLabel = `${chordLabel}7(${sharp}5)`
       seventhChord = `dominant 7(${sharp}5)`
-    }
+    } //dom #5
 
-    chords[key].options = {}
-    chords[key].options.triad = {}
+    if (chordTonesRef === JSON.stringify(['one', 'flatThree', 'five', 'seven'])) {
+      chordQ = 'minor'
+      chordName += 'm'
+      chordLabel += 'm'
+      seventhName = `${chordName}(maj7)`
+      seventhLabel = `${chordLabel}(maj7)`
+      seventhChord = 'minor(major 7)'
+    } //min(maj7)
+
+    if (chordTonesRef === JSON.stringify(['one', 'flatThree', 'five', 'flatSeven'])) {
+      chordQ = 'minor'
+      chordName += 'm'
+      chordLabel += 'm'
+      seventhName = `${chordName}7`
+      seventhLabel = `${chordLabel}7`
+      seventhChord = 'minor 7'
+    } //min7
+
+    if (chordTonesRef === JSON.stringify(['one', 'flatThree', 'flatFive', 'flatSeven'])) {
+      chordQ = 'diminished'
+      chordName += `${dim}`
+      chordLabel += `${dim}`
+      seventhName = `${chordTones[0]}m7(${flat}5)`
+      seventhLabel = `${labelsSeven.roman}m7(${flat}5)`
+      seventhChord = [`minor 7(${flat}5)`, 'half diminished']
+    } //min7(b5)
+
+    if (chordTonesRef === JSON.stringify(['one', 'flatThree', 'flatFive', 'dblFlatSeven'])) {
+      chords[key].seventh.chordDegree = `${dblFlat}7`
+      chordQ = 'diminished'
+      chordName += `${dim}`
+      chordLabel += `${dim}`
+      seventhName = `${chordName}7`
+      seventhLabel = `${chordLabel}7`
+      seventhChord = 'full diminished 7'
+    } // full dim
+
+    if (chordTonesRef === JSON.stringify(['one', 'three', 'flatFive', 'flatSeven'])) {
+      chordQ = `major(${flat}5)`
+      chordName += `maj(${flat}5)`
+      chordLabel += `maj(${flat}5)`
+      seventhName = `${chordName}7(${flat}5)`
+      seventhLabel = `${chordLabel}7(${flat}5)`
+      seventhChord = `dominant 7(${flat}5)`
+    } // dominant (b5)
+
+    if (chordTonesRef === JSON.stringify(['one', 'three', 'flatFive', 'seven'])) {
+      chordQ = `major(${flat}5)`
+      chordName += `maj(${flat}5)`
+      chordLabel += `maj(${flat}5)`
+      seventhName = `${chordName}maj7(${flat}5)`
+      seventhLabel = `${chordLabel}maj7(${flat}5)`
+      seventhChord = `major 7(${flat}5)`
+    } // maj7 (b5)
+
     chords[key].options.triad.name = chordName
-    chords[key].options.triad.notes = [chordTones[0], chordTones[1], chordTones[2]]
     chords[key].options.triad.label = chordLabel
     chords[key].options.triad.quality= chordQ
-    chords[key].options.seventhChord = {}
     chords[key].options.seventhChord.name = seventhName
-    chords[key].options.seventhChord.notes = [chordTones[0], chordTones[1], chordTones[2], chordTones[3]]
     chords[key].options.seventhChord.label = seventhLabel
     chords[key].options.seventhChord.quality = seventhChord
-    chords[key].options.shell = {}
     chords[key].options.shell.name = `${seventhName}(shell)`
-    chords[key].options.shell.notes = [chordTones[0], chordTones[1], chordTones[3]]
     chords[key].options.shell.label = `${seventhLabel}(shell)`
     chords[key].options.shell.quality = seventhChord
     chords[key].options.quartalVoicing = {}
@@ -677,7 +694,6 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
 }
 
 var scaleChoices = [];
-
 
 var add7NoteScale = (name, degrees) => {
   scaleChoices.push(name)
@@ -817,4 +833,8 @@ var findChordSpellings = () => {
 
   }
 }
+
+
+
+
 
