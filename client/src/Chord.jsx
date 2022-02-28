@@ -28,276 +28,188 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     name=chord.options.octaves.name
     label=chord.options.octaves.label
     tones=chord.options.octaves.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Power Chord' && chord.options.powerChord) {
     name=chord.options.powerChord.name
     label=chord.options.powerChord.label
     tones=chord.options.powerChord.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Triad' && chord.options.triad) {
     name=chord.options.triad.name
     label=chord.options.triad.label
     tones=chord.options.triad.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Shell Voicing' && chord.options.shell) {
     name=chord.options.shell.name
     label=chord.options.shell.label
     tones=chord.options.shell.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Seventh' && chord.options.seventhChord) {
     name=chord.options.seventhChord.name
     label=chord.options.seventhChord.label
     tones=chord.options.seventhChord.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='sus2' && chord.options.sus2) {
     name=chord.options.sus2.name
     label=chord.options.sus2.label
     tones=chord.options.sus2.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='sus4' && chord.options.sus4) {
     name=chord.options.sus4.name
     label=chord.options.sus4.label
     tones=chord.options.sus4.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
+  }
+
+  if (type==='Dominant sus4' && chord.options.dominantSus4) {
+    name=chord.options.dominantSus4.name
+    label=chord.options.dominantSus4.label
+    tones=chord.options.dominantSus4.notes
   }
 
   if (type==='add9' && chord.options.add9) {
     name=chord.options.add9.name
     label=chord.options.add9.label
     tones=chord.options.add9.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
-  if (type==='Dominant 9' && chord.options.dominant9) {
+  if (type===`Dominant 9` && chord.options.dominant9) {
     name=chord.options.dominant9.name
     label=chord.options.dominant9.label
     tones=chord.options.dominant9.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
+  }
+
+  if (type===`Dominant ${flat}9` && chord.options.dominantFlat9) {
+    name=chord.options.dominantFlat9.name
+    label=chord.options.dominantFlat9.label
+    tones=chord.options.dominantFlat9.notes
+  }
+
+  if (type===`Dominant (${flat}9, ${flat}13)` && chord.options.dominantFlat9Flat13) {
+    name=chord.options.dominantFlat9Flat13.name
+    label=chord.options.dominantFlat9Flat13.label
+    tones=chord.options.dominantFlat9Flat13.notes
+  }
+
+  if (type===`Dominant ${sharp}9` && chord.options.dominantSharp9) {
+    name=chord.options.dominantSharp9.name
+    label=chord.options.dominantSharp9.label
+    tones=chord.options.dominantSharp9.notes
+  }
+
+  if (type===`Dominant ${sharp}11` && chord.options.dominantSharp11) {
+    name=chord.options.dominantSharp11.name
+    label=chord.options.dominantSharp11.label
+    tones=chord.options.dominantSharp11.notes
+  }
+
+  if (type===`Dominant 13` && chord.options.dominant13) {
+    name=chord.options.dominant13.name
+    label=chord.options.dominant13.label
+    tones=chord.options.dominant13.notes
+  }
+
+  if (type===`Dominant add13` && chord.options.dominantAdd13) {
+    name=chord.options.dominantAdd13.name
+    label=chord.options.dominantAdd13.label
+    tones=chord.options.dominantAdd13.notes
   }
 
   if (type==='Major 6' && chord.options.major6) {
     name=chord.options.major6.name
     label=chord.options.major6.label
     tones=chord.options.major6.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Minor 6' && chord.options.minor6) {
     name=chord.options.minor6.name
     label=chord.options.minor6.label
     tones=chord.options.minor6.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Tritone' && chord.options.tritone) {
     name=chord.options.tritone.name
     label=chord.options.tritone.label
     tones=chord.options.tritone.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Major Pentatonic' && chord.options.majorPentatonic) {
     name=chord.options.majorPentatonic.name
     label=chord.options.majorPentatonic.label
     tones=chord.options.majorPentatonic.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Minor Pentatonic' && chord.options.minorPentatonic) {
     name=chord.options.minorPentatonic.name
     label=chord.options.minorPentatonic.label
     tones=chord.options.minorPentatonic.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Dominant Pentatonic' && chord.options.dominantPentatonic) {
     name=chord.options.dominantPentatonic.name
     label=chord.options.dominantPentatonic.label
     tones=chord.options.dominantPentatonic.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type===`Dominant ${sharp}4 Pentatonic` && chord.options.lydianDominantPentatonic) {
     name=chord.options.lydianDominantPentatonic.name
     label=chord.options.lydianDominantPentatonic.label
     tones=chord.options.lydianDominantPentatonic.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type===`Altered Pentatonic` && chord.options.alteredPentatonic) {
     name=chord.options.alteredPentatonic.name
     label=chord.options.alteredPentatonic.label
     tones=chord.options.alteredPentatonic.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Minor Major 7 Pentatonic' && chord.options.minorMaj7Pentatonic) {
     name=chord.options.minorMaj7Pentatonic.name
     label=chord.options.minorMaj7Pentatonic.label
     tones=chord.options.minorMaj7Pentatonic.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Minor 6 Pentatonic' && chord.options.minorMaj7Pentatonic) {
     name=chord.options.minor6Pentatonic.name
     label=chord.options.minor6Pentatonic.label
     tones=chord.options.minor6Pentatonic.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Egyptian Pentatonic' && chord.options.egyptianPentatonic) {
     name=chord.options.egyptianPentatonic.name
     label=chord.options.egyptianPentatonic.label
     tones=chord.options.egyptianPentatonic.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Japanese Pentatonic' && chord.options.japanesePentatonic) {
     name=chord.options.japanesePentatonic.name
     label=chord.options.japanesePentatonic.label
     tones=chord.options.japanesePentatonic.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Quartal Voicing' && chord.options.quartalVoicing) {
     name=chord.options.quartalVoicing.name
     label=chord.options.quartalVoicing.label
     tones=chord.options.quartalVoicing.notes
-    if (chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if (chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
   }
 
   if (type==='Fifths Voicing' && chord.options.fifthsVoicing) {
     name=chord.options.fifthsVoicing.name
     label=chord.options.fifthsVoicing.label
-    tones=chord.options.fifthsVoicing.notes
-    if(chord===currentChord && currentChordTones !== tones) {
-      setTones(tones)
-    }
-    if(chord===currentChord2 && currentChordTones2 !== tones) {
-      setTones2(tones)
-    }
+    tones=chord.
+    options.fifthsVoicing.notes
+  }
+
+  if (chord===currentChord && currentChordTones !== tones) {
+    setTones(tones)
+  }
+  if (chord===currentChord2 && currentChordTones2 !== tones) {
+    setTones2(tones)
   }
 
   if (currentChord && chord===currentChord ) {

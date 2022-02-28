@@ -640,10 +640,6 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhChord = `major 7(${flat}5)`
     } // maj7 (b5)
 
-    chords[key].options.list.push('Octaves')
-    chords[key].options.list.push('Triad')
-    chords[key].options.list.push('Seventh')
-    chords[key].options.list.push('Shell Voicing')
     chords[key].options.triad.name = chordName
     chords[key].options.triad.label = chordLabel
     chords[key].options.triad.quality= chordQ
@@ -679,14 +675,25 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       }
     }
 
+    chords[key].options.list.push('Octaves')
     addVoicing(['one', 'five'], 'powerChord', 'Power Chord', null, null, '5');
-    addVoicing(['one', 'four', 'five'], 'sus4', 'sus4', null, null, 'sus4');
+    addVoicing(['one', 'flatFive'], 'tritone', 'Tritone', 'tritone', 'tritone', 'tritone');
+    chords[key].options.list.push('Triad')
     addVoicing(['one', 'two', 'five'], 'sus2', 'sus2', null, null, 'sus2');
+    addVoicing(['one', 'four', 'five'], 'sus4', 'sus4', null, null, 'sus4');
     addVoicing(['one', 'three','five', 'two'], 'add9', 'add9', null, null, 'add9');
     addVoicing(['one', 'three', 'five', 'six'], 'major6', 'Major 6', null, null, '6');
     addVoicing(['one', 'flatThree', 'five', 'six'], 'minor6', 'Minor 6', null, null, '6');
-    addVoicing(['one', 'flatFive'], 'tritone', 'Tritone', 'tritone', 'tritone', 'tritone');
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'two'], 'dominant9', 'Dominant 9', null, null, '7(9)');
+    chords[key].options.list.push('Seventh')
+    chords[key].options.list.push('Shell Voicing')
+    addVoicing(['one', 'four', 'five', 'flatSeven'], 'dominantSus4', `Dominant sus4`, null, null, `7sus4`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two'], 'dominant9', `Dominant 9`, null, null, `7(9)`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'flatTwo'], 'dominantFlat9', `Dominant ${flat}9`, null, null, `7(${flat}9)`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'sharpTwo'], 'dominantSharp9', `Dominant ${sharp}9`, null, null, `7(${sharp}9)`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour'], 'dominantSharp11', `Dominant ${sharp}11`, null, null, `7(9, ${sharp}11)`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'six'], 'dominant13', 'Dominant 13', null, null, `7(9, ${sharp}11, 13)`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'flatTwo', 'flatSix'], 'dominantFlat9Flat13', `Dominant (${flat}9, ${flat}13)`, null, null, `7(${flat}9, ${flat}13)`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'six'], 'dominantAdd13', 'Dominant add13', null, null, `7(13)`);
     addVoicing(['one', 'two', 'three', 'five', 'six'], 'majorPentatonic', 'Major Pentatonic', null, 'Major Pentatonic', 'maj Pentatonic');
     addVoicing(['one', 'flatThree', 'four', 'five', 'flatSeven'], 'minorPentatonic', 'Minor Pentatonic', null, 'Minor Pentatonic', 'min Pentatonic');
     addVoicing(['one', 'two', 'three', 'five', 'flatSeven'], 'dominantPentatonic', 'Dominant Pentatonic', null, 'Dominant Pentatonic', 'Dominant Pentatonic');
