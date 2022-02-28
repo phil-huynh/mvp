@@ -686,9 +686,16 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     addVoicing(['one', 'three', 'five', 'six'], 'major6', 'Major 6', null, null, '6');
     addVoicing(['one', 'flatThree', 'five', 'six'], 'minor6', 'Minor 6', null, null, '6');
     addVoicing(['one', 'flatFive'], 'tritone', 'Tritone', 'tritone', 'tritone', 'tritone');
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'two'], 'dominant9', 'Dominant 9', null, null, '9');
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two'], 'dominant9', 'Dominant 9', null, null, '7(9)');
     addVoicing(['one', 'two', 'three', 'five', 'six'], 'majorPentatonic', 'Major Pentatonic', null, 'Major Pentatonic', 'maj Pentatonic');
     addVoicing(['one', 'flatThree', 'four', 'five', 'flatSeven'], 'minorPentatonic', 'Minor Pentatonic', null, 'Minor Pentatonic', 'min Pentatonic');
+    addVoicing(['one', 'two', 'three', 'five', 'flatSeven'], 'dominantPentatonic', 'Dominant Pentatonic', null, 'Dominant Pentatonic', 'Dominant Pentatonic');
+    addVoicing(['one', 'two', 'three', 'sharpFour', 'flatSeven'], 'lydianDomninantPentatonic', `Dominant ${sharp}4 Pentatonic`, null, 'Lydian Dominant Pentatonic', 'Lydian Dominant Pentatonic');
+    addVoicing(['one', 'two', 'three', 'sharpFour', 'six'], 'majSharp4Pentatonic', `Major ${sharp}4 Pentatonic`, null, `Major ${sharp}4 Pentatonic`, `maj${sharp}4 Pentatonic`);
+    addVoicing(['one', 'flatTwo', 'three', 'five', 'flatSeven'], 'alteredPentatonic', `Altered Pentatonic`, null, `Altered Pentatonic`, `Altered Pentatonic`);
+    addVoicing(['one', 'flatThree', 'four', 'five', 'seven'], 'minorMaj7Pentatonic', 'Minor Major 7 Pentatonic', null, 'Minor Major 7 Pentatonic', 'm(maj7 Pentatonic');
+    addVoicing(['one', 'two', 'four', 'five', 'flatSeven'], 'egyptianPentatonic', 'Egyptian Pentatonic', null, 'Egyptian Pentatonic', 'Egyptian Pentatonic');
+    addVoicing(['one', 'flatTwo', 'four', 'five', 'flatSix'], 'japanesePentatonic', 'Japanese Pentatonic', null, 'Japanese Pentatonic', 'Japanese Pentatonic');
 
 
     chords[key].options.quartalVoicing = {}
