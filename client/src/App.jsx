@@ -74,6 +74,7 @@ class App extends React.Component {
       showAlter: false,
       currentCard: '',
       currentList: '',
+      chordOptRoot: '',
     }
 
     this.getStrings = this.getStrings.bind(this);
@@ -394,7 +395,7 @@ class App extends React.Component {
   }
 
   handleAlterChord (e) {
-    let type = e.target.innerText
+    let type = e.target.title
     let typeKey = this.state.currentCard
     let alterKey = `${typeKey}Alt`
     this.setState({
@@ -403,19 +404,21 @@ class App extends React.Component {
     })
   }
 
-  handleAlterChordWindow (chord, list) {
+  handleAlterChordWindow (chord, list, root) {
     if(this.state.showAlter===false) {
       this.setState({
         showAlter: true,
         currentCard: chord,
-        currentList: list
+        currentList: list,
+        chordOptRoot: root
       })
     }
     if(this.state.showAlter===true) {
       this.setState({
         showAlter: false,
         currentCard: '',
-        currentList: ''
+        currentList: '',
+        chordOptRoot: ''
       })
     }
   }
@@ -449,21 +452,8 @@ class App extends React.Component {
   }
 
   resetAll() {
+    this.resetChords()
     this.setState({
-      ch0: 'Triad',
-      ch1: 'Triad',
-      ch2: 'Triad',
-      ch3: 'Triad',
-      ch4: 'Triad',
-      ch5: 'Triad',
-      ch6: 'Triad',
-      ch0Alt: false,
-      ch1Alt: false,
-      ch2Alt: false,
-      ch3Alt: false,
-      ch4Alt: false,
-      ch5Alt: false,
-      ch6Alt: false,
       selectedChord:{},
       selectedChord2:{},
       currentChordTones: [],
@@ -548,6 +538,7 @@ class App extends React.Component {
               handleAlterChordWindow={this.handleAlterChordWindow}
               currentCard={this.state.currentCard}
               list={this.state.currentList}
+              root={this.state.chordOptRoot}
             />
             <ScaleChords
               keyCenter={this.state.keyCenter}
