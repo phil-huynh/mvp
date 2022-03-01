@@ -34,7 +34,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     tones=chord.options.octaves.notes
   }
 
-  if (type===  'Power Chord' && chord.options.powerChord) {
+  if (type==='  Power Chord' && chord.options.powerChord) {
     name=chord.options.powerChord.name
     label=chord.options.powerChord.label
     tones=chord.options.powerChord.notes
