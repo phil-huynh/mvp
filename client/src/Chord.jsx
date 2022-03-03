@@ -70,16 +70,117 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     tones=chord.options.sus4.notes
   }
 
+  if (type===' add9' && chord.options.add9) {
+    name=chord.options.add9.name
+    label=chord.options.add9.label
+    tones=chord.options.add9.notes
+  }
+
+  if (type===` add${sharp}11` && chord.options.addSharp11) {
+    name=chord.options.addSharp11.name
+    label=chord.options.addSharp11.label
+    tones=chord.options.addSharp11.notes
+  }
+
   if (type===`7sus4` && chord.options.dominantSus4) {
     name=chord.options.dominantSus4.name
     label=chord.options.dominantSus4.label
     tones=chord.options.dominantSus4.notes
   }
 
-  if (type===' add9' && chord.options.add9) {
-    name=chord.options.add9.name
-    label=chord.options.add9.label
-    tones=chord.options.add9.notes
+  if (type===`maj7(sus4)` && chord.options.maj7Sus4) {
+    name=chord.options.maj7Sus4.name
+    label=chord.options.maj7Sus4.label
+    tones=chord.options.maj7Sus4.notes
+  }
+
+
+
+  if (type===`maj7(9)` && chord.options.maj9) {
+    name=chord.options.maj9.name
+    label=chord.options.maj9.label
+    tones=chord.options.maj9.notes
+  }
+
+  if (type===`maj7(${sharp}11)` && chord.options.maj7AddSharp11) {
+    name=chord.options.maj7AddSharp11.name
+    label=chord.options.maj7AddSharp11.label
+    tones=chord.options.maj7AddSharp11.notes
+  }
+
+  if (type===`maj7(13)` && chord.options.maj7Add13) {
+    name=chord.options.maj7Add13.name
+    label=chord.options.maj7Add13.label
+    tones=chord.options.maj7Add13.notes
+  }
+
+  if (type===`maj7(9, ${sharp}11)` && chord.options.majSharp11) {
+    name=chord.options.majSharp11.name
+    label=chord.options.majSharp11.label
+    tones=chord.options.majSharp11.notes
+  }
+
+  if (type=== `maj7(${sharp}11, 13)` && chord.options.maj7AddSharp11Add13) {
+    name=chord.options.maj7AddSharp11Add13.name
+    label=chord.options.maj7AddSharp11Add13.label
+    tones=chord.options.maj7AddSharp11Add13.notes
+  }
+
+  if (type===`maj7(9, 13)` && chord.options.maj9Add13) {
+    name=chord.options.maj9Add13.name
+    label=chord.options.maj9Add13.label
+    tones=chord.options.maj9Add13.notes
+  }
+
+  if (type===`maj7(9, ${sharp}11, 13)` && chord.options.maj13) {
+    name=chord.options.maj13.name
+    label=chord.options.maj13.label
+    tones=chord.options.maj13.notes
+  }
+
+
+
+
+  if (type===`m7(9)` && chord.options.min9) {
+    name=chord.options.min9.name
+    label=chord.options.min9.label
+    tones=chord.options.min9.notes
+  }
+
+  if (type===`m7(11)` && chord.options.minAdd11) {
+    name=chord.options.minAdd11.name
+    label=chord.options.minAdd11.label
+    tones=chord.options.minAdd11.notes
+  }
+
+  if (type===`m7(13)` && chord.options.minAdd13) {
+    name=chord.options.minAdd13.name
+    label=chord.options.minAdd13.label
+    tones=chord.options.minAdd13.notes
+  }
+
+  if (type===`m7(9, 11)` && chord.options.min11) {
+    name=chord.options.min11.name
+    label=chord.options.min11.label
+    tones=chord.options.min11.notes
+  }
+
+  if (type===`m7(9, 13)` && chord.options.minAdd9Add13) {
+    name=chord.options.minAdd9Add13.name
+    label=chord.options.minAdd9Add13.label
+    tones=chord.options.minAdd9Add13.notes
+  }
+
+  if (type===`m7(11, 13)` && chord.options.minAdd11Add13) {
+    name=chord.options.minAdd11Add13.name
+    label=chord.options.minAdd11Add13.label
+    tones=chord.options.minAdd11Add13.notes
+  }
+
+  if (type===`m7(9, 11, 13)` && chord.options.min13) {
+    name=chord.options.min13.name
+    label=chord.options.min13.label
+    tones=chord.options.min13.notes
   }
 
   if (type===`7(9)` && chord.options.dominant9) {
@@ -140,6 +241,12 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     name=chord.options.dominant9Flat13.name
     label=chord.options.dominant9Flat13.label
     tones=chord.options.dominant9Flat13.notes
+  }
+
+  if (type===`7(9, 13)` && chord.options.dominant9Add13) {
+    name=chord.options.dominant9Add13.name
+    label=chord.options.dominant9Add13.label
+    tones=chord.options.dominant9Add13.notes
   }
 
   if (type===`7(13)` && chord.options.dominantAdd13) {
@@ -254,8 +361,6 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     cardClass = `${cardClass} selectedChord2`
   }
 
-  console.log(tones)
-
   return (
     <React.Fragment>
       {chord ?
@@ -280,10 +385,6 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
           </Card.Header>
         </div>
         <Card.Body className='cardBody'>
-          {sevenths ?
-            <Card.Text>
-              {chord.seventh.note}
-            </Card.Text> : null}
           <Card.Text>{tones}</Card.Text>
         </Card.Body>
         <div className='footerButton'>
@@ -307,7 +408,6 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
       </Card>:null
       }
     </React.Fragment>
-
   )
 }
 

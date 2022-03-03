@@ -54,6 +54,7 @@ class App extends React.Component {
       hideScaleButton: 'hide scale',
       solfege: {},
       scaleDegrees: {},
+      chordDegrees: {},
       labelType: 'Note Names',
       singleOrCompareButton: 'Single Chord',
       compare: false,
@@ -117,7 +118,8 @@ class App extends React.Component {
       .then((res) => {
         this.setState({
           solfege: res.data.solfege,
-          scaleDegrees: res.data.scaleDegrees
+          scaleDegrees: res.data.scaleDegrees,
+          chordDegrees: res.data.chordDegrees
         })
       })
       .catch((err) => {
@@ -489,9 +491,12 @@ class App extends React.Component {
                 view={this.state.view}
                 chordOneSelected={this.state.chordOneSelected}
                 chordTwoSelected={this.state.chordTwoSelected}
+                selectedChord={this.state.selectedChord}
+                selectedChord2={this.state.selectedChord2}
                 hideScale={this.state.hideScale}
                 solfege={this.state.solfege}
                 scaleDegrees={this.state.scaleDegrees}
+                chordDegrees={this.state.chordDegrees}
                 keyCenter={this.state.keyCenter}
                 labelType={this.state.labelType}
               />

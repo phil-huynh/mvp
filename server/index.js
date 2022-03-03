@@ -47,6 +47,7 @@ app.get('/degrees', (req, res) => {
   let obj = {};
   obj.solfege = Music.solfege;
   obj.scaleDegrees = Music.scaleDegrees
+  obj.chordDegrees = Music.chordDegrees
   res.json(obj)
 })
 

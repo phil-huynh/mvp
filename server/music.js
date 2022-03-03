@@ -58,6 +58,27 @@ var scaleDegrees = {
   seven: '7'
 }
 
+var chordDegrees = {
+  one: 'R',
+  sharpOne: `${sharp}1`,
+  flatTwo: `${flat}9(2)`,
+  two: '9(2)',
+  sharpTwo: `${sharp}9(2)`,
+  flatThree: `${flat}3rd`,
+  three: '3rd',
+  four: '11(4)',
+  sharpFour: `${sharp}11(4)`,
+  flatFive: `${flat}5th`,
+  five: '5th',
+  sharpFive: `${sharp}5th`,
+  flatSix: `${flat}13(6)`,
+  six: '13(6)',
+  sharpSix: `${sharp}13(6)`,
+  dblFlatSeven: `${dblFlat}7th`,
+  flatSeven: `${flat}7th`,
+  seven: '7th'
+}
+
 var sharpNote = (note) => {
   if (note.length === 1 || note.slice(note.length -2) === `${dblSharp}`) {
     note = `${note}${sharp}`;
@@ -710,10 +731,28 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     addVoicing(['one', 'two', 'five'], 'sus2', ' sus2', null, null, 'sus2');
     addVoicing(['one', 'four', 'five'], 'sus4', ' sus4', null, null, 'sus4');
     addVoicing(['one', 'three','five', 'two'], 'add9', ' add9', null, null, 'add9');
+    addVoicing(['one', 'three','five', 'sharpFour'], 'addSharp11', ` add${sharp}11`, null, null, `add${sharp}11`);
     addVoicing(['one', 'three', 'five', 'six'], 'major6', '6', null, null, '6');
     addVoicing(['one', 'flatThree', 'five', 'six'], 'minor6', 'm6', null, null, '6');
 
     addVoicing(['one', 'four', 'five', 'flatSeven'], `dominantSus4`, `7sus4`, null, null, `7sus4`);
+    addVoicing(['one', 'four', 'five', 'seven'], `maj7Sus4`, `maj7(sus4)`, null, null, `maj7(sus4)`);
+
+    addVoicing(['one', 'three', 'five', 'seven', 'two'], 'maj9', `maj7(9)`, null, null, `maj7(9)`);
+    addVoicing(['one', 'three', 'five', 'seven', 'sharpFour'], 'maj7AddSharp11', `maj7(${sharp}11)`, null, null, `maj7(${sharp}11)`);
+    addVoicing(['one', 'three', 'five', 'seven', 'six'], 'maj7Add13', `maj7(13)`, null, null, `maj7(13)`);
+    addVoicing(['one', 'three', 'five', 'seven', 'two', 'sharpFour'], 'majSharp11', `maj7(9, ${sharp}11)`, null, null, `maj7(9, ${sharp}11)`);
+    addVoicing(['one', 'three', 'five', 'seven', 'sharpFour', 'six'], 'maj7AddSharp11Add13', `maj7(${sharp}11, 13)`, null, null, `maj7(${sharp}11, 13)`);
+    addVoicing(['one', 'three', 'five', 'seven', 'two', 'six'], 'maj9Add13', `maj7(9, 13)`, null, null, `maj7(9, 13)`);
+    addVoicing(['one', 'three', 'five', 'seven', 'two', 'sharpFour', 'six'], 'maj13', `maj7(9, ${sharp}11, 13)`, null, null, `maj7(9, ${sharp}11, 13)`);
+
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two'], 'min9', `m7(9)`, null, null, `m7(9)`);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'four'], 'minAdd11', `m7(11)`, null, null, `m7(11)`);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'six'], 'minAdd13', `m7(13)`, null, null, `m7(13)`);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two', 'four'], 'min11', `m7(9, 11)`, null, null, `m7(9, 11)`);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two', 'six'], 'minAdd9Add13', `m7(9, 13)`, null, null, `m7(9, 13)`);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'four', 'six'], 'minAdd11Add13', `m7(11, 13)`, null, null, `m7(11, 13)`);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two', 'four', 'six'], 'min13', `m7(9, 11, 13)`, null, null, `m7(9, 11, 13)`);
 
     addVoicing(['one', 'three', 'five', 'flatSeven', 'two'], 'dominant9', `7(9)`, null, null, `7(9)`);
     addVoicing(['one', 'three', 'five', 'flatSeven', 'flatTwo'], 'dominantFlat9', `7(${flat}9)`, null, null, `7(${flat}9)`);
@@ -727,6 +766,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'six'], 'dominant13', `7(9, ${sharp}11, 13)`, null, null, `7(9, ${sharp}11, 13)`);
     addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'flatSix'], 'dominantFlat13', `7(9, ${sharp}11, ${flat}13)`, null, null, `7(9, ${sharp}11, ${flat}13)`);
     addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'flatSix'], 'dominant9Flat13', `7(9, ${flat}13)`, null, null, `7(9, ${flat}13)`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'six'], 'dominant9Add13', `7(9, 13)`, null, null, `7(9, 13)`);
     addVoicing(['one', 'three', 'five', 'flatSeven', 'flatTwo', 'flatSix'], 'dominantFlat9Flat13', `7(${flat}9, ${flat}13)`, null, null, `7(${flat}9, ${flat}13)`);
 
     addVoicing(['one', 'two', 'three', 'five', 'six'], 'majorPentatonic', '  Major Pentatonic', null, 'Major Pentatonic', 'maj Pentatonic');
@@ -804,7 +844,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
 
 var scaleChoices = [];
 
-var add7NoteScale = (name, degrees) => {
+var add7NoteScale = (name, degrees, makeChords) => {
   scaleChoices.push(name)
   var objKey = name.split(' ')
   if (objKey.length > 1) {
@@ -835,41 +875,41 @@ var add7NoteScale = (name, degrees) => {
       allScales[tonic][objKey].scale.push(note)
       allScales[tonic][objKey].scaleDegrees.push(degrees[j])
     }
-
-    allScales[tonic][objKey].chords = makeChordsFor7NoteScale(allScales[tonic][objKey].scale, tonic)
-
+    if (makeChords){
+      allScales[tonic][objKey].chords = makeChordsFor7NoteScale(allScales[tonic][objKey].scale, tonic)
+    }
   }
 }
 
-add7NoteScale('major', ['one', 'two', 'three', 'four', 'five', 'six', 'seven'])
-add7NoteScale('natural minor', ['one', 'two', 'flatThree', 'four', 'five', 'flatSix', 'flatSeven'])
-add7NoteScale('harmonic minor', ['one', 'two', 'flatThree', 'four', 'five', 'flatSix', 'seven'])
-add7NoteScale('melodic minor', ['one', 'two', 'flatThree', 'four', 'five', 'six', 'seven'])
-add7NoteScale('dorian', ['one', 'two', 'flatThree', 'four', 'five', 'six', 'flatSeven'])
-add7NoteScale('phrygian', ['one', 'flatTwo', 'flatThree', 'four', 'five', 'flatSix', 'flatSeven'])
-add7NoteScale('lydian', ['one', 'two', 'three', 'sharpFour', 'five', 'six', 'seven'])
-add7NoteScale('mixolydian', ['one', 'two', 'three', 'four', 'five', 'six', 'flatSeven'])
-add7NoteScale('locrian', ['one', 'flatTwo', 'flatThree', 'four', 'flatFive', 'flatSix', 'flatSeven'])
-add7NoteScale('persian', ['one', 'flatTwo', 'three', 'four', 'flatFive', 'flatSix', 'flatSeven'])
-add7NoteScale('double harmonic major', ['one', 'flatTwo', 'three', 'four', 'five', 'flatSix', 'flatSeven'])//byzantine  see wiki
-add7NoteScale('hungarian gypsy minor', ['one', 'two', 'flatThree', 'sharpFour', 'five', 'flatSix', 'seven'])
-add7NoteScale('romanian minor', ['one', 'two', 'flatThree', 'sharpFour', 'five', 'six', 'flatSeven']) //ukrainian minor
-add7NoteScale('romanian major', ['one', 'flatTwo', 'three', 'sharpFour', 'five', 'six', 'flatSeven'])
-add7NoteScale('lydian dominant', ['one', 'two', 'three', 'sharpFour', 'five', 'six', 'flatSeven'])
-add7NoteScale('ukrainian dorian', ['one', 'two', 'flatThree', 'sharpFour', 'five', 'six', 'flatSeven'])
-add7NoteScale('phrygian dominant', ['one', 'flatTwo', 'three', 'four', 'five', 'flatSix', 'flatSeven'])
-add7NoteScale('lydian augmented', ['one', 'two', 'three', 'sharpFour', 'sharpFive', 'six', 'seven'])
-add7NoteScale('locrian natural6', ['one', 'flatTwo', 'flatThree', 'four', 'flatFive', 'six', 'flatSeven'])
-add7NoteScale('ionian sharp5', ['one', 'two', 'three', 'four', 'sharpFive', 'six', 'seven'])
-add7NoteScale('phrygian dorian', ['one', 'flatTwo', 'flatThree', 'four', 'five', 'six', 'flatSeven'])
-add7NoteScale('mixolydian flat13', ['one', 'two', 'three', 'four', 'five', 'flatSix', 'flatSeven'])
-add7NoteScale('aeoleon flat5', ['one', 'two', 'flatThree', 'four', 'flatFive', 'flatSix', 'flatSeven'])
-add7NoteScale('altered', ['one', 'flatTwo', 'sharpTwo', 'three', 'flatFive', 'sharpFive', 'flatSeven']) // 2 3 4 5 6 7
-add7NoteScale('gypsy', ['one', 'flatTwo', 'three', 'four', 'five', 'flatSix', 'seven'])
-add7NoteScale('hungarian major', ['one', 'sharpTwo', 'three', 'sharpFour', 'five', 'six', 'flatSeven'])
-add7NoteScale('neapolitan major', ['one', 'flatTwo', 'flatThree', 'four', 'five', 'six', 'seven'])
-add7NoteScale('neapolitan minor', ['one', 'flatTwo', 'flatThree', 'four', 'five', 'flatSix', 'seven'])
-add7NoteScale('arabian', ['one', 'two', 'three', 'four', 'flatFive', 'flatSix', 'flatSeven'])
+add7NoteScale('major', ['one', 'two', 'three', 'four', 'five', 'six', 'seven'], true)
+add7NoteScale('natural minor', ['one', 'two', 'flatThree', 'four', 'five', 'flatSix', 'flatSeven'], true)
+add7NoteScale('harmonic minor', ['one', 'two', 'flatThree', 'four', 'five', 'flatSix', 'seven'], true)
+add7NoteScale('melodic minor', ['one', 'two', 'flatThree', 'four', 'five', 'six', 'seven'], true)
+add7NoteScale('dorian', ['one', 'two', 'flatThree', 'four', 'five', 'six', 'flatSeven'], true)
+add7NoteScale('phrygian', ['one', 'flatTwo', 'flatThree', 'four', 'five', 'flatSix', 'flatSeven'], true)
+add7NoteScale('lydian', ['one', 'two', 'three', 'sharpFour', 'five', 'six', 'seven'], true)
+add7NoteScale('mixolydian', ['one', 'two', 'three', 'four', 'five', 'six', 'flatSeven'], true)
+add7NoteScale('locrian', ['one', 'flatTwo', 'flatThree', 'four', 'flatFive', 'flatSix', 'flatSeven'], true)
+add7NoteScale('persian', ['one', 'flatTwo', 'three', 'four', 'flatFive', 'flatSix', 'flatSeven'], true)
+add7NoteScale('double harmonic major', ['one', 'flatTwo', 'three', 'four', 'five', 'flatSix', 'flatSeven'], true)//byzantine  see wiki
+add7NoteScale('hungarian gypsy minor', ['one', 'two', 'flatThree', 'sharpFour', 'five', 'flatSix', 'seven'], true)
+add7NoteScale('romanian minor', ['one', 'two', 'flatThree', 'sharpFour', 'five', 'six', 'flatSeven'], true) //ukrainian minor
+add7NoteScale('romanian major', ['one', 'flatTwo', 'three', 'sharpFour', 'five', 'six', 'flatSeven'], true)
+add7NoteScale('lydian dominant', ['one', 'two', 'three', 'sharpFour', 'five', 'six', 'flatSeven'], true)
+add7NoteScale('ukrainian dorian', ['one', 'two', 'flatThree', 'sharpFour', 'five', 'six', 'flatSeven'], true)
+add7NoteScale('phrygian dominant', ['one', 'flatTwo', 'three', 'four', 'five', 'flatSix', 'flatSeven'], true)
+add7NoteScale('lydian augmented', ['one', 'two', 'three', 'sharpFour', 'sharpFive', 'six', 'seven'], true)
+add7NoteScale('locrian natural6', ['one', 'flatTwo', 'flatThree', 'four', 'flatFive', 'six', 'flatSeven'], true)
+add7NoteScale('ionian sharp5', ['one', 'two', 'three', 'four', 'sharpFive', 'six', 'seven'], true)
+add7NoteScale('phrygian dorian', ['one', 'flatTwo', 'flatThree', 'four', 'five', 'six', 'flatSeven'], true)
+add7NoteScale('mixolydian flat13', ['one', 'two', 'three', 'four', 'five', 'flatSix', 'flatSeven']), true
+add7NoteScale('aeoleon flat5', ['one', 'two', 'flatThree', 'four', 'flatFive', 'flatSix', 'flatSeven'], true)
+add7NoteScale('altered', ['one', 'flatTwo', 'sharpTwo', 'three', 'flatFive', 'sharpFive', 'flatSeven'], false) // 2 3 4 5 6 7
+add7NoteScale('gypsy', ['one', 'flatTwo', 'three', 'four', 'five', 'flatSix', 'seven'], true)
+add7NoteScale('hungarian major', ['one', 'sharpTwo', 'three', 'sharpFour', 'five', 'six', 'flatSeven'], true)
+add7NoteScale('neapolitan major', ['one', 'flatTwo', 'flatThree', 'four', 'five', 'six', 'seven'], true)
+add7NoteScale('neapolitan minor', ['one', 'flatTwo', 'flatThree', 'four', 'five', 'flatSix', 'seven'], true)
+add7NoteScale('arabian', ['one', 'two', 'three', 'four', 'flatFive', 'flatSix', 'flatSeven'], true)
 // add7NoteScale('major', {}, {})
 
 
@@ -910,6 +950,7 @@ module.exports.intervals = intervals
 module.exports.scaleChoices = scaleChoices
 module.exports.solfege = solfege
 module.exports.scaleDegrees = scaleDegrees
+module.exports.chordDegrees = chordDegrees
 
 
 

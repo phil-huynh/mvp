@@ -8,6 +8,7 @@ var LabelMenu = ({name, handleNeckNotes})  => {
         <option selected value='Note Names'>Note Names</option>
         <option value='Scale Degrees'>Scale Degrees</option>
         <option value='Solfege'>Solfege</option>
+        <option value='Chord Degrees'>Chord Degrees</option>
       </select>
     </span>
   )
