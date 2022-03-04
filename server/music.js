@@ -64,19 +64,19 @@ var chordDegrees = {
   flatTwo: `${flat}9(2)`,
   two: '9(2)',
   sharpTwo: `${sharp}9(2)`,
-  flatThree: `${flat}3rd`,
+  flatThree: `${flat}3`,
   three: '3rd',
   four: '11(4)',
   sharpFour: `${sharp}11(4)`,
-  flatFive: `${flat}5th`,
+  flatFive: `${flat}5`,
   five: '5th',
-  sharpFive: `${sharp}5th`,
+  sharpFive: `${sharp}5`,
   flatSix: `${flat}13(6)`,
   six: '13(6)',
   sharpSix: `${sharp}13(6)`,
   dblFlatSeven: `${dblFlat}7th`,
-  flatSeven: `${flat}7th`,
-  seven: '7th'
+  flatSeven: `${flat}7`,
+  seven: '7'
 }
 
 var sharpNote = (note) => {
@@ -771,13 +771,13 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
 
     addVoicing(['one', 'two', 'three', 'five', 'six'], 'majorPentatonic', '  Major Pentatonic', null, 'Major Pentatonic', 'maj Pentatonic');
     addVoicing(['one', 'flatThree', 'four', 'five', 'flatSeven'], 'minorPentatonic', '  Minor Pentatonic', null, 'Minor Pentatonic', 'min Pentatonic');
-    addVoicing(['one', 'two', 'three', 'five', 'flatSeven'], 'dominantPentatonic', '  Dominant Pentatonic', null, 'Dominant Pentatonic', 'Dominant Pentatonic');
+    addVoicing(['one', 'two', 'three', 'five', 'flatSeven'], 'dominantPentatonic', '  Dominant Pentatonic', null, 'Dominant Pentatonic', '');
     addVoicing(['one', 'two', 'three', 'sharpFour', 'flatSeven'], 'lydianDomninantPentatonic', `  Dominant ${sharp}4 Pentatonic`, null, 'Lydian Dominant Pentatonic', 'Lydian Dominant Pentatonic');
     addVoicing(['one', 'two', 'three', 'sharpFour', 'six'], 'majSharp4Pentatonic', `  Major ${sharp}4 Pentatonic`, null, `Major ${sharp}4 Pentatonic`, `maj${sharp}4 Pentatonic`);
     addVoicing(['one', 'flatTwo', 'three', 'five', 'flatSeven'], 'alteredPentatonic', `  Altered Pentatonic`, null, `Altered Pentatonic`, `Altered Pentatonic`);
     addVoicing(['one', 'flatThree', 'four', 'five', 'seven'], 'minorMaj7Pentatonic', '  Minor Major 7 Pentatonic', null, 'Minor Major 7 Pentatonic', 'm(maj7 Pentatonic');
-    addVoicing(['one', 'two', 'four', 'five', 'flatSeven'], 'egyptianPentatonic', '  Egyptian Pentatonic', null, 'Egyptian Pentatonic', 'Egyptian Pentatonic');
-    addVoicing(['one', 'flatTwo', 'four', 'five', 'flatSix'], 'japanesePentatonic', '  Japanese Pentatonic', null, 'Japanese Pentatonic', 'Japanese Pentatonic');
+    addVoicing(['one', 'two', 'four', 'five', 'flatSeven'], 'egyptianPentatonic', '  Egyptian Pentatonic', null, 'Egyptian Pentatonic', '');
+    addVoicing(['one', 'flatTwo', 'four', 'five', 'flatSix'], 'japanesePentatonic', '  Japanese Pentatonic', null, 'Japanese Pentatonic', '');
 
 
     chords[key].options.quartalVoicing = {}

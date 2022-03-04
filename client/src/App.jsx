@@ -6,6 +6,7 @@ import ScalesMenu from './ScalesMenu.jsx'
 import ScaleChords from './ScaleChords.jsx'
 import ViewMenu from './ViewMenu.jsx'
 import LabelMenu from './LabelMenu.jsx'
+import FocusMenu from './FocusMenu.jsx'
 import Dropdown from './Dropdown.jsx'
 import FretGuide from './FretGuide.jsx'
 import AlterChordOpt from './AlterChordOpt.jsx'
@@ -57,6 +58,7 @@ class App extends React.Component {
       chordDegrees: {},
       labelType: 'Note Names',
       singleOrCompareButton: 'Single Chord',
+      chordFocus: 'Neutral',
       compare: false,
       ch0: 'Triad',
       ch1: 'Triad',
@@ -89,6 +91,7 @@ class App extends React.Component {
     this.handleScaleChange2 = this.handleScaleChange2.bind(this);
     this.handleSecondScale = this.handleSecondScale.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleChordFocus = this.handleChordFocus.bind(this);
     this.handleStringChoice = this.handleStringChoice.bind(this);
     this.handleView = this.handleView.bind(this);
     this.selectChord = this.selectChord.bind(this);
@@ -153,6 +156,7 @@ class App extends React.Component {
   }
 
   getScale (key, scale) {
+    this.resetAll()
     axios.get('/scales', { params: { key: key, scale: scale } })
       .then((res) => {
         this.setState({
@@ -160,12 +164,6 @@ class App extends React.Component {
           tonic: res.data.tonic,
           scale: res.data.scale,
           chords: res.data.chords,
-          selectedChord: {},
-          currentChordTones: [],
-          selectedChord2: {},
-          currentChordTones2: [],
-          chordOneSelected: false,
-          chordTwoSelected: false
         })
       })
   }
@@ -325,6 +323,13 @@ class App extends React.Component {
     var labelType = e.target.value
     this.setState({
       labelType: labelType
+    })
+  }
+
+  handleChordFocus (e) {
+    var focus = e.target.value
+    this.setState({
+      chordFocus: focus
     })
   }
 
@@ -499,6 +504,7 @@ class App extends React.Component {
                 chordDegrees={this.state.chordDegrees}
                 keyCenter={this.state.keyCenter}
                 labelType={this.state.labelType}
+                chordFocus={this.state.chordFocus}
               />
             </div>
           </div>
@@ -610,7 +616,16 @@ class App extends React.Component {
             <LabelMenu
               handleNeckNotes={this.handleNeckNotes}
               name={'labelMenu'}
+              chordSelected={this.state.chordOneSelected}
             />
+            {this.state.chordOneSelected && this.state.chordTwoSelected ?
+              <FocusMenu
+                handleChordFocus={this.handleChordFocus}
+                name={'labelMenu'}
+                chordSelected={this.state.chordOneSelected}
+              />
+              : null
+            }
             <button
               onClick={(e) => this.handleHide(e)}
               className="seventh_button">
