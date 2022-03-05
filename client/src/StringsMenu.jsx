@@ -1,6 +1,6 @@
 import React from 'react';
 
-var StringsMenu = ({handleStringChoice})  => {
+var StringsMenu = ({handleStringChoicen, name})  => {
   const sharp = '\u266F';
   const flat = '\u266D';
   const dblSharp = '\u{1D12A}';
@@ -9,7 +9,7 @@ var StringsMenu = ({handleStringChoice})  => {
   const dim = '\u00B0'
 
   return (
-    <span className="chooseStrings">
+    <span className={name}>
       <select onChange={(e) => {handleStringChoice(e)}}>
         <option selected title="Guitar" value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}`}>Guitar - Standard</option>
         <option value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Drop D</option>

@@ -78,38 +78,38 @@ class App extends React.Component {
       currentCard: '',
       currentList: '',
       chordOptRoot: '',
-      instrument: 'Guitar',
       middle: 'inner_middle',
       stringbox: 'stringbox',
     }
 
-    this.getStrings = this.getStrings.bind(this);
+    this.getChoices = this.getChoices.bind(this)
+    this.getDegrees = this.getDegrees.bind(this);
     this.getScale = this.getScale.bind(this);
     this.getScale2 = this.getScale2.bind(this);
-    this.handleSevenths = this.handleSevenths.bind(this);
-    this.handleMoreSevenths = this.handleMoreSevenths.bind(this);
-    this.handleTonicChange = this.handleTonicChange.bind(this);
-    this.handleScaleChange = this.handleScaleChange.bind(this);
-    this.handleTonicChange2 = this.handleTonicChange2.bind(this);
-    this.handleScaleChange2 = this.handleScaleChange2.bind(this);
-    this.handleSecondScale = this.handleSecondScale.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleChordFocus = this.handleChordFocus.bind(this);
-    this.handleStringChoice = this.handleStringChoice.bind(this);
-    this.handleView = this.handleView.bind(this);
-    this.selectChord = this.selectChord.bind(this);
-    this.selectChord2 = this.selectChord2.bind(this);
-    this.handleHide = this.handleHide.bind(this);
-    this.getDegrees = this.getDegrees.bind(this);
-    this.handleNeckNotes = this.handleNeckNotes.bind(this);
-    this.handleSingleOrCompare = this.handleSingleOrCompare.bind(this);
+    this.getStrings = this.getStrings.bind(this);
     this.handleAlterChord = this.handleAlterChord.bind(this);
     this.handleAlterChordWindow = this.handleAlterChordWindow.bind(this);
-    this.setTones = this.setTones.bind(this);
-    this.setTones2 = this.setTones2.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChordFocus = this.handleChordFocus.bind(this);
+    this.handleHide = this.handleHide.bind(this);
+    this.handleMoreSevenths = this.handleMoreSevenths.bind(this);
+    this.handleNeckNotes = this.handleNeckNotes.bind(this);
+    this.handleScaleChange = this.handleScaleChange.bind(this);
+    this.handleScaleChange2 = this.handleScaleChange2.bind(this);
+    this.handleSecondScale = this.handleSecondScale.bind(this);
+    this.handleSevenths = this.handleSevenths.bind(this);
+    this.handleSingleOrCompare = this.handleSingleOrCompare.bind(this);
+    this.handleStringChoice = this.handleStringChoice.bind(this);
+    this.handleTonicChange = this.handleTonicChange.bind(this);
+    this.handleTonicChange2 = this.handleTonicChange2.bind(this);
+    this.handleView = this.handleView.bind(this);
+    this.resetAll = this.resetAll.bind(this)
     this.resetCard = this.resetCard.bind(this)
     this.resetChords = this.resetChords.bind(this)
-    this.resetAll = this.resetAll.bind(this)
+    this.selectChord = this.selectChord.bind(this);
+    this.selectChord2 = this.selectChord2.bind(this);
+    this.setTones = this.setTones.bind(this);
+    this.setTones2 = this.setTones2.bind(this);
   }
 
   componentDidMount () {
@@ -117,6 +117,18 @@ class App extends React.Component {
     this.getDegrees();
     this.getScale('C', 'major')
     this.getScale2('C', 'major')
+  }
+
+  getChoices () {
+    axios.get('/choices')
+      .then((res) => {
+        this.setState({
+          choices: res.data
+        })
+      })
+      .catch((err) => {
+        console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err)
+      })
   }
 
   getDegrees () {
@@ -130,31 +142,6 @@ class App extends React.Component {
       })
       .catch((err) => {
       console.log("🚀 ~ file: App.jsx ~ line 85 ~ App ~ getDegrees ~ err", err)
-      })
-  }
-
-  getStrings () {
-    axios.get('/strings')
-      .then((res) => {
-        this.setState({
-          strings: res.data.right,
-          stringsLeft: res.data.left
-        })
-      })
-      .catch((err) => {
-        console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err)
-      })
-  }
-
-  getChoices () {
-    axios.get('/choices')
-      .then((res) => {
-        this.setState({
-          choices: res.data
-        })
-      })
-      .catch((err) => {
-        console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err)
       })
   }
 
@@ -183,16 +170,74 @@ class App extends React.Component {
       })
   }
 
-  handleSevenths () {
-    this.state.sevenths === true ?
-    this.setState({
-      sevenths: false,
-      seventhsButton: 'Show 7th Chords'
-    }) :
-    this.setState({
-      sevenths: true,
-      seventhsButton: 'Show Triads'
+  getStrings () {
+    axios.get('/strings')
+    .then((res) => {
+      this.setState({
+        strings: res.data.right,
+        stringsLeft: res.data.left
+      })
     })
+    .catch((err) => {
+      console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err)
+    })
+  }
+
+  handleAlterChord (e) {
+    let type = e.target.title
+    let typeKey = this.state.currentCard
+    let alterKey = `${typeKey}Alt`
+    this.setState({
+      [typeKey]: type,
+      [alterKey]: true
+    })
+  }
+
+  handleAlterChordWindow (chord, list, root) {
+    if(this.state.showAlter===false) {
+      this.setState({
+        showAlter: true,
+        currentCard: chord,
+        currentList: list,
+        chordOptRoot: root
+      })
+    }
+    if(this.state.showAlter===true) {
+      this.setState({
+        showAlter: false,
+        currentCard: '',
+        currentList: '',
+        chordOptRoot: ''
+      })
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleChordFocus (e) {
+    var focus = e.target.value
+    this.setState({
+      chordFocus: focus
+    })
+  }
+
+  handleHide(e) {
+    if(this.state.hideScale) {
+      this.setState({
+        hideScale: false,
+        hideScaleButton: 'hide scale'
+      })
+    }
+    if(!this.state.hideScale) {
+      this.setState({
+        hideScale: true,
+        hideScaleButton: 'show scale'
+      })
+    }
   }
 
   handleMoreSevenths () {
@@ -207,10 +252,11 @@ class App extends React.Component {
     })
   }
 
-  handleTonicChange(e) {
-    var key = e.target.value
-    var scale = this.state.scaleType
-    this.getScale(key, scale)
+  handleNeckNotes (e) {
+    var labelType = e.target.value
+    this.setState({
+      labelType: labelType
+    })
   }
 
   handleScaleChange(e) {
@@ -220,26 +266,6 @@ class App extends React.Component {
       scaleType: scale
     })
     this.getScale(key, scale)
-  }
-
-  handleStringChoice(e) {
-    var mirror=[];
-    var strings = e.target.value
-    var stringArray = strings.split('.')
-    stringArray.forEach((string) => {
-      mirror.unshift(string)
-    })
-    this.setState({
-      currentStrings: stringArray,
-      currentStringsMirror: mirror,
-      instrument: instrument
-    })
-  }
-
-  handleTonicChange2(e) {
-    var key = e.target.value
-    var scale = this.state.scaleType2
-    this.getScale2(key, scale)
   }
 
   handleScaleChange2(e) {
@@ -263,9 +289,46 @@ class App extends React.Component {
     })
   }
 
-  handleChange(e) {
+  handleSevenths () {
+    this.state.sevenths === true ?
     this.setState({
-      [e.target.name]: e.target.value
+      sevenths: false,
+      seventhsButton: 'Show 7th Chords'
+    }) :
+    this.setState({
+      sevenths: true,
+      seventhsButton: 'Show Triads'
+    })
+  }
+
+  handleSingleOrCompare (e) {
+    if(this.state.compare) {
+      this.setState({
+        compare: false,
+        singleOrCompareButton: 'Single Chord',
+        selectedChord2: {},
+        currentChordTones2: [],
+        chordTwoSelected: false
+      })
+    }
+    if(!this.state.compare) {
+      this.setState({
+        compare: true,
+        singleOrCompareButton: 'Compare Chords',
+      })
+    }
+  }
+
+  handleStringChoice(e) {
+    var mirror=[];
+    var strings = e.target.value
+    var stringArray = strings.split('.')
+    stringArray.forEach((string) => {
+      mirror.unshift(string)
+    })
+    this.setState({
+      currentStrings: stringArray,
+      currentStringsMirror: mirror,
     })
   }
 
@@ -281,6 +344,18 @@ class App extends React.Component {
     console.log("🚀 ~ file: App.jsx ~ line 178 ~ App ~ handleSubmit ~ err", err)
 
     })
+  }
+
+  handleTonicChange(e) {
+    var key = e.target.value
+    var scale = this.state.scaleType
+    this.getScale(key, scale)
+  }
+
+  handleTonicChange2(e) {
+    var key = e.target.value
+    var scale = this.state.scaleType2
+    this.getScale2(key, scale)
   }
 
   handleView (e) {
@@ -305,50 +380,43 @@ class App extends React.Component {
     })
   }
 
-  handleHide(e) {
-    if(this.state.hideScale) {
-      this.setState({
-        hideScale: false,
-        hideScaleButton: 'hide scale'
-      })
-    }
-    if(!this.state.hideScale) {
-      this.setState({
-        hideScale: true,
-        hideScaleButton: 'show scale'
-      })
-    }
-  }
-
-  handleSingleOrCompare (e) {
-    if(this.state.compare) {
-      this.setState({
-        compare: false,
-        singleOrCompareButton: 'Single Chord',
-        selectedChord2: {},
-        currentChordTones2: [],
-        chordTwoSelected: false
-      })
-    }
-    if(!this.state.compare) {
-      this.setState({
-        compare: true,
-        singleOrCompareButton: 'Compare Chords',
-      })
-    }
-  }
-
-  handleNeckNotes (e) {
-    var labelType = e.target.value
+  resetCard(chord) {
+    let typeKey = chord
+    let alterKey = `${typeKey}Alt`
     this.setState({
-      labelType: labelType
+      [typeKey]: 'Triad',
+      [alterKey]: false
     })
   }
 
-  handleChordFocus (e) {
-    var focus = e.target.value
+  resetChords() {
     this.setState({
-      chordFocus: focus
+      ch0: 'Triad',
+      ch1: 'Triad',
+      ch2: 'Triad',
+      ch3: 'Triad',
+      ch4: 'Triad',
+      ch5: 'Triad',
+      ch6: 'Triad',
+      ch0Alt: false,
+      ch1Alt: false,
+      ch2Alt: false,
+      ch3Alt: false,
+      ch4Alt: false,
+      ch5Alt: false,
+      ch6Alt: false,
+    })
+  }
+
+  resetAll() {
+    this.resetChords()
+    this.setState({
+      selectedChord:{},
+      selectedChord2:{},
+      currentChordTones: [],
+      currentChordTones2: [],
+      chordOneSelected: false,
+      chordTwoSelected: false,
     })
   }
 
@@ -423,82 +491,50 @@ class App extends React.Component {
     })
   }
 
-  handleAlterChord (e) {
-    let type = e.target.title
-    let typeKey = this.state.currentCard
-    let alterKey = `${typeKey}Alt`
-    this.setState({
-      [typeKey]: type,
-      [alterKey]: true
-    })
-  }
-
-  handleAlterChordWindow (chord, list, root) {
-    if(this.state.showAlter===false) {
-      this.setState({
-        showAlter: true,
-        currentCard: chord,
-        currentList: list,
-        chordOptRoot: root
-      })
-    }
-    if(this.state.showAlter===true) {
-      this.setState({
-        showAlter: false,
-        currentCard: '',
-        currentList: '',
-        chordOptRoot: ''
-      })
-    }
-  }
-
-  resetCard(chord) {
-    let typeKey = chord
-    let alterKey = `${typeKey}Alt`
-    this.setState({
-      [typeKey]: 'Triad',
-      [alterKey]: false
-    })
-  }
-
-  resetChords() {
-    this.setState({
-      ch0: 'Triad',
-      ch1: 'Triad',
-      ch2: 'Triad',
-      ch3: 'Triad',
-      ch4: 'Triad',
-      ch5: 'Triad',
-      ch6: 'Triad',
-      ch0Alt: false,
-      ch1Alt: false,
-      ch2Alt: false,
-      ch3Alt: false,
-      ch4Alt: false,
-      ch5Alt: false,
-      ch6Alt: false,
-    })
-  }
-
-  resetAll() {
-    this.resetChords()
-    this.setState({
-      selectedChord:{},
-      selectedChord2:{},
-      currentChordTones: [],
-      currentChordTones2: [],
-      chordOneSelected: false,
-      chordTwoSelected: false,
-    })
-  }
-
   render() {
     return (
       <div className = "page">
         <div className="top">
           <span className="navbar">
-            Strings Theory
+            <span className="navTitle">
+              Strings Theory
+            </span>
+            <span></span>
+            <span>
+              Map Chords
+            </span>
+            <span>
+              map Scales
+            </span>
+            <span>
+              Find Chords
+            </span>
+            <span>
+              Find Scales
+            </span>
+            <span>
+              Tutorial
+            </span>
+            <span>
+              Settings
+            </span>
+            <span></span>
           </span>
+        </div>
+        <div className="neckDash">
+          <ViewMenu
+            handleView={this.handleView}
+            name={'viewMenu'}
+          />
+          <StringsMenu
+            handleStringChoice={this.handleStringChoice}
+            name={'stringsMenu'}
+          />
+          <button
+            onClick={(e) => this.handleHide(e)}
+            className="seventh_button">
+            {this.state.hideScaleButton}
+          </button>
         </div>
         <div className="middle">
           <FretGuide
@@ -535,142 +571,131 @@ class App extends React.Component {
             view={this.state.view}
           />
         </div>
-        <div className="bottom">
-          <div className="bottom_left">
-            <div className="btn1">
-              <button
-                onClick={(e) => this.handleSevenths(e)}
-                className="seventh_button"
-                id="sevenths_button">
-                {this.state.seventhsButton}
-              </button>
-            </div>
-            <div className="btn3">
-              <button
-                onClick={(e) => this.handleSecondScale(e)}
-                className="seventh_button"
-                id="second_button">
-                {this.state.secondButton}
-              </button>
-            </div>
-            {this.state.second === true ?
-              <div className="btn2">
-                <button
-                  onClick={(e) => this.handleMoreSevenths(e)}
-                  className="seventh_button"
-                  id="sevenths_button2">
-                  {this.state.moreSeventhsButton}
-                </button>
-              </div> : null
-            }
-          </div>
-          <div className="bottom_center">
-            <AlterChordOpt
-              showAlter={this.state.showAlter}
-              handleAlterChord={this.handleAlterChord}
-              handleAlterChordWindow={this.handleAlterChordWindow}
-              currentCard={this.state.currentCard}
-              list={this.state.currentList}
-              root={this.state.chordOptRoot}
-            />
-            <ScaleChords
-              keyCenter={this.state.keyCenter}
-              sevenths={this.state.sevenths}
-              selectChord={this.selectChord}
-              selectChord2={this.selectChord2}
-              currentChord={this.state.selectedChord}
-              currentChord2={this.state.selectedChord2}
-              chordOneSelected={this.state.chordOneSelected}
-              currentChordTones={this.state.currentChordTones}
-              currentChordTones2={this.state.currentChordTones2}
-              compareChords={this.state.compare}
-              handleAlterChordWindow={this.handleAlterChordWindow}
-              resetCard={this.resetCard}
-              setTones={this.setTones}
-              setTones2={this.setTones2}
-              ch0={this.state.ch0}
-              ch1={this.state.ch1}
-              ch2={this.state.ch2}
-              ch3={this.state.ch3}
-              ch4={this.state.ch4}
-              ch5={this.state.ch5}
-              ch6={this.state.ch6}
-              ch0Alt={this.state.ch0Alt}
-              ch1Alt={this.state.ch1Alt}
-              ch2Alt={this.state.ch2Alt}
-              ch3Alt={this.state.ch3Alt}
-              ch4Alt={this.state.ch4Alt}
-              ch5Alt={this.state.ch5Alt}
-              ch6Alt={this.state.ch6Alt}
-            />
+        <div className="bottomUpper">
+        <TonicMenu
+            handleTonicChange={this.handleTonicChange}
+            name={'tonic_options_left'}
+          />
+          <ScalesMenu
+            handleScaleChange={this.handleScaleChange}
+            name={'scale_options_left'}
+          />
+          {this.state.second ?
             <React.Fragment>
-              {this.state.second === true ?
-                <ScaleChords
-                  keyCenter={this.state.keyCenter2}
-                  sevenths={this.state.sevenths2}
-                />: null}
+              <TonicMenu
+                handleTonicChange={this.handleTonicChange2}
+                name={'tonic_options_right'}
+              />
+              <ScalesMenu
+                handleScaleChange={this.handleScaleChange2}
+                name={'scale_options_right'}
+              />
             </React.Fragment>
-          </div>
-          <div className="bottom_right">
-          <TonicMenu
-              handleTonicChange={this.handleTonicChange}
-              name={'tonic_options_left'}
-            />
-            <ScalesMenu
-              handleScaleChange={this.handleScaleChange}
-              name={'scale_options_left'}
-            />
-            <StringsMenu
-              handleStringChoice={this.handleStringChoice}
-            />
-            <TonicMenu
-              handleTonicChange={this.handleTonicChange2}
-              name={'tonic_options_right'}
-            />
-            <ScalesMenu
-              handleScaleChange={this.handleScaleChange2}
-              name={'scale_options_right'}
-            />
-            <ViewMenu
-              handleView={this.handleView}
-              name={'viewMenu'}
-            />
-            <LabelMenu
-              handleNeckNotes={this.handleNeckNotes}
+            : null
+          }
+          <LabelMenu
+            handleNeckNotes={this.handleNeckNotes}
+            name={'labelMenu'}
+            chordSelected={this.state.chordOneSelected}
+          />
+          {this.state.labelType ==='Chord Degrees' && this.state.chordOneSelected && this.state.chordTwoSelected ?
+            <FocusMenu
+              handleChordFocus={this.handleChordFocus}
               name={'labelMenu'}
               chordSelected={this.state.chordOneSelected}
             />
-            {this.state.chordOneSelected && this.state.chordTwoSelected ?
-              <FocusMenu
-                handleChordFocus={this.handleChordFocus}
-                name={'labelMenu'}
-                chordSelected={this.state.chordOneSelected}
-              />
-              : null
-            }
+            : null
+          }
+          <button
+            onClick={(e) => this.handleSingleOrCompare(e)}
+            className="seventh_button">
+            {this.state.singleOrCompareButton}
+          </button>
+          <button
+            onClick={() => this.resetChords()}
+            className="seventh_button"
+            >
+            Reset Chords
+          </button>
+          <button
+            onClick={() => this.resetAll()}
+            className="seventh_button"
+            >
+            Reset Everything
+          </button>
+          <button
+            onClick={(e) => this.handleSevenths(e)}
+            className="seventh_button"
+            id="sevenths_button">
+            {this.state.seventhsButton}
+          </button>
+          <button
+            onClick={(e) => this.handleSecondScale(e)}
+            className="seventh_button"
+            id="second_button">
+            {this.state.secondButton}
+          </button>
+          {this.state.second === true ?
             <button
-              onClick={(e) => this.handleHide(e)}
-              className="seventh_button">
-              {this.state.hideScaleButton}
-            </button>
-            <button
-              onClick={(e) => this.handleSingleOrCompare(e)}
-              className="seventh_button">
-              {this.state.singleOrCompareButton}
-            </button>
-            <button
-              onClick={() => this.resetChords()}
+              onClick={(e) => this.handleMoreSevenths(e)}
               className="seventh_button"
-              >
-              Reset Chords
+              id="sevenths_button2">
+              {this.state.moreSeventhsButton}
             </button>
-            <button
-              onClick={() => this.resetAll()}
-              className="seventh_button"
-              >
-              Reset All
-            </button>
-          </div>
+            : null
+          }
+          {this.state.chordOneSelected && this.state.chordTwoSelected ?
+            <span className="sharedLight">Shared Notes</span> : null
+          }
+        </div>
+        <div className="bottomLower">
+          <AlterChordOpt
+            showAlter={this.state.showAlter}
+            handleAlterChord={this.handleAlterChord}
+            handleAlterChordWindow={this.handleAlterChordWindow}
+            currentCard={this.state.currentCard}
+            list={this.state.currentList}
+            root={this.state.chordOptRoot}
+          />
+          <ScaleChords
+            keyCenter={this.state.keyCenter}
+            sevenths={this.state.sevenths}
+            selectChord={this.selectChord}
+            selectChord2={this.selectChord2}
+            currentChord={this.state.selectedChord}
+            currentChord2={this.state.selectedChord2}
+            chordOneSelected={this.state.chordOneSelected}
+            currentChordTones={this.state.currentChordTones}
+            currentChordTones2={this.state.currentChordTones2}
+            compareChords={this.state.compare}
+            handleAlterChordWindow={this.handleAlterChordWindow}
+            resetCard={this.resetCard}
+            setTones={this.setTones}
+            setTones2={this.setTones2}
+            ch0={this.state.ch0}
+            ch1={this.state.ch1}
+            ch2={this.state.ch2}
+            ch3={this.state.ch3}
+            ch4={this.state.ch4}
+            ch5={this.state.ch5}
+            ch6={this.state.ch6}
+            ch0Alt={this.state.ch0Alt}
+            ch1Alt={this.state.ch1Alt}
+            ch2Alt={this.state.ch2Alt}
+            ch3Alt={this.state.ch3Alt}
+            ch4Alt={this.state.ch4Alt}
+            ch5Alt={this.state.ch5Alt}
+            ch6Alt={this.state.ch6Alt}
+          />
+          <React.Fragment>
+            {this.state.second === true ?
+              <ScaleChords
+                keyCenter={this.state.keyCenter2}
+                sevenths={this.state.sevenths2}
+              />: null}
+          </React.Fragment>
+        </div>
+        <div className="bottom_right">
         </div>
       </div>
     )
