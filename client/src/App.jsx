@@ -78,6 +78,9 @@ class App extends React.Component {
       currentCard: '',
       currentList: '',
       chordOptRoot: '',
+      instrument: 'Guitar',
+      middle: 'inner_middle',
+      stringbox: 'stringbox',
     }
 
     this.getStrings = this.getStrings.bind(this);
@@ -228,7 +231,8 @@ class App extends React.Component {
     })
     this.setState({
       currentStrings: stringArray,
-      currentStringsMirror: mirror
+      currentStringsMirror: mirror,
+      instrument: instrument
     })
   }
 
@@ -280,9 +284,24 @@ class App extends React.Component {
   }
 
   handleView (e) {
-    var view = e.target.value
+    let view = e.target.value
+    let middle;
+    let stringbox;
+
+    if (view === 'Traditional' || view === 'Mirror') {
+      middle = 'inner_middle';
+      stringbox = 'stringbox';
+    }
+
+    if (view === 'Traditional-left' || view === 'Mirror-left') {
+      middle = 'inner_middle_left';
+      stringbox = 'stringbox_left';
+    }
+
     this.setState({
-      view: view
+      view: view,
+      middle: middle,
+      stringbox: stringbox
     })
   }
 
@@ -362,7 +381,8 @@ class App extends React.Component {
       this.setState({
         selectedChord2: {},
         currentChordTones2: [],
-        chordTwoSelected: false
+        chordTwoSelected: false,
+        chordFocus: 'Neutral'
       })
     }
     if (chord === this.state.selectedChord) {
@@ -372,13 +392,15 @@ class App extends React.Component {
         selectedChord2: {},
         currentChordTones2: [],
         chordOneSelected: false,
-        chordTwoSelected: false
+        chordTwoSelected: false,
+        chordFocus: 'Neutral'
       })
     } else if (chord === this.state.selectedChord2) {
       this.setState({
         selectedChord2: {},
         currentChordTones2: [],
-        chordTwoSelected: false
+        chordTwoSelected: false,
+        chordFocus: 'Neutral'
       })
     } else {
       this.setState({
@@ -483,8 +505,8 @@ class App extends React.Component {
             name ={'guideContainerUpper'}
             view={this.state.view}
           />
-          <div className="inner_middle">
-            <div className="stringbox">
+          <div className={`${this.state.middle}`}>
+            <div className={`${this.state.stringbox}`}>
               <StringSet
                 allStrings={this.state.strings}
                 strings={this.state.currentStrings}

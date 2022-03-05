@@ -11,7 +11,7 @@ var StringsMenu = ({handleStringChoice})  => {
   return (
     <span className="chooseStrings">
       <select onChange={(e) => {handleStringChoice(e)}}>
-        <option selected value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}`}>Guitar - Standard</option>
+        <option selected title="Guitar" value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.E,F${flat},D${dblSharp}`}>Guitar - Standard</option>
         <option value={`E,F${flat},D${dblSharp}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Drop D</option>
         <option value={`D,C${dblSharp},E${dblFlat}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.A,G${dblSharp},B${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Double Drop D</option>
         <option value={`D,C${dblSharp},E${dblFlat}.B,C${flat},A${dblSharp}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}.G,F${dblSharp},A${dblFlat}.D,C${dblSharp},E${dblFlat}`}>Guitar - Open G</option>

@@ -675,7 +675,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       chordLabel += `${dim}`
       seventhName = `${chordTones[0]}m7(${flat}5)`
       seventhLabel = `${labelsSeven.roman}m7(${flat}5)`
-      seventhChord = [`minor 7(${flat}5)`, 'half diminished']
+      seventhChord = `minor 7(${flat}5)`
       chords[key].options.list.push(`${dim} Triad`)
       chords[key].options.list.push(`m7(${flat}5)`)
     } //min7(b5)
@@ -930,7 +930,6 @@ var makeStringsLeft = (array) => {
     var firstOctave = shiftNotes(array[i], array);
     var extraNotes = firstOctave.slice(0,6)
     var newString = firstOctave.concat(extraNotes);
-    newString.push('');
     string[array[i]] = newString.reverse();
   }
   return string;
