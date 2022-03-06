@@ -1,17 +1,15 @@
 import React from 'react';
 
-var LabelMenu = ({name, handleNeckNotes, chordSelected})  => {
+var LabelMenu = ({name, handleNeckNotes, noteNameToggle, scaleDegreeToggle, solfegeToggle})  => {
+
+  var types = ['Note Names', 'Scale Degrees', 'Solfege']
 
   return (
     <span className={name}>
-      <select onChange={(e) => {handleNeckNotes(e)}}>
-        <option selected value='Note Names'>Note Names</option>
-        <option value='Scale Degrees'>Scale Degrees</option>
-        <option value='Solfege'>Solfege</option>
-        {chordSelected ?
-          <option value='Chord Degrees'>Chord Degrees</option> : null
-        }
-      </select>
+
+      <span className={`labelToggle ${noteNameToggle}`} onClick={(e) => {handleNeckNotes(e)}} title='Note Names'>Note Names</span>
+      <span className={`labelToggle ${scaleDegreeToggle}`} onClick={(e) => {handleNeckNotes(e)}} title='Scale Degrees'>Scale Degrees</span>
+      <span className={`labelToggle ${solfegeToggle}`} onClick={(e) => {handleNeckNotes(e)}} title='Solfege'>Solfege</span>
     </span>
   )
 }

@@ -5,21 +5,21 @@ var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord,
   var list;
   var neckClass;
 
-  if (view==='Mirror' || view==='Mirror-left') {
+  if (view==='Mirror View' || view==='Lefty Mirror View') {
     list = stringsMirror
   }
-  if (view==='Traditional' || view==='Traditional-left') {
+  if (view==='Traditional View' || view==='Lefty Traditional View') {
     list = strings
   }
 
-  if (list.length === 4){neckClass = 'four_string_neck'}
-  if (list.length === 5){neckClass = 'five_string_neck'}
-  if (list.length === 6){neckClass = 'six_string_neck'}
+  if (list && list.length === 4){neckClass = 'four_string_neck'}
+  if (list && list.length === 5){neckClass = 'five_string_neck'}
+  if (list && list.length === 6){neckClass = 'six_string_neck'}
 
   return (
 
     <div className={`${neckClass}`}>
-      {list.map((string) => (
+      {list ? list.map((string) => (
         <String
           string={string}
           allStrings={allStrings}
@@ -40,7 +40,7 @@ var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord,
           labelType={labelType}
           chordFocus={chordFocus}
         />
-      ))}
+      )): null}
     </div>
 
   )

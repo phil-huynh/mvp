@@ -1,44 +1,134 @@
-import React from 'react';
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Modal } from 'react-bootstrap'
 
-var TonicMenu = ({name, handleTonicChange})  => {
+var TonicMenu = ({showTonicMenu, handleTonicMenuWindow, handleTonicChange}) => {
+
   const sharp = '\u266F';
   const flat = '\u266D';
   const dblSharp = '\u{1D12A}';
   const dblFlat = '\u{1D12B}';
-  const natural = '\u266E';
-  const dim = '\u00B0';
+  const natural = '\u266E'
+  const dim = '\u00B0'
+
 
   return (
-    <span className={name}>
-      <select onChange={(e) => {handleTonicChange(e)}}>
-        <option selected value='C'>C</option>
-        <option value='D'>D</option>
-        <option value='E'>E</option>
-        <option value='F'>F</option>
-        <option value='G'>G</option>
-        <option value='A'>A</option>
-        <option value='B'>B</option>
-        <option value={`B${flat}`}>{`B${flat}`}</option>
-        <option value={`E${flat}`}>{`E${flat}`}</option>
-        <option value={`A${flat}`}>{`A${flat}`}</option>
-        <option value={`D${flat}`}>{`D${flat}`}</option>
-        <option value={`G${flat}`}>{`G${flat}`}</option>
-        <option value={`C${flat}`}>{`C${flat}`}</option>
-        <option value={`F${flat}`}>{`F${flat}`}</option>
-        <option value={`B${dblFlat}`}>{`B${dblFlat}`}</option>
-        <option value={`E${dblFlat}`}>{`E${dblFlat}`}</option>
-        <option value={`A${dblFlat}`}>{`A${dblFlat}`}</option>
-        <option value={`D${dblFlat}`}>{`D${dblFlat}`}</option>
-        <option value={`F${sharp}`}>{`F${sharp}`}</option>
-        <option value={`C${sharp}`}>{`C${sharp}`}</option>
-        <option value={`G${sharp}`}>{`G${sharp}`}</option>
-        <option value={`D${sharp}`}>{`D${sharp}`}</option>
-        <option value={`A${sharp}`}>{`A${sharp}`}</option>
-        <option value={`E${sharp}`}>{`E${sharp}`}</option>
-        <option value={`B${sharp}`}>{`B${sharp}`}</option>
-      </select>
-    </span>
+    <Modal
+      className='tonicMenuWindow'
+      show={showTonicMenu}
+      onHide={() => {handleTonicMenuWindow()}}
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>
+          <h2>
+            Choose a Tonic
+          </h2>
+        </Modal.Title>
+      </Modal.Header>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title='C'>C</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title='D'>D</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title='E'>E</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title='F'>F</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title='G'>G</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title='A'>A</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title='B'>B</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`B${flat}`}>{`B${flat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`E${flat}`}>{`E${flat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`A${flat}`}>{`A${flat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`D${flat}`}>{`D${flat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`G${flat}`}>{`G${flat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`C${flat}`}>{`C${flat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`F${flat}`}>{`F${flat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`B${dblFlat}`}>{`B${dblFlat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`E${dblFlat}`}>{`E${dblFlat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`A${dblFlat}`}>{`A${dblFlat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`D${dblFlat}`}>{`D${dblFlat}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`F${sharp}`}>{`F${sharp}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`C${sharp}`}>{`C${sharp}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`G${sharp}`}>{`G${sharp}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`D${sharp}`}>{`D${sharp}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`A${sharp}`}>{`A${sharp}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`E${sharp}`}>{`E${sharp}`}</div>
+      <div
+        className='tonicChoice'
+        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+        title={`B${sharp}`}>{`B${sharp}`}</div>
+    </Modal>
   )
 }
 
 export default TonicMenu;
+
+

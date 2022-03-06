@@ -1,6 +1,9 @@
-import React from 'react';
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Modal } from 'react-bootstrap'
 
-var ScalesMenu = ({name, handleScaleChange})  => {
+var ScalesMenu = ({showScaleMenu, handleScaleMenuWindow, handleScaleChange}) => {
+
   const sharp = '\u266F';
   const flat = '\u266D';
   const dblSharp = '\u{1D12A}';
@@ -9,39 +12,135 @@ var ScalesMenu = ({name, handleScaleChange})  => {
   const dim = '\u00B0'
 
   return (
-    <span className="scale_options_left">
-    <select onChange={(e) => {handleScaleChange(e)}}>
-      <option selected value='major'>Major</option>
-      <option value='naturalMinor'>Natural Minor</option>
-      <option value='harmonicMinor'>Harmonic Minor</option>
-      <option value='melodicMinor'>Melodic Minor</option>
-      <option value='dorian'>Dorian</option>
-      <option value='phrygian'>Phrygian</option>
-      <option value='lydian'>Lydian</option>
-      <option value='mixolydian'>Mixolydian</option>
-      <option value='locrian'>Locrian</option>
-      <option value='persian'>Persian</option>
-      <option value='double harmonic major'>Double Harmonic Major</option>
-      <option value='hungarian gypsy minor'>Hungarian Gypsy Minor</option>
-      <option value='romanian major'>Romanian Major</option>
-      <option value='romanian minor'>Romanian Minor</option>
-      <option value='lydian dominant'>Lydian Dominant</option>
-      <option value='ukrainian dorian'>Ukrainian Dorian</option>
-      <option value='phrygian dominant'>Phrygian Dominant</option>
-      <option value='lydian augmented'>Lydian Augmented</option>
-      <option value='locrian natural6'>Locrian #6</option>
-      <option value='ionian sharp5'>Ionian #5</option>
-      <option value='phrygian dorian'>Phrygian Dorian</option>
-      <option value='mixolydian flat13'>Mixolydian b13</option>
-      <option value='aeoleon flat5'>Aeoleon b13</option>
-      <option value='altered'>Altered Scale</option>
-      <option value='gypsy'>Gypsy Scale</option>
-      <option value='hungarian major'>Hungarian Major</option>
-      <option value='neapolitan major'>Neapolitan Major</option>
-      <option value='neapolitan minor'>Neapolitan</option>
-      <option value='arabian'>Arabian</option>
-    </select>
-  </span>
+    <Modal
+      className='scaleMenuWindow'
+      show={showScaleMenu}
+      onHide={() => {handleScaleMenuWindow()}}
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>
+          <h2>
+            Choose a Scale Type
+          </h2>
+        </Modal.Title>
+      </Modal.Header>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='major'>Major</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='naturalMinor'>Natural Minor</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='harmonicMinor'>Harmonic Minor</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='melodicMinor'>Melodic Minor</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='dorian'>Dorian</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='phrygian'>Phrygian</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='lydian'>Lydian</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='mixolydian'>Mixolydian</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='locrian'>Locrian</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='persian'>Persian</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='double harmonic major'>Double Harmonic Major</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='hungarian gypsy minor'>Hungarian Gypsy Minor</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='romanian major'>Romanian Major</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='romanian minor'>Romanian Minor</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='lydian dominant'>Lydian Dominant</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='ukrainian dorian'>Ukrainian Dorian</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='phrygian dominant'>Phrygian Dominant</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='lydian augmented'>Lydian Augmented</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='locrian natural6'>Locrian #6</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='ionian sharp5'>Ionian #5</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='phrygian dorian'>Phrygian Dorian</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='mixolydian flat13'>Mixolydian b13</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='aeoleon flat5'>Aeoleon b13</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='altered'>Altered Scale</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='gypsy'>Gypsy Scale</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='hungarian major'>Hungarian Major</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='neapolitan major'>Neapolitan Major</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='neapolitan minor'>Neapolitan</div>
+      <div
+        className="scaleChoice"
+        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+        title='arabian'>Arabian</div>
+    </Modal>
   )
 }
 

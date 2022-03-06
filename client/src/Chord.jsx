@@ -21,7 +21,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
   var triadList = [' Triad', '+ Triad', 'm Triad', `${dim} Triad`, `maj ${flat}5 Triad`]
   var seventhsList = ['maj7', '7', '+(maj7)', `7(${sharp}5)`, `7(${flat}5)`, `${dim}7`,`maj7(${flat}5)`, `m7(${flat}5)`, 'm(maj7)', 'm7']
   var shellList = ['maj7 (shell)', '7 (shell)', 'm7 (shell)', 'm(maj7) (shell)']
-  console.log("🚀 ~ file: Chord.jsx ~ line 12 ~ Chord ~ list ", list )
+
   if (chord) {
     sevenths && !wasAltered ?
     (name=chord.options.seventhChord.name, label=chord.options.seventhChord.label, cardClass='text-center seventhChordCard', tones=chord.options.seventhChord.notes) :

@@ -4,7 +4,7 @@ var FretGuide = ({name, view}) => {
 
   return (
     <div className={name}>
-      {(view === 'Traditional-left' || view === 'Mirror-left') ?
+      {(view === 'Lefty Traditional View' || view === 'Lefty Mirror View') ?
       <div className='guideLeft'>
         <span className='guidebox leftyFret17'> &#183;</span>
         <span className='guidebox leftyFret15'> &#183;</span>

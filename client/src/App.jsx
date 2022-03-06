@@ -29,6 +29,7 @@ class App extends React.Component {
       currentStringsMirror: [`E,F${flat},D${dblSharp}`, `A,G${dblSharp},B${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `G,F${dblSharp},A${dblFlat}`, `B,C${flat},A${dblSharp}`, `E,F${flat},D${dblSharp}`],
       choices: [],
       scaleType:'major',
+      scaleName:'Major',
       keyCenter: {},
       keyCenter2: {},
       tonic: '',
@@ -50,7 +51,7 @@ class App extends React.Component {
       chords2: {},
       sevenths2: false,
       moreSeventhsButton: 'Show 7th Chords',
-      view: 'Traditional',
+      view: 'Traditional View',
       hideScale: false,
       hideScaleButton: 'hide scale',
       solfege: {},
@@ -75,11 +76,18 @@ class App extends React.Component {
       ch5Alt: false,
       ch6Alt: false,
       showAlter: false,
+      showViewMenu: false,
+      showTonicMenu: false,
+      showScaleMenu: false,
       currentCard: '',
       currentList: '',
       chordOptRoot: '',
       middle: 'inner_middle',
       stringbox: 'stringbox',
+      sharedNotes: false,
+      noteNameToggle: 'toggle_on',
+      scaleDegreeToggle: 'toggle_off',
+      solfegeToggle: 'toggle_off'
     }
 
     this.getChoices = this.getChoices.bind(this)
@@ -89,6 +97,9 @@ class App extends React.Component {
     this.getStrings = this.getStrings.bind(this);
     this.handleAlterChord = this.handleAlterChord.bind(this);
     this.handleAlterChordWindow = this.handleAlterChordWindow.bind(this);
+    this.handleViewMenuWindow = this.handleViewMenuWindow.bind(this);
+    this.handleTonicMenuWindow = this.handleTonicMenuWindow.bind(this);
+    this.handleScaleMenuWindow = this.handleScaleMenuWindow.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChordFocus = this.handleChordFocus.bind(this);
     this.handleHide = this.handleHide.bind(this);
@@ -212,6 +223,45 @@ class App extends React.Component {
     }
   }
 
+  handleViewMenuWindow () {
+    if(this.state.showViewMenu===false) {
+      this.setState({
+        showViewMenu: true,
+      })
+    }
+    if(this.state.showViewMenu===true) {
+      this.setState({
+        showViewMenu: false,
+      })
+    }
+  }
+
+  handleTonicMenuWindow () {
+    if(this.state.showTonicMenu===false) {
+      this.setState({
+        showTonicMenu: true,
+      })
+    }
+    if(this.state.showTonicMenu===true) {
+      this.setState({
+        showTonicMenu: false,
+      })
+    }
+  }
+
+  handleScaleMenuWindow () {
+    if(this.state.showScaleMenu===false) {
+      this.setState({
+        showScaleMenu: true,
+      })
+    }
+    if(this.state.showScaleMenu===true) {
+      this.setState({
+        showScaleMenu: false,
+      })
+    }
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -253,17 +303,40 @@ class App extends React.Component {
   }
 
   handleNeckNotes (e) {
-    var labelType = e.target.value
-    this.setState({
-      labelType: labelType
-    })
+    var labelType = e.target.title
+    if (labelType === 'Note Names') {
+      this.setState({
+        labelType: labelType,
+        noteNameToggle: 'toggle_on',
+        scaleDegreeToggle: 'toggle_off',
+        solfegeToggle: 'toggle_off'
+      })
+    }
+    if (labelType === 'Scale Degrees') {
+      this.setState({
+        labelType: labelType,
+        noteNameToggle: 'toggle_off',
+        scaleDegreeToggle: 'toggle_on',
+        solfegeToggle: 'toggle_off'
+      })
+    }
+    if (labelType === 'Solfege') {
+      this.setState({
+        labelType: labelType,
+        noteNameToggle: 'toggle_off',
+        scaleDegreeToggle: 'toggle_off',
+        solfegeToggle: 'toggle_on'
+      })
+    }
   }
 
   handleScaleChange(e) {
     var key = this.state.tonic
-    var scale = e.target.value
+    var scale = e.target.title
+    var name = e.target.outerText
     this.setState({
-      scaleType: scale
+      scaleType: scale,
+      scaleName: name
     })
     this.getScale(key, scale)
   }
@@ -347,7 +420,7 @@ class App extends React.Component {
   }
 
   handleTonicChange(e) {
-    var key = e.target.value
+    var key = e.target.title
     var scale = this.state.scaleType
     this.getScale(key, scale)
   }
@@ -359,16 +432,16 @@ class App extends React.Component {
   }
 
   handleView (e) {
-    let view = e.target.value
+    let view = e.target.title
     let middle;
     let stringbox;
 
-    if (view === 'Traditional' || view === 'Mirror') {
+    if (view === 'Traditional View' || view === 'Mirror View') {
       middle = 'inner_middle';
       stringbox = 'stringbox';
     }
 
-    if (view === 'Traditional-left' || view === 'Mirror-left') {
+    if (view === 'Lefty Traditional View' || view === 'Lefty Mirror View') {
       middle = 'inner_middle_left';
       stringbox = 'stringbox_left';
     }
@@ -445,12 +518,30 @@ class App extends React.Component {
   }
 
   selectChord2 (chord, tones) {
+    console.log(chord)
+    console.log(tones)
+    let checker = {}
+    let notes = this.state.currentChordTones
+
+    for(var i = 0; i < notes.length; i++) {
+      checker[notes[i]] = true
+    }
+
+    var shareNotes = false
+    for (var j = 0; j < tones.length; j++) {
+      if (checker[tones[j]]) {
+        shareNotes = true;
+        break;
+      }
+    }
+
     if(this.state.compare === false) {
       this.setState({
         selectedChord2: {},
         currentChordTones2: [],
         chordTwoSelected: false,
-        chordFocus: 'Neutral'
+        chordFocus: 'Neutral',
+        sharedNotes: false
       })
     }
     if (chord === this.state.selectedChord) {
@@ -461,7 +552,8 @@ class App extends React.Component {
         currentChordTones2: [],
         chordOneSelected: false,
         chordTwoSelected: false,
-        chordFocus: 'Neutral'
+        chordFocus: 'Neutral',
+        sharedNotes: false
       })
     } else if (chord === this.state.selectedChord2) {
       this.setState({
@@ -471,6 +563,12 @@ class App extends React.Component {
         chordFocus: 'Neutral'
       })
     } else {
+      if (shareNotes) {
+        this.setState({sharedNotes: true})
+      }
+      if (!shareNotes) {
+        this.setState({sharedNotes: false})
+      }
       this.setState({
         selectedChord2: chord,
         currentChordTones2: tones,
@@ -504,7 +602,7 @@ class App extends React.Component {
               Map Chords
             </span>
             <span>
-              map Scales
+              Map Scales
             </span>
             <span>
               Find Chords
@@ -524,8 +622,15 @@ class App extends React.Component {
         <div className="neckDash">
           <ViewMenu
             handleView={this.handleView}
-            name={'viewMenu'}
+            handleViewMenuWindow={this.handleViewMenuWindow}
+            showViewMenu={this.state.showViewMenu}
           />
+          <span
+            className="viewLabel"
+            onClick={()=>this.handleViewMenuWindow()}
+          >
+            {this.state.view}
+          </span>
           <StringsMenu
             handleStringChoice={this.handleStringChoice}
             name={'stringsMenu'}
@@ -572,14 +677,31 @@ class App extends React.Component {
           />
         </div>
         <div className="bottomUpper">
-        <TonicMenu
+          <TonicMenu
             handleTonicChange={this.handleTonicChange}
-            name={'tonic_options_left'}
+            handleTonicMenuWindow={this.handleTonicMenuWindow}
+            showTonicMenu={this.state.showTonicMenu}
           />
           <ScalesMenu
             handleScaleChange={this.handleScaleChange}
-            name={'scale_options_left'}
+            handleScaleMenuWindow={this.handleScaleMenuWindow}
+            showScaleMenu={this.state.showScaleMenu}
           />
+          <span className="keyChoiceLabels">
+            <span
+              className="dashTonicLabel"
+              onClick={()=>this.handleTonicMenuWindow()}
+            >
+              {`${this.state.tonic} `}
+            </span>
+            <span
+              className="dashScaleLabel"
+              onClick={()=>this.handleScaleMenuWindow()}
+            >
+              {this.state.scaleName}
+            </span>
+
+          </span>
           {this.state.second ?
             <React.Fragment>
               <TonicMenu
@@ -596,7 +718,9 @@ class App extends React.Component {
           <LabelMenu
             handleNeckNotes={this.handleNeckNotes}
             name={'labelMenu'}
-            chordSelected={this.state.chordOneSelected}
+            noteNameToggle={this.state.noteNameToggle}
+            scaleDegreeToggle={this.state.scaleDegreeToggle}
+            solfegeToggle={this.state.solfegeToggle}
           />
           {this.state.labelType ==='Chord Degrees' && this.state.chordOneSelected && this.state.chordTwoSelected ?
             <FocusMenu
@@ -611,18 +735,18 @@ class App extends React.Component {
             className="seventh_button">
             {this.state.singleOrCompareButton}
           </button>
-          <button
+          <span
             onClick={() => this.resetChords()}
-            className="seventh_button"
+            className="reset_button"
             >
             Reset Chords
-          </button>
-          <button
+          </span>
+          <span
             onClick={() => this.resetAll()}
-            className="seventh_button"
+            className="reset_button"
             >
             Reset Everything
-          </button>
+          </span>
           <button
             onClick={(e) => this.handleSevenths(e)}
             className="seventh_button"
@@ -644,7 +768,7 @@ class App extends React.Component {
             </button>
             : null
           }
-          {this.state.chordOneSelected && this.state.chordTwoSelected ?
+          {this.state.sharedNotes ?
             <span className="sharedLight">Shared Notes</span> : null
           }
         </div>

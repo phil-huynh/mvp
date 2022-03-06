@@ -47,7 +47,7 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
     chordKey = selectedChord.notesToDegrees
   }
 
-  if (view === 'Mirror' || view === 'Traditional') {
+  if (view === 'Mirror View' || view === 'Traditional View') {
     currentString = allStrings[string]
     name = 'string'
     openClass = 'open'
@@ -55,7 +55,7 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
     noteClass = 'note'
   }
 
-  if (view === 'Mirror-left' || view === 'Traditional-left') {
+  if (view === 'Lefty Mirror View' || view === 'Lefty Traditional View') {
     currentString = stringsLeft[string]
     name = 'string-left'
     openClass = 'open-left'
@@ -64,7 +64,6 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
   }
 
   if (currentString) {
-    console.log('string', currentString)
     for(var i = 0; i < currentString.length; i++) {
       var containsNote = false;
       for(var j = 0; j < currentString[i].length; j++) {
@@ -79,7 +78,7 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
     }
   }
 
-  (view ==='Mirror-left' || view ==='Traditional-left') ? open = notes.length - 1 : open = 0;
+  (view ==='Lefty Mirror View' || view ==='Lefty Traditional View') ? open = notes.length - 1 : open = 0;
 
   return(
       <div className={`${name}`}>
@@ -145,226 +144,65 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
                                 <span className={`${openClass}`}>
                                 </span>:
                                 scale.includes(note) && chord.includes(note) && chord2.includes(note) && labelType === 'Chord Degrees' ?
-                                  <span className={`${fretClass}`}>______________________________________________________
+                                  <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
                                     <span className={`${noteClass} sharedNote`}>
                                       {altLabelContainer[chordKey[note]]}
-                                    </span>______________________________________________________
+                                    </span>_________________________________________________________________________________________________________________
                                   </span>:
                                   scale.includes(note) && chord.includes(note) && chord2.includes(note) ?
-                                    <span className={`${fretClass}`}>______________________________________________________
+                                    <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
                                       <span className={`${noteClass} sharedNote`}>
                                         {labelContainer[keyKey[note]]}
-                                      </span>______________________________________________________
+                                      </span>_________________________________________________________________________________________________________________
                                     </span>:
                                     scale.includes(note) && chord.includes(note) && labelType === 'Chord Degrees' && (chordFocus === 'Focus 1' || !chordTwoSelected ) ?
-                                      <span className={`${fretClass}`}>______________________________________________________
+                                      <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
                                         <span className={`${noteClass} selectedNote`}>
                                           {altLabelContainer[chordKey[note]]}
-                                        </span>______________________________________________________
+                                        </span>_________________________________________________________________________________________________________________
                                       </span>:
                                     scale.includes(note) && chord.includes(note) && labelType === 'Chord Degrees' && chordFocus === 'Focus 2'  ?
-                                      <span className={`${fretClass}`}>______________________________________________________
+                                      <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
                                         <span className={`${noteClass} selectedNote unfocus`}>
                                           {labelContainer[keyKey[note]]}
-                                        </span>______________________________________________________
+                                        </span>_________________________________________________________________________________________________________________
                                       </span>:
                                       scale.includes(note) && chord.includes(note) ?
-                                        <span className={`${fretClass}`}>______________________________________________________
+                                        <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
                                           <span className={`${noteClass} selectedNote`}>
                                             {labelContainer[keyKey[note]]}
-                                          </span>______________________________________________________
+                                          </span>_________________________________________________________________________________________________________________
                                         </span>:
                                         scale.includes(note) && chord2.includes(note) && labelType === 'Chord Degrees' && chordFocus === 'Focus 2' ?
-                                          <span className={`${fretClass}`}>______________________________________________________
+                                          <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
                                             <span className={`${noteClass} selectedNote2`}>
                                               {altLabelContainer[chordKey[note]]}
-                                            </span>______________________________________________________
+                                            </span>_________________________________________________________________________________________________________________
                                           </span>:
                                           scale.includes(note) && chord2.includes(note) && labelType === 'Chord Degrees' && chordFocus === 'Focus 1' ?
-                                            <span className={`${fretClass}`}>______________________________________________________
+                                            <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
                                               <span className={`${noteClass} selectedNote2 unfocus`}>
                                                 {labelContainer[keyKey[note]]}
-                                              </span>______________________________________________________
+                                              </span>_________________________________________________________________________________________________________________
                                             </span>:
                                             scale.includes(note) && chord2.includes(note) ?
-                                              <span className={`${fretClass}`}>______________________________________________________
+                                              <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
                                                 <span className={`${noteClass} selectedNote2`}>
                                                   {labelContainer[keyKey[note]]}
-                                                </span>______________________________________________________
+                                                </span>_________________________________________________________________________________________________________________
                                               </span>:
                                               scale.includes(note) && !(chordOneSelected && chordTwoSelected) && !hideScale ?
-                                                <span className={`${fretClass}`}>______________________________________________________
+                                                <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
                                                   <span className={`${noteClass}`}>
                                                     {labelContainer[keyKey[note]]}
-                                                  </span>______________________________________________________
+                                                  </span>_________________________________________________________________________________________________________________
                                                 </span>:
-                                                <span className={`${fretClass}`}>________________________________________________________________________________________________________________________________________________________________</span>
+                                                <span className={`${fretClass}`}>___________________________________________________________________________________________________________________________________________________________________________________________________________________________-</span>
 
-          )): null}
+        )): null}
       </div>
   )
 }
 
 export default String;
 
-// return(
-//   < className={`${name}`}>
-//     {notes ? notes.map((note, i) => (
-//       scale.includes(note[0]) && chord.includes(note[0]) && chord2.includes(note[0]) && (i === open || i === 0)  ?
-//         <span className={`${openClass}`}>
-//           <span className={`${openNoteClass} sharedNote`}>
-//             {note[0]}
-//           </span>
-//         </span>:
-//         scale.includes(note[0]) && chord.includes(note[0]) && (i === open || i === 0)  ?
-//           <span className={`${openClass}`}>
-//             <span className={`${openNoteClass} selectedNote`}>
-//               {note[0]}
-//             </span>
-//           </span>:
-//           scale.includes(note[0]) && chord2.includes(note[0]) && (i === open || i === 0)  ?
-//             <span className={`${openClass}`}>
-//               <span className={`${openNoteClass} selectedNote2`}>
-//                 {note[0]}
-//               </span>
-//             </span>:
-//             scale.includes(note[0]) && i === open && !(chordOneSelected && chordTwoSelected) && !hideScale ?
-//               <span className={`${openClass}`}>
-//                 <span className={`${openNoteClass}`}>
-//                   {note[0]}
-//                 </span>
-//               </span>:
-//               scale.includes(note[0]) && i === open && (hideScale || (chordOneSelected && chordTwoSelected)) ?
-//                 <span className={`${openClass}`}>
-//                 </span>:
-//                 scale.includes(note[1]) && chord.includes(note[1]) && chord2.includes(note[1]) && (i === open || i === 0) ?
-//                   <span className={`${openClass}`}>
-//                     <span className={`${openNoteClass} sharedNote`}>
-//                       {note[1]}
-//                     </span>
-//                   </span>:
-//                   scale.includes(note[1]) && chord.includes(note[1]) && (i === open || i === 0) ?
-//                     <span className={`${openClass}`}>
-//                       <span className={`${openNoteClass} selectedNote`}>
-//                         {note[1]}
-//                       </span>
-//                     </span>:
-//                     scale.includes(note[1]) && chord2.includes(note[1]) && (i === open || i === 0) ?
-//                       <span className={`${openClass}`}>
-//                         <span className={`${openNoteClass} selectedNote2`}>
-//                           {note[1]}
-//                         </span>
-//                       </span>:
-//                       scale.includes(note[1]) && i === open && !(chordOneSelected && chordTwoSelected) && !hideScale ?
-//                         <span className={`${openClass}`}>
-//                           <span className={`${openNoteClass}`}>
-//                             {note[1]}
-//                           </span>
-//                         </span>:
-//                         scale.includes(note[1]) && i === open && (hideScale || (chordOneSelected && chordTwoSelected)) ?
-//                           <span className={`${openClass}`}>
-//                           </span>:
-//                           scale.includes(note[2]) && chord.includes(note[2]) && chord2.includes(note[2]) && (i === open || i === 0) ?
-//                             <span className={`${openClass}`}>
-//                               <span className={`${openNoteClass} sharedNote`}>
-//                                 {note[2]}
-//                               </span>
-//                             </span>:
-//                             scale.includes(note[2]) && chord.includes(note[2]) && (i === open || i === 0) ?
-//                               <span className={`${openClass}`}>
-//                                 <span className={`${openNoteClass} selectedNote`}>
-//                                   {note[2]}
-//                                 </span>
-//                               </span>:
-//                               scale.includes(note[2]) && chord2.includes(note[2]) && (i === open || i === 0) ?
-//                                 <span className={`${openClass}`}>
-//                                   <span className={`${openNoteClass} selectedNote2`}>
-//                                     {note[2]}
-//                                   </span>
-//                                 </span>:
-//                                 scale.includes(note[2]) && (i === open || i === 0) && !(chordOneSelected && chordTwoSelected) && !hideScale ?
-//                                   <span className={`${openClass}`}>
-//                                     <span className={`${openNoteClass}`}>
-//                                       {note[2]}
-//                                     </span>
-//                                   </span>:
-//                                   scale.includes(note[2]) && i === open && (hideScale || (chordOneSelected && chordTwoSelected)) ?
-//                                     <span className={`${openClass}`}>
-//                                     </span>:
-//                                     !scale.includes(note[0]) && !scale.includes(note[1]) && !scale.includes(note[2]) && (i === open || i === 0) ?
-//                                       <span className={`${openClass}`}>
-//                                       </span>:
-//                                       scale.includes(note[0]) && chord.includes(note[0]) && chord2.includes(note[0]) ?
-//                                         <span className={`${fretClass}`}>______________________________
-//                                           <span className={`${noteClass} sharedNote`}>
-//                                             {note[0]}
-//                                           </span>______________________________
-//                                         </span>:
-//                                         scale.includes(note[0]) && chord.includes(note[0]) ?
-//                                           <span className={`${fretClass}`}>______________________________
-//                                             <span className={`${noteClass} selectedNote`}>
-//                                               {note[0]}
-//                                             </span>______________________________
-//                                           </span>:
-//                                           scale.includes(note[0]) && chord2.includes(note[0]) ?
-//                                             <span className={`${fretClass}`}>______________________________
-//                                               <span className={`${noteClass} selectedNote2`}>
-//                                                 {note[0]}
-//                                               </span>______________________________
-//                                             </span>:
-//                                             scale.includes(note[0]) && !(chordOneSelected && chordTwoSelected) && !hideScale ?
-//                                               <span className={`${fretClass}`}>______________________________
-//                                                 <span className={`${noteClass}`}>
-//                                                   {note[0]}
-//                                                 </span>______________________________
-//                                               </span>:
-//                                                 scale.includes(note[1]) && chord.includes(note[1]) && chord2.includes(note[1]) ?
-//                                                   <span className={`${fretClass}`}>______________________________
-//                                                     <span className={`${noteClass} sharedNote`}>
-//                                                       {note[1]}
-//                                                     </span>______________________________
-//                                                   </span>:
-//                                                   scale.includes(note[1]) && chord.includes(note[1]) ?
-//                                                     <span className={`${fretClass}`}>______________________________
-//                                                       <span className={`${noteClass} selectedNote`}>
-//                                                         {note[1]}
-//                                                       </span>______________________________
-//                                                     </span>:
-//                                                   scale.includes(note[1]) && chord2.includes(note[1]) ?
-//                                                     <span className={`${fretClass}`}>______________________________
-//                                                       <span className={`${noteClass} selectedNote2`}>
-//                                                         {note[1]}
-//                                                       </span>______________________________
-//                                                     </span>:
-//                                                     scale.includes(note[1]) && !(chordOneSelected && chordTwoSelected) && !hideScale ?
-//                                                       <span className={`${fretClass}`}>______________________________
-//                                                         <span className={`${noteClass}`}>
-//                                                           {note[1]}
-//                                                         </span>______________________________
-//                                                       </span>:
-//                                                       scale.includes(note[2]) && chord.includes(note[2]) && chord2.includes(note[2]) ?
-//                                                         <span className={`${fretClass}`}>______________________________
-//                                                           <span className={`${noteClass} sharedNote`}>
-//                                                             {note[2]}
-//                                                           </span>______________________________
-//                                                         </span>:
-//                                                         scale.includes(note[2]) && chord.includes(note[2]) ?
-//                                                           <span className={`${fretClass}`}>______________________________
-//                                                             <span className={`${noteClass} selectedNote`}>
-//                                                               {note[2]}
-//                                                             </span>______________________________
-//                                                           </span>:
-//                                                           scale.includes(note[2]) && chord2.includes(note[2]) ?
-//                                                             <span className={`${fretClass}`}>______________________________
-//                                                               <span className={`${noteClass} selectedNote2`}>
-//                                                                 {note[2]}
-//                                                               </span>______________________________
-//                                                             </span>:
-//                                                             scale.includes(note[2]) && !(chordOneSelected && chordTwoSelected) && !hideScale ?
-//                                                               <span className={`${fretClass}`}>______________________________
-//                                                                 <span className={`${noteClass}`}>
-//                                                                   {note[2]}
-//                                                                 </span>______________________________
-//                                                               </span>:
-//                                                               <span className={`${fretClass}`}>________________________________________________________________________________________</span>
-//       )): null}

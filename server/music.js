@@ -770,7 +770,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     addVoicing(['one', 'three', 'five', 'flatSeven', 'flatTwo', 'flatSix'], 'dominantFlat9Flat13', `7(${flat}9, ${flat}13)`, null, null, `7(${flat}9, ${flat}13)`);
 
     addVoicing(['one', 'two', 'three', 'five', 'six'], 'majorPentatonic', '  Major Pentatonic', null, 'Major Pentatonic', 'maj Pentatonic');
-    addVoicing(['one', 'flatThree', 'four', 'five', 'flatSeven'], 'minorPentatonic', '  Minor Pentatonic', null, 'Minor Pentatonic', 'min Pentatonic');
+    addVoicing(['one', 'flatThree', 'four', 'five', 'flatSeven'], 'minorPentatonic', '  Minor Pentatonic', null, 'Minor Pentatonic', 'm Pentatonic');
     addVoicing(['one', 'two', 'three', 'five', 'flatSeven'], 'dominantPentatonic', '  Dominant Pentatonic', null, 'Dominant Pentatonic', '');
     addVoicing(['one', 'two', 'three', 'sharpFour', 'flatSeven'], 'lydianDomninantPentatonic', `  Dominant ${sharp}4 Pentatonic`, null, 'Lydian Dominant Pentatonic', 'Lydian Dominant Pentatonic');
     addVoicing(['one', 'two', 'three', 'sharpFour', 'six'], 'majSharp4Pentatonic', `  Major ${sharp}4 Pentatonic`, null, `Major ${sharp}4 Pentatonic`, `maj${sharp}4 Pentatonic`);
