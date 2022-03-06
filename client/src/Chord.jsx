@@ -361,6 +361,8 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     cardClass = `${cardClass} selectedChord2`
   }
 
+  console.log(tones)
+
   return (
     <React.Fragment>
       {chord ?
@@ -385,7 +387,11 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
           </Card.Header>
         </div>
         <Card.Body className='cardBody'>
-          <Card.Text>{tones}</Card.Text>
+          <Card.Text>{tones.map ((tone) => (
+            <span>&nbsp;{tone}&nbsp;</span>
+          ))}
+
+          </Card.Text>
         </Card.Body>
         <div className='footerButton'>
           <Card.Footer
@@ -397,7 +403,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
           <Card.Footer></Card.Footer>
           {wasAltered ?
             <Card.Footer
-              className='alterChordButton'
+              className='resetCardButton'
               onClick={()=>{resetCard(whichChordAmI)}}
             >
               Reset Me

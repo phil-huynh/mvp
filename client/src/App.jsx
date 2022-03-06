@@ -10,6 +10,7 @@ import FocusMenu from './FocusMenu.jsx'
 import Dropdown from './Dropdown.jsx'
 import FretGuide from './FretGuide.jsx'
 import AlterChordOpt from './AlterChordOpt.jsx'
+import HideScaleMenu from './HideScaleMenu.jsx'
 import axios from 'axios';
 
 const sharp = '\u266F';
@@ -52,7 +53,7 @@ class App extends React.Component {
       sevenths2: false,
       moreSeventhsButton: 'Show 7th Chords',
       view: 'Traditional View',
-      hideScale: false,
+      hideScale: 'Show Scale',
       hideScaleButton: 'hide scale',
       solfege: {},
       scaleDegrees: {},
@@ -87,7 +88,13 @@ class App extends React.Component {
       sharedNotes: false,
       noteNameToggle: 'toggle_on',
       scaleDegreeToggle: 'toggle_off',
-      solfegeToggle: 'toggle_off'
+      solfegeToggle: 'toggle_off',
+      scaleVisibleToggle: 'toggle_on',
+      scaleHiddenToggle: 'toggle_off',
+      scaleUnfocusedToggle: 'toggle_off',
+      scaleVisibleLabel: 'Scale Visible',
+      scaleHiddenLabel: 'Hide Scale',
+      scaleUnfocusedLabel: 'Unfocus Scale',
     }
 
     this.getChoices = this.getChoices.bind(this)
@@ -276,16 +283,38 @@ class App extends React.Component {
   }
 
   handleHide(e) {
-    if(this.state.hideScale) {
+    var hideScale = e.target.title
+    if(hideScale === 'Hide Scale') {
       this.setState({
-        hideScale: false,
-        hideScaleButton: 'hide scale'
+        hideScale: hideScale,
+        scaleHiddenToggle: 'toggle_on',
+        scaleUnfocusedToggle: 'toggle_off',
+        scaleVisibleToggle: 'toggle_off',
+        scaleVisibleLabel: 'Show Scale',
+        scaleHiddenLabel: 'Scale Hidden',
+        scaleUnfocusedLabel: 'Unfocus Scale',
       })
     }
-    if(!this.state.hideScale) {
+    if(hideScale === 'Show Scale') {
       this.setState({
-        hideScale: true,
-        hideScaleButton: 'show scale'
+        hideScale: hideScale,
+        scaleHiddenToggle: 'toggle_off',
+        scaleUnfocusedToggle: 'toggle_off',
+        scaleVisibleToggle: 'toggle_on',
+        scaleVisibleLabel: 'Scale Visible',
+        scaleHiddenLabel: 'Hide Scale',
+        scaleUnfocusedLabel: 'Unfocus Scale',
+      })
+    }
+    if(hideScale === 'Unfocus Scale') {
+      this.setState({
+        hideScale: hideScale,
+        scaleHiddenToggle: 'toggle_off',
+        scaleUnfocusedToggle: 'toggle_on',
+        scaleVisibleToggle: 'toggle_off',
+        scaleVisibleLabel: 'Show Scale',
+        scaleHiddenLabel: 'Hide Scale',
+        scaleUnfocusedLabel: 'Scale Unfocused',
       })
     }
   }
@@ -490,6 +519,7 @@ class App extends React.Component {
       currentChordTones2: [],
       chordOneSelected: false,
       chordTwoSelected: false,
+      sharedNotes: false
     })
   }
 
@@ -560,7 +590,8 @@ class App extends React.Component {
         selectedChord2: {},
         currentChordTones2: [],
         chordTwoSelected: false,
-        chordFocus: 'Neutral'
+        chordFocus: 'Neutral',
+        sharedNotes: false
       })
     } else {
       if (shareNotes) {
@@ -635,11 +666,17 @@ class App extends React.Component {
             handleStringChoice={this.handleStringChoice}
             name={'stringsMenu'}
           />
-          <button
-            onClick={(e) => this.handleHide(e)}
-            className="seventh_button">
-            {this.state.hideScaleButton}
-          </button>
+          <HideScaleMenu
+            name={'hideScaleMenu'}
+            handleHide={this.handleHide}
+            scaleHiddenToggle={this.state.scaleHiddenToggle}
+            scaleUnfocusedToggle={this.state.scaleUnfocusedToggle}
+            scaleVisibleToggle={this.state.scaleVisibleToggle}
+            scaleHiddenLabel={this.state.scaleHiddenLabel}
+            scaleUnfocusedLabel={this.state.scaleUnfocusedLabel}
+            scaleVisibleLabel={this.state.scaleVisibleLabel}
+          />
+
         </div>
         <div className="middle">
           <FretGuide
@@ -739,7 +776,7 @@ class App extends React.Component {
             onClick={() => this.resetChords()}
             className="reset_button"
             >
-            Reset Chords
+            Reset Voicings
           </span>
           <span
             onClick={() => this.resetAll()}
