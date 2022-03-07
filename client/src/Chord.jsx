@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, Button } from 'react-bootstrap'
 
 
-var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2, resetCard}) => {
+var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, chordTwoSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleLock, displayChordDegrees, handleChordFocus, chordFocus}) => {
 
   const sharp = '\u266F';
   const flat = '\u266D';
@@ -21,6 +21,10 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
   var triadList = [' Triad', '+ Triad', 'm Triad', `${dim} Triad`, `maj ${flat}5 Triad`]
   var seventhsList = ['maj7', '7', '+(maj7)', `7(${sharp}5)`, `7(${flat}5)`, `${dim}7`,`maj7(${flat}5)`, `m7(${flat}5)`, 'm(maj7)', 'm7']
   var shellList = ['maj7 (shell)', '7 (shell)', 'm7 (shell)', 'm(maj7) (shell)']
+
+  var selected = chord === currentChord
+  var selected2 = chord === currentChord2
+  var both = (chordOneSelected && chordTwoSelected)
 
   if (chord) {
     sevenths && !wasAltered ?
@@ -94,8 +98,6 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     tones=chord.options.maj7Sus4.notes
   }
 
-
-
   if (type===`maj7(9)` && chord.options.maj9) {
     name=chord.options.maj9.name
     label=chord.options.maj9.label
@@ -137,9 +139,6 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     label=chord.options.maj13.label
     tones=chord.options.maj13.notes
   }
-
-
-
 
   if (type===`m7(9)` && chord.options.min9) {
     name=chord.options.min9.name
@@ -394,6 +393,44 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
           </Card.Text>
         </Card.Body>
         <div className='footerButton'>
+            {selected && displayChordDegrees && both && chordFocus === 'Neutral' ?
+              <Card.Footer>
+                <span onClick={()=>handleChordFocus('Focus 1')}>Focus</span>
+              </Card.Footer>
+              :selected && displayChordDegrees && both && chordFocus === "Focus 1" ?
+              <Card.Footer>
+                <span onClick={()=>handleChordFocus('Neutral')}>Focused</span>
+              </Card.Footer>
+              :selected && displayChordDegrees && both && chordFocus === "Focus 2" ?
+              <Card.Footer>
+                <span onClick={()=>handleChordFocus('Focus 1')}>Unfocused</span>
+              </Card.Footer>
+              :selected2 && displayChordDegrees && both && chordFocus === 'Neutral' ?
+              <Card.Footer>
+                <span onClick={()=>handleChordFocus('Focus 2')}>Focus</span>
+              </Card.Footer>
+              :selected2 && displayChordDegrees && both && chordFocus === "Focus 1" ?
+              <Card.Footer>
+                <span onClick={()=>handleChordFocus('Focus 2')}>Unfocused</span>
+              </Card.Footer>
+              :selected2 && displayChordDegrees && both && chordFocus === "Focus 2" ?
+              <Card.Footer>
+                <span onClick={()=>handleChordFocus('Neutral')}>Focused</span>
+              </Card.Footer>
+              :null
+          }
+          <Card.Footer></Card.Footer>
+          {selected && !compareChords ?
+            <Card.Footer className="lock">
+              <span onClick={()=>handleLock()}>Lock</span>
+            </Card.Footer>
+            :selected && compareChords ?
+            <Card.Footer className="lock">
+              <span onClick={()=>handleLock()}>Locked</span>
+            </Card.Footer>
+            : null
+          }
+          <Card.Footer></Card.Footer>
           <Card.Footer
             className='alterChordButton'
             onClick={()=>{handleAlterChordWindow(whichChordAmI, list, root)}}

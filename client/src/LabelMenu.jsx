@@ -6,7 +6,6 @@ var LabelMenu = ({name, handleNeckNotes, noteNameToggle, scaleDegreeToggle, solf
 
   return (
     <span className={name}>
-
       <span className={`labelToggle ${noteNameToggle}`} onClick={(e) => {handleNeckNotes(e)}} title='Note Names'>Note Names</span>
       <span className={`labelToggle ${scaleDegreeToggle}`} onClick={(e) => {handleNeckNotes(e)}} title='Scale Degrees'>Scale Degrees</span>
       <span className={`labelToggle ${solfegeToggle}`} onClick={(e) => {handleNeckNotes(e)}} title='Solfege'>Solfege</span>

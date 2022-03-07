@@ -43,7 +43,7 @@ class App extends React.Component {
       chordTwoSelected: false,
       selectedChord2:{},
       currentChordTones2: [],
-      seventhsButton: 'Show 7th Chords',
+      defaultType: 'Triads',
       second: false,
       secondButton: 'Compare a scale',
       scaleType2: 'major',
@@ -80,6 +80,7 @@ class App extends React.Component {
       showViewMenu: false,
       showTonicMenu: false,
       showScaleMenu: false,
+      showStringsMenu: false,
       currentCard: '',
       currentList: '',
       chordOptRoot: '',
@@ -95,6 +96,10 @@ class App extends React.Component {
       scaleVisibleLabel: 'Scale Visible',
       scaleHiddenLabel: 'Hide Scale',
       scaleUnfocusedLabel: 'Unfocus Scale',
+      instrument: 'Guitar',
+      tuning: ' E B G D A E ',
+      displayChordDegrees: false,
+      chordDegButtonClass: 'chordDegButton'
     }
 
     this.getChoices = this.getChoices.bind(this)
@@ -107,8 +112,10 @@ class App extends React.Component {
     this.handleViewMenuWindow = this.handleViewMenuWindow.bind(this);
     this.handleTonicMenuWindow = this.handleTonicMenuWindow.bind(this);
     this.handleScaleMenuWindow = this.handleScaleMenuWindow.bind(this);
+    this.handleStringsMenuWindow = this.handleStringsMenuWindow.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChordFocus = this.handleChordFocus.bind(this);
+    this.handleChordDegrees = this.handleChordDegrees.bind(this);
     this.handleHide = this.handleHide.bind(this);
     this.handleMoreSevenths = this.handleMoreSevenths.bind(this);
     this.handleNeckNotes = this.handleNeckNotes.bind(this);
@@ -269,17 +276,45 @@ class App extends React.Component {
     }
   }
 
+  handleStringsMenuWindow () {
+    if(this.state.showStringsMenu===false) {
+      this.setState({
+        showStringsMenu: true,
+      })
+    }
+    if(this.state.showStringsMenu===true) {
+      this.setState({
+        showStringsMenu: false,
+      })
+    }
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
-  handleChordFocus (e) {
-    var focus = e.target.value
+  handleChordFocus (focus) {
     this.setState({
       chordFocus: focus
     })
+  }
+
+  handleChordDegrees() {
+    if (this.state.displayChordDegrees) {
+      this.setState({
+        displayChordDegrees: false,
+        chordDegButtonClass: 'chordDegButton',
+        chordFocus: 'Neutral'
+      })
+    }
+    if (!this.state.displayChordDegrees) {
+      this.setState({
+        displayChordDegrees: true,
+        chordDegButtonClass: 'chordDegButton toggle_on'
+      })
+    }
   }
 
   handleHide(e) {
@@ -395,11 +430,11 @@ class App extends React.Component {
     this.state.sevenths === true ?
     this.setState({
       sevenths: false,
-      seventhsButton: 'Show 7th Chords'
+      defaultType: 'Triads'
     }) :
     this.setState({
       sevenths: true,
-      seventhsButton: 'Show Triads'
+      defaultType: 'Seventh Chords'
     })
   }
 
@@ -410,7 +445,8 @@ class App extends React.Component {
         singleOrCompareButton: 'Single Chord',
         selectedChord2: {},
         currentChordTones2: [],
-        chordTwoSelected: false
+        chordTwoSelected: false,
+        sharedNotes: false
       })
     }
     if(!this.state.compare) {
@@ -423,14 +459,19 @@ class App extends React.Component {
 
   handleStringChoice(e) {
     var mirror=[];
-    var strings = e.target.value
-    var stringArray = strings.split('.')
-    stringArray.forEach((string) => {
+    var data = e.target.title
+    var dataArray = data.split('.')
+    var instrument = dataArray[0]
+    var tuning = dataArray[1]
+    var strings = dataArray.slice(2)
+    strings.forEach((string) => {
       mirror.unshift(string)
     })
     this.setState({
-      currentStrings: stringArray,
+      currentStrings: strings,
       currentStringsMirror: mirror,
+      instrument: instrument,
+      tuning: tuning
     })
   }
 
@@ -507,6 +548,7 @@ class App extends React.Component {
       ch4Alt: false,
       ch5Alt: false,
       ch6Alt: false,
+
     })
   }
 
@@ -519,7 +561,9 @@ class App extends React.Component {
       currentChordTones2: [],
       chordOneSelected: false,
       chordTwoSelected: false,
-      sharedNotes: false
+      sharedNotes: false,
+      compare: false,
+      displayChordDegrees: false
     })
   }
 
@@ -529,6 +573,9 @@ class App extends React.Component {
         selectedChord: {},
         currentChordTones: [],
         chordOneSelected: false,
+        compare: false,
+        displayChordDegrees: false,
+        chordDegButtonClass: 'chordDegButton'
       })
     }
     if(!this.state.chordOneSelected || !this.state.compare) {
@@ -543,6 +590,8 @@ class App extends React.Component {
         selectedChord: {},
         currentChordTones: [],
         chordOneSelected: false,
+        displayChordDegrees: false,
+        chordDegButtonClass: 'chordDegButton'
       })
     }
   }
@@ -583,7 +632,10 @@ class App extends React.Component {
         chordOneSelected: false,
         chordTwoSelected: false,
         chordFocus: 'Neutral',
-        sharedNotes: false
+        sharedNotes: false,
+        compare: false,
+        displayChordDegrees: false,
+        chordDegButtonClass: 'chordDegButton'
       })
     } else if (chord === this.state.selectedChord2) {
       this.setState({
@@ -662,8 +714,16 @@ class App extends React.Component {
           >
             {this.state.view}
           </span>
+          <span
+            className="tuningLabel"
+            onClick={()=>this.handleStringsMenuWindow()}
+          >
+            {`${this.state.instrument} : ${this.state.tuning}`}
+          </span>
           <StringsMenu
             handleStringChoice={this.handleStringChoice}
+            handleStringsMenuWindow={this.handleStringsMenuWindow}
+            showStringsMenu={this.state.showStringsMenu}
             name={'stringsMenu'}
           />
           <HideScaleMenu
@@ -705,6 +765,7 @@ class App extends React.Component {
                 keyCenter={this.state.keyCenter}
                 labelType={this.state.labelType}
                 chordFocus={this.state.chordFocus}
+                displayChordDegrees={this.state.displayChordDegrees}
               />
             </div>
           </div>
@@ -767,11 +828,6 @@ class App extends React.Component {
             />
             : null
           }
-          <button
-            onClick={(e) => this.handleSingleOrCompare(e)}
-            className="seventh_button">
-            {this.state.singleOrCompareButton}
-          </button>
           <span
             onClick={() => this.resetChords()}
             className="reset_button"
@@ -784,12 +840,20 @@ class App extends React.Component {
             >
             Reset Everything
           </span>
-          <button
+          <span
             onClick={(e) => this.handleSevenths(e)}
-            className="seventh_button"
-            id="sevenths_button">
-            {this.state.seventhsButton}
-          </button>
+            className="defaultChordLabel"
+          >
+            {this.state.defaultType}
+          </span>
+          {this.state.chordOneSelected ?
+            <span
+              className={this.state.chordDegButtonClass}
+              onClick={()=>this.handleChordDegrees()}
+            >
+              Chord Degrees
+            </span>: null
+          }
           <button
             onClick={(e) => this.handleSecondScale(e)}
             className="seventh_button"
@@ -826,13 +890,18 @@ class App extends React.Component {
             currentChord={this.state.selectedChord}
             currentChord2={this.state.selectedChord2}
             chordOneSelected={this.state.chordOneSelected}
+            chordTwoSelected={this.state.chordTwoSelected}
             currentChordTones={this.state.currentChordTones}
             currentChordTones2={this.state.currentChordTones2}
             compareChords={this.state.compare}
+            handleLock={this.handleSingleOrCompare}
             handleAlterChordWindow={this.handleAlterChordWindow}
             resetCard={this.resetCard}
             setTones={this.setTones}
             setTones2={this.setTones2}
+            displayChordDegrees={this.state.displayChordDegrees}
+            handleChordFocus={this.handleChordFocus}
+            chordFocus={this.state.chordFocus}
             ch0={this.state.ch0}
             ch1={this.state.ch1}
             ch2={this.state.ch2}
