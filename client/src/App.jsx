@@ -6,7 +6,6 @@ import ScalesMenu from './ScalesMenu.jsx'
 import ScaleChords from './ScaleChords.jsx'
 import ViewMenu from './ViewMenu.jsx'
 import LabelMenu from './LabelMenu.jsx'
-import FocusMenu from './FocusMenu.jsx'
 import Dropdown from './Dropdown.jsx'
 import FretGuide from './FretGuide.jsx'
 import AlterChordOpt from './AlterChordOpt.jsx'
@@ -97,7 +96,7 @@ class App extends React.Component {
       scaleHiddenLabel: 'Hide Scale',
       scaleUnfocusedLabel: 'Unfocus Scale',
       instrument: 'Guitar',
-      tuning: ' E B G D A E ',
+      tuning: ' E A D G B E ',
       displayChordDegrees: false,
       chordDegButtonClass: 'chordDegButton'
     }

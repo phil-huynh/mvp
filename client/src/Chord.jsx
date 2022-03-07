@@ -28,8 +28,8 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
 
   if (chord) {
     sevenths && !wasAltered ?
-    (name=chord.options.seventhChord.name, label=chord.options.seventhChord.label, cardClass='text-center seventhChordCard', tones=chord.options.seventhChord.notes) :
-    (name=chord.options.triad.name, label=chord.options.triad.label, cardClass='text-center chordCard', tones=chord.options.triad.notes)
+    (name=chord.options.seventhChord.name, label=chord.options.seventhChord.label, tones=chord.options.seventhChord.notes) :
+    (name=chord.options.triad.name, label=chord.options.triad.label, tones=chord.options.triad.notes)
   }
 
   if (type==='  Octaves' && chord.options.octaves) {

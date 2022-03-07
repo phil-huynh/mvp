@@ -8,7 +8,7 @@ var ViewMenu = ({showViewMenu, handleViewMenuWindow, handleView}) => {
 
   return (
     <Modal
-      className='viewMenuWindow'
+      className='modalMenu'
       show={showViewMenu}
       onHide={() => {handleViewMenuWindow()}}
     >
@@ -21,7 +21,7 @@ var ViewMenu = ({showViewMenu, handleViewMenuWindow, handleView}) => {
       </Modal.Header>
       {views.map((view) => (
         <div
-          className='viewChoice'
+          className='modalMenuChoice'
           title = {view}
           onClick={(e)=>{handleView(e); handleViewMenuWindow()}}
         >

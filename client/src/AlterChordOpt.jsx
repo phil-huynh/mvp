@@ -13,7 +13,7 @@ var AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterChord, list,
 
   return (
     <Modal
-      className='alterChord'
+      className='modalMenu'
       show={showAlter}
       onHide={() => {handleAlterChordWindow()}}
     >
@@ -26,7 +26,7 @@ var AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterChord, list,
       </Modal.Header>
       {list ? list.map((choice) => (
         <div
-          className='chordChoice'
+          className='modalMenuChoice'
           title={choice}
           onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}
         >
