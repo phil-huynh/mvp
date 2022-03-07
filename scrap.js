@@ -613,17 +613,6 @@ var makeChordsFor7NoteScale = (scale, tonic, name) => {
     */
 
 
-
-
-
-
-
-
-
-
-
-
-
     chords[key].triadName = chordName
     chords[key].triadLabel = chordLabel
     chords[key].chordQuality = chordQ
@@ -672,3 +661,25 @@ var solfege = {
     seven: '7'
   }
 
+
+
+
+// *********** COMPARE SCALES AND SEVENTHS2 BUTTONS  *********************
+
+//   <button
+//   onClick={(e) => this.handleSecondScale(e)}
+//   className="seventh_button"
+//   id="second_button">
+//   {this.state.secondButton}
+// </button>
+// {this.state.second === true ?
+//   <button
+//     onClick={(e) => this.handleMoreSevenths(e)}
+//     className="seventh_button"
+//     id="sevenths_button2">
+//     {this.state.moreSeventhsButton}
+//   </button>
+//   : null
+// }
+
+//************************************************************************ */

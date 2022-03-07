@@ -853,21 +853,6 @@ class App extends React.Component {
               Chord Degrees
             </span>: null
           }
-          <button
-            onClick={(e) => this.handleSecondScale(e)}
-            className="seventh_button"
-            id="second_button">
-            {this.state.secondButton}
-          </button>
-          {this.state.second === true ?
-            <button
-              onClick={(e) => this.handleMoreSevenths(e)}
-              className="seventh_button"
-              id="sevenths_button2">
-              {this.state.moreSeventhsButton}
-            </button>
-            : null
-          }
           {this.state.sharedNotes ?
             <span className="sharedLight">Shared Notes</span> : null
           }
