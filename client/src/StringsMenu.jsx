@@ -44,19 +44,19 @@ var ViewMenu = ({showStringsMenu, handleStringsMenuWindow, handleStringChoice, n
         </Modal.Title>
       </Modal.Header>
       <div className={name}>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. E B G D A E .${stringE}.${stringB}.${stringG}.${stringD}.${stringA}.${stringE}`}>Guitar - Standard</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. E B G D A D .${stringE}.${stringB}.${stringG}.${stringD}.${stringA}.${stringD}`}>Guitar - Drop D</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. D B G D A D .${stringD}.${stringB}.${stringG}.${stringD}.${stringA}.${stringD}`}>Guitar - Double Drop D</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. D B G D G D .${stringD}.${stringB}.${stringG}.${stringD}.${stringG}.${stringD}`}>Guitar - Open G</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. E C G C A C  .${stringE}.${stringC}.${stringG}.${stringC}.${stringA}.${stringC}`}>Guitar - Open C6</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. D A F${sharp} D A D .${stringD}.${stringA}.${stringFsharp}.${stringD}.${stringA}.${stringD}`}>Guitar - Open D</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Ukelele. A E C G .${stringA}.${stringE}.${stringC}.${stringG}`}>Ukelele</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Mandolin. G D A E .${stringG}.${stringD}.${stringA}.${stringE}`}>Mandolin</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`4 String Bass. G D A E .${stringG}.${stringD}.${stringA}.${stringE}`}>4 String Bass</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`5 String Bass. G D A E B .${stringG}.${stringD}.${stringA}.${stringE}.${stringB}`}>5 String Bass</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Violin. E A D G .${stringE}.${stringA}.${stringD}.${stringG}`}>Violin</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Viola. A D G C .${stringA}.${stringD}.${stringG}.${stringC}`}>Viola</div>
-        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Cello. A D G C .${stringA}.${stringD}.${stringG}.${stringC}`}>Cello</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. E A D G B E .${stringE}.${stringB}.${stringG}.${stringD}.${stringA}.${stringE}`}>Guitar - Standard</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. E A D G B D .${stringE}.${stringB}.${stringG}.${stringD}.${stringA}.${stringD}`}>Guitar - Drop D</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. D A D G B D .${stringD}.${stringB}.${stringG}.${stringD}.${stringA}.${stringD}`}>Guitar - Double Drop D</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. D G D G B D .${stringD}.${stringB}.${stringG}.${stringD}.${stringG}.${stringD}`}>Guitar - Open G</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. C A C G C E .${stringE}.${stringC}.${stringG}.${stringC}.${stringA}.${stringC}`}>Guitar - Open C6</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Guitar. D A D F${sharp} A D .${stringD}.${stringA}.${stringFsharp}.${stringD}.${stringA}.${stringD}`}>Guitar - Open D</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Ukelele. G C E A .${stringA}.${stringE}.${stringC}.${stringG}`}>Ukelele</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Mandolin. E A D G .${stringG}.${stringD}.${stringA}.${stringE}`}>Mandolin</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`4 String Bass. E A G D .${stringG}.${stringD}.${stringA}.${stringE}`}>4 String Bass</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`5 String Bass. B E A D G .${stringG}.${stringD}.${stringA}.${stringE}.${stringB}`}>5 String Bass</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Violin. G D A E .${stringE}.${stringA}.${stringD}.${stringG}`}>Violin</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Viola. C G D A .${stringA}.${stringD}.${stringG}.${stringC}`}>Viola</div>
+        <div className="tuningChoice" onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}} title={`Cello. C G D A .${stringA}.${stringD}.${stringG}.${stringC}`}>Cello</div>
       </div>
     </Modal>
   )
