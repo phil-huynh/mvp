@@ -368,7 +368,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
       <Card
         className={cardClass}
         bg='secondary'
-        border='dark'
+        border='white'
         text='white'
         >
         <div
@@ -393,29 +393,29 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
           </Card.Text>
         </Card.Body>
         <div className='footerButton'>
-            {selected && displayChordDegrees && both && chordFocus === 'Neutral' ?
+            {selected && both && chordFocus === 'Neutral' ?
               <Card.Footer>
-                <span onClick={()=>handleChordFocus('Focus 1')}>Focus</span>
+                <span className="focusButton" onClick={()=>handleChordFocus('Focus 1')}>Focus</span>
               </Card.Footer>
-              :selected && displayChordDegrees && both && chordFocus === "Focus 1" ?
+              :selected && both && chordFocus === "Focus 1" ?
               <Card.Footer>
-                <span onClick={()=>handleChordFocus('Neutral')}>Focused</span>
+                <span className="focusButton toggle_on" onClick={()=>handleChordFocus('Neutral')}>Focused</span>
               </Card.Footer>
-              :selected && displayChordDegrees && both && chordFocus === "Focus 2" ?
+              :selected && both && chordFocus === "Focus 2" ?
               <Card.Footer>
-                <span onClick={()=>handleChordFocus('Focus 1')}>Unfocused</span>
+                <span className="focusButton" onClick={()=>handleChordFocus('Focus 1')}>Unfocused</span>
               </Card.Footer>
-              :selected2 && displayChordDegrees && both && chordFocus === 'Neutral' ?
+              :selected2 && both && chordFocus === 'Neutral' ?
               <Card.Footer>
-                <span onClick={()=>handleChordFocus('Focus 2')}>Focus</span>
+                <span className="focusButton" onClick={()=>handleChordFocus('Focus 2')}>Focus</span>
               </Card.Footer>
-              :selected2 && displayChordDegrees && both && chordFocus === "Focus 1" ?
+              :selected2 && both && chordFocus === "Focus 1" ?
               <Card.Footer>
-                <span onClick={()=>handleChordFocus('Focus 2')}>Unfocused</span>
+                <span className="focusButton" onClick={()=>handleChordFocus('Focus 2')}>Unfocused</span>
               </Card.Footer>
-              :selected2 && displayChordDegrees && both && chordFocus === "Focus 2" ?
+              :selected2 && both && chordFocus === "Focus 2" ?
               <Card.Footer>
-                <span onClick={()=>handleChordFocus('Neutral')}>Focused</span>
+                <span className="focusButton toggle_on" onClick={()=>handleChordFocus('Neutral')}>Focused</span>
               </Card.Footer>
               :null
           }
@@ -425,7 +425,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
               <span onClick={()=>handleLock()}>Lock</span>
             </Card.Footer>
             :selected && compareChords ?
-            <Card.Footer className="lock">
+            <Card.Footer className="lock toggle_on">
               <span onClick={()=>handleLock()}>Locked</span>
             </Card.Footer>
             : null

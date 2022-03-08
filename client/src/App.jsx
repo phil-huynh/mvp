@@ -562,7 +562,9 @@ class App extends React.Component {
       chordTwoSelected: false,
       sharedNotes: false,
       compare: false,
-      displayChordDegrees: false
+      displayChordDegrees: false,
+      chordDegButtonClass: 'chordDegButton',
+      chordFocus: 'Neutral',
     })
   }
 
@@ -787,11 +789,14 @@ class App extends React.Component {
             showScaleMenu={this.state.showScaleMenu}
           />
           <span className="keyChoiceLabels">
+            <span>
+              {`Scale :`}
+            </span>
             <span
               className="dashTonicLabel"
               onClick={()=>this.handleTonicMenuWindow()}
             >
-              {`${this.state.tonic} `}
+              {` ${this.state.tonic} `}
             </span>
             <span
               className="dashScaleLabel"
