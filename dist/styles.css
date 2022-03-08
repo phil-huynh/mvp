@@ -1,0 +1,590 @@
+/*****************************************************************************
+*******    CSS RESET   *******************************************************
+******************************************************************************/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: white
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*****************************************************************************
+*******    APP    ************************************************************
+******************************************************************************/
+
+html {
+  font-size: 62.5%;
+}
+
+#app {
+  height: 100%;
+  width: 100%
+}
+
+.page {
+  height: 100%;
+  font-size: 1.6rem;
+  background: rgb(2,0,36);
+  background: radial-gradient(circle, rgba(2,0,36,1) 21%, rgb(41, 0, 135) 51%, rgba(45,49,66,0.9514180672268907) 79%);
+  display: grid;
+  grid-template-rows: 8% 10% 25% 20% 32%;
+}
+
+/*****************************************************************************
+*******    TOP    ************************************************************
+******************************************************************************/
+
+.top {
+  position: fixed;
+  grid-row-start: 1;
+}
+.navbar{
+  height: 100%;
+  width: 100vw;
+  color: white;
+  font-size: 1.8vh;
+  font-weight: 200;
+  font-family: 'Comic Neue', cursive;
+  padding: 3.0rem;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+  color: #FFFFFF;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+}
+
+.navTitle {
+  font-size: 3vh;
+  /*text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px rgb(41, 0, 135), 0 0 30px rgb(41, 0, 135), 0 0 40px rgb(41, 0, 135), 0 0 55px rgb(41, 0, 135), 0 0 75px rgb(41, 0, 135), 38px 19px 8px rgba(206,89,55,0);*/
+}
+
+.neckDash {
+  grid-row-start: 2;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-bottom: 1.7%;
+  background-color: #363B4A;
+  border: white double 4px;
+  border-radius: 10px ;
+  padding: 1%;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+  color: #FFFFFF;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+  opacity: .9;
+}
+
+.viewLabel,
+.tuningLabel,
+.hideScaleMenu,
+.labelMenu,
+.keyChoiceLabels,
+.defaultChordLabel,
+.chordDegButton {
+  margin-right: 2%;
+  color: white;
+  font-size: 1.8vh;
+  font-weight: 200;
+  font-family: 'Comic Neue', cursive;
+  cursor: pointer;
+}
+
+.viewLabel:hover ,
+.tuningLabel:hover {
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.modalMenu .modal-content {
+  background-color: #373B4B;
+  color: white;
+}
+
+.modalMenuChoice {
+  padding-left: 1.5rem;
+  font-size: 2.0rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modalMenuChoice:hover {
+  color: white;
+  text-shadow: 0 0 5px #04D3FF, 0 0 10px #04D3FF, 0 0 15px #04D3FF, 0 0 20px #04D3FF, 0 0 30px #04D3FF, 0 0 40px #04D3FF, 0 0 55px #04D3FF, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.modalMenuChoice:active {
+  background-color: #363B4A;
+  color: white;
+  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 25px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.keyChoiceLabels {
+  margin-right: 3%;
+}
+.dashTonicLabel:hover,
+.dashScaleLabel:hover,
+.defaultChordLabel:hover {
+  text-shadow: 0 0 5px #FFF, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.labelToggle {
+  margin-right: 2%;
+}
+
+.hideToggle {
+  margin-right: 2%;
+}
+
+.toggle_on {
+  text-shadow: 0 0 5px #04D3FF, 0 0 10px #04D3FF, 0 0 15px #04D3FF, 0 0 20px #04D3FF, 0 0 2px #04D3FF, 0 0 30px #04D3FF, 0 0 40px #04D3FF, 0 0 48git stpx #04D3FF, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.reset_button{
+  color: white;
+  font-size: 1.8vh;
+  font-weight: 200;
+  font-family: 'Comic Neue', cursive;
+  margin-right: 2%;
+  cursor: pointer;
+}
+
+.reset_button:hover,
+.resetCardButton:hover {
+  text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 55px red, 0 0 75px red, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.reset_button:active {
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.middle {
+  grid-row-start: 3;
+  margin-top: 0;
+  display: grid;
+  grid-template-rows: 6% 8% 76% 4% 6%;
+}
+
+.inner_middle {
+  grid-row-start: 3;
+  display: grid;
+  grid-template-columns: 96% 4%;
+}
+
+.inner_middle_left {
+  grid-row-start: 3;
+  display: grid;
+  grid-template-columns: 4% 96%;
+}
+
+.neckImage {
+  grid-column-start: 1;
+  background-size: 20%;
+  position: relative;
+  height: 100%;
+  width: 96%;
+  z-index: 0;
+}
+
+.stringbox,
+.stringbox_left {
+  grid-column-start: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.stringbox_left {
+  grid-column-start: 2;
+}
+
+.four_string_neck,
+.five_string_neck,
+.six_string_neck {
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+  width: 100%;
+  height: 100%;
+  color: black;
+  position: relative;
+  z-index: 2;
+}
+
+.five_string_neck {
+  display: grid;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+.six_string_neck {
+  display: grid;
+  grid-template-rows: 16.67% 16.67% 16.67% 16.67% 16.67% 16.67% ;
+  background-size: 30%;
+}
+
+.guideContainerUpper {
+  grid-row-start: 1;
+  display: grid;
+  grid-template-columns: 96% 4%;
+
+}
+
+.guideContainerLower {
+  grid-row-start: 5;
+  display: grid;
+  grid-template-columns: 96% 4%
+}
+
+.guide,
+.guideLeft {
+  grid-column-start: 1;
+  display: grid;
+  grid-template-columns: 4.73% 8.39% 7.94% 7.51% 7.1% 6.71% 6.35% 6.01% 5.68% 5.38% 5.09% 4.82% 4.56% 4.32% 4.09% 3.88% 3.67% 3.48%;
+  width: 100%;
+  height: 80%;
+  vertical-align: middle;
+}
+
+.guideLeft {
+  display: grid;
+  grid-template-columns: 4% 3.48% 3.67% 3.88% 4.09% 4.32% 4.56% 4.82% 5.09% 5.38% 5.68% 6.01% 6.35% 6.71% 7.1% 7.51% 7.94% 8.39% 4%;
+}
+
+.guidebox {
+  background-color: #363A4A;
+  overflow-x: hidden;
+  font-weight: bold;
+  font-size: 3.0rem;
+  color: white;
+  border: white solid 1px;
+  border-radius: 5px;
+  display: grid;
+  justify-items: center;
+  line-height: 2.0rem;
+  align-content: center;
+  vertical-align: middle;
+  padding-bottom: .8rem;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 4px 4px 15px 5px #000000;
+}
+
+.fret3{grid-column-start: 4;}
+.fret5{grid-column-start: 6;}
+.fret7{grid-column-start: 8;}
+.fret9{grid-column-start: 10;}
+.fret12{grid-column-start: 13;padding-bottom: 10px;}
+.fret15{grid-column-start: 16;}
+.fret17{grid-column-start: 18;}
+
+.leftyFret17{grid-column-start: 2;}
+.leftyFret15{grid-column-start: 4;}
+.leftyFret12{grid-column-start: 7;
+  padding-bottom: 1.0rem;}
+.leftyFret9{grid-column-start: 10;}
+.leftyFret7{grid-column-start: 12;}
+.leftyFret5{grid-column-start: 14;}
+.leftyFret3{grid-column-start: 16;}
+
+.string {
+  display: grid;
+  grid-template-columns: 4.89% 8.39% 7.94% 7.51% 7.1% 6.71% 6.35% 6.01% 5.68% 5.38% 5.09% 4.82% 4.56% 4.32% 4.09% 3.88% 3.67% 3.48%;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.string-left {
+  display: grid;
+  grid-template-columns: 3.48% 3.67% 3.88% 4.09% 4.32% 4.56% 4.82% 5.09% 5.38% 5.68% 6.01% 6.35% 6.71% 7.1% 7.51% 7.94% 8.39% 4.89%;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.open,
+.open-left {
+  text-align: center;
+  vertical-align: middle;
+  display: grid;
+  grid-template-columns: 47% 20% 33%;
+}
+
+.open {
+  border-right: black double 12px;
+}
+
+.open-left {
+  display: grid;
+  grid-template-columns: 20% 25% 55%;
+  border-left: black double 12px;
+}
+
+.openNote,
+.openNoteLeft {
+  grid-column-start: 2;
+  background-color: #383C4C;
+  color: white;
+  width: 2.6vh;
+  height: 2.6vh;
+  font-family: 'Balsamiq Sans', cursive;
+  font-size: 1.2vh;
+  font-weight: 600;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: white solid 1px;
+  border-radius: 50%;
+  line-height: 3.0rem;
+  vertical-align: middle
+}
+
+.fret {
+  background-image: url('./images/woodgrain3.png');
+  overflow-x: hidden;
+  z-index: 1;
+  font-family: 'Flow Block', cursive;
+  font-weight: 600;
+  font-size: .8rem;
+  color: rgb(183, 180, 180);
+  border-right: rgb(107, 107, 107) double 6px;
+  border-left: black solid 1px;
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  justify-items: center;
+  align-items: center;
+  line-height: 3.0rem;
+  vertical-align: middle;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+}
+
+.note,
+.noteLeft{
+  position: relative;
+  z-index: 1;
+  grid-column-start: 2;
+  background-color: #383C4C;
+  border: white solid 1px;
+  color: white;
+  width: 2.6vh;
+  height: 2.6vh;
+  font-family: 'Balsamiq Sans', cursive;
+  font-size: 1.2vh;
+  font-weight: 300;
+  text-align: center;
+  overflow-y: visible;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding-top: 3px;
+
+}
+
+.selectedNote,
+.selectedNote2,
+.sharedNote {
+  background-color: 	#000000;
+  border: white solid 1px;
+  color: black;
+  font-family: 'Balsamiq Sans', cursive;
+  font-weight: 300;
+  width: 2.6vh;
+  height: 2.6vh;
+  color: #FFFFFF;
+  background: #333333;
+  padding-top: 3px;
+  color: white;
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 0.5rem yellow,
+  0 0 0.2rem yellow,
+  0 0 0.7rem yellow,
+  inset 0 0 1.7rem yellow;
+}
+
+.selectedNote2 {
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 0.5rem #0095ec,
+  0 0 0.2rem #0095ec,
+  0 0 0.7rem #0095ec,
+  inset 0 0 1.7rem #0095ec;
+}
+
+.sharedNote {
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 0.5rem #49ff18,
+  0 0 0.2rem #49ff18,
+  0 0 0.7rem #49ff18,
+  inset 0 0 1.7rem #49ff18;
+}
+
+.unfocus {
+  opacity: .4;
+}
+
+.bottomLower,
+.bottomUpper {
+  grid-row-start: 5;
+  margin-left: 4%;
+  margin-right: 4%;
+  background-color: #363B4A;
+  border: white double 4px;
+  border-radius: 10px ;
+  padding: 4%;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+  color: #FFFFFF;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+  opacity: .9;
+}
+
+.bottomUpper {
+  grid-row-start: 4;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding: .5%;
+  padding-left: 2%;
+}
+
+
+.sharedLight{
+  font-size: 2.2vh;
+  font-weight: 200;
+  font-family: 'Comic Neue', cursive;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #49ff18, 0 0 20px #49ff18,  0 0 25px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 55px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  color: #FFFFFF;
+}
+
+.chordDegButton {
+  margin-right: 2%;
+}
+.chordDegButton {
+  margin-right: 2%;
+}
+
+.chordCard {
+  width:11vw;
+  line-height: 30%;
+  font-size: 2vh;
+  cursor: pointer;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 4px 4px 15px 5px #000000;
+}
+
+.chordCard:active {
+  position:relative;
+  top:3px;
+  left: 2px;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 1px 0px 15px 3px #000000;
+}
+
+.selectedChord2 {
+  text-shadow: 0 0 5px #FFF, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec, 0 0 55px #0095ec, 0 0 75px #0095ec, 38px 19px 8px rgba(206,89,55,0);
+  color: #0095ec;
+
+}
+
+.selectedChord {
+  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
+  color: #FFFFFF;
+}
+
+
+.triadName,
+.triadLabel{
+  font-size: 1.7vh;
+  font-weight: 300;
+  font-family: 'Comic Neue', cursive;
+  margin: .6rem
+}
+
+.cardBody {
+  font-size: 1.4vh;
+  font-weight: 200;
+  font-family: 'Comic Neue', cursive;
+  margin-top: .6rem;
+  margin-bottom: .6rem;
+}
+
+.footerButton {
+  font-size: 1.5vh;
+  font-weight: 200;
+  margin-top: .6rem;
+  margin-bottom: .6rem;
+  font-family: 'Comic Neue', cursive;
+  text-shadow: none;
+}
+
+.lock {
+  margin-bottom: 3px;
+}
+
+.cardNameLabel:hover,
+.alterChordButton:hover,
+.lock:hover,
+.focusButton:hover {
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #04D3FF, 0 0 30px #04D3FF, 0 0 40px #04D3FF, 0 0 55px #04D3FF, 0 0 75px #04D3FF, 38px 19px 8px rgba(206,89,55,0);
+}
+
+
+
+
+
+
+
+
