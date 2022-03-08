@@ -735,7 +735,9 @@ class App extends React.Component {
             scaleUnfocusedLabel={this.state.scaleUnfocusedLabel}
             scaleVisibleLabel={this.state.scaleVisibleLabel}
           />
-
+          {this.state.sharedNotes ?
+            <span className="sharedLight">Shared Notes</span> : null
+          }
         </div>
         <div className="middle">
           <FretGuide
@@ -819,13 +821,20 @@ class App extends React.Component {
             scaleDegreeToggle={this.state.scaleDegreeToggle}
             solfegeToggle={this.state.solfegeToggle}
           />
-          {this.state.labelType ==='Chord Degrees' && this.state.chordOneSelected && this.state.chordTwoSelected ?
-            <FocusMenu
-              handleChordFocus={this.handleChordFocus}
-              name={'labelMenu'}
-              chordSelected={this.state.chordOneSelected}
-            />
-            : null
+
+          <span
+            onClick={(e) => this.handleSevenths(e)}
+            className="defaultChordLabel"
+          >
+            {`Default Voicing : ${this.state.defaultType}`}
+          </span>
+          {this.state.chordOneSelected ?
+            <span
+              className={this.state.chordDegButtonClass}
+              onClick={()=>this.handleChordDegrees()}
+            >
+              Chord Degrees
+            </span>: null
           }
           <span
             onClick={() => this.resetChords()}
@@ -839,23 +848,6 @@ class App extends React.Component {
             >
             Reset Everything
           </span>
-          <span
-            onClick={(e) => this.handleSevenths(e)}
-            className="defaultChordLabel"
-          >
-            {this.state.defaultType}
-          </span>
-          {this.state.chordOneSelected ?
-            <span
-              className={this.state.chordDegButtonClass}
-              onClick={()=>this.handleChordDegrees()}
-            >
-              Chord Degrees
-            </span>: null
-          }
-          {this.state.sharedNotes ?
-            <span className="sharedLight">Shared Notes</span> : null
-          }
         </div>
         <div className="bottomLower">
           <AlterChordOpt

@@ -91,7 +91,15 @@ var ViewMenu = ({showStringsMenu, handleStringsMenuWindow, handleStringChoice, n
         <div
           className="modalMenuChoice"
           onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
-          title={`5 String Bass. B E A D G .${stringG}.${stringD}.${stringA}.${stringE}.${stringB}`}>5 String Bass</div>
+          title={`5 String Bass. B E A D G .${stringG}.${stringD}.${stringA}.${stringE}.${stringB}`}>5 String Bass BEADG</div>
+        <div
+          className="modalMenuChoice"
+          onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
+          title={`5 String Bass. E A D G C .${stringC}.${stringG}.${stringD}.${stringA}.${stringE}`}>5 String Bass EADGC</div>
+        <div
+          className="modalMenuChoice"
+          onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
+          title={`6 String Bass. B E A D G C .${stringC}.${stringG}.${stringD}.${stringA}.${stringE}.${stringB}`}>6 String Bass BEADGC</div>
         <div
           className="modalMenuChoice"
           onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
