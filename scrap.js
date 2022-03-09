@@ -997,3 +997,169 @@ var solfege = {
             label: 'Japanese Pentatonic',
         },
       };
+
+
+      handleTonicChange={this.handleTonicChange}
+      handleTonicMenuWindow={this.handleTonicMenuWindow}
+      showTonicMenu={this.state.showTonicMenu}
+
+      handleScaleChange={this.handleScaleChange}
+      handleScaleMenuWindow={this.handleScaleMenuWindow}
+      showScaleMenu={this.state.showScaleMenu}
+
+      this.handleTonicMenuWindow()
+      this.handleScaleMenuWindow()
+      this.state.scaleName
+
+      handleTonicChange={this.handleTonicChange2}
+
+      handleScaleChange={this.handleScaleChange2}
+
+      handleNeckNotes={this.handleNeckNotes}
+      name={'labelMenu'}
+      noteNameToggle={this.state.noteNameToggle}
+      scaleDegreeToggle={this.state.scaleDegreeToggle}
+      solfegeToggle={this.state.solfegeToggle}
+
+      this.handleSevenths(e)
+
+      this.state.defaultType
+      this.state.chordOneSelected
+      this.state.chordDegButtonClass
+
+      this.handleChordDegrees()
+      this.resetChords()
+      this.resetAll()
+
+      showAlter={this.state.showAlter}
+      handleAlterChord={this.handleAlterChord}
+      handleAlterChordWindow={this.handleAlterChordWindow}
+      currentCard={this.state.currentCard}
+      list={this.state.currentList}
+      root={this.state.chordOptRoot}
+
+      keyCenter={this.state.keyCenter}
+      sevenths={this.state.sevenths}
+      selectChord={this.selectChord}
+      selectChord2={this.selectChord2}
+      currentChord={this.state.selectedChord}
+      currentChord2={this.state.selectedChord2}
+      chordOneSelected={this.state.chordOneSelected}
+      chordTwoSelected={this.state.chordTwoSelected}
+      currentChordTones={this.state.currentChordTones}
+      currentChordTones2={this.state.currentChordTones2}
+      compareChords={this.state.compare}
+      handleLock={this.handleSingleOrCompare}
+      handleAlterChordWindow={this.handleAlterChordWindow}
+      resetCard={this.resetCard}
+      setTones={this.setTones}
+      setTones2={this.setTones2}
+      displayChordDegrees={this.state.displayChordDegrees}
+      handleChordFocus={this.handleChordFocus}
+      chordFocus={this.state.chordFocus}
+      ch0={this.state.ch0}
+      ch1={this.state.ch1}
+      ch2={this.state.ch2}
+      ch3={this.state.ch3}
+      ch4={this.state.ch4}
+      ch5={this.state.ch5}
+      ch6={this.state.ch6}
+      ch0Alt={this.state.ch0Alt}
+      ch1Alt={this.state.ch1Alt}
+      ch2Alt={this.state.ch2Alt}
+      ch3Alt={this.state.ch3Alt}
+      ch4Alt={this.state.ch4Alt}
+      ch5Alt={this.state.ch5Alt}
+      ch6Alt={this.state.ch6Alt}
+
+
+
+
+      handleTonicChange={this.handleTonicChange}
+      handleTonicMenuWindow={this.handleTonicMenuWindow}
+      showTonicMenu={this.state.showTonicMenu}
+
+      handleScaleChange={this.handleScaleChange}
+      handleScaleMenuWindow={this.handleScaleMenuWindow}
+      showScaleMenu={this.state.showScaleMenu}
+
+      this.handleTonicMenuWindow()
+      this.handleScaleMenuWindow()
+      this.state.scaleName
+
+      handleTonicChange={this.handleTonicChange2}
+
+      handleScaleChange={this.handleScaleChange2}
+
+      handleNeckNotes={this.handleNeckNotes}
+      name={'labelMenu'}
+      noteNameToggle={this.state.noteNameToggle}
+      scaleDegreeToggle={this.state.scaleDegreeToggle}
+      solfegeToggle={this.state.solfegeToggle}
+
+      this.handleSevenths(e)
+
+      this.state.defaultType
+      this.state.chordOneSelected
+      this.state.chordDegButtonClass
+
+      this.handleChordDegrees()
+      this.resetChords()
+      this.resetAll()
+
+      showAlter={this.state.showAlter}
+      handleAlterChord={this.handleAlterChord}
+      handleAlterChordWindow={this.handleAlterChordWindow}
+      currentCard={this.state.currentCard}
+      list={this.state.currentList}
+      root={this.state.chordOptRoot}
+
+      keyCenter={this.state.keyCenter}
+      sevenths={this.state.sevenths}
+      selectChord={this.selectChord}
+      selectChord2={this.selectChord2}
+      currentChord={this.state.selectedChord}
+      currentChord2={this.state.selectedChord2}
+      chordOneSelected={this.state.chordOneSelected}
+      chordTwoSelected={this.state.chordTwoSelected}
+      currentChordTones={this.state.currentChordTones}
+      currentChordTones2={this.state.currentChordTones2}
+      compareChords={this.state.compare}
+      handleLock={this.handleSingleOrCompare}
+      handleAlterChordWindow={this.handleAlterChordWindow}
+      resetCard={this.resetCard}
+      setTones={this.setTones}
+      setTones2={this.setTones2}
+      displayChordDegrees={this.state.displayChordDegrees}
+      handleChordFocus={this.handleChordFocus}
+      chordFocus={this.state.chordFocus}
+      ch0={this.state.ch0}
+      ch1={this.state.ch1}
+      ch2={this.state.ch2}
+      ch3={this.state.ch3}
+      ch4={this.state.ch4}
+      ch5={this.state.ch5}
+      ch6={this.state.ch6}
+      ch0Alt={this.state.ch0Alt}
+      ch1Alt={this.state.ch1Alt}
+      ch2Alt={this.state.ch2Alt}
+      ch3Alt={this.state.ch3Alt}
+      ch4Alt={this.state.ch4Alt}
+      ch5Alt={this.state.ch5Alt}
+      ch6Alt={this.state.ch6Alt}
+    /
+
+
+    {second ?
+        <React.Fragment>
+          <TonicMenu
+            handleTonicChange={handleTonicChange2}
+            name={'tonic_options_right'}
+          />
+          <ScalesMenu
+            handleScaleChange={handleScaleChange2}
+            name={'scale_options_right'}
+          />
+        </React.Fragment>
+        : null
+      }

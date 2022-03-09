@@ -6,10 +6,12 @@ import ScalesMenu from './ScalesMenu.jsx'
 import ScaleChords from './ScaleChords.jsx'
 import ViewMenu from './ViewMenu.jsx'
 import LabelMenu from './LabelMenu.jsx'
+import Header from './Header.jsx'
+import NeckDash from './NeckDash.jsx'
+import MapScalesRender from './MapScalesRender.jsx'
 import Dropdown from './Dropdown.jsx'
 import FretGuide from './FretGuide.jsx'
 import AlterChordOpt from './AlterChordOpt.jsx'
-import HideScaleMenu from './HideScaleMenu.jsx'
 import axios from 'axios';
 
 const sharp = '\u266F';
@@ -106,6 +108,7 @@ class App extends React.Component {
       findScalesToggle: 'navOption',
       tutorialToggle: 'navOption',
       settingsToggle: 'navOption',
+      renderView: 'Map Scales'
 
     }
 
@@ -397,7 +400,8 @@ class App extends React.Component {
         findChordsToggle: 'navOption',
         findScalesToggle: 'navOption',
         tutorialToggle: 'navOption',
-        settingsToggle: 'navOption'
+        settingsToggle: 'navOption',
+        renderView: 'Map Chords'
       })
     }
     if (choice === 'mapScales') {
@@ -407,7 +411,8 @@ class App extends React.Component {
         findChordsToggle: 'navOption',
         findScalesToggle: 'navOption',
         tutorialToggle: 'navOption',
-        settingsToggle: 'navOption'
+        settingsToggle: 'navOption',
+        renderView: 'Map Scales'
       })
     }
     if (choice === 'findChords') {
@@ -571,7 +576,6 @@ class App extends React.Component {
     })
     .catch((err) => {
     console.log("🚀 ~ file: App.jsx ~ line 178 ~ App ~ handleSubmit ~ err", err)
-
     })
   }
 
@@ -764,81 +768,35 @@ class App extends React.Component {
     return (
       <div className = "page">
         <div className="top">
-          <span className="navbar">
-            <span className="navTitle">
-              Strings Theory
-            </span>
-            <span></span>
-            <span
-              className={this.state.mapChordsToggle}
-              onClick={(e)=>this.handleNavChoice(e)}
-              title="mapChords"
-              >
-              Map Chords
-            </span>
-            <span
-              className={this.state.mapScalesToggle}
-              onClick={(e)=>this.handleNavChoice(e)}
-              title="mapScales"
-              >
-              Map Scales
-            </span>
-            <span
-              className={this.state.findChordsToggle}
-              onClick={(e)=>this.handleNavChoice(e)}
-              title="findChords"
-              >
-              Find Chords
-            </span>
-            <span
-              className={this.state.findScalesToggle}
-              onClick={(e)=>this.handleNavChoice(e)}
-              title="findScales"
-              >
-              Find Scales
-            </span>
-            <span
-              className={this.state.tutorialToggle}
-              onClick={(e)=>this.handleNavChoice(e)}
-              title="tutorial"
-              >
-              Tutorial
-            </span>
-            <span
-              className={this.state.settingsToggle}
-              onClick={(e)=>this.handleNavChoice(e)}
-              title="settings"
-            >
-              Settings
-            </span>
-            <span></span>
-          </span>
+          <Header
+            handleNavChoice={this.handleNavChoice}
+            mapChordsToggle={this.state.mapChordsToggle}
+            mapScalesToggle={this.state.mapScalesToggle}
+            findChordsToggle={this.state.findChordsToggle}
+            findScalesToggle={this.state.findScalesToggle}
+            tutorialToggle={this.state.tutorialToggle}
+            settingsToggle={this.state.settingsToggle}
+          />
         </div>
-        <div className="neckDash">
           <ViewMenu
             handleView={this.handleView}
             handleViewMenuWindow={this.handleViewMenuWindow}
             showViewMenu={this.state.showViewMenu}
           />
-          <span
-            className="viewLabel"
-            onClick={()=>this.handleViewMenuWindow()}
-          >
-            {this.state.view}
-          </span>
-          <span
-            className="tuningLabel"
-            onClick={()=>this.handleStringsMenuWindow()}
-          >
-            {`${this.state.instrument} : ${this.state.tuning}`}
-          </span>
           <StringsMenu
             handleStringChoice={this.handleStringChoice}
             handleStringsMenuWindow={this.handleStringsMenuWindow}
             showStringsMenu={this.state.showStringsMenu}
             name={'stringsMenu'}
           />
-          <HideScaleMenu
+        <div className="neckDash">
+          <NeckDash
+            handleViewMenuWindow={this.handleViewMenuWindow}
+            handleStringsMenuWindow={this.handleStringsMenuWindow}
+            view={this.state.view}
+            instrument={this.state.instrument}
+            tuning={this.state.tuning}
+            sharedNotes={this.state.sharedNotes}
             name={'hideScaleMenu'}
             handleHide={this.handleHide}
             scaleHiddenToggle={this.state.scaleHiddenToggle}
@@ -847,10 +805,7 @@ class App extends React.Component {
             scaleHiddenLabel={this.state.scaleHiddenLabel}
             scaleUnfocusedLabel={this.state.scaleUnfocusedLabel}
             scaleVisibleLabel={this.state.scaleVisibleLabel}
-          />
-          {this.state.sharedNotes ?
-            <span className="sharedLight">Shared Notes</span> : null
-          }
+            />
         </div>
         <div className="middle">
           {!['Violin', 'Viola', 'Cello'].includes(this.state.instrument) ?
@@ -893,112 +848,8 @@ class App extends React.Component {
             />: null
           }
         </div>
-        <div className="bottomUpper">
-          <TonicMenu
-            handleTonicChange={this.handleTonicChange}
-            handleTonicMenuWindow={this.handleTonicMenuWindow}
-            showTonicMenu={this.state.showTonicMenu}
-          />
-          <ScalesMenu
-            handleScaleChange={this.handleScaleChange}
-            handleScaleMenuWindow={this.handleScaleMenuWindow}
-            showScaleMenu={this.state.showScaleMenu}
-          />
-          <span className="keyChoiceLabels">
-            <span>
-              {`Scale :`}
-            </span>
-            <span
-              className="dashTonicLabel"
-              onClick={()=>this.handleTonicMenuWindow()}
-            >
-              {` ${this.state.tonic} `}
-            </span>
-            <span
-              className="dashScaleLabel"
-              onClick={()=>this.handleScaleMenuWindow()}
-            >
-              {this.state.scaleName}
-            </span>
-
-          </span>
-          {this.state.second ?
-            <React.Fragment>
-              <TonicMenu
-                handleTonicChange={this.handleTonicChange2}
-                name={'tonic_options_right'}
-              />
-              <ScalesMenu
-                handleScaleChange={this.handleScaleChange2}
-                name={'scale_options_right'}
-              />
-            </React.Fragment>
-            : null
-          }
-          <LabelMenu
-            handleNeckNotes={this.handleNeckNotes}
-            name={'labelMenu'}
-            noteNameToggle={this.state.noteNameToggle}
-            scaleDegreeToggle={this.state.scaleDegreeToggle}
-            solfegeToggle={this.state.solfegeToggle}
-          />
-
-          <span
-            onClick={(e) => this.handleSevenths(e)}
-            className="defaultChordLabel"
-          >
-            {`Default Voicing : ${this.state.defaultType}`}
-          </span>
-          {this.state.chordOneSelected ?
-            <span
-              className={this.state.chordDegButtonClass}
-              onClick={()=>this.handleChordDegrees()}
-            >
-              Chord Degrees
-            </span>: null
-          }
-          <span
-            onClick={() => this.resetChords()}
-            className="reset_button"
-            >
-            Reset Voicings
-          </span>
-          <span
-            onClick={() => this.resetAll()}
-            className="reset_button"
-            >
-            Reset Everything
-          </span>
-        </div>
-        <div className="bottomLower">
-          <AlterChordOpt
-            showAlter={this.state.showAlter}
-            handleAlterChord={this.handleAlterChord}
-            handleAlterChordWindow={this.handleAlterChordWindow}
-            currentCard={this.state.currentCard}
-            list={this.state.currentList}
-            root={this.state.chordOptRoot}
-          />
-          <ScaleChords
-            keyCenter={this.state.keyCenter}
-            sevenths={this.state.sevenths}
-            selectChord={this.selectChord}
-            selectChord2={this.selectChord2}
-            currentChord={this.state.selectedChord}
-            currentChord2={this.state.selectedChord2}
-            chordOneSelected={this.state.chordOneSelected}
-            chordTwoSelected={this.state.chordTwoSelected}
-            currentChordTones={this.state.currentChordTones}
-            currentChordTones2={this.state.currentChordTones2}
-            compareChords={this.state.compare}
-            handleLock={this.handleSingleOrCompare}
-            handleAlterChordWindow={this.handleAlterChordWindow}
-            resetCard={this.resetCard}
-            setTones={this.setTones}
-            setTones2={this.setTones2}
-            displayChordDegrees={this.state.displayChordDegrees}
-            handleChordFocus={this.handleChordFocus}
-            chordFocus={this.state.chordFocus}
+        {this.state.renderView === 'Map Scales' ?
+          <MapScalesRender
             ch0={this.state.ch0}
             ch1={this.state.ch1}
             ch2={this.state.ch2}
@@ -1013,15 +864,52 @@ class App extends React.Component {
             ch4Alt={this.state.ch4Alt}
             ch5Alt={this.state.ch5Alt}
             ch6Alt={this.state.ch6Alt}
-          />
-          <React.Fragment>
-            {this.state.second === true ?
-              <ScaleChords
-                keyCenter={this.state.keyCenter2}
-                sevenths={this.state.sevenths2}
-              />: null}
-          </React.Fragment>
-        </div>
+            chordDegButtonClass={this.state.chordDegButtonClass}
+            chordFocus={this.state.chordFocus}
+            chordOneSelected={this.state.chordOneSelected}
+            chordTwoSelected={this.state.chordTwoSelected}
+            compareChords={this.state.compare}
+            currentCard={this.state.currentCard}
+            currentChord={this.state.selectedChord}
+            currentChord2={this.state.selectedChord2}
+            currentChordTones={this.state.currentChordTones}
+            currentChordTones2={this.state.currentChordTones2}
+            defaultType={this.state.defaultType}
+            displayChordDegrees={this.state.displayChordDegrees}
+            handleAlterChord={this.handleAlterChord}
+            handleAlterChordWindow={this.handleAlterChordWindow}
+            handleChordDegrees={this.handleChordDegrees}
+            handleChordFocus={this.handleChordFocus}
+            handleLock={this.handleSingleOrCompare}
+            handleNeckNotes={this.handleNeckNotes}
+            handleScaleChange={this.handleScaleChange}
+            handleScaleChange2={this.handleScaleChange2}
+            handleScaleMenuWindow={this.handleScaleMenuWindow}
+            handleSevenths={this.handleSevenths}
+            handleTonicChange={this.handleTonicChange}
+            handleTonicChange2={this.handleTonicChange2}
+            handleTonicMenuWindow={this.handleTonicMenuWindow}
+            keyCenter={this.state.keyCenter}
+            list={this.state.currentList}
+            noteNameToggle={this.state.noteNameToggle}
+            resetAll={this.resetAll}
+            resetCard={this.resetCard}
+            resetChords={this.resetChords}
+            root={this.state.chordOptRoot}
+            scaleDegreeToggle={this.state.scaleDegreeToggle}
+            scaleName={this.state.scaleName}
+            selectChord={this.selectChord}
+            selectChord2={this.selectChord2}
+            setTones={this.setTones}
+            setTones2={this.setTones2}
+            sevenths={this.state.sevenths}
+            showAlter={this.state.showAlter}
+            showScaleMenu={this.state.showScaleMenu}
+            showTonicMenu={this.state.showTonicMenu}
+            solfegeToggle={this.state.solfegeToggle}
+            tonic={this.state.tonic}
+          />: null
+        }
       </div>
     )
   }
