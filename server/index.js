@@ -18,6 +18,7 @@ app.use(morgan("dev"));
 
 app.get('/scales', (req, res) => {
   let key = req.query.key
+  console.log("🚀 ~ file: index.js ~ line 21 ~ app.get ~ key", key)
   let scale = req.query.scale
   var objKey = scale.split(' ')
   if (objKey.length > 1) {
@@ -49,6 +50,10 @@ app.get('/degrees', (req, res) => {
   obj.scaleDegrees = Music.scaleDegrees
   obj.chordDegrees = Music.chordDegrees
   res.json(obj)
+})
+
+app.get('/chordtypes', (req, res) => {
+  res.json(Music.chordTypes)
 })
 
 app.get('/choices', (req, res) => {

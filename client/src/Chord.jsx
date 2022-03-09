@@ -360,8 +360,6 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     cardClass = `${cardClass} selectedChord2`
   }
 
-  console.log(tones)
-
   return (
     <React.Fragment>
       {chord ?

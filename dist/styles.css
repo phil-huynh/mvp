@@ -104,6 +104,10 @@ html {
   /*text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px rgb(41, 0, 135), 0 0 30px rgb(41, 0, 135), 0 0 40px rgb(41, 0, 135), 0 0 55px rgb(41, 0, 135), 0 0 75px rgb(41, 0, 135), 38px 19px 8px rgba(206,89,55,0);*/
 }
 
+.navOption {
+  cursor: pointer;
+}
+
 .neckDash {
   grid-row-start: 2;
   margin-left: 4%;
@@ -182,10 +186,6 @@ html {
 
 .hideToggle {
   margin-right: 2%;
-}
-
-.toggle_on {
-  text-shadow: 0 0 5px #04D3FF, 0 0 10px #04D3FF, 0 0 15px #04D3FF, 0 0 20px #04D3FF, 0 0 2px #04D3FF, 0 0 30px #04D3FF, 0 0 40px #04D3FF, 0 0 48git stpx #04D3FF, 38px 19px 8px rgba(206,89,55,0);
 }
 
 .reset_button{
@@ -405,6 +405,29 @@ html {
   box-shadow: 5px 5px 15px 5px #000000;
 }
 
+.orchestral {
+  background-color: #000000;
+  overflow-x: hidden;
+  z-index: 1;
+  font-family: 'Flow Block', cursive;
+  font-weight: 600;
+  font-size: .8rem;
+  color: rgb(183, 180, 180);
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  justify-items: center;
+  align-items: center;
+  line-height: 3.0rem;
+  vertical-align: middle;
+}
+
+.orchNeckTop {
+  border-top: white solid 1px
+}
+.orchNeckBottom {
+  border-bottom: white solid 1px;
+}
+
 .note,
 .noteLeft{
   position: relative;
@@ -540,7 +563,7 @@ html {
 }
 
 .selectedChord {
-  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
+  text-shadow: #FFF 0px 0px 5px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
   color: #FFFFFF;
 }
 
@@ -583,7 +606,9 @@ html {
 
 
 
-
+.toggle_on {
+  text-shadow: 0 0 5px #FFF, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 45px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+}
 
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees }) => {
+var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, firstString, lastString }) => {
   var notes=[];
   var currentString;
   var name;
@@ -12,7 +12,21 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
   var chordKey;
   var keyKey = keyCenter.notesToDegrees
   var labelContainer = keyCenter.tonicScaleDegrees
-  var fretClass = 'fret'
+  var fretClass;
+
+  if (['Violin', 'Viola', 'Cello'].includes(instrument)) {
+    fretClass = 'orchestral'
+    if(firstString) {
+      fretClass += ' orchNeckTop'
+    }
+    if(lastString) {
+      fretClass += ' orchNeckBottom'
+    }
+  } else {
+    fretClass = 'fret'
+  }
+
+
 
   if (labelType === 'Note Names') {
     labelContainer = keyCenter.tonicScaleDegrees
@@ -208,7 +222,7 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
                                                           {labelContainer[keyKey[note]]}
                                                         </span>_________________________________________________________________________________________________________________
                                                       </span>:
-                                                    <span className={`${fretClass}`}>___________________________________________________________________________________________________________________________________________________________________________________________________________________________-</span>
+                                                      <span className={`${fretClass}`}>___________________________________________________________________________________________________________________________________________________________________________________________________________________________-</span>
 
         )): null}
       </div>

@@ -683,3 +683,317 @@ var solfege = {
 // }
 
 //************************************************************************ */
+
+
+    addChordType('majorTriad', ['one', 'three', 'five'], '')
+    addChordType('maj7', ['one', 'three', 'five', 'seven'], 'maj7')
+    addChordType('domniant', ['one', 'three', 'five', 'flatSeven'], '7')
+    addChordType('minorTriad:', ['one', 'flatThree', 'five'], 'm',)
+    addChordType('min7', ['one', 'flatThree', 'five', 'flatSeven'], 'm7')
+    addChordType('min7FlatFive', ['one', 'flatThree', 'flatFive', 'flatSeven'], `m7(${flat}5)`)
+    addChordType('dimTriad', ['one', 'flatThree', 'flatFive'], `${dim}`)
+    addChordType('fullDim', ['one', 'flatThree', 'flatFive', 'dblFlat7'], `${dim}7`)
+    addChordType('augTriad', ['one', 'three', 'sharpFive'], '+')
+    addChordType('augmaj7', ['one', 'three', 'sharpFive', 'sevn'], '+(maj7)')
+    addChordType('dominantSharp5', ['one', 'three', 'sharpFive', 'flatSevn'], `7${sharp}5`)
+    addChordType('maj7Flat5', ['one', 'three', 'flatFive', 'seven'], `maj7(${flat}5)`)
+    addChordType('dominantFlat5', ['one', 'three', 'flatFive', 'flatSeven'], `7(${flat}5)`)
+    addChordType('sus2', ['one', 'two', 'five'], 'sus2')
+    addChordType('sus4', ['one', 'four', 'five'], 'sus4')
+    addChordType('add9', ['one', 'three','five', 'two'], 'add9', true)
+    addChordType('addSharp11', ['one', 'three','five', 'sharpFour'], `add${sharp}11`, true)
+    addChordType('major6', ['one', 'three', 'five', 'six'], '6')
+    addChordType('minor6', ['one', 'flatThree', 'five', 'six'], 'm6')
+    addChordType('dominantSus4', ['one', 'four', 'five', 'flatSeven'], `7sus4`)
+    addChordType('maj7Sus4', ['one', 'four', 'five', 'seven'], `maj7(sus4)`)
+    addChordType('maj9', ['one', 'three', 'five', 'seven', 'two'], 'maj9', true)
+    addChordType('maj7AddSharp11',['one', 'three', 'five', 'seven', 'sharpFour'], `maj7(${sharp}11)`, true)
+    addChordType('maj7Add13', ['one', 'three', 'five', 'seven', 'six'], `maj7(13)`, true)
+    addChordType('majSharp11', ['one', 'three', 'five', 'seven', 'two', 'sharpFour'], `maj7(9, ${sharp}11)`, true)
+    addChordType('maj7AddSharp11Add13', ['one', 'three', 'five', 'seven', 'sharpFour', 'six'],  `maj7(${sharp}11, 13)`, true)
+    addChordType('maj9Add13', ['one', 'three', 'five', 'seven', 'two', 'six'], `maj7(9, 13)`, true)
+    addChordType('maj13', ['one', 'three', 'five', 'seven', 'two', 'sharpFour', 'six'], 'maj13', true)
+    addChordType('min9', ['one', 'flatThree', 'five', 'flatSeven', 'two'], `m7(9)`, true)
+    addChordType('minAdd11', ['one', 'flatThree', 'five', 'flatSeven', 'four'], `m7(11)`, true)
+    addChordType('minAdd13', ['one', 'flatThree', 'five', 'flatSeven', 'six'], `m7(13)`, true)
+    addChordType('min11', ['one', 'flatThree', 'five', 'flatSeven', 'two', 'four'], `m7(9, 11)`, true)
+    addChordType('minAdd9Add1', ['one', 'flatThree', 'five', 'flatSeven', 'two', 'six'], `m7(9, 13)`, true)
+    addChordType('minAdd11Add13', ['one', 'flatThree', 'five', 'flatSeven', 'four', 'six'], `m7(11, 13)`, true)
+    addChordType('min13', ['one', 'flatThree', 'five', 'flatSeven', 'two', 'four', 'six'], `m7(9, 11, 13)`, true)
+    addChordType('dominant9', ['one', 'three', 'five', 'flatSeven', 'two'], `7(9)`, true)
+    addChordType('dominantFlat9', ['one', 'three', 'five', 'flatSeven', 'flatTwo'], `7(${flat}9)`, true)
+    addChordType('dominantSharp9', ['one', 'three', 'five', 'flatSeven', 'sharpTwo'], `7(${sharp}9)`, true)
+    addChordType('dominantAddSharp11', ['one', 'three', 'five', 'flatSeven', 'sharpFour'], `7(${sharp}11)`, true)
+    addChordType('dominantSharp11', ['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour'], `7(9, ${sharp}11), true`)
+    addChordType('dominantAdd13', ['one', 'three', 'five', 'flatSeven', 'six'], `7(13)`, true)
+    addChordType('dominantAddFlat13', ['one', 'three', 'five', 'flatSeven', 'flatSix'], `7(${flat}13)`, true)
+    addChordType('dominant13', ['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'six'], `7(9, ${sharp}11, 13)`, true)
+    addChordType('dominantFlat13', ['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'flatSix'], `7(9, ${sharp}11, ${flat}13)`, true)
+    addChordType('dominant9Flat13', ['one', 'three', 'five', 'flatSeven', 'two', 'flatSix'], `7(9, ${flat}13)`, true)
+    addChordType('dominant9Add13', ['one', 'three', 'five', 'flatSeven', 'two', 'six'], `7(9, 13)`, true)
+    addChordType('dominantFlat9Flat13', ['one', 'three', 'five', 'flatSeven', 'flatTwo', 'flatSix'], `7(${flat}9, ${flat}13)`, true)
+    addChordType('majorPentatonic', ['one', 'two', 'three', 'five', 'six'], 'maj Pentatonic')
+    addChordType('minorPentatonic', ['one', 'flatThree', 'four', 'five', 'flatSeven'], 'min Pentatonic')
+    addChordType('dominantPentatonic', ['one', 'two', 'three', 'five', 'flatSeven'], 'Dominant Pentatonic')
+    addChordType('lydianDominantPentatonic', ['one', 'two', 'three', 'sharpFour', 'flatSeven'], `Dominant${sharp}4 Pentatonic`)
+    addChordType('majSharp4Pentatonic', ['one', 'two', 'three', 'sharpFour', 'six'], `maj${sharp}4 Pentatonic`)
+    addChordType('alteredPentatonic', ['one', 'flatTwo', 'three', 'five', 'flatSeven'], ` Altered Pentatonic`)
+    addChordType('minorMaj7Pentatonic', ['one', 'flatThree', 'four', 'five', 'seven'], 'm(maj7 Pentatonic')
+    addChordType('egyptianPentatonic', ['one', 'two', 'four', 'five', 'flatSeven'], 'Egyptian Pentatonic')
+    addChordType('japanesePentatonic', ['one', 'flatTwo', 'four', 'five', 'flatSix'], 'Japanese Pentatonic')
+
+
+    var chordTypes = {
+        majorTriad: {
+            notes: ['one', 'three', 'five'],
+            label: '',
+        },
+        maj7: {
+            notes: ['one', 'three', 'five', 'seven'],
+            label: 'maj7',
+        },
+        domniant: {
+            notes: ['one', 'three', 'five', 'flatSeven'],
+            label: '7',
+        },
+        minorTriad: {
+            notes: ['one', 'flatThree', 'five'],
+            label: 'm',
+        },
+        min7: {
+            notes: ['one', 'flatThree', 'five', 'flatSeven'],
+            label: 'm7',
+        },
+        min7FlatFive: {
+            notes: ['one', 'flatThree', 'flatFive', 'flatSeven'],
+            label: `m7(${flat}5)`,
+        },
+        dimTriad: {
+            notes: ['one', 'flatThree', 'flatFive'],
+            label: `${dim}`,
+        },
+        fullDim: {
+            notes: ['one', 'flatThree', 'flatFive', 'dblFlat7'],
+            label: `${dim}7`,
+        },
+        augTriad: {
+            notes: ['one', 'three', 'sharpFive'],
+            label: '+',
+        },
+        augmaj7: {
+            notes: ['one', 'three', 'sharpFive', 'sevn'],
+            label: '+(maj7)',
+        },
+        dominantSharp5: {
+            notes: ['one', 'three', 'sharpFive', 'flatSevn'],
+            label: `7${sharp}5`,
+        },
+        maj7Flat5: {
+            notes: ['one', 'three', 'flatFive', 'seven'],
+            label: `maj7(${flat}5)`,
+        },
+        dominantFlat5: {
+            notes: ['one', 'three', 'flatFive', 'flatSeven'],
+            label: `7(${flat}5)`,
+        },
+        sus2: {
+            notes: ['one', 'two', 'five'],
+            label: 'sus2',
+        },
+        sus4: {
+            notes: ['one', 'four', 'five'],
+            label: 'sus4',
+        },
+        add9: {
+            notes: ['one', 'three','five', 'two'],
+            label: 'add9',
+            useUpper: true
+        },
+        addSharp11: {
+            notes: ['one', 'three','five', 'sharpFour'],
+            label: `add${sharp}11`,
+            useUpper: true
+        },
+        major6: {
+            notes: ['one', 'three', 'five', 'six'],
+            label: '6',
+        },
+        minor6: {
+            notes: ['one', 'flatThree', 'five', 'six'],
+            label: 'm6',
+        },
+        dominantSus4: {
+            notes: ['one', 'four', 'five', 'flatSeven'],
+            label: `7sus4`,
+        },
+        maj7Sus4: {
+            notes: ['one', 'four', 'five', 'seven'],
+            label: `maj7(sus4)`,
+        },
+        maj9: {
+            notes: ['one', 'three', 'five', 'seven', 'two'],
+            label: 'maj9',
+            useUpper: true
+        },
+        maj7AddSharp11: {
+            notes:['one', 'three', 'five', 'seven', 'sharpFour'],
+            label: `maj7(${sharp}11)`,
+            useUpper: true
+        },
+        maj7Add13: {
+            notes: ['one', 'three', 'five', 'seven', 'six'],
+            label: `maj7(13)`,
+            useUpper: true
+        },
+        majSharp11: {
+            notes: ['one', 'three', 'five', 'seven', 'two', 'sharpFour'],
+            label: `maj7(9, ${sharp}11)`,
+            useUpper: true
+        },
+        maj7AddSharp11Add13: {
+            notes: ['one', 'three', 'five', 'seven', 'sharpFour', 'six'],
+            label:  `maj7(${sharp}11, 13)`,
+            useUpper: true
+        },
+        maj9Add13: {
+            notes: ['one', 'three', 'five', 'seven', 'two', 'six'],
+            label: `maj7(9, 13)`,
+            useUpper: true
+        },
+        maj13: {
+            notes: ['one', 'three', 'five', 'seven', 'two', 'sharpFour', 'six'],
+            label: 'maj13',
+            useUpper: true
+        },
+        min9: {
+            notes: ['one', 'flatThree', 'five', 'flatSeven', 'two'],
+            label: `m7(9)`,
+            useUpper: true
+        },
+        minAdd11: {
+            notes: ['one', 'flatThree', 'five', 'flatSeven', 'four'],
+            label: `m7(11)`,
+            useUpper: true
+        },
+        minAdd13: {
+            notes: ['one', 'flatThree', 'five', 'flatSeven', 'six'],
+            label: `m7(13)`,
+            useUpper: true
+        },
+        min11: {
+            notes: ['one', 'flatThree', 'five', 'flatSeven', 'two', 'four'],
+            label: `m7(9, 11)`,
+            useUpper: true
+        },
+        minAdd9Add13:{
+            notes: ['one', 'flatThree', 'five', 'flatSeven', 'two', 'six'],
+            label: `m7(9, 13)`,
+            useUpper: true
+        },
+        minAdd11Add13: {
+            notes: ['one', 'flatThree', 'five', 'flatSeven', 'four', 'six'],
+            label: `m7(11, 13)`,
+            useUpper: true
+        },
+        min13: {
+            notes: ['one', 'flatThree', 'five', 'flatSeven', 'two', 'four', 'six'],
+            label: `m7(9, 11, 13)`,
+            useUpper: true
+        },
+        dominant9: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'two'],
+            label: `7(9)`,
+            useUpper: true
+        },
+        dominantFlat9: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'flatTwo'],
+            label: `7(${flat}9)`,
+            useUpper: true
+        },
+        dominantSharp9: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'sharpTwo'],
+            label: `7(${sharp}9)`,
+            useUpper: true
+        },
+        dominantAddSharp11: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'sharpFour'],
+            label: `7(${sharp}11)`,
+            useUpper: true
+        },
+        dominantSharp11: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour'],
+            label: `7(9, ${sharp}11)`,
+            useUpper: true
+        },
+        dominantAdd13: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'six'],
+            label: `7(13)`,
+            useUpper: true
+        },
+        dominantAddFlat13: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'flatSix'],
+            label: `7(${flat}13)`,
+            useUpper: true
+        },
+        dominant13: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'six'],
+            label: `7(9, ${sharp}11, 13)`,
+            useUpper: true
+        },
+        dominantFlat13: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'flatSix'],
+            label: `7(9, ${sharp}11, ${flat}13)`,
+            useUpper: true
+        },
+        dominant9Flat13: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'two', 'flatSix'],
+            label: `7(9, ${flat}13)`,
+            useUpper: true
+        },
+        dominant9Add13: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'two', 'six'],
+            label: `7(9, 13)`,
+            useUpper: true
+        },
+        dominantFlat9Flat13: {
+            notes: ['one', 'three', 'five', 'flatSeven', 'flatTwo', 'flatSix'],
+            label: `7(${flat}9, ${flat}13)`,
+            useUpper: true
+        },
+        majorPentatonic: {
+            notes: ['one', 'two', 'three', 'five', 'six'],
+            label: 'maj Pentatonic',
+        },
+        minorPentatonic: {
+            notes: ['one', 'flatThree', 'four', 'five', 'flatSeven'],
+            label: 'min Pentatonic',
+        },
+        dominantPentatonic: {
+            notes: ['one', 'two', 'three', 'five', 'flatSeven'],
+            label: 'Dominant Pentatonic',
+        },
+        lydianDominantPentatonic: {
+            notes: ['one', 'two', 'three', 'sharpFour', 'flatSeven'],
+            label: `Dominant ${sharp}4 Pentatonic`,
+        },
+        majSharp4Pentatonic: {
+            notes: ['one', 'two', 'three', 'sharpFour', 'six'],
+            label: `maj${sharp}4 Pentatonic`,
+        },
+        alteredPentatonic: {
+            notes: ['one', 'flatTwo', 'three', 'five', 'flatSeven'],
+            label: ` Altered Pentatonic`
+        },
+        minorMaj7Pentatonic: {
+            notes: ['one', 'flatThree', 'four', 'five', 'seven'],
+            label: 'm(maj7 Pentatonic',
+        },
+        egyptianPentatonic: {
+            notes: ['one', 'two', 'four', 'five', 'flatSeven'],
+            label: 'Egyptian Pentatonic',
+        },
+        japanesePentatonic: {
+            notes: ['one', 'flatTwo', 'four', 'five', 'flatSix'],
+            label: 'Japanese Pentatonic',
+        },
+      };

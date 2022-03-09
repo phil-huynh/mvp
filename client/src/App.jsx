@@ -57,6 +57,7 @@ class App extends React.Component {
       solfege: {},
       scaleDegrees: {},
       chordDegrees: {},
+      chordTypes: {},
       labelType: 'Note Names',
       singleOrCompareButton: 'Single Chord',
       chordFocus: 'Neutral',
@@ -98,9 +99,17 @@ class App extends React.Component {
       instrument: 'Guitar',
       tuning: ' E A D G B E ',
       displayChordDegrees: false,
-      chordDegButtonClass: 'chordDegButton'
+      chordDegButtonClass: 'chordDegButton',
+      mapChordsToggle: 'navOption',
+      mapScalesToggle: 'navOption toggle_on',
+      findChordsToggle: 'navOption',
+      findScalesToggle: 'navOption',
+      tutorialToggle: 'navOption',
+      settingsToggle: 'navOption',
+
     }
 
+    this.getChordTypes = this.getChordTypes.bind(this)
     this.getChoices = this.getChoices.bind(this)
     this.getDegrees = this.getDegrees.bind(this);
     this.getScale = this.getScale.bind(this);
@@ -117,6 +126,7 @@ class App extends React.Component {
     this.handleChordDegrees = this.handleChordDegrees.bind(this);
     this.handleHide = this.handleHide.bind(this);
     this.handleMoreSevenths = this.handleMoreSevenths.bind(this);
+    this.handleNavChoice = this.handleNavChoice.bind(this);
     this.handleNeckNotes = this.handleNeckNotes.bind(this);
     this.handleScaleChange = this.handleScaleChange.bind(this);
     this.handleScaleChange2 = this.handleScaleChange2.bind(this);
@@ -141,6 +151,7 @@ class App extends React.Component {
     this.getDegrees();
     this.getScale('C', 'major')
     this.getScale2('C', 'major')
+    this.getChordTypes()
   }
 
   getChoices () {
@@ -152,6 +163,18 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err)
+      })
+  }
+
+  getChordTypes () {
+    axios.get('/chordtypes')
+      .then((res) => {
+        this.setState({
+          chordTypes: res.data
+        })
+      })
+      .catch((err) => {
+        console.log("🚀 ~ file: App.jsx ~ line 166 ~ App ~ getChordTypes ~ err", err)
       })
   }
 
@@ -363,6 +386,70 @@ class App extends React.Component {
       sevenths2: true,
       moreSeventhsButton: 'Show Triads'
     })
+  }
+
+  handleNavChoice(e) {
+    let choice = e.target.title
+    if (choice === 'mapChords') {
+      this.setState({
+        mapChordsToggle: 'navOption toggle_on',
+        mapScalesToggle: 'navOption',
+        findChordsToggle: 'navOption',
+        findScalesToggle: 'navOption',
+        tutorialToggle: 'navOption',
+        settingsToggle: 'navOption'
+      })
+    }
+    if (choice === 'mapScales') {
+      this.setState({
+        mapChordsToggle: 'navOption',
+        mapScalesToggle: 'navOption toggle_on',
+        findChordsToggle: 'navOption',
+        findScalesToggle: 'navOption',
+        tutorialToggle: 'navOption',
+        settingsToggle: 'navOption'
+      })
+    }
+    if (choice === 'findChords') {
+      this.setState({
+        mapChordsToggle: 'navOption',
+        mapScalesToggle: 'navOption',
+        findChordsToggle: 'navOption toggle_on',
+        findScalesToggle: 'navOption',
+        tutorialToggle: 'navOption',
+        settingsToggle: 'navOption'
+      })
+    }
+    if (choice === 'findScales') {
+      this.setState({
+        mapChordsToggle: 'navOption',
+        mapScalesToggle: 'navOption',
+        findChordsToggle: 'navOption',
+        findScalesToggle: 'navOption toggle_on',
+        tutorialToggle: 'navOption',
+        settingsToggle: 'navOption'
+      })
+    }
+    if (choice === 'tutorial') {
+      this.setState({
+        mapChordsToggle: 'navOption',
+        mapScalesToggle: 'navOption',
+        findScalesToggle: 'navOption',
+        findChordsToggle: 'navOption',
+        tutorialToggle: 'navOption toggle_on',
+        settingsToggle: 'navOption'
+      })
+    }
+    if (choice === 'settings') {
+      this.setState({
+        mapChordsToggle: 'navOption',
+        mapScalesToggle: 'navOption',
+        findScalesToggle: 'navOption',
+        findChordsToggle: 'navOption',
+        tutorialToggle: 'navOption',
+        settingsToggle: 'navOption toggle_on'
+      })
+    }
   }
 
   handleNeckNotes (e) {
@@ -682,22 +769,46 @@ class App extends React.Component {
               Strings Theory
             </span>
             <span></span>
-            <span>
+            <span
+              className={this.state.mapChordsToggle}
+              onClick={(e)=>this.handleNavChoice(e)}
+              title="mapChords"
+              >
               Map Chords
             </span>
-            <span>
+            <span
+              className={this.state.mapScalesToggle}
+              onClick={(e)=>this.handleNavChoice(e)}
+              title="mapScales"
+              >
               Map Scales
             </span>
-            <span>
+            <span
+              className={this.state.findChordsToggle}
+              onClick={(e)=>this.handleNavChoice(e)}
+              title="findChords"
+              >
               Find Chords
             </span>
-            <span>
+            <span
+              className={this.state.findScalesToggle}
+              onClick={(e)=>this.handleNavChoice(e)}
+              title="findScales"
+              >
               Find Scales
             </span>
-            <span>
+            <span
+              className={this.state.tutorialToggle}
+              onClick={(e)=>this.handleNavChoice(e)}
+              title="tutorial"
+              >
               Tutorial
             </span>
-            <span>
+            <span
+              className={this.state.settingsToggle}
+              onClick={(e)=>this.handleNavChoice(e)}
+              title="settings"
+            >
               Settings
             </span>
             <span></span>
@@ -742,10 +853,12 @@ class App extends React.Component {
           }
         </div>
         <div className="middle">
-          <FretGuide
-            name ={'guideContainerUpper'}
-            view={this.state.view}
-          />
+          {!['Violin', 'Viola', 'Cello'].includes(this.state.instrument) ?
+            <FretGuide
+              name ={'guideContainerUpper'}
+              view={this.state.view}
+            />: null
+          }
           <div className={`${this.state.middle}`}>
             <div className={`${this.state.stringbox}`}>
               <StringSet
@@ -769,13 +882,16 @@ class App extends React.Component {
                 labelType={this.state.labelType}
                 chordFocus={this.state.chordFocus}
                 displayChordDegrees={this.state.displayChordDegrees}
+                instrument={this.state.instrument}
               />
             </div>
           </div>
-          <FretGuide
-            name ={'guideContainerLower'}
-            view={this.state.view}
-          />
+          {!['Violin', 'Viola', 'Cello'].includes(this.state.instrument) ?
+            <FretGuide
+              name ={'guideContainerLower'}
+              view={this.state.view}
+            />: null
+          }
         </div>
         <div className="bottomUpper">
           <TonicMenu
@@ -905,8 +1021,6 @@ class App extends React.Component {
                 sevenths={this.state.sevenths2}
               />: null}
           </React.Fragment>
-        </div>
-        <div className="bottom_right">
         </div>
       </div>
     )

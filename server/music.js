@@ -79,6 +79,73 @@ var chordDegrees = {
   seven: '7'
 }
 
+var chordTypes = {}
+
+var addChordType = (key, degrees, label, useUpper)=> {
+  chordTypes[key] = {}
+  chordTypes[key].degrees = degrees
+  chordTypes[key].label = label
+  useUpper ? chordTypes[key].useUpper = true : null
+}
+
+addChordType('majorTriad', ['one', 'three', 'five'], '')
+addChordType('maj7', ['one', 'three', 'five', 'seven'], 'maj7')
+addChordType('domniant', ['one', 'three', 'five', 'flatSeven'], '7')
+addChordType('minorTriad:', ['one', 'flatThree', 'five'], 'm',)
+addChordType('min7', ['one', 'flatThree', 'five', 'flatSeven'], 'm7')
+addChordType('min7FlatFive', ['one', 'flatThree', 'flatFive', 'flatSeven'], `m7(${flat}5)`)
+addChordType('dimTriad', ['one', 'flatThree', 'flatFive'], `${dim}`)
+addChordType('fullDim', ['one', 'flatThree', 'flatFive', 'dblFlat7'], `${dim}7`)
+addChordType('augTriad', ['one', 'three', 'sharpFive'], '+')
+addChordType('augmaj7', ['one', 'three', 'sharpFive', 'sevn'], '+(maj7)')
+addChordType('dominantSharp5', ['one', 'three', 'sharpFive', 'flatSevn'], `7${sharp}5`)
+addChordType('maj7Flat5', ['one', 'three', 'flatFive', 'seven'], `maj7(${flat}5)`)
+addChordType('dominantFlat5', ['one', 'three', 'flatFive', 'flatSeven'], `7(${flat}5)`)
+addChordType('sus2', ['one', 'two', 'five'], 'sus2')
+addChordType('sus4', ['one', 'four', 'five'], 'sus4')
+addChordType('add9', ['one', 'three','five', 'two'], 'add9', true)
+addChordType('addSharp11', ['one', 'three','five', 'sharpFour'], `add${sharp}11`, true)
+addChordType('major6', ['one', 'three', 'five', 'six'], '6')
+addChordType('minor6', ['one', 'flatThree', 'five', 'six'], 'm6')
+addChordType('dominantSus4', ['one', 'four', 'five', 'flatSeven'], `7sus4`)
+addChordType('maj7Sus4', ['one', 'four', 'five', 'seven'], `maj7(sus4)`)
+addChordType('maj9', ['one', 'three', 'five', 'seven', 'two'], 'maj9', true)
+addChordType('maj7AddSharp11',['one', 'three', 'five', 'seven', 'sharpFour'], `maj7(${sharp}11)`, true)
+addChordType('maj7Add13', ['one', 'three', 'five', 'seven', 'six'], `maj7(13)`, true)
+addChordType('majSharp11', ['one', 'three', 'five', 'seven', 'two', 'sharpFour'], `maj7(9, ${sharp}11)`, true)
+addChordType('maj7AddSharp11Add13', ['one', 'three', 'five', 'seven', 'sharpFour', 'six'],  `maj7(${sharp}11, 13)`, true)
+addChordType('maj9Add13', ['one', 'three', 'five', 'seven', 'two', 'six'], `maj7(9, 13)`, true)
+addChordType('maj13', ['one', 'three', 'five', 'seven', 'two', 'sharpFour', 'six'], 'maj13', true)
+addChordType('min9', ['one', 'flatThree', 'five', 'flatSeven', 'two'], `m7(9)`, true)
+addChordType('minAdd11', ['one', 'flatThree', 'five', 'flatSeven', 'four'], `m7(11)`, true)
+addChordType('minAdd13', ['one', 'flatThree', 'five', 'flatSeven', 'six'], `m7(13)`, true)
+addChordType('min11', ['one', 'flatThree', 'five', 'flatSeven', 'two', 'four'], `m7(9, 11)`, true)
+addChordType('minAdd9Add1', ['one', 'flatThree', 'five', 'flatSeven', 'two', 'six'], `m7(9, 13)`, true)
+addChordType('minAdd11Add13', ['one', 'flatThree', 'five', 'flatSeven', 'four', 'six'], `m7(11, 13)`, true)
+addChordType('min13', ['one', 'flatThree', 'five', 'flatSeven', 'two', 'four', 'six'], `m7(9, 11, 13)`, true)
+addChordType('dominant9', ['one', 'three', 'five', 'flatSeven', 'two'], `7(9)`, true)
+addChordType('dominantFlat9', ['one', 'three', 'five', 'flatSeven', 'flatTwo'], `7(${flat}9)`, true)
+addChordType('dominantSharp9', ['one', 'three', 'five', 'flatSeven', 'sharpTwo'], `7(${sharp}9)`, true)
+addChordType('dominantAddSharp11', ['one', 'three', 'five', 'flatSeven', 'sharpFour'], `7(${sharp}11)`, true)
+addChordType('dominantSharp11', ['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour'], `7(9, ${sharp}11), true`)
+addChordType('dominantAdd13', ['one', 'three', 'five', 'flatSeven', 'six'], `7(13)`, true)
+addChordType('dominantAddFlat13', ['one', 'three', 'five', 'flatSeven', 'flatSix'], `7(${flat}13)`, true)
+addChordType('dominant13', ['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'six'], `7(9, ${sharp}11, 13)`, true)
+addChordType('dominantFlat13', ['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'flatSix'], `7(9, ${sharp}11, ${flat}13)`, true)
+addChordType('dominant9Flat13', ['one', 'three', 'five', 'flatSeven', 'two', 'flatSix'], `7(9, ${flat}13)`, true)
+addChordType('dominant9Add13', ['one', 'three', 'five', 'flatSeven', 'two', 'six'], `7(9, 13)`, true)
+addChordType('dominantFlat9Flat13', ['one', 'three', 'five', 'flatSeven', 'flatTwo', 'flatSix'], `7(${flat}9, ${flat}13)`, true)
+addChordType('majorPentatonic', ['one', 'two', 'three', 'five', 'six'], 'maj Pentatonic')
+addChordType('minorPentatonic', ['one', 'flatThree', 'four', 'five', 'flatSeven'], 'min Pentatonic')
+addChordType('dominantPentatonic', ['one', 'two', 'three', 'five', 'flatSeven'], 'Dominant Pentatonic')
+addChordType('lydianDominantPentatonic', ['one', 'two', 'three', 'sharpFour', 'flatSeven'], `Dominant${sharp}4 Pentatonic`)
+addChordType('majSharp4Pentatonic', ['one', 'two', 'three', 'sharpFour', 'six'], `maj${sharp}4 Pentatonic`)
+addChordType('alteredPentatonic', ['one', 'flatTwo', 'three', 'five', 'flatSeven'], ` Altered Pentatonic`)
+addChordType('minorMaj7Pentatonic', ['one', 'flatThree', 'four', 'five', 'seven'], 'm(maj7 Pentatonic')
+addChordType('egyptianPentatonic', ['one', 'two', 'four', 'five', 'flatSeven'], 'Egyptian Pentatonic')
+addChordType('japanesePentatonic', ['one', 'flatTwo', 'four', 'five', 'flatSix'], 'Japanese Pentatonic')
+
+
 var sharpNote = (note) => {
   if (note.length === 1 || note.slice(note.length -2) === `${dblSharp}`) {
     note = `${note}${sharp}`;
@@ -891,7 +958,7 @@ add7NoteScale('lydian', ['one', 'two', 'three', 'sharpFour', 'five', 'six', 'sev
 add7NoteScale('mixolydian', ['one', 'two', 'three', 'four', 'five', 'six', 'flatSeven'], true)
 add7NoteScale('locrian', ['one', 'flatTwo', 'flatThree', 'four', 'flatFive', 'flatSix', 'flatSeven'], true)
 add7NoteScale('persian', ['one', 'flatTwo', 'three', 'four', 'flatFive', 'flatSix', 'flatSeven'], true)
-add7NoteScale('double harmonic major', ['one', 'flatTwo', 'three', 'four', 'five', 'flatSix', 'flatSeven'], true)//byzantine  see wiki
+add7NoteScale('double harmonic major', ['one', 'flatTwo', 'three', 'four', 'five', 'flatSix', 'flatSeven'], true)//byzantine see wiki
 add7NoteScale('hungarian gypsy minor', ['one', 'two', 'flatThree', 'sharpFour', 'five', 'flatSix', 'seven'], true)
 add7NoteScale('romanian minor', ['one', 'two', 'flatThree', 'sharpFour', 'five', 'six', 'flatSeven'], true) //ukrainian minor
 add7NoteScale('romanian major', ['one', 'flatTwo', 'three', 'sharpFour', 'five', 'six', 'flatSeven'], true)
@@ -950,7 +1017,7 @@ module.exports.scaleChoices = scaleChoices
 module.exports.solfege = solfege
 module.exports.scaleDegrees = scaleDegrees
 module.exports.chordDegrees = chordDegrees
-
+module.exports.chordTypes = chordTypes
 
 
 var findChordSpellings = () => {

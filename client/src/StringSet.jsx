@@ -1,9 +1,11 @@
 import React from 'react';
 import String from './String.jsx';
 
-var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees,  keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees})  => {
+var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees,  keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument})  => {
   var list;
   var neckClass;
+  var firstString;
+  var lastString;
 
   if (view==='Mirror View' || view==='Lefty Mirror View') {
     list = stringsMirror
@@ -19,7 +21,9 @@ var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord,
   return (
 
     <div className={`${neckClass}`}>
-      {list ? list.map((string) => (
+      {list ? list.map((string, i) => (
+        i === 0 ? firstString = true : firstString = false,
+        i === list.length - 1 ? lastString = true : lastString = false,
         <String
           string={string}
           allStrings={allStrings}
@@ -40,6 +44,9 @@ var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord,
           labelType={labelType}
           chordFocus={chordFocus}
           displayChordDegrees={displayChordDegrees}
+          instrument={instrument}
+          firstString={firstString}
+          lastString={lastString}
         />
       )): null}
     </div>
