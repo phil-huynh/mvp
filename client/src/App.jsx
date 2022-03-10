@@ -90,6 +90,7 @@ class App extends React.Component {
       secondButton: 'Compare a scale',
       selectedChord:{},
       selectedChord2:{},
+      selNote: '',
       settingsToggle: 'navOption',
       sevenths: false,
       sevenths2: false,
@@ -141,8 +142,9 @@ class App extends React.Component {
     this.handleTonicChange = this.handleTonicChange.bind(this);
     this.handleTonicChange2 = this.handleTonicChange2.bind(this);
     this.handleView = this.handleView.bind(this);
-    this.resetAll = this.resetAll.bind(this)
-    this.resetCard = this.resetCard.bind(this)
+    this.markNote = this.markNote.bind(this);
+    this.resetAll = this.resetAll.bind(this);
+    this.resetCard = this.resetCard.bind(this);
     this.resetChords = this.resetChords.bind(this)
     this.selectChord = this.selectChord.bind(this);
     this.selectChord2 = this.selectChord2.bind(this);
@@ -614,6 +616,19 @@ class App extends React.Component {
     })
   }
 
+  markNote (note) {
+    if(this.state.selNote === note) {
+      this.setState({
+        selNote: ''
+      })
+    }
+    if(this.state.selNote !== note) {
+      this.setState({
+        selNote: note
+      })
+    }
+  }
+
   resetCard(chord) {
     let typeKey = chord
     let alterKey = `${typeKey}Alt`
@@ -657,6 +672,7 @@ class App extends React.Component {
       displayChordDegrees: false,
       chordDegButtonClass: 'chordDegButton',
       chordFocus: 'Neutral',
+      selNote: ''
     })
   }
 
@@ -675,7 +691,8 @@ class App extends React.Component {
       this.setState({
         selectedChord: chord,
         currentChordTones: tones,
-        chordOneSelected: true
+        chordOneSelected: true,
+        selNote: ''
       })
     }
     if (chord === this.state.selectedChord && !this.state.compare && this.state.chordOneSelected) {
@@ -835,6 +852,7 @@ class App extends React.Component {
                 displayChordDegrees={this.state.displayChordDegrees}
                 instrument={this.state.instrument}
                 render={this.state.renderView}
+                selNote={this.state.selNote}
               />
             </div>
           </div>
@@ -889,6 +907,7 @@ class App extends React.Component {
               handleTonicMenuWindow={this.handleTonicMenuWindow}
               keyCenter={this.state.keyCenter}
               list={this.state.currentList}
+              markNote={this.markNote}
               noteNameToggle={this.state.noteNameToggle}
               resetCard={this.resetCard}
               resetChords={this.resetChords}
@@ -898,6 +917,7 @@ class App extends React.Component {
               scaleName={this.state.scaleName}
               selectChord={this.selectChord}
               selectChord2={this.selectChord2}
+              selNote={this.state.selNote}
               setTones={this.setTones}
               setTones2={this.setTones2}
               sevenths={this.state.sevenths}

@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, Button } from 'react-bootstrap'
 
 
-var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, chordTwoSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleLock, displayChordDegrees, handleChordFocus, chordFocus, sharedNotes}) => {
+var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, chordTwoSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleLock, displayChordDegrees, handleChordFocus, chordFocus, sharedNotes, selNote}) => {
 
   const sharp = '\u266F';
   const flat = '\u266D';
@@ -23,6 +23,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
   var shellList = ['maj7 (shell)', '7 (shell)', 'm7 (shell)', 'm(maj7) (shell)']
   var isChord1 = chord===currentChord
   var isChord2 = chord===currentChord2
+  var noneSelected = (!chordOneSelected && !chordTwoSelected)
 
 
   var selected = chord === currentChord
@@ -388,9 +389,13 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
         </div>
         <Card.Body className='cardBody'>
           <Card.Text>{tones.map ((tone) => (
-            sharedNotes.length > 0 && sharedNotes.includes(tone) && (isChord1 || isChord2)?
+            sharedNotes.length > 0 && sharedNotes.includes(tone) && (isChord1 || isChord2) ?
             <span className="sharedCardNote">&nbsp;{tone}&nbsp;</span>
-            :<span>&nbsp;{tone}&nbsp;</span>
+            : noneSelected && tone === selNote ?
+            <span className="targetNote" >&nbsp;{tone}&nbsp;</span>
+            :
+
+            <span>&nbsp;{tone}&nbsp;</span>
           ))}
 
           </Card.Text>

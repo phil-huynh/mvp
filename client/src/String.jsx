@@ -1,6 +1,6 @@
 import React from 'react'
 
-var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, firstString, lastString, render }) => {
+var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, firstString, lastString, render, selNote }) => {
   var notes=[];
   var currentString;
   var name;
@@ -142,6 +142,12 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
                             {labelContainer[keyKey[note]]}
                             </span>
                           </span>:
+                        scale.includes(note) && !chordOneSelected && !chordTwoSelected && selNote && selNote === note && i === open ?
+                          <span className={`${openClass}`}>
+                            <span className={`${openNoteClass} selNoteNeckToggle`}>
+                            {labelContainer[keyKey[note]]}
+                            </span>
+                          </span>:
                           scale.includes(note) && i === open && !(chordOneSelected && chordTwoSelected) && hideScale === 'Show Scale' ?
                             <span className={`${openClass}`}>
                               <span className={`${openNoteClass}`}>
@@ -205,6 +211,12 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
                                                 scale.includes(note) && chord2.includes(note) ?
                                                   <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
                                                     <span className={`${noteClass} selectedNote2`}>
+                                                      {labelContainer[keyKey[note]]}
+                                                    </span>_________________________________________________________________________________________________________________
+                                                  </span>:
+                                                scale.includes(note) && !chordOneSelected && !chordTwoSelected && selNote && selNote === note ?
+                                                  <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
+                                                    <span className={`${noteClass} selNoteNeckToggle`}>
                                                       {labelContainer[keyKey[note]]}
                                                     </span>_________________________________________________________________________________________________________________
                                                   </span>:
