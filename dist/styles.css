@@ -135,7 +135,7 @@ html {
 .keyChoiceLabels,
 .defaultChordLabel,
 .chordDegButton {
-  margin-right: 3%;
+  margin-right: 2%;
   color: white;
   font-size: 1.8vh;
   font-weight: 200;
@@ -145,13 +145,18 @@ html {
 
 .labelMenu {
   margin-right: 2%;
+  margin-left: 2%;
 }
 
 .keyChoiceLabels,
 .viewLabel,
 .tuningLabel {
-  font-size: 2.7vh;
+  font-size: 2.3vh;
   font-weight: 500;
+}
+
+.spelledScale {
+  font-size: 2.3vh;
 }
 
 .viewLabel:hover ,
@@ -507,8 +512,8 @@ html {
   0 0 .2rem #fff,
   0 0 0.5rem red,
   0 0 0.2rem red,
-  0 0 0.7rem red,
-  inset 0 0 1.7rem red;
+  0 0 1.4rem red,
+  inset 0 0 2rem red;
 }
 
 .unfocus {
@@ -565,7 +570,7 @@ html {
 
 .chordDegButton {
 
-  font-size: 2.2vh
+  font-size: 1.8vh
 }
 .chordDegButton {
   margin-right: 2%;
@@ -653,7 +658,6 @@ html {
 
 .spelledScale {
   margin-left: 2%;
-  margin-right: 2%;
 }
 
 .sharedCardNote {
