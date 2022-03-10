@@ -387,7 +387,9 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
             {name}
           </Card.Header>
         </div>
-        <Card.Body className='cardBody'>
+        <Card.Body
+          className='cardBody'
+          onClick={chordOneSelected && compareChords ? ()=>{selectChord2(chord, tones)} : ()=>{selectChord(chord, tones)}}>
           <Card.Text>{tones.map ((tone) => (
             sharedNotes.length > 0 && sharedNotes.includes(tone) && (isChord1 || isChord2) ?
             <span className="sharedCardNote">&nbsp;{tone}&nbsp;</span>
