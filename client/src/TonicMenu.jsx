@@ -76,30 +76,6 @@ var TonicMenu = ({showTonicMenu, handleTonicMenuWindow, handleTonicChange}) => {
       <div
         className='modalMenuChoice'
         onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
-        title={`C${flat}`}>{`C${flat}`}</div>
-      <div
-        className='modalMenuChoice'
-        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
-        title={`F${flat}`}>{`F${flat}`}</div>
-      <div
-        className='modalMenuChoice'
-        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
-        title={`B${dblFlat}`}>{`B${dblFlat}`}</div>
-      <div
-        className='modalMenuChoice'
-        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
-        title={`E${dblFlat}`}>{`E${dblFlat}`}</div>
-      <div
-        className='modalMenuChoice'
-        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
-        title={`A${dblFlat}`}>{`A${dblFlat}`}</div>
-      <div
-        className='modalMenuChoice'
-        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
-        title={`D${dblFlat}`}>{`D${dblFlat}`}</div>
-      <div
-        className='modalMenuChoice'
-        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
         title={`F${sharp}`}>{`F${sharp}`}</div>
       <div
         className='modalMenuChoice'
@@ -117,14 +93,6 @@ var TonicMenu = ({showTonicMenu, handleTonicMenuWindow, handleTonicChange}) => {
         className='modalMenuChoice'
         onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
         title={`A${sharp}`}>{`A${sharp}`}</div>
-      <div
-        className='modalMenuChoice'
-        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
-        title={`E${sharp}`}>{`E${sharp}`}</div>
-      <div
-        className='modalMenuChoice'
-        onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
-        title={`B${sharp}`}>{`B${sharp}`}</div>
     </Modal>
   )
 }
