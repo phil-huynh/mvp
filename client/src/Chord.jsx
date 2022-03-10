@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, Button } from 'react-bootstrap'
 
 
-var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, chordTwoSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleLock, displayChordDegrees, handleChordFocus, chordFocus}) => {
+var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, chordTwoSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleLock, displayChordDegrees, handleChordFocus, chordFocus, sharedNotes}) => {
 
   const sharp = '\u266F';
   const flat = '\u266D';
@@ -21,6 +21,9 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
   var triadList = [' Triad', '+ Triad', 'm Triad', `${dim} Triad`, `maj ${flat}5 Triad`]
   var seventhsList = ['maj7', '7', '+(maj7)', `7(${sharp}5)`, `7(${flat}5)`, `${dim}7`,`maj7(${flat}5)`, `m7(${flat}5)`, 'm(maj7)', 'm7']
   var shellList = ['maj7 (shell)', '7 (shell)', 'm7 (shell)', 'm(maj7) (shell)']
+  var isChord1 = chord===currentChord
+  var isChord2 = chord===currentChord2
+
 
   var selected = chord === currentChord
   var selected2 = chord === currentChord2
@@ -345,18 +348,18 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     options.fifthsVoicing.notes
   }
 
-  if (chord===currentChord && currentChordTones !== tones) {
+  if (isChord1 && currentChordTones !== tones) {
     setTones(tones)
   }
-  if (chord===currentChord2 && currentChordTones2 !== tones) {
+  if (isChord2 && currentChordTones2 !== tones) {
     setTones2(tones)
   }
 
-  if (currentChord && chord===currentChord ) {
+  if (isChord1) {
     cardClass = `${cardClass} selectedChord`
   }
 
-  if (currentChord2 && chord===currentChord2) {
+  if (isChord2) {
     cardClass = `${cardClass} selectedChord2`
   }
 
@@ -385,7 +388,9 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
         </div>
         <Card.Body className='cardBody'>
           <Card.Text>{tones.map ((tone) => (
-            <span>&nbsp;{tone}&nbsp;</span>
+            sharedNotes.length > 0 && sharedNotes.includes(tone) && (isChord1 || isChord2)?
+            <span className="sharedCardNote">&nbsp;{tone}&nbsp;</span>
+            :<span>&nbsp;{tone}&nbsp;</span>
           ))}
 
           </Card.Text>

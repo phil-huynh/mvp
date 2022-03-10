@@ -1,9 +1,9 @@
 import React from 'react'
 import HideScaleMenu from './HideScaleMenu.jsx'
 
-var NeckDash = ({handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel}) => {
+var NeckDash = ({handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll}) => {
   return (
-    <span>
+    <span className="neckDashLayout">
       <span
         className="viewLabel"
         onClick={()=>handleViewMenuWindow()}
@@ -26,7 +26,13 @@ var NeckDash = ({handleViewMenuWindow, handleStringsMenuWindow, instrument, tuni
         scaleUnfocusedLabel={scaleUnfocusedLabel}
         scaleVisibleLabel={scaleVisibleLabel}
       />
-      {sharedNotes ?
+      <span
+        onClick={() => resetAll()}
+        className="reset_button resetAll"
+        >
+        Reset All
+      </span>
+      {sharedNotes.length > 0 ?
         <span className="sharedLight">Shared Notes</span> : null
       }
     </span>

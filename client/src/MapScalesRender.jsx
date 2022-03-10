@@ -6,58 +6,11 @@ import AlterChordOpt from './AlterChordOpt.jsx'
 import ScaleChords from './ScaleChords.jsx'
 
 
-var MapScalesRender = ({
-  ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt,
-  chordDegButtonClass,
-  chordFocus,
-  chordOneSelected,
-  chordTwoSelected,
-  compareChords,
-  currentCard,
-  currentChord,
-  currentChord2,
-  currentChordTones,
-  currentChordTones2,
-  defaultType,
-  displayChordDegrees,
+var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt, chordDegButtonClass, chordFocus, chordOneSelected, chordTwoSelected, compareChords, currentCard, currentChord, currentChord2, currentChordTones, currentChordTones2, defaultType, displayChordDegrees, handleAlterChord, handleAlterChordWindow, handleChordDegrees, handleChordFocus, handleLock, handleNeckNotes, handleScaleChange, handleScaleChange2, handleScaleMenuWindow, handleSevenths, handleTonicChange, handleTonicChange2, handleTonicMenuWindow, keyCenter, list, noteNameToggle, resetCard, resetChords, root, scale, scaleDegreeToggle, scaleName, selectChord, selectChord2, setTones, setTones2, sevenths, sharedNotes, showAlter, showScaleMenu, showTonicMenu, solfegeToggle, tonic}) => {
 
-  handleAlterChord,
-  handleAlterChordWindow,
-  handleChordDegrees,
-  handleChordFocus,
-  handleLock,
-  handleNeckNotes,
-  handleScaleChange,
-  handleScaleChange2,
-  handleScaleMenuWindow,
-  handleSevenths,
-  handleTonicChange,
-  handleTonicChange2,
-  handleTonicMenuWindow,
-  keyCenter,
-  list,
-  noteNameToggle,
-
-  resetAll,
-  resetCard,
-  resetChords,
-  root,
-  scaleDegreeToggle,
-  scaleName,
-  selectChord,
-  selectChord2,
-  setTones,
-  setTones2,
-  sevenths,
-  showAlter,
-  showScaleMenu,
-  showTonicMenu,
-  solfegeToggle,
-  tonic
-  }) => {
   return (
     <React.Fragment>
-      <div className="bottomUpper">
+      <div className="bottomUpperScales">
         <TonicMenu
           handleTonicChange={handleTonicChange}
           handleTonicMenuWindow={handleTonicMenuWindow}
@@ -84,7 +37,17 @@ var MapScalesRender = ({
           >
             {scaleName}
           </span>
-
+          <span className="spelledScale">
+            {scale ? scale.map((note) => (
+              sharedNotes.length > 0 && sharedNotes.includes(note) ?
+                <span className="sharedNoteInScale">{`   ${note}   `}</span>
+                : currentChordTones.length > 0 && currentChordTones.includes(note) ?
+                  <span className="chord1NoteInScale">{`   ${note}   `}</span>
+                : currentChordTones2.length > 0 && currentChordTones2.includes(note) ?
+                  <span className="chord2NoteInScale">{`   ${note}   `}</span>
+                : <span>{`   ${note}   `}</span>
+            )): null}
+          </span>
         </span>
 
         <LabelMenu
@@ -101,6 +64,13 @@ var MapScalesRender = ({
         >
           {`Default Voicing : ${defaultType}`}
         </span>
+
+        <span
+          onClick={() => resetChords()}
+          className="reset_button"
+          >
+          Reset Voicings
+        </span>
         {chordOneSelected ?
           <span
             className={chordDegButtonClass}
@@ -109,20 +79,8 @@ var MapScalesRender = ({
             Chord Degrees
           </span>: null
         }
-        <span
-          onClick={() => resetChords()}
-          className="reset_button"
-          >
-          Reset Voicings
-        </span>
-        <span
-          onClick={() => resetAll()}
-          className="reset_button"
-          >
-          Reset Everything
-        </span>
       </div>
-      <div className="bottomLower">
+      <div className="bottomLowerScales">
         <AlterChordOpt
           showAlter={showAlter}
           handleAlterChord={handleAlterChord}
@@ -148,6 +106,7 @@ var MapScalesRender = ({
           resetCard={resetCard}
           setTones={setTones}
           setTones2={setTones2}
+          sharedNotes={sharedNotes}
           displayChordDegrees={displayChordDegrees}
           handleChordFocus={handleChordFocus}
           chordFocus={chordFocus}

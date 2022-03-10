@@ -70,7 +70,7 @@ html {
   background: rgb(2,0,36);
   background: radial-gradient(circle, rgba(2,0,36,1) 21%, rgb(41, 0, 135) 51%, rgba(45,49,66,0.9514180672268907) 79%);
   display: grid;
-  grid-template-rows: 8% 10% 25% 20% 32%;
+  grid-template-rows: 8% 10% 25% 52%;
 }
 
 /*****************************************************************************
@@ -110,8 +110,8 @@ html {
 
 .neckDash {
   grid-row-start: 2;
-  margin-left: 4%;
-  margin-right: 4%;
+  margin-left: 2%;
+  margin-right: 2%;
   margin-bottom: 1.7%;
   background-color: #363B4A;
   border: white double 4px;
@@ -135,12 +135,19 @@ html {
 .keyChoiceLabels,
 .defaultChordLabel,
 .chordDegButton {
-  margin-right: 2%;
+  margin-right: 4%;
   color: white;
   font-size: 1.8vh;
   font-weight: 200;
   font-family: 'Comic Neue', cursive;
   cursor: pointer;
+}
+
+.keyChoiceLabels,
+.viewLabel,
+.tuningLabel {
+  font-size: 2.7vh;
+  font-weight: 500;
 }
 
 .viewLabel:hover ,
@@ -482,7 +489,7 @@ html {
   inset 0 0 1.7rem #0095ec;
 }
 
-.sharedNote {
+.sharedNeckNote {
   box-shadow: 0 0 .2rem #fff,
   0 0 .2rem #fff,
   0 0 0.5rem #49ff18,
@@ -495,15 +502,23 @@ html {
   opacity: .4;
 }
 
-.bottomLower,
-.bottomUpper {
-  grid-row-start: 5;
-  margin-left: 4%;
-  margin-right: 4%;
+
+.map_scales_bottom_render {
+  grid-row-start: 4;
+  display: grid;
+  grid-template-rows: 30% 70%;
+}
+
+.bottomLowerScales,
+.bottomUpperScales {
+  grid-row-start: 2;
+  margin-left: 2%;
+  margin-right: 2%;
   background-color: #363B4A;
   border: white double 4px;
   border-radius: 10px ;
-  padding: 4%;
+  padding: .5%;
+  padding-left: .8%;
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
   box-shadow: 5px 5px 15px 5px #000000;
   color: #FFFFFF;
@@ -515,8 +530,8 @@ html {
   opacity: .9;
 }
 
-.bottomUpper {
-  grid-row-start: 4;
+.bottomUpperScales {
+  grid-row-start: 1;
   margin-top: 2%;
   margin-bottom: 2%;
   padding: .5%;
@@ -525,22 +540,25 @@ html {
 
 
 .sharedLight{
-  font-size: 2.2vh;
+  margin-left: 7%;
+  font-size: 2.7vh;
   font-weight: 200;
   font-family: 'Comic Neue', cursive;
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #49ff18, 0 0 20px #49ff18,  0 0 25px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 55px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
   color: #FFFFFF;
 }
 
+
 .chordDegButton {
-  margin-right: 2%;
+
+  font-size: 2.7vh
 }
 .chordDegButton {
   margin-right: 2%;
 }
 
 .chordCard {
-  width:11vw;
+  width:12.5vw;
   line-height: 30%;
   font-size: 2vh;
   cursor: pointer;
@@ -559,12 +577,16 @@ html {
 .selectedChord2 {
   text-shadow: 0 0 5px #FFF, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec, 0 0 55px #0095ec, 0 0 75px #0095ec, 38px 19px 8px rgba(206,89,55,0);
   color: #0095ec;
+  -webkit-box-shadow: 5px 5px 15px 5px #0095ec;
+  box-shadow: 5px 5px 15px 5px #0095ec;
 
 }
 
 .selectedChord {
-  text-shadow: #FFF 0px 0px 5px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
+  text-shadow: yellow 0px 0px 7px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
   color: #FFFFFF;
+  -webkit-box-shadow: 2px 2px 15px 5px yellow;
+  box-shadow: 2px 2px 15px 5px yellow;
 }
 
 
@@ -610,6 +632,51 @@ html {
   text-shadow: 0 0 5px #FFF, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 45px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
 }
 
+.spelledScale {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.sharedCardNote {
+  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+}
+.sharedNoteInScale {
+  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+}
+.chord1NoteInScale {
+  text-shadow: yellow 0px 0px 7px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
+}
+.chord2NoteInScale {
+  text-shadow: 0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec, 0 0 55px #0095ec, 0 0 75px #0095ec, 38px 19px 8px rgba(206,89,55,0);
+}
 
 
 
+
+
+
+
+
+
+
+.test{
+  grid-row-start: 4;
+  margin-left: 4%;
+  margin-right: 4%;
+  background-color: #363B4A;
+  border: white double 4px;
+  border-radius: 10px ;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding: .5%;
+  padding-left: 2%;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+  color: #FFFFFF;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+  opacity: .9;
+}

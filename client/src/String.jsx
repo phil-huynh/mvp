@@ -1,6 +1,6 @@
 import React from 'react'
 
-var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, firstString, lastString }) => {
+var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, firstString, lastString, render }) => {
   var notes=[];
   var currentString;
   var name;
@@ -25,8 +25,6 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
   } else {
     fretClass = 'fret'
   }
-
-
 
   if (labelType === 'Note Names') {
     labelContainer = keyCenter.tonicScaleDegrees
@@ -98,13 +96,13 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
         {notes ? notes.map((note, i) => (
           scale.includes(note) && chord.includes(note) && chord2.includes(note) && i === open && displayChordDegrees ?
             <span className={`${openClass}`}>
-              <span className={`${openNoteClass} sharedNote`}>
+              <span className={`${openNoteClass} sharedNeckNote`}>
                 {altLabelContainer[chordKey[note]]}
               </span>
             </span>:
             scale.includes(note) && chord.includes(note) && chord2.includes(note) && i === open ?
               <span className={`${openClass}`}>
-                <span className={`${openNoteClass} sharedNote`}>
+                <span className={`${openNoteClass} sharedNeckNote`}>
                   {labelContainer[keyKey[note]]}
                 </span>
               </span>:
@@ -164,13 +162,13 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
                                   </span>:
                                   scale.includes(note) && chord.includes(note) && chord2.includes(note) && displayChordDegrees ?
                                     <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
-                                      <span className={`${noteClass} sharedNote`}>
+                                      <span className={`${noteClass} sharedNeckNote`}>
                                         {altLabelContainer[chordKey[note]]}
                                       </span>_________________________________________________________________________________________________________________
                                     </span>:
                                     scale.includes(note) && chord.includes(note) && chord2.includes(note) ?
                                       <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
-                                        <span className={`${noteClass} sharedNote`}>
+                                        <span className={`${noteClass} sharedNeckNote`}>
                                           {labelContainer[keyKey[note]]}
                                         </span>_________________________________________________________________________________________________________________
                                       </span>:

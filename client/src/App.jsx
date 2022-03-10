@@ -9,6 +9,7 @@ import LabelMenu from './LabelMenu.jsx'
 import Header from './Header.jsx'
 import NeckDash from './NeckDash.jsx'
 import MapScalesRender from './MapScalesRender.jsx'
+import MapChordsRender from './MapChordsRender.jsx'
 import Dropdown from './Dropdown.jsx'
 import FretGuide from './FretGuide.jsx'
 import AlterChordOpt from './AlterChordOpt.jsx'
@@ -25,45 +26,6 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      strings: {},
-      stringsLeft: {},
-      currentStrings: [`E,F${flat},D${dblSharp}`, `B,C${flat},A${dblSharp}`, `G,F${dblSharp},A${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `A,G${dblSharp},B${dblFlat}`, `E,F${flat},D${dblSharp}`],
-      currentStringsMirror: [`E,F${flat},D${dblSharp}`, `A,G${dblSharp},B${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `G,F${dblSharp},A${dblFlat}`, `B,C${flat},A${dblSharp}`, `E,F${flat},D${dblSharp}`],
-      choices: [],
-      scaleType:'major',
-      scaleName:'Major',
-      keyCenter: {},
-      keyCenter2: {},
-      tonic: '',
-      scale: [],
-      chords: {},
-      sevenths: false,
-      selectedChord:{},
-      currentChordTones: [],
-      chordOneSelected: false,
-      chordTwoSelected: false,
-      selectedChord2:{},
-      currentChordTones2: [],
-      defaultType: 'Triads',
-      second: false,
-      secondButton: 'Compare a scale',
-      scaleType2: 'major',
-      tonic2: '',
-      scale2: [],
-      chords2: {},
-      sevenths2: false,
-      moreSeventhsButton: 'Show 7th Chords',
-      view: 'Traditional View',
-      hideScale: 'Show Scale',
-      hideScaleButton: 'hide scale',
-      solfege: {},
-      scaleDegrees: {},
-      chordDegrees: {},
-      chordTypes: {},
-      labelType: 'Note Names',
-      singleOrCompareButton: 'Single Chord',
-      chordFocus: 'Neutral',
-      compare: false,
       ch0: 'Triad',
       ch1: 'Triad',
       ch2: 'Triad',
@@ -78,37 +40,76 @@ class App extends React.Component {
       ch4Alt: false,
       ch5Alt: false,
       ch6Alt: false,
-      showAlter: false,
-      showViewMenu: false,
-      showTonicMenu: false,
-      showScaleMenu: false,
-      showStringsMenu: false,
-      currentCard: '',
-      currentList: '',
-      chordOptRoot: '',
-      middle: 'inner_middle',
-      stringbox: 'stringbox',
-      sharedNotes: false,
-      noteNameToggle: 'toggle_on',
-      scaleDegreeToggle: 'toggle_off',
-      solfegeToggle: 'toggle_off',
-      scaleVisibleToggle: 'toggle_on',
-      scaleHiddenToggle: 'toggle_off',
-      scaleUnfocusedToggle: 'toggle_off',
-      scaleVisibleLabel: 'Scale Visible',
-      scaleHiddenLabel: 'Hide Scale',
-      scaleUnfocusedLabel: 'Unfocus Scale',
-      instrument: 'Guitar',
-      tuning: ' E A D G B E ',
-      displayChordDegrees: false,
+      choices: [],
+      chords: {},
+      chords2: {},
+      chordDegrees: {},
       chordDegButtonClass: 'chordDegButton',
-      mapChordsToggle: 'navOption',
-      mapScalesToggle: 'navOption toggle_on',
+      chordOneSelected: false,
+      chordOptRoot: '',
+      chordTwoSelected: false,
+      chordTypes: {},
+      chordFocus: 'Neutral',
+      currentCard: '',
+      compare: false,
+      currentChordTones: [],
+      currentChordTones2: [],
+      currentList: '',
+      currentStrings: [`E,F${flat},D${dblSharp}`, `B,C${flat},A${dblSharp}`, `G,F${dblSharp},A${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `A,G${dblSharp},B${dblFlat}`, `E,F${flat},D${dblSharp}`],
+      currentStringsMirror: [`E,F${flat},D${dblSharp}`, `A,G${dblSharp},B${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `G,F${dblSharp},A${dblFlat}`, `B,C${flat},A${dblSharp}`, `E,F${flat},D${dblSharp}`],
+      defaultType: 'Triads',
+      displayChordDegrees: false,
       findChordsToggle: 'navOption',
       findScalesToggle: 'navOption',
-      tutorialToggle: 'navOption',
+      hideScale: 'Show Scale',
+      hideScaleButton: 'hide scale',
+      instrument: 'Guitar',
+      keyCenter: {},
+      keyCenter2: {},
+      labelType: 'Note Names',
+      mapChordsToggle: 'navOption',
+      mapScalesToggle: 'navOption toggle_on',
+      middle: 'inner_middle',
+      moreSeventhsButton: 'Show 7th Chords',
+      noteNameToggle: 'toggle_on',
+      renderView: 'Map Scales',
+      scale: [],
+      scale2: [],
+      scaleDegrees: {},
+      scaleDegreeToggle: 'toggle_off',
+      scaleHiddenLabel: 'Hide Scale',
+      scaleHiddenToggle: 'toggle_off',
+      scaleName:'Major',
+      scaleType:'major',
+      scaleType2: 'major',
+      scaleUnfocusedToggle: 'toggle_off',
+      scaleVisibleLabel: 'Scale Visible',
+      scaleUnfocusedLabel: 'Unfocus Scale',
+      scaleVisibleToggle: 'toggle_on',
+      second: false,
+      secondButton: 'Compare a scale',
+      selectedChord:{},
+      selectedChord2:{},
       settingsToggle: 'navOption',
-      renderView: 'Map Scales'
+      sevenths: false,
+      sevenths2: false,
+      sharedNotes: [],
+      showAlter: false,
+      showScaleMenu: false,
+      showStringsMenu: false,
+      showTonicMenu: false,
+      showViewMenu: false,
+      singleOrCompareButton: 'Single Chord',
+      solfege: {},
+      solfegeToggle: 'toggle_off',
+      strings: {},
+      stringbox: 'stringbox',
+      stringsLeft: {},
+      tonic: '',
+      tonic2: '',
+      tuning: ' E A D G B E ',
+      tutorialToggle: 'navOption',
+      view: 'Traditional View',
 
     }
 
@@ -651,7 +652,7 @@ class App extends React.Component {
       currentChordTones2: [],
       chordOneSelected: false,
       chordTwoSelected: false,
-      sharedNotes: false,
+      sharedNotes: [],
       compare: false,
       displayChordDegrees: false,
       chordDegButtonClass: 'chordDegButton',
@@ -693,16 +694,15 @@ class App extends React.Component {
     console.log(tones)
     let checker = {}
     let notes = this.state.currentChordTones
+    var sharedNotes = []
 
     for(var i = 0; i < notes.length; i++) {
       checker[notes[i]] = true
     }
 
-    var shareNotes = false
     for (var j = 0; j < tones.length; j++) {
       if (checker[tones[j]]) {
-        shareNotes = true;
-        break;
+        sharedNotes.push(tones[j])
       }
     }
 
@@ -712,7 +712,7 @@ class App extends React.Component {
         currentChordTones2: [],
         chordTwoSelected: false,
         chordFocus: 'Neutral',
-        sharedNotes: false
+        sharedNotes: [],
       })
     }
     if (chord === this.state.selectedChord) {
@@ -724,7 +724,7 @@ class App extends React.Component {
         chordOneSelected: false,
         chordTwoSelected: false,
         chordFocus: 'Neutral',
-        sharedNotes: false,
+        sharedNotes: [],
         compare: false,
         displayChordDegrees: false,
         chordDegButtonClass: 'chordDegButton'
@@ -735,19 +735,14 @@ class App extends React.Component {
         currentChordTones2: [],
         chordTwoSelected: false,
         chordFocus: 'Neutral',
-        sharedNotes: false
+        sharedNotes: []
       })
     } else {
-      if (shareNotes) {
-        this.setState({sharedNotes: true})
-      }
-      if (!shareNotes) {
-        this.setState({sharedNotes: false})
-      }
       this.setState({
         selectedChord2: chord,
         currentChordTones2: tones,
-        chordTwoSelected: true
+        chordTwoSelected: true,
+        sharedNotes: sharedNotes
       })
     }
   }
@@ -799,6 +794,7 @@ class App extends React.Component {
             sharedNotes={this.state.sharedNotes}
             name={'hideScaleMenu'}
             handleHide={this.handleHide}
+            resetAll={this.resetAll}
             scaleHiddenToggle={this.state.scaleHiddenToggle}
             scaleUnfocusedToggle={this.state.scaleUnfocusedToggle}
             scaleVisibleToggle={this.state.scaleVisibleToggle}
@@ -838,6 +834,7 @@ class App extends React.Component {
                 chordFocus={this.state.chordFocus}
                 displayChordDegrees={this.state.displayChordDegrees}
                 instrument={this.state.instrument}
+                render={this.state.renderView}
               />
             </div>
           </div>
@@ -849,66 +846,73 @@ class App extends React.Component {
           }
         </div>
         {this.state.renderView === 'Map Scales' ?
-          <MapScalesRender
-            ch0={this.state.ch0}
-            ch1={this.state.ch1}
-            ch2={this.state.ch2}
-            ch3={this.state.ch3}
-            ch4={this.state.ch4}
-            ch5={this.state.ch5}
-            ch6={this.state.ch6}
-            ch0Alt={this.state.ch0Alt}
-            ch1Alt={this.state.ch1Alt}
-            ch2Alt={this.state.ch2Alt}
-            ch3Alt={this.state.ch3Alt}
-            ch4Alt={this.state.ch4Alt}
-            ch5Alt={this.state.ch5Alt}
-            ch6Alt={this.state.ch6Alt}
-            chordDegButtonClass={this.state.chordDegButtonClass}
-            chordFocus={this.state.chordFocus}
-            chordOneSelected={this.state.chordOneSelected}
-            chordTwoSelected={this.state.chordTwoSelected}
-            compareChords={this.state.compare}
-            currentCard={this.state.currentCard}
-            currentChord={this.state.selectedChord}
-            currentChord2={this.state.selectedChord2}
-            currentChordTones={this.state.currentChordTones}
-            currentChordTones2={this.state.currentChordTones2}
-            defaultType={this.state.defaultType}
-            displayChordDegrees={this.state.displayChordDegrees}
-            handleAlterChord={this.handleAlterChord}
-            handleAlterChordWindow={this.handleAlterChordWindow}
-            handleChordDegrees={this.handleChordDegrees}
-            handleChordFocus={this.handleChordFocus}
-            handleLock={this.handleSingleOrCompare}
-            handleNeckNotes={this.handleNeckNotes}
-            handleScaleChange={this.handleScaleChange}
-            handleScaleChange2={this.handleScaleChange2}
-            handleScaleMenuWindow={this.handleScaleMenuWindow}
-            handleSevenths={this.handleSevenths}
-            handleTonicChange={this.handleTonicChange}
-            handleTonicChange2={this.handleTonicChange2}
-            handleTonicMenuWindow={this.handleTonicMenuWindow}
-            keyCenter={this.state.keyCenter}
-            list={this.state.currentList}
-            noteNameToggle={this.state.noteNameToggle}
-            resetAll={this.resetAll}
-            resetCard={this.resetCard}
-            resetChords={this.resetChords}
-            root={this.state.chordOptRoot}
-            scaleDegreeToggle={this.state.scaleDegreeToggle}
-            scaleName={this.state.scaleName}
-            selectChord={this.selectChord}
-            selectChord2={this.selectChord2}
-            setTones={this.setTones}
-            setTones2={this.setTones2}
-            sevenths={this.state.sevenths}
-            showAlter={this.state.showAlter}
-            showScaleMenu={this.state.showScaleMenu}
-            showTonicMenu={this.state.showTonicMenu}
-            solfegeToggle={this.state.solfegeToggle}
-            tonic={this.state.tonic}
-          />: null
+          <div className='map_scales_bottom_render'>
+            <MapScalesRender
+              ch0={this.state.ch0}
+              ch1={this.state.ch1}
+              ch2={this.state.ch2}
+              ch3={this.state.ch3}
+              ch4={this.state.ch4}
+              ch5={this.state.ch5}
+              ch6={this.state.ch6}
+              ch0Alt={this.state.ch0Alt}
+              ch1Alt={this.state.ch1Alt}
+              ch2Alt={this.state.ch2Alt}
+              ch3Alt={this.state.ch3Alt}
+              ch4Alt={this.state.ch4Alt}
+              ch5Alt={this.state.ch5Alt}
+              ch6Alt={this.state.ch6Alt}
+              chordDegButtonClass={this.state.chordDegButtonClass}
+              chordFocus={this.state.chordFocus}
+              chordOneSelected={this.state.chordOneSelected}
+              chordTwoSelected={this.state.chordTwoSelected}
+              compareChords={this.state.compare}
+              currentCard={this.state.currentCard}
+              currentChord={this.state.selectedChord}
+              currentChord2={this.state.selectedChord2}
+              currentChordTones={this.state.currentChordTones}
+              currentChordTones2={this.state.currentChordTones2}
+              defaultType={this.state.defaultType}
+              displayChordDegrees={this.state.displayChordDegrees}
+              handleAlterChord={this.handleAlterChord}
+              handleAlterChordWindow={this.handleAlterChordWindow}
+              handleChordDegrees={this.handleChordDegrees}
+              handleChordFocus={this.handleChordFocus}
+              handleLock={this.handleSingleOrCompare}
+              handleNeckNotes={this.handleNeckNotes}
+              handleScaleChange={this.handleScaleChange}
+              handleScaleChange2={this.handleScaleChange2}
+              handleScaleMenuWindow={this.handleScaleMenuWindow}
+              handleSevenths={this.handleSevenths}
+              handleTonicChange={this.handleTonicChange}
+              handleTonicChange2={this.handleTonicChange2}
+              handleTonicMenuWindow={this.handleTonicMenuWindow}
+              keyCenter={this.state.keyCenter}
+              list={this.state.currentList}
+              noteNameToggle={this.state.noteNameToggle}
+              resetCard={this.resetCard}
+              resetChords={this.resetChords}
+              root={this.state.chordOptRoot}
+              scale={this.state.scale}
+              scaleDegreeToggle={this.state.scaleDegreeToggle}
+              scaleName={this.state.scaleName}
+              selectChord={this.selectChord}
+              selectChord2={this.selectChord2}
+              setTones={this.setTones}
+              setTones2={this.setTones2}
+              sevenths={this.state.sevenths}
+              sharedNotes={this.state.sharedNotes}
+              showAlter={this.state.showAlter}
+              showScaleMenu={this.state.showScaleMenu}
+              showTonicMenu={this.state.showTonicMenu}
+              solfegeToggle={this.state.solfegeToggle}
+              tonic={this.state.tonic}
+            />
+          </div>
+          :
+          this.state.renderView === 'Map Chords' ?
+          <MapChordsRender/>
+          :null
         }
       </div>
     )
