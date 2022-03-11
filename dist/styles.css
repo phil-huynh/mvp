@@ -524,7 +524,7 @@ html {
 .map_scales_bottom_render {
   grid-row-start: 4;
   display: grid;
-  grid-template-rows: 25% 75%;
+  grid-template-rows: 30% 70%;
 }
 
 .bottomLowerScales,

@@ -10,7 +10,6 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
 
   return (
     <React.Fragment>
-      <div className="bottomUpperScales">
         <TonicMenu
           handleTonicChange={handleTonicChange}
           handleTonicMenuWindow={handleTonicMenuWindow}
@@ -21,6 +20,7 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
           handleScaleMenuWindow={handleScaleMenuWindow}
           showScaleMenu={showScaleMenu}
         />
+      <div className="bottomUpperScales">
         <span className="keyChoiceLabels">
           <span>
             {`Scale :`}
@@ -55,7 +55,6 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
             )): null}
           </span>
         </span>
-
         <LabelMenu
           handleNeckNotes={handleNeckNotes}
           name={'labelMenu'}
@@ -63,14 +62,12 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
           scaleDegreeToggle={scaleDegreeToggle}
           solfegeToggle={solfegeToggle}
         />
-
         <span
           className="defaultChordLabel"
         >
           <span>{`Default Voicing : `}</span>
           <span className="defaultVoicing" onClick={(e) => handleSevenths(e)}>{`${defaultType}`}</span>
         </span>
-
         <span
           onClick={() => resetChords()}
           className="reset_button"
