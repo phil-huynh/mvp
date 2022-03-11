@@ -369,8 +369,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
       {chord ?
       <Card
         className={cardClass}
-        bg='secondary'
-        border='white'
+        bg='dark'
         text='white'
         >
         <div
