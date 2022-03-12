@@ -186,7 +186,7 @@ align-content: center;
 
 .viewLabel:hover ,
 .tuningLabel:hover {
-  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px , 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 38px 19px 8px rgba(206,89,55,0);
 }
 
 .sharedLight{
@@ -196,7 +196,7 @@ align-content: center;
   padding-left: .8%;
   padding-right: .8%;
   border-radius: 10px;;
-  border: white solid 5px;
+  border: white solid 3px;
   font-family: 'Comic Neue', cursive;
   text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18,  0 0 25px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 50px #49ff18, 38px 19px 8px rgba(206,89,55,0);
   color: #FFFFFF;
