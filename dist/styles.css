@@ -563,7 +563,7 @@ html {
   font-size: 2.7vh;
   font-weight: 200;
   font-family: 'Comic Neue', cursive;
-  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #49ff18, 0 0 20px #49ff18,  0 0 25px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 55px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18,  0 0 25px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 50px #49ff18, 38px 19px 8px rgba(206,89,55,0);
   color: #FFFFFF;
 }
 
@@ -594,7 +594,7 @@ html {
 }
 
 .selectedChord2 {
-  text-shadow: 0 0 5px #FFF, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec, 0 0 55px #0095ec, 0 0 75px #0095ec, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec, 0 0 55px #0095ec, 38px 19px 8px rgba(206,89,55,0);
   color: #0095ec;
   -webkit-box-shadow: 4px 4px 15px 7px #0095ec;
   box-shadow: 2px 2px 15px 7px #0095ec;
@@ -649,7 +649,7 @@ html {
 
 
 .toggle_on {
-  text-shadow: 0 0 5px #FFF, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 45px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 7px blue, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 45px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
 }
 
 .targetNote {
@@ -664,13 +664,13 @@ html {
   text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
 }
 .sharedNoteInScale {
-  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 38px 19px 8px rgba(206,89,55,0);
 }
 .chord1NoteInScale {
   text-shadow: yellow 0px 0px 5px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
 }
 .chord2NoteInScale {
-  text-shadow: 0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec, 0 0 55px #0095ec, 0 0 75px #0095ec, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec,cd  38px 19px 8px rgba(206,89,55,0);
 }
 
 
@@ -701,5 +701,5 @@ html {
   background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
   background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
   background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
-  opacity: .9;
+
 }
