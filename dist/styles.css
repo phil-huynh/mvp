@@ -200,8 +200,8 @@ align-content: center;
   font-family: 'Comic Neue', cursive;
   text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18,  0 0 25px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 50px #49ff18, 38px 19px 8px rgba(206,89,55,0);
   color: #FFFFFF;
-  -webkit-box-shadow: 4px 4px 15px 7px #49ff18, inset 0 0 1.6rem #49ff18;
-  box-shadow: 4px 4px 15px 7px #49ff18, inset 0 0 1.6rem #49ff18;
+  -webkit-box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 1.6rem #49ff18;
+  box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 1.6rem #49ff18;
 }
 
 .sharedLight_container {
@@ -227,8 +227,8 @@ align-content: center;
 
 .can_reset {
   text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 55px, 38px 19px 8px rgba(206,89,55,0);
-  -webkit-box-shadow: 4px 4px 15px 4px red, inset 0 0 1.6rem red;
-  box-shadow: 2px 2px 15px 4px red, inset 0 0 1.6rem red;
+  -webkit-box-shadow: 2px 2px 15px 6px red, inset 0 0 1.6rem red;
+  box-shadow: 2px 2px 15px 6px red, inset 0 0 1.6rem red;
 }
 
 /*****************************************************************************
@@ -673,8 +673,8 @@ align-content: center;
 }
 
 .chordDegToggle {
-  -webkit-box-shadow: 4px 4px 15px 7px blue, inset 0 0 1.6rem blue;
-  box-shadow: 4px 4px 15px 7px blue, inset 0 0 1.6rem blue;
+  -webkit-box-shadow: 2px 2px 15px 7px blue, inset 0 0 1.6rem blue;
+  box-shadow: 2px 2px 15px 7px blue, inset 0 0 1.6rem blue;
 }
 
 
