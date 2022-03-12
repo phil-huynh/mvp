@@ -70,7 +70,7 @@ html {
   background: rgb(2,0,36);
   background: radial-gradient(circle, rgba(2,0,36,1) 21%, rgb(41, 0, 135) 51%, rgba(45,49,66,0.9514180672268907) 79%);
   display: grid;
-  grid-template-rows: 8% 10% 25% 52%;
+  grid-template-rows: 6.5% 8% 1.5% 31% 1.5% 52%;
 }
 
 /*****************************************************************************
@@ -81,6 +81,7 @@ html {
   position: fixed;
   grid-row-start: 1;
 }
+
 .navbar{
   height: 100%;
   width: 100vw;
@@ -108,11 +109,15 @@ html {
   cursor: pointer;
 }
 
+/*****************************************************************************
+*******    UPPER DASH    *****************************************************
+******************************************************************************/
+
 .neckDash {
   grid-row-start: 2;
+  height: 100%;
   margin-left: 2%;
   margin-right: 2%;
-  margin-bottom: 1.7%;
   background-color: #363B4A;
   border: white double 4px;
   border-radius: 10px ;
@@ -128,14 +133,23 @@ html {
   opacity: .9;
 }
 
+.neckDashLayout {
+width: 100%;
+height:100%;
+display: grid;
+grid-template-columns: 18% 20% 30% 26% 8%;
+align-content: center;
+}
+
 .viewLabel,
 .tuningLabel,
 .hideScaleMenu,
 .labelMenu,
 .keyChoiceLabels,
 .defaultChordLabel,
-.chordDegButton {
-  margin-right: 2%;
+.chordDegButton,
+.spelledScale {
+  margin-right: 2.5%;
   color: white;
   font-size: 1.8vh;
   font-weight: 200;
@@ -143,15 +157,26 @@ html {
   cursor: pointer;
 }
 
-.labelMenu {
-  margin-right: 2%;
-  margin-left: 2%;
+.viewLabel {
+  grid-column-start: 1;
+  align-content: center;
 }
 
-.keyChoiceLabels,
+.tuningLabel {
+  grid-column-start: 2;
+  align-content: center;
+}
+
+.hideScaleMenu {
+  grid-column-start: 3;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .viewLabel,
 .tuningLabel {
-  font-size: 2.3vh;
+  font-size: 2.8vh;
   font-weight: 500;
 }
 
@@ -163,6 +188,52 @@ html {
 .tuningLabel:hover {
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
 }
+
+.sharedLight{
+  font-size: 2.7vh;
+  font-weight: 500;
+  padding: .5%;
+  padding-left: .8%;
+  padding-right: .8%;
+  border-radius: 10px;;
+  border: white solid 5px;
+  font-family: 'Comic Neue', cursive;
+  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18,  0 0 25px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 50px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  color: #FFFFFF;
+  -webkit-box-shadow: 4px 4px 15px 7px #49ff18, inset 0 0 1.6rem #49ff18;
+  box-shadow: 4px 4px 15px 7px #49ff18, inset 0 0 1.6rem #49ff18;
+}
+
+.sharedLight_container {
+  grid-column-start: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resetAll_container {
+  grid-column-start: 5;
+  display: flex;
+  align-items: center;
+}
+
+.resetAll {
+  border: solid white 2px;
+  border-radius: 10px;
+  padding: 1%;
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.can_reset {
+  text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 55px, 38px 19px 8px rgba(206,89,55,0);
+  -webkit-box-shadow: 4px 4px 15px 4px red, inset 0 0 1.6rem red;
+  box-shadow: 2px 2px 15px 4px red, inset 0 0 1.6rem red;
+}
+
+/*****************************************************************************
+*******    MODAL MENUS    *****************************************************
+******************************************************************************/
 
 .modalMenu .modal-content {
   background-color: #373B4B;
@@ -222,11 +293,22 @@ html {
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
 }
 
+/*****************************************************************************
+*******    MIDDLE AND NECK    ************************************************
+******************************************************************************/
+
 .middle {
-  grid-row-start: 3;
+  grid-row-start: 4;
   margin-top: 0;
+  height: 100%;
+
+}
+
+.neckComponent {
+  height: 100%;
   display: grid;
-  grid-template-rows: 6% 8% 76% 4% 6%;
+  grid-template-rows: 8% 4% 76% 4% 8%;
+
 }
 
 .inner_middle {
@@ -286,33 +368,34 @@ html {
   background-size: 30%;
 }
 
-.guideContainerUpper {
+.guideContainerUpper_left {
   grid-row-start: 1;
+  height: 100%;
   display: grid;
-  grid-template-columns: 96% 4%;
-
+  grid-template-columns: 4% 3.3% 3.52% 3.66% 3.97% 4.14% 4.3% 4.65% 4.89% 5.11% 5.52% 5.72% 6.1% 6.43% 6.82% 7.21% 7.56% 8% 4% 4%;
 }
 
-.guideContainerLower {
+.guideContainerUpper_right {
+  grid-row-start: 1;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 4.73% 8% 7.56% 7.21% 6.82% 6.43% 6.1% 5.72% 5.52% 5.11% 4.89% 4.65% 4.37% 4.14% 3.97% 3.72% 3.55% 3.34% 4%;
+}
+
+.guideContainerLower_left {
   grid-row-start: 5;
+  height: 100%;
   display: grid;
-  grid-template-columns: 96% 4%
+  grid-template-columns: 4% 3.3% 3.52% 3.66% 3.97% 4.14% 4.3% 4.65% 4.89% 5.11% 5.52% 5.72% 6.1% 6.43% 6.82% 7.21% 7.56% 8% 4% 4%;
 }
 
-.guide,
-.guideLeft {
-  grid-column-start: 1;
+.guideContainerLower_right {
+  grid-row-start: 5;
+  height: 100%;
   display: grid;
-  grid-template-columns: 4.73% 8.39% 7.94% 7.51% 7.1% 6.71% 6.35% 6.01% 5.68% 5.38% 5.09% 4.82% 4.56% 4.32% 4.09% 3.88% 3.67% 3.48%;
-  width: 100%;
-  height: 80%;
-  vertical-align: middle;
+  grid-template-columns: 4.73% 8% 7.56% 7.21% 6.82% 6.43% 6.1% 5.72% 5.52% 5.11% 4.89% 4.65% 4.37% 4.14% 3.97% 3.72% 3.55% 3.34% 4%;
 }
 
-.guideLeft {
-  display: grid;
-  grid-template-columns: 4% 3.48% 3.67% 3.88% 4.09% 4.32% 4.56% 4.82% 5.09% 5.38% 5.68% 6.01% 6.35% 6.71% 7.1% 7.51% 7.94% 8.39% 4%;
-}
 
 .guidebox {
   background-color: #363A4A;
@@ -324,7 +407,6 @@ html {
   border-radius: 5px;
   display: grid;
   justify-items: center;
-  line-height: 2.0rem;
   align-content: center;
   vertical-align: middle;
   padding-bottom: .8rem;
@@ -520,16 +602,15 @@ html {
   opacity: .4;
 }
 
-
 .map_scales_bottom_render {
-  grid-row-start: 4;
+  grid-row-start: 6;
   display: grid;
-  grid-template-rows: 30% 70%;
+  grid-template-rows: 15% 5% 74%;
 }
 
 .bottomLowerScales,
 .bottomUpperScales {
-  grid-row-start: 2;
+  grid-row-start: 3;
   margin-left: 2%;
   margin-right: 2%;
   background-color: #363B4A;
@@ -545,35 +626,76 @@ html {
   background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
   background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
   background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
-  opacity: .9;
+  opacity: .8;
   vertical-align: middle;
 }
 
 .bottomUpperScales {
   grid-row-start: 1;
-  margin-top: 2%;
-  margin-bottom: 2%;
   padding: .5%;
-  padding-left: 2%;
+  padding-left: 1%;
+  display: grid;
+  grid-template-columns: 25% 25% 22% 22% 6%;
 }
 
-
-.sharedLight{
-  margin-left: 7%;
-  font-size: 2.7vh;
-  font-weight: 200;
-  font-family: 'Comic Neue', cursive;
-  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18,  0 0 25px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 50px #49ff18, 38px 19px 8px rgba(206,89,55,0);
-  color: #FFFFFF;
+.keyChoice_container {
+  display: flex;
+  align-items: center;
 }
 
+.keyChoiceLabels {
+  font-size: 2.5vh;
+}
+
+.spelledScale_container {
+  display: flex;
+  align-items: center;
+}
+
+.labelMenu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chordDegree_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .chordDegButton {
-
-  font-size: 1.8vh
+  font-size: 2.5vh;
+  border: white solid 3px;
+  border-radius: 10px;
+  padding: 1%;
+  padding-left: 3%;
+  padding-right: 3%;
 }
-.chordDegButton {
-  margin-right: 2%;
+
+.chordDegToggle {
+  -webkit-box-shadow: 4px 4px 15px 7px blue, inset 0 0 1.6rem blue;
+  box-shadow: 4px 4px 15px 7px blue, inset 0 0 1.6rem blue;
+}
+
+
+.resetVoicings_container {
+  grid-column-start: 5;
+  display: flex;
+  align-items: center;
+}
+
+.resetVoicings {
+  border: solid white 2px;
+  border-radius: 10px;
+  padding: 1%;
+  padding-left: 3%;
+  padding-right: 3%;
+  font-size: 1.5vh;
+}
+
+.rsv1, .rsv2 {
+  display: flex;
+  justify-content: center;
 }
 
 .chordCard {
@@ -583,6 +705,7 @@ html {
   cursor: pointer;
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
   box-shadow: 4px 4px 15px 5px #000000;
+  opacity: 1;
 }
 
 .chordCard:active {
@@ -658,6 +781,7 @@ html {
 
 .spelledScale {
   margin-left: 2%;
+  font-size: 3vh;
 }
 
 .sharedCardNote {
@@ -670,7 +794,7 @@ html {
   text-shadow: yellow 0px 0px 5px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
 }
 .chord2NoteInScale {
-  text-shadow: 0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec,cd  38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec,  38px 19px 8px rgba(206,89,55,0);
 }
 
 
@@ -683,13 +807,12 @@ html {
 
 
 .test{
-  grid-row-start: 4;
-  margin-left: 4%;
-  margin-right: 4%;
+  grid-row-start: 6;
+  margin-left: 2%;
+  margin-right: 2%;
   background-color: #363B4A;
   border: white double 4px;
   border-radius: 10px ;
-  margin-top: 2%;
   margin-bottom: 2%;
   padding: .5%;
   padding-left: 2%;
@@ -701,5 +824,5 @@ html {
   background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
   background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
   background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
-
+  opacity: .7;
 }

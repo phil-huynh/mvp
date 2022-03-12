@@ -1,7 +1,14 @@
 import React from 'react'
 import HideScaleMenu from './HideScaleMenu.jsx'
 
-var NeckDash = ({handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll}) => {
+var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote}) => {
+
+  var resetClass = "reset_button resetAll"
+
+  if (selNote || chordOneSelected || resetVoicingCount) {
+    resetClass = "reset_button resetAll can_reset"
+  }
+
   return (
     <span className="neckDashLayout">
       <span
@@ -17,7 +24,7 @@ var NeckDash = ({handleViewMenuWindow, handleStringsMenuWindow, instrument, tuni
         {`${instrument} : ${tuning}`}
       </span>
       <HideScaleMenu
-        name={name}
+        name={'hideScaleMenu'}
         handleHide={handleHide}
         scaleHiddenToggle={scaleHiddenToggle}
         scaleUnfocusedToggle={scaleUnfocusedToggle}
@@ -26,15 +33,20 @@ var NeckDash = ({handleViewMenuWindow, handleStringsMenuWindow, instrument, tuni
         scaleUnfocusedLabel={scaleUnfocusedLabel}
         scaleVisibleLabel={scaleVisibleLabel}
       />
-      <span
-        onClick={() => resetAll()}
-        className="reset_button resetAll"
-        >
-        Reset All
-      </span>
       {sharedNotes.length > 0 ?
-        <span className="sharedLight">Shared Notes</span> : null
+        <span className="sharedLight_container">
+          <span className="sharedLight">Shared Notes</span>
+        </span>
+        : null
       }
+      <span className="resetAll_container">
+        <span
+          onClick={() => resetAll()}
+          className={resetClass}
+          >
+          Reset All
+        </span>
+      </span>
     </span>
   )
 }

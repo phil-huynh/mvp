@@ -6,7 +6,14 @@ import AlterChordOpt from './AlterChordOpt.jsx'
 import ScaleChords from './ScaleChords.jsx'
 
 
-var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt, chordDegButtonClass, chordFocus, chordOneSelected, chordTwoSelected, compareChords, currentCard, currentChord, currentChord2, currentChordTones, currentChordTones2, defaultType, displayChordDegrees, handleAlterChord, handleAlterChordWindow, handleChordDegrees, handleChordFocus, handleLock, handleNeckNotes, handleScaleChange, handleScaleChange2, handleScaleMenuWindow, handleSevenths, handleTonicChange, handleTonicChange2, handleTonicMenuWindow, keyCenter, list, markNote, noteNameToggle, resetCard, resetChords, root, scale, scaleDegreeToggle, scaleName, selectChord, selectChord2, selNote, setTones, setTones2, sevenths, sharedNotes, showAlter, showScaleMenu, showTonicMenu, solfegeToggle, tonic}) => {
+var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt, chordDegButtonClass, chordFocus, chordOneSelected, chordTwoSelected, compareChords, currentCard, currentChord, currentChord2, currentChordTones, currentChordTones2, defaultType, displayChordDegrees, handleAlterChord, handleAlterChordWindow, handleChordDegrees, handleChordFocus, handleLock, handleNeckNotes, handleScaleChange, handleScaleChange2, handleScaleMenuWindow, handleSevenths, handleTonicChange, handleTonicChange2, handleTonicMenuWindow, keyCenter, list, markNote, noteNameToggle, resetCard, resetChords, resetVoicingCount,root, scale, scaleDegreeToggle, scaleName, selectChord, selectChord2, selNote, setTones, setTones2, sevenths, sharedNotes, showAlter, showScaleMenu, showTonicMenu, solfegeToggle, tonic}) => {
+
+
+  var resetClass = 'reset_button resetVoicings '
+
+  if (resetVoicingCount) {
+    resetClass = 'reset_button resetVoicings can_reset'
+  }
 
   return (
     <React.Fragment>
@@ -21,22 +28,26 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
           showScaleMenu={showScaleMenu}
         />
       <div className="bottomUpperScales">
-        <span className="keyChoiceLabels">
-          <span>
-            {`Scale :`}
+        <div className='keyChoice_container'>
+          <span className="keyChoiceLabels">
+            <span>
+              {`Scale :  `}
+            </span>
+            <span
+              className="dashTonicLabel"
+              onClick={()=>handleTonicMenuWindow()}
+            >
+              {` ${tonic}   `}
+            </span>
+            <span
+              className="dashScaleLabel"
+              onClick={()=>handleScaleMenuWindow()}
+            >
+              {scaleName}
+            </span>
           </span>
-          <span
-            className="dashTonicLabel"
-            onClick={()=>handleTonicMenuWindow()}
-          >
-            {` ${tonic} `}
-          </span>
-          <span
-            className="dashScaleLabel"
-            onClick={()=>handleScaleMenuWindow()}
-          >
-            {scaleName}
-          </span>
+        </div>
+        <div className="spelledScale_contaier">
           <span className="spelledScale">
             {scale ? scale.map((note) => (
               sharedNotes.length > 0 && sharedNotes.includes(note) ?
@@ -54,34 +65,48 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
                 : <span>{`   ${note}   `}</span>
             )): null}
           </span>
-        </span>
-        <LabelMenu
-          handleNeckNotes={handleNeckNotes}
-          name={'labelMenu'}
-          noteNameToggle={noteNameToggle}
-          scaleDegreeToggle={scaleDegreeToggle}
-          solfegeToggle={solfegeToggle}
-        />
-        <span
-          className="defaultChordLabel"
-        >
-          <span>{`Default Voicing : `}</span>
-          <span className="defaultVoicing" onClick={(e) => handleSevenths(e)}>{`${defaultType}`}</span>
-        </span>
-        <span
-          onClick={() => resetChords()}
-          className="reset_button"
-          >
-          Reset Voicings
-        </span>
+        </div>
+          <div className="labels_and_voicings">
+            <LabelMenu
+              handleNeckNotes={handleNeckNotes}
+              name={'labelMenu'}
+              noteNameToggle={noteNameToggle}
+              scaleDegreeToggle={scaleDegreeToggle}
+              solfegeToggle={solfegeToggle}
+            />
+          <div className="defaultChordLabel_container">
+            <span
+              className="defaultChordLabel"
+            >
+              <span>{`Default Voicing : `}</span>
+              <span className="defaultVoicing" onClick={(e) => handleSevenths(e)}>{`${defaultType}`}</span>
+            </span>
+          </div>
+        </div>
         {chordOneSelected ?
-          <span
-            className={chordDegButtonClass}
-            onClick={()=>handleChordDegrees()}
-          >
-            Chord Degrees
-          </span>: null
+          <div className="chordDegree_container">
+            <span
+              className={chordDegButtonClass}
+              onClick={()=>handleChordDegrees()}
+            >
+              Chord Degrees
+            </span>
+          </div>
+          : null
         }
+        <div className="resetVoicings_container">
+          <div
+            onClick={() => resetChords()}
+            className={resetClass}
+          >
+            <div className="rsv1">
+              Reset
+            </div>
+            <div className="rsv2">
+              Voicings
+            </div>
+          </div>
+        </div>
       </div>
       <div className="bottomLowerScales">
         <AlterChordOpt

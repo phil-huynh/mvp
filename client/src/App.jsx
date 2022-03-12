@@ -73,6 +73,7 @@ class App extends React.Component {
       moreSeventhsButton: 'Show 7th Chords',
       noteNameToggle: 'toggle_on',
       renderView: 'Map Scales',
+      resetVoicingCount: 0,
       scale: [],
       scale2: [],
       scaleDegrees: {},
@@ -240,9 +241,12 @@ class App extends React.Component {
     let type = e.target.title
     let typeKey = this.state.currentCard
     let alterKey = `${typeKey}Alt`
+    let count = this.state.resetVoicingCount
+    count ++
     this.setState({
       [typeKey]: type,
-      [alterKey]: true
+      [alterKey]: true,
+      resetVoicingCount: count
     })
   }
 
@@ -340,7 +344,7 @@ class App extends React.Component {
     if (!this.state.displayChordDegrees) {
       this.setState({
         displayChordDegrees: true,
-        chordDegButtonClass: 'chordDegButton toggle_on'
+        chordDegButtonClass: 'chordDegButton toggle_on chordDegToggle'
       })
     }
   }
@@ -632,9 +636,12 @@ class App extends React.Component {
   resetCard(chord) {
     let typeKey = chord
     let alterKey = `${typeKey}Alt`
+    let count = this.state.resetVoicingCount
+    count--
     this.setState({
       [typeKey]: 'Triad',
-      [alterKey]: false
+      [alterKey]: false,
+      resetVoicingCount: count,
     })
   }
 
@@ -654,7 +661,7 @@ class App extends React.Component {
       ch4Alt: false,
       ch5Alt: false,
       ch6Alt: false,
-
+      resetVoicingCount: 0,
     })
   }
 
@@ -672,7 +679,8 @@ class App extends React.Component {
       displayChordDegrees: false,
       chordDegButtonClass: 'chordDegButton',
       chordFocus: 'Neutral',
-      selNote: ''
+      selNote: '',
+      resetVoicingCount: 0,
     })
   }
 
@@ -803,6 +811,7 @@ class App extends React.Component {
           />
         <div className="neckDash">
           <NeckDash
+            chordOneSelected={this.state.chordOneSelected}
             handleViewMenuWindow={this.handleViewMenuWindow}
             handleStringsMenuWindow={this.handleStringsMenuWindow}
             view={this.state.view}
@@ -812,56 +821,61 @@ class App extends React.Component {
             name={'hideScaleMenu'}
             handleHide={this.handleHide}
             resetAll={this.resetAll}
+            resetVoicingCount={this.state.resetVoicingCount}
             scaleHiddenToggle={this.state.scaleHiddenToggle}
             scaleUnfocusedToggle={this.state.scaleUnfocusedToggle}
             scaleVisibleToggle={this.state.scaleVisibleToggle}
             scaleHiddenLabel={this.state.scaleHiddenLabel}
             scaleUnfocusedLabel={this.state.scaleUnfocusedLabel}
             scaleVisibleLabel={this.state.scaleVisibleLabel}
+            selNote={this.state.selNote}
             />
         </div>
         <div className="middle">
-          {!['Violin', 'Viola', 'Cello'].includes(this.state.instrument) ?
-            <FretGuide
-              name ={'guideContainerUpper'}
-              view={this.state.view}
-            />: null
-          }
-          <div className={`${this.state.middle}`}>
-            <div className={`${this.state.stringbox}`}>
-              <StringSet
-                allStrings={this.state.strings}
-                strings={this.state.currentStrings}
-                stringsMirror={this.state.currentStringsMirror}
-                stringsLeft={this.state.stringsLeft}
-                scale={this.state.scale}
-                chord={this.state.currentChordTones}
-                chord2={this.state.currentChordTones2}
+          <div className="neckComponent">
+
+            {!['Violin', 'Viola', 'Cello'].includes(this.state.instrument) ?
+              <FretGuide
+                name ={'guideContainerUpper'}
                 view={this.state.view}
-                chordOneSelected={this.state.chordOneSelected}
-                chordTwoSelected={this.state.chordTwoSelected}
-                selectedChord={this.state.selectedChord}
-                selectedChord2={this.state.selectedChord2}
-                hideScale={this.state.hideScale}
-                solfege={this.state.solfege}
-                scaleDegrees={this.state.scaleDegrees}
-                chordDegrees={this.state.chordDegrees}
-                keyCenter={this.state.keyCenter}
-                labelType={this.state.labelType}
-                chordFocus={this.state.chordFocus}
-                displayChordDegrees={this.state.displayChordDegrees}
-                instrument={this.state.instrument}
-                render={this.state.renderView}
-                selNote={this.state.selNote}
-              />
+              />: null
+            }
+            <div className={`${this.state.middle}`}>
+              <div className={`${this.state.stringbox}`}>
+                <StringSet
+                  allStrings={this.state.strings}
+                  strings={this.state.currentStrings}
+                  stringsMirror={this.state.currentStringsMirror}
+                  stringsLeft={this.state.stringsLeft}
+                  scale={this.state.scale}
+                  chord={this.state.currentChordTones}
+                  chord2={this.state.currentChordTones2}
+                  view={this.state.view}
+                  chordOneSelected={this.state.chordOneSelected}
+                  chordTwoSelected={this.state.chordTwoSelected}
+                  selectedChord={this.state.selectedChord}
+                  selectedChord2={this.state.selectedChord2}
+                  hideScale={this.state.hideScale}
+                  solfege={this.state.solfege}
+                  scaleDegrees={this.state.scaleDegrees}
+                  chordDegrees={this.state.chordDegrees}
+                  keyCenter={this.state.keyCenter}
+                  labelType={this.state.labelType}
+                  chordFocus={this.state.chordFocus}
+                  displayChordDegrees={this.state.displayChordDegrees}
+                  instrument={this.state.instrument}
+                  render={this.state.renderView}
+                  selNote={this.state.selNote}
+                />
+              </div>
             </div>
+            {!['Violin', 'Viola', 'Cello'].includes(this.state.instrument) ?
+              <FretGuide
+                name ={'guideContainerLower'}
+                view={this.state.view}
+              />: null
+            }
           </div>
-          {!['Violin', 'Viola', 'Cello'].includes(this.state.instrument) ?
-            <FretGuide
-              name ={'guideContainerLower'}
-              view={this.state.view}
-            />: null
-          }
         </div>
         {this.state.renderView === 'Map Scales' ?
           <div className='map_scales_bottom_render'>
@@ -911,6 +925,7 @@ class App extends React.Component {
               noteNameToggle={this.state.noteNameToggle}
               resetCard={this.resetCard}
               resetChords={this.resetChords}
+              resetVoicingCount={this.state.resetVoicingCount}
               root={this.state.chordOptRoot}
               scale={this.state.scale}
               scaleDegreeToggle={this.state.scaleDegreeToggle}
