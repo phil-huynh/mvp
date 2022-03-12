@@ -151,6 +151,7 @@ class App extends React.Component {
     this.selectChord2 = this.selectChord2.bind(this);
     this.setTones = this.setTones.bind(this);
     this.setTones2 = this.setTones2.bind(this);
+    this.updateShared = this.updateShared.bind(this)
   }
 
   componentDidMount () {
@@ -784,6 +785,12 @@ class App extends React.Component {
     })
   }
 
+  updateShared (notes) {
+    this.setState({
+      sharedNotes: notes
+    })
+  }
+
   render() {
     return (
       <div className = "page">
@@ -942,6 +949,7 @@ class App extends React.Component {
               showTonicMenu={this.state.showTonicMenu}
               solfegeToggle={this.state.solfegeToggle}
               tonic={this.state.tonic}
+              updateShared={this.updateShared}
             />
           </div>
           :

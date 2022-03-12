@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, Button } from 'react-bootstrap'
 
 
-var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, chordTwoSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleLock, displayChordDegrees, handleChordFocus, chordFocus, sharedNotes, selNote}) => {
+var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, chordTwoSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleLock, displayChordDegrees, handleChordFocus, chordFocus, sharedNotes, selNote, updateShared}) => {
 
   const sharp = '\u266F';
   const flat = '\u266D';
@@ -351,9 +351,35 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
 
   if (isChord1 && currentChordTones !== tones) {
     setTones(tones)
+    if (both) {
+      let checker = {}
+      let sharedNotes = []
+      for(var i = 0; i < currentChordTones2.length; i++) {
+        checker[currentChordTones2[i]] = true
+      }
+      for (var j = 0; j < tones.length; j++) {
+        if (checker[tones[j]]) {
+          sharedNotes.push(tones[j])
+        }
+      }
+      updateShared(sharedNotes)
+    }
   }
   if (isChord2 && currentChordTones2 !== tones) {
     setTones2(tones)
+    if (both) {
+      let checker = {}
+      let sharedNotes = []
+      for(var i = 0; i < currentChordTones.length; i++) {
+        checker[currentChordTones[i]] = true
+      }
+      for (var j = 0; j < tones.length; j++) {
+        if (checker[tones[j]]) {
+          sharedNotes.push(tones[j])
+        }
+      }
+      updateShared(sharedNotes)
+    }
   }
 
   if (isChord1) {

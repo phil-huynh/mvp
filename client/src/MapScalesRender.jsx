@@ -6,7 +6,7 @@ import AlterChordOpt from './AlterChordOpt.jsx'
 import ScaleChords from './ScaleChords.jsx'
 
 
-var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt, chordDegButtonClass, chordFocus, chordOneSelected, chordTwoSelected, compareChords, currentCard, currentChord, currentChord2, currentChordTones, currentChordTones2, defaultType, displayChordDegrees, handleAlterChord, handleAlterChordWindow, handleChordDegrees, handleChordFocus, handleLock, handleNeckNotes, handleScaleChange, handleScaleChange2, handleScaleMenuWindow, handleSevenths, handleTonicChange, handleTonicChange2, handleTonicMenuWindow, keyCenter, list, markNote, noteNameToggle, resetCard, resetChords, resetVoicingCount,root, scale, scaleDegreeToggle, scaleName, selectChord, selectChord2, selNote, setTones, setTones2, sevenths, sharedNotes, showAlter, showScaleMenu, showTonicMenu, solfegeToggle, tonic}) => {
+var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt, chordDegButtonClass, chordFocus, chordOneSelected, chordTwoSelected, compareChords, currentCard, currentChord, currentChord2, currentChordTones, currentChordTones2, defaultType, displayChordDegrees, handleAlterChord, handleAlterChordWindow, handleChordDegrees, handleChordFocus, handleLock, handleNeckNotes, handleScaleChange, handleScaleChange2, handleScaleMenuWindow, handleSevenths, handleTonicChange, handleTonicChange2, handleTonicMenuWindow, keyCenter, list, markNote, noteNameToggle, resetCard, resetChords, resetVoicingCount,root, scale, scaleDegreeToggle, scaleName, selectChord, selectChord2, selNote, setTones, setTones2, sevenths, sharedNotes, showAlter, showScaleMenu, showTonicMenu, solfegeToggle, tonic, updateShared}) => {
 
 
   var resetClass = 'reset_button resetVoicings '
@@ -153,6 +153,7 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
           ch4Alt={ch4Alt}
           ch5Alt={ch5Alt}
           ch6Alt={ch6Alt}
+          updateShared={updateShared}
         />
       </div>
     </React.Fragment>
