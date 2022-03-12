@@ -223,12 +223,19 @@ align-content: center;
   padding: 1%;
   padding-left: 3%;
   padding-right: 3%;
+
 }
 
 .can_reset {
   text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 55px, 38px 19px 8px rgba(206,89,55,0);
-  -webkit-box-shadow: 2px 2px 15px 6px red, inset 0 0 1.6rem red;
-  box-shadow: 2px 2px 15px 6px red, inset 0 0 1.6rem red;
+  -webkit-box-shadow: 2px 2px 15px 3px red, inset 0 0 1.6rem red;
+  box-shadow: 2px 2px 15px 3px red, inset 0 0 1.6rem red;
+}
+
+.can_reset:hover {
+  text-shadow: 0 0 5px white, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 55px, 38px 19px 8px rgba(206,89,55,0);
+  -webkit-box-shadow: 2px 2px 15px 10px red, inset 0 0 2rem red;
+  box-shadow: 2px 2px 15px 10px red, inset 0 0 3rem red;
 }
 
 /*****************************************************************************
@@ -284,10 +291,6 @@ align-content: center;
   cursor: pointer;
 }
 
-.reset_button:hover,
-.resetCardButton:hover {
-  text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 55px red, 0 0 75px red, 38px 19px 8px rgba(206,89,55,0);
-}
 
 .reset_button:active {
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
@@ -759,6 +762,13 @@ align-content: center;
 
 .lock {
   margin-bottom: 3px;
+}
+
+.resetCardButton {
+  text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 45px red, 38px 19px 8px rgba(206,89,55,0);
+}
+.resetCardButton:hover  {
+  text-shadow: 0 0 5px white, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 55px red, 0 0 75px red, 38px 19px 8px rgba(206,89,55,0);
 }
 
 .noteRef:hover,
