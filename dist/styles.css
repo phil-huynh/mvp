@@ -403,6 +403,7 @@ align-content: center;
 .guidebox {
   background-color: #363A4A;
   overflow-x: hidden;
+  overflow-y: hidden;
   font-weight: bold;
   font-size: 3.0rem;
   color: white;
