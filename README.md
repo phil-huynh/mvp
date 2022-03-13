@@ -55,7 +55,7 @@ Strings Theory is a resource and educational tool for strings players at all lev
 #### If a chord has been selected, a "Chord Degrees" button will appear in the dash. When this feature is toggled on, the notes that are contained in the chord will display as chord degrees on the neck. If there are two chords selected, the chord degrees will not appear on the neck until a chord is "Focused"(see next) .  
 <img src="https://media.giphy.com/media/9bPGXl6gGx4zeKXBXM/giphy.gif" width=900/> 
 
-#### Line. 
+#### If two chords are selected, a "Focus" toggle will appear on each. By default, focus is neutral, both cards' toggle displays as "Focus", and all notes on the neck are equally visible. By clicking this button on a card, the users moves the focus to the chosen chord. One chord card toggle will read "Focused" and the other "Unfocused". The notes of the "Focused" chord remain fully visible (including shared notes) and the notes of he "Unfocused" chord will become partially transparent to make the "Focused" chord more readable. Clicking on the "Unfocused" toggle will shift the chord focus to the new chord and the toggle labels will switch. Clicking on the "Focused" toggle will return the focus to neutral. If Chord Degrees is toggled on, the chord degrees of the "Focused" chord will be displayed.  
 <img src="https://media.giphy.com/media/rW4BR9jvafN6IEBWXt/giphy.gif" width=900/> 
 
 #### Line. 
