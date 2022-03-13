@@ -47,10 +47,10 @@ Strings Theory is a resource and educational tool for strings players at all lev
 <img src="https://media.giphy.com/media/2mxIRT4tYqfjCd9pI9/giphy.gif" width=900/>
 <img src="https://media.giphy.com/media/D1Ho0OKm5ugM0tpSpu/giphy.gif" width=900/> 
 
-#### Each chord can be altered idependently. If a user clicks the "Alter Me" button on a chord card, a modal window opens which will display dynamic and postion specific options for the selected chord. Each modal menu will only dispay structures that are diatonically available to that specific chord in that specific key. Users can choose between several chord alerations and pentatonic scales. The altered chord card will render a reset button that can independently reset the chord card. Additionally, if any chords have been altered, the "Reset Voicings" button will glow red, indicating that there are chords to reset. Clicking "Reset Voicings" will return all of the chords back to the default voicing.   
-<img src="https://media.giphy.com/media/0Gj4OkDPQQoNwePReF/giphy.gif" width=900/> 
-
-#### If a chord has been altered, it will not be affected by a default chord change until it is reset. The notes added or subtracted from the voicing will render accordingly on the neck, in the scale display, and on the chord cards. 
+#### Each chord can be altered idependently. If a user clicks the "Alter Me" button on a chord card, a modal window opens which will display dynamic and postion specific options for the selected chord. Each modal menu will only dispay structures that are diatonically available to that specific chord in that specific key. Users can choose between several chord alerations and pentatonic scales. The altered chord card will render a reset button that can independently reset the chord card. Additionally, if any chords have been altered, the "Reset Voicings" button will glow red, indicating that there are chords to reset. Clicking "Reset Voicings" will return all of the chords back to the default voicing. 
+####
+#### If a chord has been altered, it will not be affected by a default chord change until it is reset. The notes added or subtracted from the voicing will render accordingly on the neck, in the scale display, and on the chord cards.
+<img src="https://media.giphy.com/media/0Gj4OkDPQQoNwePReF/giphy.gif" width=900/>  
 <img src="https://media.giphy.com/media/TF9pU92RbiWRMA3tJs/giphy.gif" width=900/> 
 
 #### If a chord has been selected, a "Chord Degrees" button will appear in the dash. When this feature is toggled on, the notes that are contained in the chord will display as chord degrees on the neck. If there are two chords selected, the chord degrees will not appear on the neck until a chord is "Focused"(see next on Focus) .  
