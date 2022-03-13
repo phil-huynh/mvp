@@ -31,13 +31,13 @@ Strings Theory is a resource and educational tool for strings players at all lev
 #### Users can look up several scales in all 12 keys and the neck display, scale display, and chord cards will update accordingly. 
 <img src="https://media.giphy.com/media/1DZfvEO5LmFbaKh2B2/giphy.gif" width=900/> 
 
-#### If no chord is selected, clicking on a note name in the scale display will mark all locations of the selected note on the neck and will also highlight the selected note name in all of the chord cards that contain it.  
+#### If no chord is selected, clicking on a note name in the scale display will mark all locations of the selected note on the neck and will also highlight the selected note name in all of the chord cards that contain it. Click the currently selected note to clear selection.  
 <img src="https://media.giphy.com/media/4vWRmkcBdV3jM0CAO6/giphy.gif" width=900/> 
 
 #### The notes on the neck can be viewed as note names(A, B, C, D, E, F, G, ect..), scale degrees(1,2,3,4,5,6,7, ect...), or solfege(do, re, mi, fa, sol, la, ti, do). The default voicing toggle selects what type of voicing the chords fall back to when reset. The default voicing can be Triads or Seventh Chords. 
 <img src="https://media.giphy.com/media/GFytdYT3e1GTr4K0dC/giphy.gif" width=900/> 
 
-#### Line. 
+#### When a chord card is selected, the notes of the chord will be highlighted on the neck and in the scale display. Click the currently selected chord card to clear selection. 
 <img src="https://media.giphy.com/media/9bV454prI06Tdf7RfA/giphy.gif" width=900/> 
 
 #### Line. 
