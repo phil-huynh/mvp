@@ -48,9 +48,12 @@ Strings Theory is a resource and educational tool for strings players at all lev
 
 #### When a chord is selected, a "Lock" toggle will appear on the chord card. If the user clicks this toggle, it will lock the chord and allow for a second chord to be selected. The notes of the second chord will also highlight on the neck and in the scale display. The remaining notes that do not belong to either chord will automatically be hidden. If the two chords share notes, the "Shared Notes" indicator will glow in the upper right corner and the note names of the shared notes inside the chord cards and in the scale display will glow in the same color as the indicator. Click on the current second chord to clear the second chord selection. The "Locked" chord can be unlocked by clicking the toggle again. Both chord selections can be cleared by clicking the "Locked" chord. 
 ####
-#### Any alterations made to either chord will be immediately relfected in the neck display, scale display, and chord cards.(see next section on alterations)
+#### Any alterations made to either chord will be immediately relfected in the neck display, scale display, and chord cards.(see section on alterations)
 <img src="https://media.giphy.com/media/2mxIRT4tYqfjCd9pI9/giphy.gif" width=900/>
 <img src="https://media.giphy.com/media/D1Ho0OKm5ugM0tpSpu/giphy.gif" width=900/> 
+
+#### If two chords are selected, a "Focus" toggle will appear on each. By default, focus is neutral, both cards' toggle displays as "Focus", and all notes on the neck are equally visible. By clicking this button on a card, the users moves the focus to the chosen chord. One chord card toggle will read "Focused" and the other "Unfocused". The notes of the "Focused" chord remain fully visible (including shared notes) and the notes of he "Unfocused" chord will become partially transparent to make the "Focused" chord more readable. Clicking on the "Unfocused" toggle will shift the chord focus to the new chord and the toggle labels will switch. Clicking on the "Focused" toggle will return the focus to neutral. If Chord Degrees is toggled on, the chord degrees of the "Focused" chord will be displayed.  
+<img src="https://media.giphy.com/media/rW4BR9jvafN6IEBWXt/giphy.gif" width=900/> 
 
 #### Each chord can be altered idependently. If a user clicks the "Alter Me" button on a chord card, a modal window opens which will display dynamic and postion specific options for the selected chord. Each modal menu will only dispay structures that are diatonically available to that specific chord in that specific key. Users can choose between several chord alerations and pentatonic scales. The altered chord card will render a reset button that can independently reset the chord card. Additionally, if any chords have been altered, the "Reset Voicings" button will glow red, indicating that there are chords to reset. Clicking "Reset Voicings" will return all of the chords back to the default voicing. 
 ####
@@ -61,8 +64,7 @@ Strings Theory is a resource and educational tool for strings players at all lev
 
 
 
-#### If two chords are selected, a "Focus" toggle will appear on each. By default, focus is neutral, both cards' toggle displays as "Focus", and all notes on the neck are equally visible. By clicking this button on a card, the users moves the focus to the chosen chord. One chord card toggle will read "Focused" and the other "Unfocused". The notes of the "Focused" chord remain fully visible (including shared notes) and the notes of he "Unfocused" chord will become partially transparent to make the "Focused" chord more readable. Clicking on the "Unfocused" toggle will shift the chord focus to the new chord and the toggle labels will switch. Clicking on the "Focused" toggle will return the focus to neutral. If Chord Degrees is toggled on, the chord degrees of the "Focused" chord will be displayed.  
-<img src="https://media.giphy.com/media/rW4BR9jvafN6IEBWXt/giphy.gif" width=900/> 
+
 
 #### If any changes have been made that can reset(note selected in scale display, chord selected or locked, chord altered, chord degrees toggled on) the "Reset All" button in the upper right corner will glow red. Click this button to reset everything on the page.   
 <img src="https://media.giphy.com/media/3HMw1s2DzOnBT5n1P5/giphy.gif" width=900/> 
