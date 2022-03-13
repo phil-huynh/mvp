@@ -23,6 +23,7 @@ Strings Theory is a resource and educational tool for strings players at all lev
 
 <img src="https://media.giphy.com/media/bREeb4eQTTHkDy40Fz/giphy.gif"/> 
 
+<img src="https://media.giphy.com/media/I9QN347uJmAcE6oqOF/giphy.gif"/> 
 
 
 
