@@ -21,21 +21,34 @@ Strings Theory is a resource and educational tool for strings players at all lev
 
 
 
-<img src="https://media.giphy.com/media/bREeb4eQTTHkDy40Fz/giphy.gif" width=700/> 
+<img src="https://media.giphy.com/media/bREeb4eQTTHkDy40Fz/giphy.gif" width=900/> 
 
-<img src="https://media.giphy.com/media/I9QN347uJmAcE6oqOF/giphy.gif" width=700/> 
+<img src="https://media.giphy.com/media/I9QN347uJmAcE6oqOF/giphy.gif" width=900/> 
 
-<img src="https://media.giphy.com/media/igIsud0EoGotF0XuMk/giphy.gif" width=700/> 
+<img src="https://media.giphy.com/media/igIsud0EoGotF0XuMk/giphy.gif" width=900/> 
 
-<img src="https://media.giphy.com/media/045osg0PKUOIlX08pA/giphy.gif" width=700/> 
+<img src="https://media.giphy.com/media/045osg0PKUOIlX08pA/giphy.gif" width=900/> 
 
-<img src="https://media.giphy.com/media/1DZfvEO5LmFbaKh2B2/giphy.gif" width=700/> 
+<img src="https://media.giphy.com/media/1DZfvEO5LmFbaKh2B2/giphy.gif" width=900/> 
 
-<img src="https://media.giphy.com/media/4vWRmkcBdV3jM0CAO6/giphy.gif" width=700/> 
+<img src="https://media.giphy.com/media/4vWRmkcBdV3jM0CAO6/giphy.gif" width=900/> 
 
-<img src="https://media.giphy.com/media/GFytdYT3e1GTr4K0dC/giphy.gif" width=700/> 
+<img src="https://media.giphy.com/media/GFytdYT3e1GTr4K0dC/giphy.gif" width=900/> 
 
-<img src="https://media.giphy.com/media/9bV454prI06Tdf7RfA/giphy.gif" width=700/> 
+<img src="https://media.giphy.com/media/9bV454prI06Tdf7RfA/giphy.gif" width=900/> 
+
+<img src="https://media.giphy.com/media/Yd1Rk35ZvNNqueD1TU/giphy.gif" width=900/> 
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
