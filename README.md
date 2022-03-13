@@ -28,10 +28,7 @@ Strings Theory is a resource and educational tool for strings players at all lev
 #### Users can choose from several instruments with multiple tunings. Neck renders will dynamically render to correspond with the instrument selected and the tuning chosen.
 <img src="https://media.giphy.com/media/igIsud0EoGotF0XuMk/giphy.gif" width=900/> 
 
-#### Line. 
-<img src="https://media.giphy.com/media/045osg0PKUOIlX08pA/giphy.gif" width=900/> 
-
-#### Line. 
+#### Users can look up several scales in all 12 keys and the neck display, scale display, and chord cards will update accordingly. 
 <img src="https://media.giphy.com/media/1DZfvEO5LmFbaKh2B2/giphy.gif" width=900/> 
 
 #### Line. 
