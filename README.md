@@ -19,38 +19,51 @@ Strings Theory is a resource and educational tool for strings players at all lev
 
 #### Line. 
 
-
-
 <img src="https://media.giphy.com/media/bREeb4eQTTHkDy40Fz/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/I9QN347uJmAcE6oqOF/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/igIsud0EoGotF0XuMk/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/045osg0PKUOIlX08pA/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/1DZfvEO5LmFbaKh2B2/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/4vWRmkcBdV3jM0CAO6/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/GFytdYT3e1GTr4K0dC/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/9bV454prI06Tdf7RfA/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/Yd1Rk35ZvNNqueD1TU/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/2mxIRT4tYqfjCd9pI9/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/0Gj4OkDPQQoNwePReF/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/TF9pU92RbiWRMA3tJs/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/9bPGXl6gGx4zeKXBXM/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/rW4BR9jvafN6IEBWXt/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/D1Ho0OKm5ugM0tpSpu/giphy.gif" width=900/> 
 
+#### Line. 
 <img src="https://media.giphy.com/media/3HMw1s2DzOnBT5n1P5/giphy.gif" width=900/> 
 
 ---
