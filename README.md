@@ -52,7 +52,7 @@ Strings Theory is a resource and educational tool for strings players at all lev
 #### If a chord has been altered, it will not be affected by a default chord change until it is reset. The notes added or subtracted from the voicing will render accordingly on the neck, in the scale display, and on the chord cards. 
 <img src="https://media.giphy.com/media/TF9pU92RbiWRMA3tJs/giphy.gif" width=900/> 
 
-#### Line. 
+#### If a chord has been selected, a "Chord Degrees" button will appear in the dash. When this feature is toggled on, the notes that are contained in the chord will display as chord degrees on the neck. If there are two chords selected, the chord degrees will not appear on the neck until a chord is "Focused"(see next) .  
 <img src="https://media.giphy.com/media/9bPGXl6gGx4zeKXBXM/giphy.gif" width=900/> 
 
 #### Line. 
