@@ -41,7 +41,7 @@ Strings Theory is a resource and educational tool for strings players at all lev
 
 <img src="https://media.giphy.com/media/2mxIRT4tYqfjCd9pI9/giphy.gif" width=900/> 
 
-<img src="https://media.giphy.com/media/2mxIRT4tYqfjCd9pI9/giphy.gif" width=900/> 
+<img src="https://media.giphy.com/media/0Gj4OkDPQQoNwePReF/giphy.gif" width=900/> 
 
 
 
