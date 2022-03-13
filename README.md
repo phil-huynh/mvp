@@ -38,9 +38,12 @@ Strings Theory is a resource and educational tool for strings players at all lev
 <img src="https://media.giphy.com/media/GFytdYT3e1GTr4K0dC/giphy.gif" width=900/> 
 
 #### When a chord card is selected, the notes of the chord will be highlighted on the neck and in the scale display. Click the currently selected chord card to clear selection. 
-<img src="https://media.giphy.com/media/9bV454prI06Tdf7RfA/giphy.gif" width=900/> 
-
+####
+#### If a chord has been selected, a "Chord Degrees" button will appear in the dash. When this feature is toggled on, the notes that are contained in the chord will display as chord degrees on the neck. If there are two chords selected, the chord degrees will not appear on the neck until a chord is "Focused"(see section on Focus) . 
+####
 #### The scale visibity can be toggled as needed. The scale can be set to Visible(fully visible), Unfocused(partially transparent), or hidden. If a chord is selected, it will not be affected by this toggle. This allows users see chords more clearly and choose what they need to see. 
+<img src="https://media.giphy.com/media/9bV454prI06Tdf7RfA/giphy.gif" width=900/> 
+<img src="https://media.giphy.com/media/9bPGXl6gGx4zeKXBXM/giphy.gif" width=900/> 
 <img src="https://media.giphy.com/media/Yd1Rk35ZvNNqueD1TU/giphy.gif" width=900/> 
 
 #### When a chord is selected, a "Lock" toggle will appear on the chord card. If the user clicks this toggle, it will lock the chord and allow for a second chord to be selected. The notes of the second chord will also highlight on the neck and in the scale display. The remaining notes that do not belong to either chord will automatically be hidden. If the two chords share notes, the "Shared Notes" indicator will glow in the upper right corner and the note names of the shared notes inside the chord cards and in the scale display will glow in the same color as the indicator. Click on the current second chord to clear the second chord selection. The "Locked" chord can be unlocked by clicking the toggle again. Both chord selections can be cleared by clicking the "Locked" chord. 
@@ -55,8 +58,8 @@ Strings Theory is a resource and educational tool for strings players at all lev
 <img src="https://media.giphy.com/media/0Gj4OkDPQQoNwePReF/giphy.gif" width=900/>  
 <img src="https://media.giphy.com/media/TF9pU92RbiWRMA3tJs/giphy.gif" width=900/> 
 
-#### If a chord has been selected, a "Chord Degrees" button will appear in the dash. When this feature is toggled on, the notes that are contained in the chord will display as chord degrees on the neck. If there are two chords selected, the chord degrees will not appear on the neck until a chord is "Focused"(see next on Focus) .  
-<img src="https://media.giphy.com/media/9bPGXl6gGx4zeKXBXM/giphy.gif" width=900/> 
+
+
 
 #### If two chords are selected, a "Focus" toggle will appear on each. By default, focus is neutral, both cards' toggle displays as "Focus", and all notes on the neck are equally visible. By clicking this button on a card, the users moves the focus to the chosen chord. One chord card toggle will read "Focused" and the other "Unfocused". The notes of the "Focused" chord remain fully visible (including shared notes) and the notes of he "Unfocused" chord will become partially transparent to make the "Focused" chord more readable. Clicking on the "Unfocused" toggle will shift the chord focus to the new chord and the toggle labels will switch. Clicking on the "Focused" toggle will return the focus to neutral. If Chord Degrees is toggled on, the chord degrees of the "Focused" chord will be displayed.  
 <img src="https://media.giphy.com/media/rW4BR9jvafN6IEBWXt/giphy.gif" width=900/> 
