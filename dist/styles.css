@@ -471,10 +471,10 @@ align-content: center;
   grid-column-start: 2;
   background-color: #383C4C;
   color: white;
-  width: 2.6vh;
-  height: 2.6vh;
+  width: 2.8vh;
+  height: 2.8vh;
   font-family: 'Balsamiq Sans', cursive;
-  font-size: 1.2vh;
+  font-size: 1.4vh;
   font-weight: 600;
   text-align: center;
   display: inline-flex;
@@ -537,10 +537,10 @@ align-content: center;
   background-color: #383C4C;
   border: white solid 1px;
   color: white;
-  width: 2.6vh;
-  height: 2.6vh;
+  width: 2.8vh;
+  height: 2.8vh;
   font-family: 'Balsamiq Sans', cursive;
-  font-size: 1.2vh;
+  font-size: 1.4vh;
   font-weight: 300;
   text-align: center;
   overflow-y: visible;
@@ -561,8 +561,8 @@ align-content: center;
   color: black;
   font-family: 'Balsamiq Sans', cursive;
   font-weight: 300;
-  width: 2.6vh;
-  height: 2.6vh;
+  width: 2.8vh;
+  height: 2.8vh;
   color: #FFFFFF;
   background: #333333;
   padding-top: 3px;
@@ -791,7 +791,7 @@ align-content: center;
 
 .spelledScale {
   margin-left: 2%;
-  font-size: 3vh;
+  font-size: 2.9vh;
 }
 
 .sharedCardNote {
