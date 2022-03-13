@@ -11,7 +11,7 @@
 
 ## General Info
 
-Strings Theory is a resource application for music students and professionals. The app is currenlty still in development, but a working version of the currently available features can be viewed at http://ec2-13-58-22-143.us-east-2.compute.amazonaws.com:3000/ 
+Strings Theory is a resource application for music students and professionals. The app is currenlty still in development, but a working version of the currently available features can be viewed at http://ec2-13-58-22-143.us-east-2.compute.amazonaws.com:3000/ . The app is not currently optimized for mobile. The best way to view this app is currently on a laptop or desktop computer. This app is being updated frequently. 
 
 ## <a name="demo"></a>⚜️ Demo
 ---
@@ -61,14 +61,14 @@ Strings Theory is a resource application for music students and professionals. T
 <img src="https://media.giphy.com/media/0Gj4OkDPQQoNwePReF/giphy.gif" width=900/>  
 <img src="https://media.giphy.com/media/TF9pU92RbiWRMA3tJs/giphy.gif" width=900/> 
 
-
-
-
-
-
 #### If any changes have been made that can reset(note selected in scale display, chord selected or locked, chord altered, chord degrees toggled on) the "Reset All" button in the upper right corner will glow red. Click this button to reset everything on the page.   
 <img src="https://media.giphy.com/media/3HMw1s2DzOnBT5n1P5/giphy.gif" width=900/> 
 
+
+---
+### Map Chords Feature
+#### This feature is in development. It will allow the user to identify unknown chords or scales that they are playing by inputing them on the neck. It will identify chords and scales as well a provide alternative options and suggestions for related structures. Updates coming soon. 
+---
 ---
 ## 🧪 Technologies
 
