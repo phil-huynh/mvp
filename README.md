@@ -15,16 +15,17 @@ Strings Theory is a resource and educational tool for strings players at all lev
 
 ## <a name="demo"></a>⚜️ Demo
 ---
-
-
-#### Line. 
-
+### Map Chords Feature
+#### This feature is in development. It will allow the user to view chords independent of a scale reference and make comparisons to other chords that do not share a source scale. Updates coming soon. 
+---
+### Map Scales Feature 
+#### Everything that is availble in this feature is fully functional. There will be additions to this feature that will allow for comparisons to other scales or non related structures. The demo below reflects the current state of the feature.
 <img src="https://media.giphy.com/media/bREeb4eQTTHkDy40Fz/giphy.gif" width=900/> 
 
-#### Line. 
+#### Users can choose how they would like the neck to be rendered. Users can choose the default "Traditional View" to see the notes stacked with the lowest on the bottom and the highest notes on the top. "Mirror View" displays the low notes on top and the high notes on the bottom(this emulates a guitarist looking at their hands in a mirror). "Lefty Traditional View" and "Lefty Mirror View" do the same things respectively in addition to the neck switching directions from (low->high) to (high->low). 
 <img src="https://media.giphy.com/media/I9QN347uJmAcE6oqOF/giphy.gif" width=900/> 
 
-#### Line. 
+#### Users can choose from several instruments with multiple tunings. Neck renders will dynamically render to correspond with the instrument selected and the tuning chosen.
 <img src="https://media.giphy.com/media/igIsud0EoGotF0XuMk/giphy.gif" width=900/> 
 
 #### Line. 
