@@ -11,7 +11,7 @@
 
 ## General Info
 
-Strings Theory is a resource application for music students and professionals. The app is currenlty still in development, but a working version of the currently available features can be viewed at [this link] (http://ec2-13-58-22-143.us-east-2.compute.amazonaws.com:3000/) 
+Strings Theory is a resource application for music students and professionals. The app is currenlty still in development, but a working version of the currently available features can be viewed at http://ec2-13-58-22-143.us-east-2.compute.amazonaws.com:3000/ 
 
 ## <a name="demo"></a>⚜️ Demo
 ---
