@@ -90,6 +90,14 @@ Strings Theory is a resource application for music students and professionals. T
 - webpack-cli: 4.9.1
 
 ## 🚀 Installation and Setup
-
+```
+$ git clone https://github.com/phil-huynh/mvp.git
+```
+From the root directory, run
+```
+$ npm install
+$ npm run build-dev
+$ npm start
+```
 ## 🤝 Contributors
 - [Phil Huynh](https://www.github.com/phil-huynh/)
