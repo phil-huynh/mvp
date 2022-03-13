@@ -67,7 +67,7 @@ Strings Theory is a resource application for music students and professionals. T
 
 ---
 ### Map Chords Feature
-#### This feature is in development. It will allow the user to identify unknown chords or scales that they are playing by inputing them on the neck. It will identify chords and scales as well a provide alternative options and suggestions for related structures. Updates coming soon. 
+#### This feature is in development. It will allow the user to identify unknown chords or scales that they are playing by inputting them on the neck. It will identify chords and scales as well a provide alternative options and suggestions for related structures. Updates coming soon. 
 ---
 ---
 ## 🧪 Technologies
