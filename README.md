@@ -25,13 +25,13 @@ Strings Theory is a resource and educational tool for strings players at all lev
 #### Users can choose how they would like the neck to be rendered. Users can choose the default "Traditional View" to see the notes stacked with the lowest on the bottom and the highest notes on the top. "Mirror View" displays the low notes on top and the high notes on the bottom(this emulates a guitarist looking at their hands in a mirror). "Lefty Traditional View" and "Lefty Mirror View" do the same things respectively in addition to the neck switching directions from (low->high) to (high->low). 
 <img src="https://media.giphy.com/media/I9QN347uJmAcE6oqOF/giphy.gif" width=900/> 
 
-#### Users can choose from several instruments with multiple tunings. Neck renders will dynamically render to correspond with the instrument selected and the tuning chosen.
+#### Users can choose from several instruments with multiple tunings. Neck renders will dynamically render to correspond with the instrument and tuning selected.
 <img src="https://media.giphy.com/media/igIsud0EoGotF0XuMk/giphy.gif" width=900/> 
 
 #### Users can look up several scales in all 12 keys and the neck display, scale display, and chord cards will update accordingly. 
 <img src="https://media.giphy.com/media/1DZfvEO5LmFbaKh2B2/giphy.gif" width=900/> 
 
-#### Line. 
+#### If no chord is selected, clicking on a note name in the scale display will mark all locations of the selected note on the neck and will also highlight the selected note name in all of the chord cards that contain it.  
 <img src="https://media.giphy.com/media/4vWRmkcBdV3jM0CAO6/giphy.gif" width=900/> 
 
 #### Line. 
