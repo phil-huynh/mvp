@@ -49,7 +49,7 @@ Strings Theory is a resource and educational tool for strings players at all lev
 #### Each chord can be altered idependently. If a user clicks the "Alter Me" button on a chord card, a modal window opens which will display dynamic and postion specific options for the selected chord. Each modal menu will only dispay structures that are diatonically available to that specific chord in that specific key. Users can choose between several chord alerations and pentatonic scales.  
 <img src="https://media.giphy.com/media/0Gj4OkDPQQoNwePReF/giphy.gif" width=900/> 
 
-#### Line. 
+#### If a chord has been altered, it will not be affected by a default chord change until it is reset. The notes added or subtracted from the voicing will render accordingly on the neck, in the scale display, and on the chord cards. 
 <img src="https://media.giphy.com/media/TF9pU92RbiWRMA3tJs/giphy.gif" width=900/> 
 
 #### Line. 
