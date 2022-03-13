@@ -46,7 +46,7 @@ Strings Theory is a resource and educational tool for strings players at all lev
 #### When a chord is selected, a "Lock" toggle will appear on the chord card. If the user clicks this toggle, it will lock the chord and allow for a second chord to be selected. The notes of the second chord will also highlight on the neck and in the scale display. The remaining notes that do not belong to either chord will automatically be hidden. If the two chords share notes, the "Shared Notes" indicator will glow in the upper right corner and the note names of the shared notes inside the chord cards and in the scale display will glow in the same color as the indicator. Click on the current second chord to clear the second chord selection. The "Locked" chord can be unlocked by clicking the toggle again. Both chord selections can be cleared by clicking the "Locked" chord. 
 <img src="https://media.giphy.com/media/2mxIRT4tYqfjCd9pI9/giphy.gif" width=900/> 
 
-#### Line. 
+#### Each chord can be altered idependently. If a user clicks the "Alter Me" button on a chord card, a modal window opens which will display dynamic and postion specific options for the selected chord. Each modal menu will only dispay structures that are diatonically available to that specific chord in that specific key. Users can choose between several chord alerations and pentatonic scales.  
 <img src="https://media.giphy.com/media/0Gj4OkDPQQoNwePReF/giphy.gif" width=900/> 
 
 #### Line. 
