@@ -64,30 +64,30 @@ Strings Theory is a resource application for music students and professionals. T
 ## 🧪 Technologies
 
 ### Dependencies
--axios: 0.24.0,
--bootstrap: 5.1.3
--bootstrap-icons: 1.8.0
--express: 4.17.1
--morgan: 1.10.0
--nodemon: 2.0.15
--pg: 8.7.1
--react: 17.0.2
--react-bootstrap: 2.1.2
--react-dom: 17.0.2
--react-icons: 4.3.1
--webpack: 5.64.4
+- axios: 0.24.0,
+- bootstrap: 5.1.3
+- bootstrap-icons: 1.8.0
+- express: 4.17.1
+- morgan: 1.10.0
+- nodemon: 2.0.15
+- pg: 8.7.1
+- react: 17.0.2
+- react-bootstrap: 2.1.2
+- react-dom: 17.0.2
+- react-icons: 4.3.1
+- webpack: 5.64.4
 
 ### Dev Dependencies
--@babel/core: 7.15.8
--@babel/preset-env: 7.15.8
--@babel/preset-react: 7.16.0
--babel-loader: 8.2.3
--css-loader: 6.5.0
--eslint: 8.1.0
--style-loader: 3.3.1
--url-loader: 4.1.1
--webpack: 5.61.0
--webpack-cli: 4.9.1
+- @babel/core: 7.15.8
+- @babel/preset-env: 7.15.8
+- @babel/preset-react: 7.16.0
+- babel-loader: 8.2.3
+- css-loader: 6.5.0
+- eslint: 8.1.0
+- style-loader: 3.3.1
+- url-loader: 4.1.1
+- webpack: 5.61.0
+- webpack-cli: 4.9.1
 
 ## 🚀 Installation and Setup
 
