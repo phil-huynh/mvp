@@ -7,11 +7,9 @@ const dim = '\u00B0'
 
 const whiteNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 
-const clockwise = ['G', 'D', 'A', 'E', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}`, `D${sharp}`, `A${sharp}`,
-`E${sharp}`, `B${sharp}`];
+const clockwise = ['G', 'D', 'A', 'E', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}`, `D${sharp}`, `A${sharp}`, `E${sharp}`, `B${sharp}`, `F${dblSharp}`, `C${dblSharp}`, `G${dblSharp}`, `D${dblSharp}`, `A${dblSharp}`, `E${dblSharp}`, `B${dblSharp}`, `F${dblSharp}${sharp}`];
 
-const counterClockwise = ["F", `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`,
-`B${dblFlat}`, `E${dblFlat}`, `A${dblFlat}`, `D${dblFlat}`]
+const counterClockwise = ["F", `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`, `B${dblFlat}`, `E${dblFlat}`, `A${dblFlat}`, `D${dblFlat}`, `G${dblFlat}`, `C${dblFlat}`, `F${dblFlat}`, `B${dblFlat}${flat}`, `E${dblFlat}${flat}`, `A${dblFlat}${flat}`, `D${dblFlat}${flat}`]
 
 var chromaticScale = [['C', `B${sharp}`, `D${dblFlat}`], [`C${sharp}`, `D${flat}`, `B${dblSharp}`], ["D", `C${dblSharp}`, `E${dblFlat}`], [`D${sharp}`, `E${flat}`, `F${dblFlat}`], ["E", `F${flat}`, `D${dblSharp}`], ["F", `E${sharp}`, `G${dblFlat}`], [`F${sharp}`, `G${flat}`, `E${dblSharp}`], ["G", `F${dblSharp}`, `A${dblFlat}`], [`G${sharp}`, `A${flat}`], ["A", `G${dblSharp}`, `B${dblFlat}`], [`A${sharp}`, `B${flat}`, `C${dblFlat}`], ["B", `C${flat}`, `A${dblSharp}`]];
 
@@ -925,25 +923,36 @@ var add7NoteScale = (name, degrees, makeChords) => {
   } else {
     objKey = name;
   }
-  for (var tonic in allScales) {
-    allScales[tonic][objKey] = {};
-    allScales[tonic][objKey].tonic = tonic
-    allScales[tonic][objKey].type = name
-    allScales[tonic][objKey].tonicScaleDegrees = allScales[tonic].scaleDegrees
-    allScales[tonic][objKey].scaleDegrees = []
-    allScales[tonic][objKey].notesToDegrees = {}
-    allScales[tonic][objKey].scale = []
 
-    for (var key in allScales[tonic].scaleDegrees) {
-      allScales[tonic][objKey].notesToDegrees[allScales[tonic].scaleDegrees[key]] = key
-    }
-    for (var j = 0; j < degrees.length; j++) {
-      let note = allScales[tonic].scaleDegrees[degrees[j]];
-      allScales[tonic][objKey].scale.push(note)
-      allScales[tonic][objKey].scaleDegrees.push(degrees[j])
-    }
-    if (makeChords){
-      allScales[tonic][objKey].chords = makeChordsFor7NoteScale(allScales[tonic][objKey].scale, tonic)
+  var tonicsToUse = ['C', 'D', 'E', 'F', 'G', 'A', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}`, `D${sharp}`, `A${sharp}`, `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`, `E${sharp}`, `B${sharp}`]
+  let checker = {}
+
+  tonicsToUse.forEach((note) => {
+    checker[note] = true
+  })
+
+
+  for (var tonic in allScales) {
+    if (checker[tonic]) {
+      allScales[tonic][objKey] = {};
+      allScales[tonic][objKey].tonic = tonic
+      allScales[tonic][objKey].type = name
+      allScales[tonic][objKey].tonicScaleDegrees = allScales[tonic].scaleDegrees
+      allScales[tonic][objKey].scaleDegrees = []
+      allScales[tonic][objKey].notesToDegrees = {}
+      allScales[tonic][objKey].scale = []
+
+      for (var key in allScales[tonic].scaleDegrees) {
+        allScales[tonic][objKey].notesToDegrees[allScales[tonic].scaleDegrees[key]] = key
+      }
+      for (var j = 0; j < degrees.length; j++) {
+        let note = allScales[tonic].scaleDegrees[degrees[j]];
+        allScales[tonic][objKey].scale.push(note)
+        allScales[tonic][objKey].scaleDegrees.push(degrees[j])
+      }
+      if (makeChords){
+        allScales[tonic][objKey].chords = makeChordsFor7NoteScale(allScales[tonic][objKey].scale, tonic)
+      }
     }
   }
 }
