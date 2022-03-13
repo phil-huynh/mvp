@@ -40,7 +40,7 @@ Strings Theory is a resource and educational tool for strings players at all lev
 #### When a chord card is selected, the notes of the chord will be highlighted on the neck and in the scale display. Click the currently selected chord card to clear selection. 
 <img src="https://media.giphy.com/media/9bV454prI06Tdf7RfA/giphy.gif" width=900/> 
 
-#### Line. 
+#### The scale visibity can be toggled as needed. The scale can be set to Visible(fully visible), Unfocused(partially transparent), or hidden. If a chord is selected, it will not be affected by this toggle. This allows users see chords more clearly and choose what they need to see. 
 <img src="https://media.giphy.com/media/Yd1Rk35ZvNNqueD1TU/giphy.gif" width=900/> 
 
 #### Line. 
