@@ -34,7 +34,7 @@ Strings Theory is a resource and educational tool for strings players at all lev
 #### If no chord is selected, clicking on a note name in the scale display will mark all locations of the selected note on the neck and will also highlight the selected note name in all of the chord cards that contain it.  
 <img src="https://media.giphy.com/media/4vWRmkcBdV3jM0CAO6/giphy.gif" width=900/> 
 
-#### Line. 
+#### The notes on the neck can be viewed as note names(A, B, C, D, E, F, G, ect..), scale degrees(1,2,3,4,5,6,7, ect...), or solfege(do, re, mi, fa, sol, la, ti, do). The default voicing toggle selects what type of voicing the chords fall back to when reset. The default voicing can be Triads or Seventh Chords. 
 <img src="https://media.giphy.com/media/GFytdYT3e1GTr4K0dC/giphy.gif" width=900/> 
 
 #### Line. 
