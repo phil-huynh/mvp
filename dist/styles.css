@@ -798,13 +798,13 @@ align-content: center;
   text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
 }
 .sharedNoteInScale {
-  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 2px #49ff18, 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 38px 19px 8px rgba(206,89,55,0);
 }
 .chord1NoteInScale {
   text-shadow: yellow 0px 0px 5px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
 }
 .chord2NoteInScale {
-  text-shadow: 0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec,  38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 2px #0095ec,0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 38px 19px 8px rgba(206,89,55,0);
 }
 
 
