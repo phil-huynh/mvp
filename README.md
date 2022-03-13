@@ -15,33 +15,17 @@ Strings Theory is a resource and educational tool for strings players at all lev
 
 ## <a name="demo"></a>⚜️ Demo
 ---
-### Overview Component
 
 
-#### Page dynamically re-renders when a different product is selected. 
+#### Line. 
 
 
 
 <img src="https://media.giphy.com/media/ovB7jDDERqLsZMzp7k/giphy.gif" width="410"/> 
 
 
-#### Users can cycle through the photo carousel using the arrows or by clicking on a photo directly. They can also choose from multiple styles for each available item.
 
 
-<img src="https://media.giphy.com/media/EWbhbJQRj7WnWQYEUg/giphy.gif" width="410"/> <img src="https://media.giphy.com/media/1lL5VlO0ZNoM97pyBr/giphy.gif" width="410"/>
-
-
-
-#### Users can zoom in on an item's photos. Photos can be cycled through while in zoom mode.
-
-
-<img src="https://media.giphy.com/media/569wd5FwlwKZv8V2iZ/giphy.gif" width="410"/> <img src="https://media.giphy.com/media/pPpvR9Jhi29LZ3qGZX/giphy.gif" width="410"/>
-
-
-#### Choosing a size dynamically updates the quanity menu to reflect the current quantity available. Users can share their favorite items on Facebook, Twitter, or Pintrest.
-
-
-<img src="https://media.giphy.com/media/vGCJXF0QfZTYZwwxN3/giphy.gif" width="410"/> <img src="https://media.giphy.com/media/7jmqevBMiHwid10yVT/giphy.gif" width="410"/>
 
 
 
