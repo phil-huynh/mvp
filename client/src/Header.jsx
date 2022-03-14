@@ -1,6 +1,6 @@
 import React from 'react'
 
-var Header = ({handleNavChoice, mapChordsToggle, mapScalesToggle, findChordsToggle, findScalesToggle, tutorialToggle, settingsToggle}) => {
+var Header = ({handleNavChoice, mapChordsToggle, mapScalesToggle, findStructuresToggle, tutorialToggle, settingsToggle}) => {
   return (
     <span className="navbar">
       <span className="navTitle">
@@ -22,18 +22,11 @@ var Header = ({handleNavChoice, mapChordsToggle, mapScalesToggle, findChordsTogg
         Map Scales
       </span>
       <span
-        className={findChordsToggle}
+        className={findStructuresToggle}
         onClick={(e)=>handleNavChoice(e)}
-        title="findChords"
+        title="findStructures"
         >
-        Find Chords
-      </span>
-      <span
-        className={findScalesToggle}
-        onClick={(e)=>handleNavChoice(e)}
-        title="findScales"
-        >
-        Find Scales
+        Find Structures
       </span>
       <span
         className={tutorialToggle}
@@ -41,13 +34,6 @@ var Header = ({handleNavChoice, mapChordsToggle, mapScalesToggle, findChordsTogg
         title="tutorial"
         >
         Tutorial
-      </span>
-      <span
-        className={settingsToggle}
-        onClick={(e)=>handleNavChoice(e)}
-        title="settings"
-      >
-        Settings
       </span>
       <span></span>
     </span>

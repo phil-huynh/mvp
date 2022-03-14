@@ -245,6 +245,187 @@ align-content: center;
 .modalMenu .modal-content {
   background-color: #373B4B;
   color: white;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 4px 4px 15px 5px #000000;
+}
+
+.welcome .modal-content {
+  background-color: #232634;
+  color: white;
+  width: 200%;
+  font-size: 3rem;
+  position: relative;
+  right: 60%;
+  border-radius: 10px;
+  font-family: 'Comic Neue', cursive;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 4px 4px 15px 5px #000000;
+}
+
+.welcome_message {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.welcome_header {
+  font-size: 6rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 7%;
+  margin-bottom: 5%;
+}
+
+.sorry_label {
+  font-size: 3.3rem;
+}
+
+.upper_welcome_message {
+  margin-bottom: 5%;
+}
+
+.middle_welcome_message {
+  margin-bottom: 7%;
+}
+
+.bottom_welcome_message {
+  margin-bottom: 7%;
+}
+
+.welcome_options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10%;
+  font-size: 3.6rem;
+}
+
+.welcome_choice {
+  cursor: pointer;
+}
+.welcome_choice:hover {
+  text-shadow: 0 0 5px #04D3FF, 0 0 10px #04D3FF, 0 0 15px #04D3FF, 0 0 20px #04D3FF, 0 0 30px #04D3FF, 0 0 40px #04D3FF, 0 0 55px #04D3FF, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.construction .modal-content {
+  background-color: #232634;
+  color: white;
+  width: 200%;
+  font-size: 3rem;
+  position: relative;
+  right: 60%;
+  border-radius: 10px;
+  font-family: 'Comic Neue', cursive;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 4px 4px 15px 5px #000000;
+}
+
+.construction_message {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.sorry {
+  font-size: 6rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 7%;
+  margin-bottom: 5%;
+}
+
+.sorry_label {
+  font-size: 3.3rem;
+}
+
+.upper_construction_message {
+  margin-bottom: 5%;
+}
+
+.middle_construction_message {
+  margin-bottom: 7%;
+}
+
+.bottom_construction_message {
+  margin-bottom: 7%;
+}
+
+.construction_options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10%;
+  font-size: 3.6rem;
+}
+
+.construction_choice {
+  cursor: pointer;
+}
+.construction_choice:hover {
+  text-shadow: 0 0 5px #04D3FF, 0 0 10px #04D3FF, 0 0 15px #04D3FF, 0 0 20px #04D3FF, 0 0 30px #04D3FF, 0 0 40px #04D3FF, 0 0 55px #04D3FF, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.tutorial .modal-content {
+  background-color: #232634;
+  color: white;
+  width: 300%;
+  font-size: 2.5rem;
+  position: relative;
+  right: 100%;
+  border-radius: 10px;
+  font-family: 'Comic Neue', cursive;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 4px 4px 15px 5px #000000;
+}
+
+.tutorial_header {
+  font-size: 5.5rem;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
+  margin-bottom: 3%;
+  text-decoration: underline;
+}
+
+.welcome_header {
+  font-size: 6rem;
+}
+
+.feature_header {
+  font-size: 5rem;
+  margin-top: 1.5%;
+  margin-bottom: 2%;
+  text-decoration: underline;
+}
+
+.tutorial_topic_header {
+  font-size: 2.8rem;
+  color: white;
+  text-decoration: underline;
+}
+
+.tutorial_body {
+  padding-left: 5%;
+  padding-right: 5%;
+  overflow-y: auto;
+}
+
+.first_topic {
+  margin-top: 4%;
+}
+
+.tutorial_contents {
+  margin-bottom: 1.2%;
+}
+
+.tutorialGif {
+  width: 100%;
+  margin-top: .8%;
+  margin-bottom: 8%;
+  border-radius: 5px;
+}
+
+.tutorialGif_upper {
+  width: 100%;
+  margin-top: .8%;
+  border-radius: 5px;
 }
 
 .modalMenuChoice {
@@ -723,7 +904,7 @@ align-content: center;
 .selectedChord2 {
   text-shadow: 0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec, 0 0 55px #0095ec, 38px 19px 8px rgba(206,89,55,0);
   color: #0095ec;
-  -webkit-box-shadow: 4px 4px 15px 7px #0095ec;
+  -webkit-box-shadow: 2px 2px 15px 7px #0095ec;
   box-shadow: 2px 2px 15px 7px #0095ec;
 
 }
@@ -808,8 +989,20 @@ align-content: center;
   text-shadow: 0 0 2px #0095ec,0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 38px 19px 8px rgba(206,89,55,0);
 }
 
+.chord1Tutorial {
+  text-shadow: yellow 0px 0px 5px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, red 0px 0px 75px;
+}
+.targetNoteTutorial {
+  text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red, 0 0 20px red, 0 0 30px red, 38px 19px 8px rgba(206,89,55,0);
+}
 
+.chord2Tutorial {
+  text-shadow: 0 0 2px #0095ec,0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 38px 19px 8px rgba(206,89,55,0);
+}
 
+.sharedNoteTutorial {
+  text-shadow: 0 0 2px #49ff18, 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+}
 
 
 

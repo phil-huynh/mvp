@@ -12,7 +12,11 @@ import MapScalesRender from './MapScalesRender.jsx'
 import MapChordsRender from './MapChordsRender.jsx'
 import Dropdown from './Dropdown.jsx'
 import FretGuide from './FretGuide.jsx'
+import Tutorial from './Tutorial.jsx'
 import AlterChordOpt from './AlterChordOpt.jsx'
+import Welcome from './Welcome.jsx'
+import ConstructionMapChords from './ConstructionMapChords.jsx'
+import ConstructionFindStructures from './ConstructionFindStructures.jsx'
 import axios from 'axios';
 
 const sharp = '\u266F';
@@ -61,6 +65,7 @@ class App extends React.Component {
       displayChordDegrees: false,
       findChordsToggle: 'navOption',
       findScalesToggle: 'navOption',
+      findStructuresToggle: 'navOption',
       hideScale: 'Show Scale',
       hideScaleButton: 'hide scale',
       instrument: 'Guitar',
@@ -72,7 +77,7 @@ class App extends React.Component {
       middle: 'inner_middle',
       moreSeventhsButton: 'Show 7th Chords',
       noteNameToggle: 'toggle_on',
-      renderView: 'Map Scales',
+      renderView: 'Welcome',
       resetVoicingCount: 0,
       scale: [],
       scale2: [],
@@ -97,10 +102,14 @@ class App extends React.Component {
       sevenths2: false,
       sharedNotes: [],
       showAlter: false,
+      showConstructionMapChords: false,
+      showConstructionFindStructures: false,
       showScaleMenu: false,
       showStringsMenu: false,
       showTonicMenu: false,
+      showTutorial: false,
       showViewMenu: false,
+      showWelcome: true,
       singleOrCompareButton: 'Single Chord',
       solfege: {},
       solfegeToggle: 'toggle_off',
@@ -127,6 +136,9 @@ class App extends React.Component {
     this.handleTonicMenuWindow = this.handleTonicMenuWindow.bind(this);
     this.handleScaleMenuWindow = this.handleScaleMenuWindow.bind(this);
     this.handleStringsMenuWindow = this.handleStringsMenuWindow.bind(this);
+    this.handleTutorialWindow = this.handleTutorialWindow.bind(this);
+    this.handleConstructionMapChordsWindow = this.handleConstructionMapChordsWindow.bind(this);
+    this.handleConstructionFindStructuresWindow = this.handleConstructionFindStructuresWindow.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChordFocus = this.handleChordFocus.bind(this);
     this.handleChordDegrees = this.handleChordDegrees.bind(this);
@@ -143,6 +155,7 @@ class App extends React.Component {
     this.handleTonicChange = this.handleTonicChange.bind(this);
     this.handleTonicChange2 = this.handleTonicChange2.bind(this);
     this.handleView = this.handleView.bind(this);
+    this.handleWelcomeWindow = this.handleWelcomeWindow.bind(this);
     this.markNote = this.markNote.bind(this);
     this.resetAll = this.resetAll.bind(this);
     this.resetCard = this.resetCard.bind(this);
@@ -238,6 +251,8 @@ class App extends React.Component {
     })
   }
 
+
+
   handleAlterChord (e) {
     let type = e.target.title
     let typeKey = this.state.currentCard
@@ -318,6 +333,69 @@ class App extends React.Component {
     if(this.state.showStringsMenu===true) {
       this.setState({
         showStringsMenu: false,
+      })
+    }
+  }
+
+  handleTutorialWindow () {
+    if(this.state.showTutorial===false) {
+      this.setState({
+        showTutorial: true,
+      })
+    }
+    if(this.state.showTutorial===true) {
+      this.setState({
+        showTutorial: false,
+        renderView: 'Map Scales',
+        mapScalesToggle: 'navOption toggle_on',
+        tutorialToggle: 'navOption',
+      })
+    }
+  }
+
+  handleWelcomeWindow () {
+    if(this.state.showWelcome===false) {
+      this.setState({
+        showWelcome: true,
+      })
+    }
+    if(this.state.showWelcome===true) {
+      this.setState({
+        showWelcome: false,
+        renderView: 'Map Scales',
+        mapScalesToggle: 'navOption toggle_on',
+      })
+    }
+  }
+
+  handleConstructionMapChordsWindow () {
+    if(this.state.showConstructionMapChords===false) {
+      this.setState({
+        showConstructionMapChords: true,
+      })
+    }
+    if(this.state.showConstructionMapChords===true) {
+      this.setState({
+        showConstructionMapChords: false,
+        renderView: 'Map Scales',
+        mapScalesToggle: 'navOption toggle_on',
+        mapChordsToggle: 'navOption',
+      })
+    }
+  }
+
+  handleConstructionFindStructuresWindow () {
+    if(this.state.showConstructionFindStructures===false) {
+      this.setState({
+        showConstructionFindStructures: true,
+      })
+    }
+    if(this.state.showConstructionFindStructures===true) {
+      this.setState({
+        showConstructionFindStructures: false,
+        renderView: 'Map Scales',
+        mapScalesToggle: 'navOption toggle_on',
+        findStructuresToggle: 'navOption',
       })
     }
   }
@@ -409,59 +487,36 @@ class App extends React.Component {
         findScalesToggle: 'navOption',
         tutorialToggle: 'navOption',
         settingsToggle: 'navOption',
-        renderView: 'Map Chords'
       })
+      this.handleConstructionMapChordsWindow()
     }
     if (choice === 'mapScales') {
       this.setState({
         mapChordsToggle: 'navOption',
         mapScalesToggle: 'navOption toggle_on',
-        findChordsToggle: 'navOption',
-        findScalesToggle: 'navOption',
+        findStructuresToggle: 'navOption',
         tutorialToggle: 'navOption',
-        settingsToggle: 'navOption',
         renderView: 'Map Scales'
       })
     }
-    if (choice === 'findChords') {
+    if (choice === 'findStructures') {
       this.setState({
         mapChordsToggle: 'navOption',
         mapScalesToggle: 'navOption',
-        findChordsToggle: 'navOption toggle_on',
-        findScalesToggle: 'navOption',
+        findStructuresToggle: 'navOption toggle_on',
         tutorialToggle: 'navOption',
-        settingsToggle: 'navOption'
       })
-    }
-    if (choice === 'findScales') {
-      this.setState({
-        mapChordsToggle: 'navOption',
-        mapScalesToggle: 'navOption',
-        findChordsToggle: 'navOption',
-        findScalesToggle: 'navOption toggle_on',
-        tutorialToggle: 'navOption',
-        settingsToggle: 'navOption'
-      })
+      this.handleConstructionFindStructuresWindow()
     }
     if (choice === 'tutorial') {
       this.setState({
         mapChordsToggle: 'navOption',
         mapScalesToggle: 'navOption',
-        findScalesToggle: 'navOption',
-        findChordsToggle: 'navOption',
+        findStructuresToggle: 'navOption',
         tutorialToggle: 'navOption toggle_on',
-        settingsToggle: 'navOption'
+        renderView: "Tutorial"
       })
-    }
-    if (choice === 'settings') {
-      this.setState({
-        mapChordsToggle: 'navOption',
-        mapScalesToggle: 'navOption',
-        findScalesToggle: 'navOption',
-        findChordsToggle: 'navOption',
-        tutorialToggle: 'navOption',
-        settingsToggle: 'navOption toggle_on'
-      })
+      this.handleTutorialWindow()
     }
   }
 
@@ -799,10 +854,28 @@ class App extends React.Component {
             handleNavChoice={this.handleNavChoice}
             mapChordsToggle={this.state.mapChordsToggle}
             mapScalesToggle={this.state.mapScalesToggle}
-            findChordsToggle={this.state.findChordsToggle}
-            findScalesToggle={this.state.findScalesToggle}
+            findStructuresToggle={this.state.findStructuresToggle}
             tutorialToggle={this.state.tutorialToggle}
             settingsToggle={this.state.settingsToggle}
+          />
+          <Welcome
+            showWelcome={this.state.showWelcome}
+            handleWelcomeWindow={this.handleWelcomeWindow}
+            handleNavChoice={this.handleNavChoice}
+            />
+          <ConstructionMapChords
+            showConstructionMapChords={this.state.showConstructionMapChords}
+            handleConstructionMapChordsWindow={this.handleConstructionMapChordsWindow}
+            handleNavChoice={this.handleNavChoice}
+            />
+          <ConstructionFindStructures
+            showConstructionFindStructures={this.state.showConstructionFindStructures}
+            handleConstructionFindStructuresWindow={this.handleConstructionFindStructuresWindow}
+            handleNavChoice={this.handleNavChoice}
+          />
+          <Tutorial
+            showTutorial={this.state.showTutorial}
+            handleTutorialWindow={this.handleTutorialWindow}
           />
         </div>
           <ViewMenu
