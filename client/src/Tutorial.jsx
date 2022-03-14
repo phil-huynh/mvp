@@ -47,11 +47,11 @@ var Tutorial = ({showTutorial, handleTutorialWindow}) => {
 
 
           <div className="tutorial_topic_header toggle_on first_topic" id="neck_view">Changing the Neck View</div>
-          <div>First, choose how you would like to view the neck. By default, the neck is in <span className="toggle_on">Traditional View</span>(notes stacked with the lowest on the bottom and the highest notes on the top). You can change this by clicking on <span className="toggle_on">Traditional View</span> in the upper left of the page. Strings Theory provides 3 other ways to view the neck. <span className="toggle_on">Mirror View</span> displays the low notes on top and the high notes on the bottom (this emulates looking at your hands in a mirror). <span className="toggle_on">Lefty Traditional View</span> and <span className="toggle_on">Lefty Mirror View</span> do the same things respectively in addition to the neck switching directions from (low->high) to (high->low).</div>
+          <div>First, choose how you would like to view the neck. By default, the neck is in <span className="toggle_on">Traditional View</span>(notes stacked with the lowest on the bottom and the highest notes on the top). You can change this by clicking on <span className="toggle_on">Traditional View</span> in the upper left of the page. Strings Theory provides 3 other ways to view the neck. <span className="toggle_on">Mirror View</span> displays the low notes on top and the high notes on the bottom (this emulates looking at your hands in a mirror). <span className="toggle_on">Lefty Traditional View</span> and <span className="toggle_on">Lefty Mirror View</span> do the same things respectively in addition to the neck switching directions from (low->high) to (high->low). <a href="#top">Back to Top</a></div></div>
           <img className="tutorialGif" src="https://media.giphy.com/media/I9QN347uJmAcE6oqOF/giphy.gif"/>
 
           <div className="tutorial_topic_header toggle_on" id="instrument_tuning">Changing Instrument or Tuning</div>
-          <div>You can choose from several instruments in multiple tunings. Click <span className="toggle_on">Guitar: E A D G B E</span> to change the instrument and tuning.</div>
+          <div>You can choose from several instruments in multiple tunings. Click <span className="toggle_on">Guitar: E A D G B E</span> to change the instrument and tuning. <a href="#top">Back to Top</a></div></div>
           <img className="tutorialGif" src="https://media.giphy.com/media/igIsud0EoGotF0XuMk/giphy.gif"/>
 
           <div className="tutorial_topic_header toggle_on" id="get_scales">Look Up A Scale</div>
