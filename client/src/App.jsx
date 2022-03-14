@@ -66,7 +66,7 @@ class App extends React.Component {
       findChordsToggle: 'navOption',
       findScalesToggle: 'navOption',
       findStructuresToggle: 'navOption',
-      hideScale: 'Show Scale',
+      hideScale: 'Hide Scale',
       hideScaleButton: 'hide scale',
       instrument: 'Guitar',
       keyCenter: {},
@@ -364,6 +364,7 @@ class App extends React.Component {
         showWelcome: false,
         renderView: 'Map Scales',
         mapScalesToggle: 'navOption toggle_on',
+        hideScale: 'Show Scale'
       })
     }
   }
