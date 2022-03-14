@@ -311,7 +311,7 @@ align-content: center;
   width: 150%;
   font-size: 2rem;
   position: relative;
-  right: 60%;
+  right: 40%;
   border-radius: 10px;
   font-family: 'Comic Neue', cursive;
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
@@ -364,7 +364,7 @@ align-content: center;
 .tutorial .modal-content {
   background-color: #232634;
   color: white;
-  width: 150%;
+  width: 250%;
   font-size: 2rem;
   position: relative;
   right: 100%;
