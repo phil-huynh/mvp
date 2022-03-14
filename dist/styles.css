@@ -253,7 +253,7 @@ align-content: center;
   background-color: #232634;
   color: white;
   width: 200%;
-  font-size: 2rem;
+  font-size: 2.2rem;
   position: relative;
   right: 50%;
   border-radius: 10px;
@@ -268,7 +268,7 @@ align-content: center;
 }
 
 .welcome_header {
-  font-size: 6rem;
+  font-size: 5rem;
   display: flex;
   justify-content: center;
   margin-top: 7%;
@@ -309,9 +309,9 @@ align-content: center;
   background-color: #232634;
   color: white;
   width: 150%;
-  font-size: 2rem;
+  font-size: 2.2rem;
   position: relative;
-  right: 20%;
+  right: 30%;
   border-radius: 10px;
   font-family: 'Comic Neue', cursive;
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
@@ -365,9 +365,9 @@ align-content: center;
   background-color: #232634;
   color: white;
   width: 250%;
-  font-size: 2rem;
+  font-size: 2.2rem;
   position: relative;
-  right: 70%;
+  right: 80%;
   border-radius: 10px;
   font-family: 'Comic Neue', cursive;
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
@@ -384,12 +384,8 @@ align-content: center;
   text-decoration: underline;
 }
 
-.welcome_header {
-  font-size: 5.5rem;
-}
-
 .feature_header {
-  font-size: 4.5rem;
+  font-size: 4rem;
   margin-top: 1.5%;
   margin-bottom: 2%;
   text-decoration: underline;
