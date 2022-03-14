@@ -30,7 +30,7 @@ Strings Theory is a resource application for music students and professionals. T
 
 #### When a chord card is selected, the notes of the chord will be highlighted on the neck and in the scale display. Click the currently selected chord card to clear selection. 
 ####
-#### If a chord has been selected, a "Chord Degrees" button will appear in the dash. When this feature is toggled on, the notes that are contained in the chord will display as chord degrees on the neck. If there are two chords selected, the chord degrees will not appear on the neck until a chord is "Focused"(see section on Focus) . 
+#### If a chord has been selected, a "Chord Degrees" button will appear in the dash. When this feature is toggled on, the notes that are contained in the chord will display as chord degrees on the neck. If there are two chords selected, the chord degrees will not appear on the neck until a chord is "Focused". (see section on Focus)  
 ####
 #### The scale visibity can be toggled as needed. The scale can be set to Visible(fully visible), Unfocused(partially transparent), or hidden. If a chord is selected, it will not be affected by this toggle. This allows users see chords more clearly and choose what they need to see. 
 <img src="https://media.giphy.com/media/9bV454prI06Tdf7RfA/giphy.gif" width=900/> 
@@ -57,7 +57,7 @@ Strings Theory is a resource application for music students and professionals. T
 
 
 ---
-### Map Chords Feature
+### Find Structures Feature
 #### This feature is in development. It will allow the user to identify unknown chords or scales that they are playing by inputting them on the neck. It will identify chords and scales as well a provide alternative options and suggestions for related structures. Updates coming soon. 
 ---
 ---
