@@ -659,7 +659,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].options.octaves.label = `${chordLabel} Octaves`
     chords[key].options.list.push('  Octaves')
 
-    var addVoicing = (voicing, objKey, listName, name, label, quality) => {
+    var addVoicing = (voicing, objKey, listName, name, label, quality, useUpper) => {
       let notes = []
       var check = (voicing) => {
         for (var k = 0; k < voicing.length; k++) {
@@ -676,10 +676,12 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       if(check(voicing)) {
         chords[key].options[objKey] = {}
         chords[key].options[objKey].notes = notes
+        chords[key].options[objKey].voicingObjKey = objKey
         if (name == null) {chords[key].options[objKey].name = `${chName}${quality}`;}
         if (name != null) {chords[key].options[objKey].name = `${name}`;}
         if (label == null) {chords[key].options[objKey].label = `${chLabel}${quality}`;}
         if (label != null) {chords[key].options[objKey].label = `${label}`;}
+        if (useUpper) {chords[key].options[objKey].useUpper = useUpper;}
         chords[key].options.list.push(`${listName}`)
       }
     }
@@ -816,44 +818,44 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
 
     addVoicing(['one', 'two', 'five'], 'sus2', ' sus2', null, null, 'sus2');
     addVoicing(['one', 'four', 'five'], 'sus4', ' sus4', null, null, 'sus4');
-    addVoicing(['one', 'three','five', 'two'], 'add9', ' add9', null, null, 'add9');
-    addVoicing(['one', 'three','five', 'sharpFour'], 'addSharp11', ` add${sharp}11`, null, null, `add${sharp}11`);
+    addVoicing(['one', 'three','five', 'two'], 'add9', ' add9', null, null, 'add9', true);
+    addVoicing(['one', 'three','five', 'sharpFour'], 'addSharp11', ` add${sharp}11`, null, null, `add${sharp}11`, true);
     addVoicing(['one', 'three', 'five', 'six'], 'major6', '6', null, null, '6');
     addVoicing(['one', 'flatThree', 'five', 'six'], 'minor6', 'm6', null, null, '6');
 
     addVoicing(['one', 'four', 'five', 'flatSeven'], `dominantSus4`, `7sus4`, null, null, `7sus4`);
     addVoicing(['one', 'four', 'five', 'seven'], `maj7Sus4`, `maj7(sus4)`, null, null, `maj7(sus4)`);
 
-    addVoicing(['one', 'three', 'five', 'seven', 'two'], 'maj9', `maj7(9)`, null, null, `maj7(9)`);
-    addVoicing(['one', 'three', 'five', 'seven', 'sharpFour'], 'maj7AddSharp11', `maj7(${sharp}11)`, null, null, `maj7(${sharp}11)`);
-    addVoicing(['one', 'three', 'five', 'seven', 'six'], 'maj7Add13', `maj7(13)`, null, null, `maj7(13)`);
-    addVoicing(['one', 'three', 'five', 'seven', 'two', 'sharpFour'], 'majSharp11', `maj7(9, ${sharp}11)`, null, null, `maj7(9, ${sharp}11)`);
-    addVoicing(['one', 'three', 'five', 'seven', 'sharpFour', 'six'], 'maj7AddSharp11Add13', `maj7(${sharp}11, 13)`, null, null, `maj7(${sharp}11, 13)`);
-    addVoicing(['one', 'three', 'five', 'seven', 'two', 'six'], 'maj9Add13', `maj7(9, 13)`, null, null, `maj7(9, 13)`);
-    addVoicing(['one', 'three', 'five', 'seven', 'two', 'sharpFour', 'six'], 'maj13', `maj7(9, ${sharp}11, 13)`, null, null, `maj7(9, ${sharp}11, 13)`);
+    addVoicing(['one', 'three', 'five', 'seven', 'two'], 'maj9', `maj7(9)`, null, null, `maj7(9)`, true);
+    addVoicing(['one', 'three', 'five', 'seven', 'sharpFour'], 'maj7AddSharp11', `maj7(${sharp}11)`, null, null, `maj7(${sharp}11)`, true);
+    addVoicing(['one', 'three', 'five', 'seven', 'six'], 'maj7Add13', `maj7(13)`, null, null, `maj7(13)`, true);
+    addVoicing(['one', 'three', 'five', 'seven', 'two', 'sharpFour'], 'majSharp11', `maj7(9, ${sharp}11)`, null, null, `maj7(9, ${sharp}11)`, true);
+    addVoicing(['one', 'three', 'five', 'seven', 'sharpFour', 'six'], 'maj7AddSharp11Add13', `maj7(${sharp}11, 13)`, null, null, `maj7(${sharp}11, 13)`, true);
+    addVoicing(['one', 'three', 'five', 'seven', 'two', 'six'], 'maj9Add13', `maj7(9, 13)`, null, null, `maj7(9, 13)`, true);
+    addVoicing(['one', 'three', 'five', 'seven', 'two', 'sharpFour', 'six'], 'maj13', `maj7(9, ${sharp}11, 13)`, null, null, `maj7(9, ${sharp}11, 13)`, true);
 
-    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two'], 'min9', `m7(9)`, null, null, `m7(9)`);
-    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'four'], 'minAdd11', `m7(11)`, null, null, `m7(11)`);
-    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'six'], 'minAdd13', `m7(13)`, null, null, `m7(13)`);
-    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two', 'four'], 'min11', `m7(9, 11)`, null, null, `m7(9, 11)`);
-    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two', 'six'], 'minAdd9Add13', `m7(9, 13)`, null, null, `m7(9, 13)`);
-    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'four', 'six'], 'minAdd11Add13', `m7(11, 13)`, null, null, `m7(11, 13)`);
-    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two', 'four', 'six'], 'min13', `m7(9, 11, 13)`, null, null, `m7(9, 11, 13)`);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two'], 'min9', `m7(9)`, null, null, `m7(9)`, true);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'four'], 'minAdd11', `m7(11)`, null, null, `m7(11)`, true);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'six'], 'minAdd13', `m7(13)`, null, null, `m7(13)`, true);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two', 'four'], 'min11', `m7(9, 11)`, null, null, `m7(9, 11)`, true);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two', 'six'], 'minAdd9Add13', `m7(9, 13)`, null, null, `m7(9, 13)`, true);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'four', 'six'], 'minAdd11Add13', `m7(11, 13)`, null, null, `m7(11, 13)`, true);
+    addVoicing(['one', 'flatThree', 'five', 'flatSeven', 'two', 'four', 'six'], 'min13', `m7(9, 11, 13)`, null, null, `m7(9, 11, 13)`, true);
 
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'two'], 'dominant9', `7(9)`, null, null, `7(9)`);
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'flatTwo'], 'dominantFlat9', `7(${flat}9)`, null, null, `7(${flat}9)`);
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'sharpTwo'], 'dominantSharp9', `7(${sharp}9)`, null, null, `7(${sharp}9)`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two'], 'dominant9', `7(9)`, null, null, `7(9)`, true);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'flatTwo'], 'dominantFlat9', `7(${flat}9)`, null, null, `7(${flat}9)`, true);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'sharpTwo'], 'dominantSharp9', `7(${sharp}9)`, null, null, `7(${sharp}9)`, true);
 
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'sharpFour'], 'dominantAddSharp11', `7(${sharp}11)`, null, null, `7(${sharp}11)`);
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour'], 'dominantSharp11', `7(9, ${sharp}11)`, null, null, `7(9, ${sharp}11)`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'sharpFour'], 'dominantAddSharp11', `7(${sharp}11)`, null, null, `7(${sharp}11)`, true);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour'], 'dominantSharp11', `7(9, ${sharp}11)`, null, null, `7(9, ${sharp}11)`, true);
 
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'six'], 'dominantAdd13', `7(13)`, null, null, `7(13)`);
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'flatSix'], 'dominantAddFlat13', `7(${flat}13)`, null, null, `7(${flat}13)`);
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'six'], 'dominant13', `7(9, ${sharp}11, 13)`, null, null, `7(9, ${sharp}11, 13)`);
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'flatSix'], 'dominantFlat13', `7(9, ${sharp}11, ${flat}13)`, null, null, `7(9, ${sharp}11, ${flat}13)`);
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'flatSix'], 'dominant9Flat13', `7(9, ${flat}13)`, null, null, `7(9, ${flat}13)`);
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'six'], 'dominant9Add13', `7(9, 13)`, null, null, `7(9, 13)`);
-    addVoicing(['one', 'three', 'five', 'flatSeven', 'flatTwo', 'flatSix'], 'dominantFlat9Flat13', `7(${flat}9, ${flat}13)`, null, null, `7(${flat}9, ${flat}13)`);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'six'], 'dominantAdd13', `7(13)`, null, null, `7(13)`, true);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'flatSix'], 'dominantAddFlat13', `7(${flat}13)`, null, null, `7(${flat}13)`, true);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'six'], 'dominant13', `7(9, ${sharp}11, 13)`, null, null, `7(9, ${sharp}11, 13)`, true);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'sharpFour', 'flatSix'], 'dominantFlat13', `7(9, ${sharp}11, ${flat}13)`, null, null, `7(9, ${sharp}11, ${flat}13)`, true);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'flatSix'], 'dominant9Flat13', `7(9, ${flat}13)`, null, null, `7(9, ${flat}13)`, true);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'two', 'six'], 'dominant9Add13', `7(9, 13)`, null, null, `7(9, 13)`, true);
+    addVoicing(['one', 'three', 'five', 'flatSeven', 'flatTwo', 'flatSix'], 'dominantFlat9Flat13', `7(${flat}9, ${flat}13)`, null, null, `7(${flat}9, ${flat}13)`, true);
 
     addVoicing(['one', 'two', 'three', 'five', 'six'], 'majorPentatonic', '  Major Pentatonic', null, 'Major Pentatonic', 'maj Pentatonic');
     addVoicing(['one', 'flatThree', 'four', 'five', 'flatSeven'], 'minorPentatonic', '  Minor Pentatonic', null, 'Minor Pentatonic', 'm Pentatonic');

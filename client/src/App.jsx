@@ -51,6 +51,8 @@ class App extends React.Component {
       chordDegreesUpper: {},
       chordDegButtonClass: 'chordDegButton',
       chordOneSelected: false,
+      chordObjKey: '',
+      chord2ObjKey: '',
       chordOptRoot: '',
       chordTwoSelected: false,
       chordTypes: {},
@@ -741,7 +743,7 @@ class App extends React.Component {
     })
   }
 
-  selectChord (chord, tones) {
+  selectChord (chord, tones, key) {
     if(chord === this.state.selectedChord && this.state.compare && this.state.chordTwoSelected === false) {
       this.setState({
         selectedChord: {},
@@ -749,7 +751,8 @@ class App extends React.Component {
         chordOneSelected: false,
         compare: false,
         displayChordDegrees: false,
-        chordDegButtonClass: 'chordDegButton'
+        chordDegButtonClass: 'chordDegButton',
+        chordObjKey: '',
       })
     }
     if(!this.state.chordOneSelected || !this.state.compare) {
@@ -757,7 +760,8 @@ class App extends React.Component {
         selectedChord: chord,
         currentChordTones: tones,
         chordOneSelected: true,
-        selNote: ''
+        selNote: '',
+        chordObjKey: key,
       })
     }
     if (chord === this.state.selectedChord && !this.state.compare && this.state.chordOneSelected) {
@@ -766,12 +770,13 @@ class App extends React.Component {
         currentChordTones: [],
         chordOneSelected: false,
         displayChordDegrees: false,
-        chordDegButtonClass: 'chordDegButton'
+        chordDegButtonClass: 'chordDegButton',
+        chordObjKey: '',
       })
     }
   }
 
-  selectChord2 (chord, tones) {
+  selectChord2 (chord, tones, key) {
     console.log(chord)
     console.log(tones)
     let checker = {}
@@ -795,6 +800,7 @@ class App extends React.Component {
         chordTwoSelected: false,
         chordFocus: 'Neutral',
         sharedNotes: [],
+        chord2ObjKey: '',
       })
     }
     if (chord === this.state.selectedChord) {
@@ -809,7 +815,9 @@ class App extends React.Component {
         sharedNotes: [],
         compare: false,
         displayChordDegrees: false,
-        chordDegButtonClass: 'chordDegButton'
+        chordDegButtonClass: 'chordDegButton',
+        chordObjKey: '',
+        chord2ObjKey: '',
       })
     } else if (chord === this.state.selectedChord2) {
       this.setState({
@@ -817,14 +825,16 @@ class App extends React.Component {
         currentChordTones2: [],
         chordTwoSelected: false,
         chordFocus: 'Neutral',
-        sharedNotes: []
+        sharedNotes: [],
+        chord2ObjKey: '',
       })
     } else {
       this.setState({
         selectedChord2: chord,
         currentChordTones2: tones,
         chordTwoSelected: true,
-        sharedNotes: sharedNotes
+        sharedNotes: sharedNotes,
+        chord2ObjKey: key,
       })
     }
   }
