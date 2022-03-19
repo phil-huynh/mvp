@@ -48,6 +48,7 @@ class App extends React.Component {
       chords: {},
       chords2: {},
       chordDegrees: {},
+      chordDegreesUpper: {},
       chordDegButtonClass: 'chordDegButton',
       chordOneSelected: false,
       chordOptRoot: '',
@@ -205,7 +206,8 @@ class App extends React.Component {
         this.setState({
           solfege: res.data.solfege,
           scaleDegrees: res.data.scaleDegrees,
-          chordDegrees: res.data.chordDegrees
+          chordDegrees: res.data.chordDegrees,
+          chordDegreesUpper: res.data.chordDegreesUpper
         })
       })
       .catch((err) => {
@@ -597,7 +599,6 @@ class App extends React.Component {
     if(this.state.compare) {
       this.setState({
         compare: false,
-        singleOrCompareButton: 'Single Chord',
         selectedChord2: {},
         currentChordTones2: [],
         chordTwoSelected: false,
@@ -607,7 +608,6 @@ class App extends React.Component {
     if(!this.state.compare) {
       this.setState({
         compare: true,
-        singleOrCompareButton: 'Compare Chords',
       })
     }
   }
@@ -940,6 +940,7 @@ class App extends React.Component {
                   solfege={this.state.solfege}
                   scaleDegrees={this.state.scaleDegrees}
                   chordDegrees={this.state.chordDegrees}
+                  chordDegreesUpper={this.state.chordDegreesUpper}
                   keyCenter={this.state.keyCenter}
                   labelType={this.state.labelType}
                   chordFocus={this.state.chordFocus}

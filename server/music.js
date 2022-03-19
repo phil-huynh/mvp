@@ -59,6 +59,27 @@ var scaleDegrees = {
 var chordDegrees = {
   one: 'R',
   sharpOne: `${sharp}1`,
+  flatTwo: `${flat}2`,
+  two: '2',
+  sharpTwo: `${sharp}2`,
+  flatThree: `${flat}3`,
+  three: '3rd',
+  four: '4',
+  sharpFour: `${sharp}4`,
+  flatFive: `${flat}5`,
+  five: '5th',
+  sharpFive: `${sharp}5`,
+  flatSix: `${flat}6`,
+  six: '6',
+  sharpSix: `${sharp}6`,
+  dblFlatSeven: `${dblFlat}7th`,
+  flatSeven: `${flat}7`,
+  seven: '7'
+}
+
+var chordDegreesUpper = {
+  one: 'R',
+  sharpOne: `${sharp}1`,
   flatTwo: `${flat}9`,
   two: '9',
   sharpTwo: `${sharp}9`,
@@ -1026,6 +1047,7 @@ module.exports.scaleChoices = scaleChoices
 module.exports.solfege = solfege
 module.exports.scaleDegrees = scaleDegrees
 module.exports.chordDegrees = chordDegrees
+module.exports.chordDegreesUpper = chordDegrees
 module.exports.chordTypes = chordTypes
 
 
