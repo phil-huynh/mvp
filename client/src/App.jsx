@@ -19,12 +19,12 @@ import ConstructionMapChords from './ConstructionMapChords.jsx'
 import ConstructionFindStructures from './ConstructionFindStructures.jsx'
 import axios from 'axios';
 
-const sharp = '\u266F';
+const sharp = '#';
 const flat = '\u266D';
 const dblSharp = '\u{1D12A}';
 const dblFlat = '\u{1D12B}';
 const natural = '\u266E';
-const dim = '\u00B0'
+const dim = '\u00B0';
 
 class App extends React.Component {
   constructor(props) {
@@ -604,7 +604,9 @@ class App extends React.Component {
         selectedChord2: {},
         currentChordTones2: [],
         chordTwoSelected: false,
-        sharedNotes: false
+        sharedNotes: false,
+        chordFocus: 'Neutral',
+        chord2ObjKey: '',
       })
     }
     if(!this.state.compare) {
@@ -839,15 +841,17 @@ class App extends React.Component {
     }
   }
 
-  setTones (tones) {
+  setTones (tones, key) {
     this.setState({
-      currentChordTones: tones
+      currentChordTones: tones,
+      chordObjKey: key,
     })
   }
 
-  setTones2 (tones) {
+  setTones2 (tones, key) {
     this.setState({
-      currentChordTones2: tones
+      currentChordTones2: tones,
+      chord2ObjKey: key,
     })
   }
 
@@ -958,6 +962,8 @@ class App extends React.Component {
                   instrument={this.state.instrument}
                   render={this.state.renderView}
                   selNote={this.state.selNote}
+                  chordObjKey={this.state.chordObjKey}
+                  chord2ObjKey={this.state.chord2ObjKey}
                 />
               </div>
             </div>

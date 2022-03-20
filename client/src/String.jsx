@@ -1,6 +1,6 @@
 import React from 'react'
 
-var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, firstString, lastString, render, selNote, chordDegreesUpper }) => {
+var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, firstString, lastString, render, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey }) => {
   var notes=[];
   var currentString;
   var name;
@@ -39,13 +39,13 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
   }
 
   if (displayChordDegrees && chordFocus === 'Focus 1') {
-    altLabelContainer = chordDegrees
     chordKey = selectedChord.notesToDegrees
+    selectedChord.options[chordObjKey].useUpper !== undefined ? altLabelContainer = chordDegreesUpper : altLabelContainer = chordDegrees
   }
 
   if (displayChordDegrees  && chordFocus === 'Focus 2') {
-    altLabelContainer = chordDegrees
     chordKey = selectedChord2.notesToDegrees
+    selectedChord2.options[chord2ObjKey].useUpper !== undefined ? altLabelContainer = chordDegreesUpper : altLabelContainer = chordDegrees
   }
 
   if (displayChordDegrees && chordFocus === 'Neutral') {
@@ -54,8 +54,9 @@ var String = ({ string, allStrings, stringsLeft, scale, chord, chord2, view, cho
   }
 
   if (displayChordDegrees  && chordFocus === 'Neutral' && !chordTwoSelected) {
-    altLabelContainer = chordDegrees
     chordKey = selectedChord.notesToDegrees
+    selectedChord.options[chordObjKey].useUpper !== undefined ? altLabelContainer = chordDegreesUpper : altLabelContainer = chordDegrees
+
   }
 
   if (view === 'Mirror View' || view === 'Traditional View') {

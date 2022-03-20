@@ -4,12 +4,12 @@ import { Modal } from 'react-bootstrap'
 
 var AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterChord, list, root}) => {
 
-  const sharp = '\u266F';
+  const sharp = '#';
   const flat = '\u266D';
   const dblSharp = '\u{1D12A}';
   const dblFlat = '\u{1D12B}';
-  const natural = '\u266E'
-  const dim = '\u00B0'
+  const natural = '\u266E';
+  const dim = '\u00B0';
 
   return (
     <Modal

@@ -1,4 +1,4 @@
-const sharp = '\u266F';
+const sharp = '#';
 const flat = '\u266D';
 const dblSharp = '\u{1D12A}';
 const dblFlat = '\u{1D12B}';
@@ -92,7 +92,7 @@ var chordDegreesUpper = {
   sharpFive: `${sharp}5`,
   flatSix: `${flat}13`,
   six: '13',
-  sharpSix: `${sharp}13(6)`,
+  sharpSix: `${sharp}13`,
   dblFlatSeven: `${dblFlat}7th`,
   flatSeven: `${flat}7`,
   seven: '7'
@@ -804,13 +804,16 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
 
     chords[key].options.triad.name = chordName
     chords[key].options.triad.label = chordLabel
-    chords[key].options.triad.quality= chordQ
+    chords[key].options.triad.quality = chordQ
+    chords[key].options.triad.voicingObjKey = 'triad'
     chords[key].options.seventhChord.name = seventhName
     chords[key].options.seventhChord.label = seventhLabel
     chords[key].options.seventhChord.quality = seventhChord
+    chords[key].options.seventhChord.voicingObjKey = 'seventhChord'
     chords[key].options.shell.name = `${seventhName}(shell)`
     chords[key].options.shell.label = `${seventhLabel}(shell)`
     chords[key].options.shell.quality = seventhChord
+    chords[key].options.shell.voicingObjKey = 'shell'
 
 
 
@@ -871,9 +874,11 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].options.quartalVoicing = {}
     chords[key].options.quartalVoicing.notes =  quartalVoicing
     chords[key].options.quartalVoicing.label = '4ths voicing'
+    chords[key].options.quartalVoicing.voicingObjKey = 'quartalVoicing'
     chords[key].options.fifthsVoicing = {}
     chords[key].options.fifthsVoicing.notes = fifthsVoicing
     chords[key].options.fifthsVoicing.label = '5ths voicing'
+    chords[key].options.fifthsVoicing.voicingObjKey = 'fifthsVoicing'
 
     chords[key].options.list.push(`  Quartal Voicing`)
     chords[key].options.list.push(`  Fifths Voicing`)
@@ -1049,7 +1054,7 @@ module.exports.scaleChoices = scaleChoices
 module.exports.solfege = solfege
 module.exports.scaleDegrees = scaleDegrees
 module.exports.chordDegrees = chordDegrees
-module.exports.chordDegreesUpper = chordDegrees
+module.exports.chordDegreesUpper = chordDegreesUpper
 module.exports.chordTypes = chordTypes
 
 

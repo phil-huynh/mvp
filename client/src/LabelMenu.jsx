@@ -2,8 +2,6 @@ import React from 'react';
 
 var LabelMenu = ({name, handleNeckNotes, noteNameToggle, scaleDegreeToggle, solfegeToggle})  => {
 
-  var types = ['Note Names', 'Scale Degrees', 'Solfege']
-
   return (
     <div className="labelMenu_container">
       <span className={name}>

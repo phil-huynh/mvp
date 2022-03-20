@@ -4,12 +4,12 @@ import { Modal } from 'react-bootstrap'
 
 var ViewMenu = ({showStringsMenu, handleStringsMenuWindow, handleStringChoice, name}) => {
 
-  const sharp = '\u266F';
-  const flat = '\u266D';
-  const dblSharp = '\u{1D12A}';
-  const dblFlat = '\u{1D12B}';
-  const natural = '\u266E';
-  const dim = '\u00B0'
+  const sharp = '#';
+const flat = '\u266D';
+const dblSharp = '\u{1D12A}';
+const dblFlat = '\u{1D12B}';
+const natural = '\u266E';
+const dim = '\u00B0';
 
   var stringA = `A,G${dblSharp},B${dblFlat}`
   var stringB = `B,C${flat},A${dblSharp}`

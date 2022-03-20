@@ -5,7 +5,7 @@ import { Card, Button } from 'react-bootstrap'
 
 var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, chordTwoSelected, keyCenter, compareChords, whichChordAmI, handleAlterChordWindow, type, wasAltered, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleLock, displayChordDegrees, handleChordFocus, chordFocus, sharedNotes, selNote, updateShared}) => {
 
-  const sharp = '\u266F';
+  const sharp = '#';
   const flat = '\u266D';
   const dblSharp = '\u{1D12A}';
   const dblFlat = '\u{1D12B}';
@@ -402,7 +402,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
   }
 
   if (isChord1 && currentChordTones !== tones) {
-    setTones(tones)
+    setTones(tones, objKey)
     if (both) {
       let checker = {}
       let sharedNotes = []
@@ -418,7 +418,7 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     }
   }
   if (isChord2 && currentChordTones2 !== tones) {
-    setTones2(tones)
+    setTones2(tones, objKey)
     if (both) {
       let checker = {}
       let sharedNotes = []
@@ -442,7 +442,6 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
     cardClass = `${cardClass} selectedChord2`
   }
 
-  console.log(objKey)
 
   return (
     <React.Fragment>
