@@ -781,23 +781,23 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     } // full dim
 
     if (chordTonesRef === JSON.stringify(['one', 'three', 'flatFive', 'flatSeven'])) {
-      chordQ = `major(${flat}5)`
-      chordName += `maj(${flat}5)`
-      chordLabel += `maj(${flat}5)`
       seventhName = `${chordName}7(${flat}5)`
       seventhLabel = `${chordLabel}7(${flat}5)`
       seventhChord = `dominant 7(${flat}5)`
+      chordQ = `major(${flat}5)`
+      chordName += `maj(${flat}5)`
+      chordLabel += `maj(${flat}5)`
       chords[key].options.list.push(`maj ${flat}5 Triad`)
       chords[key].options.list.push(`7(${flat}5)`)
     } // dominant (b5)
 
     if (chordTonesRef === JSON.stringify(['one', 'three', 'flatFive', 'seven'])) {
-      chordQ = `major(${flat}5)`
-      chordName += `maj(${flat}5)`
-      chordLabel += `maj(${flat}5)`
       seventhName = `${chordName}maj7(${flat}5)`
       seventhLabel = `${chordLabel}maj7(${flat}5)`
       seventhChord = `major 7(${flat}5)`
+      chordQ = `major(${flat}5)`
+      chordName += `maj(${flat}5)`
+      chordLabel += `maj(${flat}5)`
       chords[key].options.list.push(`maj${flat}5 Triad`)
       chords[key].options.list.push(`maj7(${flat}5)`)
     } // maj7 (b5)
