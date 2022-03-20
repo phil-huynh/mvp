@@ -798,7 +798,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhName = `${chordName}maj7(${flat}5)`
       seventhLabel = `${chordLabel}maj7(${flat}5)`
       seventhChord = `major 7(${flat}5)`
-      chords[key].options.list.push(`maj ${flat}5 Triad`)
+      chords[key].options.list.push(`maj${flat}5 Triad`)
       chords[key].options.list.push(`maj7(${flat}5)`)
     } // maj7 (b5)
 
