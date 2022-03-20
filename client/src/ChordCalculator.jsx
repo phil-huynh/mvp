@@ -99,7 +99,10 @@ const dim = '\u00B0'
             <div className="types_col col_seven">sus4</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_eight"></div>
+            <div className="types_col col_eight">7sus4</div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_nine"></div>
           </div>
         </div>
         <div className="types_row row_tow">
@@ -122,10 +125,13 @@ const dim = '\u00B0'
             <div className="types_col col_six">add9</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_seven">7sus4</div>
+            <div className="types_col col_seven">{`maj7(9, ${sharp}11)`}</div>
           </div>
           <div className="type_choice_container">
             <div className="types_col col_eight">maj7(sus4)</div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_nine"></div>
           </div>
         </div>
         <div className="types_row row_three">
@@ -153,6 +159,9 @@ const dim = '\u00B0'
           <div className="type_choice_container">
             <div className="types_col col_eight">{`maj7(13)`}</div>
           </div>
+          <div className="type_choice_container">
+            <div className="types_col col_nine"></div>
+          </div>
         </div>
         <div className="types_row row_four">
           <div className="type_choice_container">
@@ -178,6 +187,9 @@ const dim = '\u00B0'
           </div>
           <div className="type_choice_container">
             <div className="types_col col_eight"></div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_nine"></div>
           </div>
         </div>
         <div className="types_row row_five">
@@ -205,6 +217,9 @@ const dim = '\u00B0'
           <div className="type_choice_container">
             <div className="types_col col_eight">7(13)</div>
           </div>
+          <div className="type_choice_container">
+            <div className="types_col col_nine"></div>
+          </div>
         </div>
         <div className="types_row row_six">
           <div className="type_choice_container">
@@ -217,7 +232,7 @@ const dim = '\u00B0'
             <div className="types_col col_three"></div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_four">{`maj7(9, ${sharp}11)`}</div>
+            <div className="types_col col_four"></div>
           </div>
           <div className="type_choice_container">
             <div className="types_col col_five">{`maj7(${sharp}11, 13)`}</div>
@@ -230,6 +245,9 @@ const dim = '\u00B0'
           </div>
           <div className="type_choice_container">
             <div className="types_col col_eight"></div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_nine"></div>
           </div>
         </div>
         <div className="types_row row_seven">
@@ -257,6 +275,9 @@ const dim = '\u00B0'
           <div className="type_choice_container">
             <div className="types_col col_eight">Domininant Pentatonic</div>
           </div>
+          <div className="type_choice_container">
+            <div className="types_col col_nine"></div>
+          </div>
         </div>
         <div className="types_row row_eight">
           <div className="type_choice_container">
@@ -282,6 +303,9 @@ const dim = '\u00B0'
           </div>
           <div className="type_choice_container">
             <div className="types_col col_eight">Egyptian Pentatonic</div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_nine"></div>
           </div>
         </div>
 
