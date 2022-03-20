@@ -15,6 +15,7 @@ import FretGuide from './FretGuide.jsx'
 import Tutorial from './Tutorial.jsx'
 import AlterChordOpt from './AlterChordOpt.jsx'
 import Welcome from './Welcome.jsx'
+import ChordCalculator from './ChordCalculator.jsx'
 import ConstructionMapChords from './ConstructionMapChords.jsx'
 import ConstructionFindStructures from './ConstructionFindStructures.jsx'
 import axios from 'axios';
@@ -80,7 +81,7 @@ class App extends React.Component {
       middle: 'inner_middle',
       moreSeventhsButton: 'Show 7th Chords',
       noteNameToggle: 'toggle_on',
-      renderView: 'Welcome',
+      renderView: 'test',
       resetVoicingCount: 0,
       scale: [],
       scale2: [],
@@ -112,7 +113,7 @@ class App extends React.Component {
       showTonicMenu: false,
       showTutorial: false,
       showViewMenu: false,
-      showWelcome: true,
+      showWelcome: false,
       singleOrCompareButton: 'Single Chord',
       solfege: {},
       solfegeToggle: 'toggle_off',
@@ -175,7 +176,7 @@ class App extends React.Component {
     this.getDegrees();
     this.getScale('C', 'major')
     this.getScale2('C', 'major')
-    this.getChordTypes()
+    //this.getChordTypes()
   }
 
   getChoices () {
@@ -1046,6 +1047,12 @@ class App extends React.Component {
           :
           this.state.renderView === 'Map Chords' ?
           <MapChordsRender/>
+          :
+          this.state.renderView === 'test' ?
+            <div className="testContainer">
+              <ChordCalculator/>
+              <ChordCalculator/>
+            </div>
           :null
         }
       </div>

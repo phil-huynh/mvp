@@ -243,7 +243,7 @@ align-content: center;
 ******************************************************************************/
 
 .modalMenu .modal-content {
-  background-color: #373B4B;
+  background-color: #232634;
   color: white;
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
   box-shadow: 4px 4px 15px 5px #000000;
@@ -302,7 +302,7 @@ align-content: center;
   cursor: pointer;
 }
 .welcome_choice:hover {
-  text-shadow: 0 0 5px #04D3FF, 0 0 10px #04D3FF, 0 0 15px #04D3FF, 0 0 20px #04D3FF, 0 0 30px #04D3FF, 0 0 40px #04D3FF, 0 0 55px #04D3FF, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
 }
 
 .construction .modal-content {
@@ -358,7 +358,7 @@ align-content: center;
   cursor: pointer;
 }
 .construction_choice:hover {
-  text-shadow: 0 0 5px #04D3FF, 0 0 10px #04D3FF, 0 0 15px #04D3FF, 0 0 20px #04D3FF, 0 0 30px #04D3FF, 0 0 40px #04D3FF, 0 0 55px #04D3FF, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
 }
 
 .tutorial .modal-content {
@@ -431,24 +431,20 @@ align-content: center;
   cursor: pointer;
 }
 
-.modalMenuChoice:hover {
-  color: white;
-  text-shadow: 0 0 5px #04D3FF, 0 0 10px #04D3FF, 0 0 15px #04D3FF, 0 0 20px #04D3FF, 0 0 30px #04D3FF, 0 0 40px #04D3FF, 0 0 55px #04D3FF, 38px 19px 8px rgba(206,89,55,0);
+.keyChoiceLabels {
+  margin-right: 3%;
+}
+.modalMenuChoice:hover,
+.dashTonicLabel:hover,
+.dashScaleLabel:hover,
+.defaultVoicing:hover {
+  text-shadow: 0 0 5px #FFF, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
 }
 
 .modalMenuChoice:active {
   background-color: #363B4A;
   color: white;
   text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 25px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 38px 19px 8px rgba(206,89,55,0);
-}
-
-.keyChoiceLabels {
-  margin-right: 3%;
-}
-.dashTonicLabel:hover,
-.dashScaleLabel:hover,
-.defaultVoicing:hover {
-  text-shadow: 0 0 5px #FFF, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
 }
 
 .labelToggle {
@@ -999,6 +995,155 @@ align-content: center;
 .sharedNoteTutorial {
   text-shadow: 0 0 2px #49ff18, 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 38px 19px 8px rgba(206,89,55,0);
 }
+
+
+
+.testContainer {
+  grid-row-start: 6;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-bottom: 2%;
+  margin-left: 1.75%;
+  margin-right: 1.75%;
+}
+
+.calculatorContainer {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border: white double 5px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: 20% 80%;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+  color: #FFFFFF;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+}
+
+.rootSelector,
+.chordTypeSelector {
+  height: 100%;
+  border: white double 5px;
+  border-radius: 10px;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+  color: #FFFFFF;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+}
+
+.rootSelector {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding-top: .2%;
+  padding-bottom: .2%;
+}
+
+.whiteNoteContainer,
+.blackNoteContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.whiteNoteContainer {
+  background-color: white;
+  border: solid black 2px;
+}
+
+.whiteNote {
+  background-color: #232634;
+  width: 60%;
+  height: 40%;
+  font-size: 1.7vh;
+  color: white;
+  border: white double 4px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blackNote {
+  display:grid;
+  grid-template-rows: repeat(2, 50%);
+}
+
+.blackNoteName {
+  height: 80%;
+  width: 60%;
+  font-size: 1.7vh;
+  color: white;
+  border: white solid 2px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.whiteNote:hover,
+.blackNoteName:hover,
+.types_col:hover {
+  -webkit-box-shadow: 2px 2px 15px 8px blue, inset 0 0 3.7rem blue;
+  box-shadow: 2px 2px 15px 8px blue, inset 0 0 3.7rem blue;
+  text-shadow: 0 0 5px #FFF, 0 0 10px white, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.whiteNote:active,
+.blackNoteName:active,
+.types_col:active {
+  -webkit-box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 2.2rem #49ff18;
+  box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 2.2rem #49ff18;
+  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+}
+
+
+.chordTypeSelector {
+  display: grid;
+  grid-template-rows: repeat(8, 12.5%);
+  padding: .5%;
+}
+
+.types_row {
+  display: grid;
+  grid-template-columns: repeat(8, 12.5%);
+  justify-content: center;
+}
+
+.type_choice_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.types_col {
+  width: 92%;
+  height: 90%;
+  font-size: 1.15vh;
+  padding:1%;
+  color: white;
+  border: white solid 2px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+
+
+
 
 
 
