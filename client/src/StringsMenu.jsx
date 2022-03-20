@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap'
 
 var ViewMenu = ({showStringsMenu, handleStringsMenuWindow, handleStringChoice, name}) => {
 
-  const sharp = '#';
+const sharp = '#';
 const flat = '\u266D';
 const dblSharp = '\u{1D12A}';
 const dblFlat = '\u{1D12B}';
@@ -63,11 +63,27 @@ const dim = '\u00B0';
         <div
           className="modalMenuChoice"
           onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
-          title={`Guitar. D A D G A D .${stringD}.${stringA}.${stringG}.${stringD}.${stringA}.${stringD}`}>Guitar - DADGAD</div>
+          title={`Guitar. C G C F A D .${stringD}.${stringA}.${stringF}.${stringC}.${stringG}.${stringC}`}>Guitar - Drop C</div>
+        <div
+          className="modalMenuChoice"
+          onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
+          title={`Guitar. B F${sharp} B E G${sharp} C${sharp} .${stringCsharp}.${stringGsharp}.${stringE}.${stringB}.${stringFsharp}.${stringB}`}>Guitar - Drop B</div>
+        <div
+          className="modalMenuChoice"
+          onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
+          title={`Guitar. A E A D F${sharp} B .${stringB}.${stringFsharp}.${stringD}.${stringA}.${stringE}.${stringA}`}>Guitar - Drop A</div>
         <div
           className="modalMenuChoice"
           onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
           title={`Guitar. D G D G B D .${stringD}.${stringB}.${stringG}.${stringD}.${stringG}.${stringD}`}>Guitar - Open G</div>
+        <div
+          className="modalMenuChoice"
+          onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
+          title={`Guitar. E B E G${sharp} B E .${stringE}.${stringB}.${stringGsharp}.${stringE}.${stringB}.${stringE}`}>Guitar - Open E</div>
+        <div
+          className="modalMenuChoice"
+          onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
+          title={`Guitar. E A E A C${sharp} E .${stringE}.${stringCsharp}.${stringA}.${stringE}.${stringA}.${stringE}`}>Guitar - Open A</div>
         <div
           className="modalMenuChoice"
           onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
@@ -76,6 +92,18 @@ const dim = '\u00B0';
           className="modalMenuChoice"
           onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
           title={`Guitar. D A D F${sharp} A D .${stringD}.${stringA}.${stringFsharp}.${stringD}.${stringA}.${stringD}`}>Guitar - Open D</div>
+        <div
+          className="modalMenuChoice"
+          onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
+          title={`Guitar. D A D F A D .${stringD}.${stringA}.${stringF}.${stringD}.${stringA}.${stringD}`}>Guitar - Open D Minor</div>
+        <div
+          className="modalMenuChoice"
+          onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
+          title={`Guitar. D A D G A D .${stringD}.${stringA}.${stringG}.${stringD}.${stringA}.${stringD}`}>Guitar - DADGAD</div>
+        <div
+          className="modalMenuChoice"
+          onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
+          title={`Guitar. D G C G C D .${stringD}.${stringC}.${stringG}.${stringC}.${stringG}.${stringD}`}>Guitar - DGCGCD(Rain Song)</div>
         <div
           className="modalMenuChoice"
           onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
