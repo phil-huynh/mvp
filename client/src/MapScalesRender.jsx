@@ -47,8 +47,8 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
             </span>
           </span>
         </div>
-        <div className="spelledScale_contaier">
-          <span className="spelledScale">
+        <div className="spelledScale_container">
+          <div className="spelledScale">
             {scale ? scale.map((note) => (
               sharedNotes.length > 0 && sharedNotes.includes(note) ?
                 <span className="sharedNoteInScale">{`   ${note}   `}</span>
@@ -64,7 +64,7 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
                   <span className="noteRef" onClick={()=>markNote(note)}>{`   ${note}   `}</span>
                 : <span>{`   ${note}   `}</span>
             )): null}
-          </span>
+          </div>
         </div>
           <div className="labels_and_voicings">
             <LabelMenu
