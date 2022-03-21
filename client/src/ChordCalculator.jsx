@@ -74,9 +74,37 @@ const dim = '\u00B0'
           <div className="whiteNote">B</div>
         </div>
       </div>
-
       <div className="chordTypeSelector">
         <div className="types_row row_one">
+          <div className="type_choice_container">
+            <div className="types_col col_one"></div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_two"></div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_three"></div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_four"></div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_five"></div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_six"></div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_seven"></div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_eight"></div>
+          </div>
+          <div className="type_choice_container">
+            <div className="types_col col_nine"></div>
+          </div>
+        </div>
+        <div className="types_row row_two">
           <div className="type_choice_container">
             <div className="types_col col_one">maj</div>
           </div>
@@ -102,10 +130,10 @@ const dim = '\u00B0'
             <div className="types_col col_eight">7sus4</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_nine"></div>
+            <div className="types_col col_nine">maj7(sus4)</div>
           </div>
         </div>
-        <div className="types_row row_tow">
+        <div className="types_row row_three">
           <div className="type_choice_container">
             <div className="types_col col_one">6</div>
           </div>
@@ -128,13 +156,13 @@ const dim = '\u00B0'
             <div className="types_col col_seven">{`maj7(9, ${sharp}11)`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_eight">maj7(sus4)</div>
+            <div className="types_col col_eight">{`maj7(9, 13)`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_nine"></div>
+            <div className="types_col col_nine">{`maj7(${sharp}11, 13)`}</div>
           </div>
         </div>
-        <div className="types_row row_three">
+        <div className="types_row row_four">
           <div className="type_choice_container">
             <div className="types_col col_one">maj7</div>
           </div>
@@ -160,10 +188,10 @@ const dim = '\u00B0'
             <div className="types_col col_eight">{`maj7(13)`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_nine"></div>
+            <div className="types_col col_nine">Whole Tone Scale</div>
           </div>
         </div>
-        <div className="types_row row_four">
+        <div className="types_row row_five">
           <div className="type_choice_container">
             <div className="types_col col_one">m9</div>
           </div>
@@ -186,13 +214,13 @@ const dim = '\u00B0'
             <div className="types_col col_seven">m7(9,11,13)</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_eight"></div>
+            <div className="types_col col_eight">{'maj13'}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_nine"></div>
+            <div className="types_col col_nine">Whole/Half Scale</div>
           </div>
         </div>
-        <div className="types_row row_five">
+        <div className="types_row row_six">
           <div className="type_choice_container">
             <div className="types_col col_one">7</div>
           </div>
@@ -218,10 +246,10 @@ const dim = '\u00B0'
             <div className="types_col col_eight">7(13)</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_nine"></div>
+            <div className="types_col col_nine">Half/Whole Scale</div>
           </div>
         </div>
-        <div className="types_row row_six">
+        <div className="types_row row_seven">
           <div className="type_choice_container">
             <div className="types_col col_one">{`7(${flat}9)`}</div>
           </div>
@@ -229,54 +257,25 @@ const dim = '\u00B0'
             <div className="types_col col_two">{`7(${sharp}9)`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_three"></div>
+            <div className="types_col col_three">{`7(9, ${sharp}11)`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_four"></div>
+            <div className="types_col col_four">{`7(9, ${flat}13)`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_five">{`maj7(${sharp}11, 13)`}</div>
+            <div className="types_col col_five">{`7(${flat}9, ${flat}13)`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_six">{`maj7(9, 13)`}</div>
+            <div className="types_col col_six">7(9, 13)</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_seven">{'maj13'}</div>
+            <div className="types_col col_seven">{`7(9, ${sharp}11, 13)`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_eight"></div>
+            <div className="types_col col_eight">{`7(9, ${sharp}11, ${flat}13)`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_nine"></div>
-          </div>
-        </div>
-        <div className="types_row row_seven">
-          <div className="type_choice_container">
-            <div className="types_col col_one">{`7(9, ${sharp}11)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_two"></div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_three">{`7(9, ${sharp}11, 13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_four">{`7(9, ${sharp}11, ${flat}13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_five">{`7(9, ${flat}13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_six">{`7(${flat}9, ${flat}13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_seven">7(9, 13)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_eight">Domininant Pentatonic</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_nine"></div>
+            <div className="types_col col_nine">Altered Scale</div>
           </div>
         </div>
         <div className="types_row row_eight">
@@ -287,25 +286,25 @@ const dim = '\u00B0'
             <div className="types_col col_two">min Pentatonic</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_three">{`Dominant${sharp}4 Pentatonic`}</div>
+            <div className="types_col col_three">Domininant Pentatonic</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_four">{`maj${sharp}4 Pentatonic`}</div>
+            <div className="types_col col_four">{`Dominant${sharp}4 Pentatonic`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_five">Altered Pentatonic</div>
+            <div className="types_col col_five">{`maj${sharp}4 Pentatonic`}</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_six">m(maj7) Pentatonic</div>
+            <div className="types_col col_six">Altered Pentatonic</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_seven">Japanese Pentatonic</div>
+            <div className="types_col col_seven">m(maj7) Pentatonic</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_eight">Egyptian Pentatonic</div>
+            <div className="types_col col_eight">Japanese Pentatonic</div>
           </div>
           <div className="type_choice_container">
-            <div className="types_col col_nine"></div>
+            <div className="types_col col_nine">Egyptian Pentatonic</div>
           </div>
         </div>
 

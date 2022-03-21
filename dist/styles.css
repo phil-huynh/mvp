@@ -1089,21 +1089,6 @@ align-content: center;
   align-items: center;
 }
 
-.whiteNote:hover,
-.blackNoteName:hover,
-.types_col:hover {
-  -webkit-box-shadow: 2px 2px 15px 8px blue, inset 0 0 3.7rem blue;
-  box-shadow: 2px 2px 15px 8px blue, inset 0 0 3.7rem blue;
-  text-shadow: 0 0 5px #FFF, 0 0 10px white, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
-}
-
-.whiteNote:active,
-.blackNoteName:active,
-.types_col:active {
-  -webkit-box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 2.2rem #49ff18;
-  box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 2.2rem #49ff18;
-  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
-}
 
 
 .chordTypeSelector {
@@ -1130,13 +1115,35 @@ align-content: center;
   font-size: 1.15vh;
   padding:1%;
   color: white;
-  border: white solid 2px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #FFFFFF;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+  -webkit-box-shadow: 1px 1px 1px 1px black;
+  box-shadow: 1px 1px 1px 1px black;
 }
 
+.whiteNote:hover,
+.blackNoteName:hover,
+.types_col:hover {
+  -webkit-box-shadow: 2px 2px 15px 8px blue, inset 0 0 3.7rem blue;
+  box-shadow: 2px 2px 15px 8px blue, inset 0 0 3.7rem blue;
+  text-shadow: 0 0 5px blue, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.whiteNote:active,
+.blackNoteName:active,
+.types_col:active {
+  -webkit-box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 2.2rem #49ff18;
+  box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 2.2rem #49ff18;
+  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+}
 
 
 
