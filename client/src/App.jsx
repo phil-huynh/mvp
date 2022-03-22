@@ -31,6 +31,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      calcChord1: [],
+      calcChord2: [],
       ch0: 'Triad',
       ch1: 'Triad',
       ch2: 'Triad',
@@ -81,8 +83,11 @@ class App extends React.Component {
       middle: 'inner_middle',
       moreSeventhsButton: 'Show 7th Chords',
       noteNameToggle: 'toggle_on',
-      renderView: 'Welcome',
+      noteRefs: {},
+      renderView: 'test',
       resetVoicingCount: 0,
+      root1: '',
+      root2: '',
       scale: [],
       scale2: [],
       scaleDegrees: {},
@@ -113,7 +118,7 @@ class App extends React.Component {
       showTonicMenu: false,
       showTutorial: false,
       showViewMenu: false,
-      showWelcome: true,
+      showWelcome: false,
       singleOrCompareButton: 'Single Chord',
       solfege: {},
       solfegeToggle: 'toggle_off',
@@ -125,10 +130,12 @@ class App extends React.Component {
       tuning: ' E A D G B E ',
       tutorialToggle: 'navOption',
       view: 'Traditional View',
+      voicing1: '',
+      voicing2: '',
 
     }
 
-    this.getChordTypes = this.getChordTypes.bind(this)
+    this.getChord = this.getChord.bind(this)
     this.getChoices = this.getChoices.bind(this)
     this.getDegrees = this.getDegrees.bind(this);
     this.getScale = this.getScale.bind(this);
@@ -150,6 +157,7 @@ class App extends React.Component {
     this.handleMoreSevenths = this.handleMoreSevenths.bind(this);
     this.handleNavChoice = this.handleNavChoice.bind(this);
     this.handleNeckNotes = this.handleNeckNotes.bind(this);
+    this.handleRootChange = this.handleRootChange.bind(this);
     this.handleScaleChange = this.handleScaleChange.bind(this);
     this.handleScaleChange2 = this.handleScaleChange2.bind(this);
     this.handleSecondScale = this.handleSecondScale.bind(this);
@@ -159,6 +167,7 @@ class App extends React.Component {
     this.handleTonicChange = this.handleTonicChange.bind(this);
     this.handleTonicChange2 = this.handleTonicChange2.bind(this);
     this.handleView = this.handleView.bind(this);
+    this.handleVoicingChange = this.handleVoicingChange.bind(this);
     this.handleWelcomeWindow = this.handleWelcomeWindow.bind(this);
     this.markNote = this.markNote.bind(this);
     this.resetAll = this.resetAll.bind(this);
@@ -174,9 +183,9 @@ class App extends React.Component {
   componentDidMount () {
     this.getStrings();
     this.getDegrees();
-    this.getScale('C', 'major')
-    this.getScale2('C', 'major')
-    //this.getChordTypes()
+    this.getScale('C', 'major');
+    this.getScale2('C', 'major');
+
   }
 
   getChoices () {
@@ -191,15 +200,20 @@ class App extends React.Component {
       })
   }
 
-  getChordTypes () {
-    axios.get('/chordtypes')
+  getChord (root, type, which) {
+    var key = `calcChord${which}`
+    console.log(key)
+    console.log(root)
+    console.log(type)
+    axios.get('/chord', { params: { root: root, type: type } })
       .then((res) => {
+        console.log(res)
         this.setState({
-          chordTypes: res.data
+          [key]: res.data
         })
       })
       .catch((err) => {
-        console.log("🚀 ~ file: App.jsx ~ line 166 ~ App ~ getChordTypes ~ err", err)
+      console.log("🚀 ~ file: App.jsx ~ line 213 ~ App ~ getChord ~ err", err)
       })
   }
 
@@ -660,6 +674,31 @@ class App extends React.Component {
     this.getScale2(key, scale)
   }
 
+  handleRootChange(e, which) {
+    let rootKey = `root${which}`
+    let voicingKey = `voicing${which}`
+    let root = e.target.outerText
+    this.setState({
+      [rootKey]: root
+    })
+    if(this.state[voicingKey]) {
+      this.getChord(root, this.state[voicingKey], which)
+    }
+  }
+
+  handleVoicingChange(e, which) {
+    let rootKey = `root${which}`
+    let voicingKey = `voicing${which}`
+    let voicing = e.target.outerText
+    this.setState({
+      [voicingKey]: voicing
+    })
+    if(this.state[rootKey]) {
+      this.getChord(this.state[rootKey], voicing, which)
+    }
+  }
+
+
   handleView (e) {
     let view = e.target.title
     let middle;
@@ -842,6 +881,7 @@ class App extends React.Component {
     }
   }
 
+
   setTones (tones, key) {
     this.setState({
       currentChordTones: tones,
@@ -944,8 +984,8 @@ class App extends React.Component {
                   stringsMirror={this.state.currentStringsMirror}
                   stringsLeft={this.state.stringsLeft}
                   scale={this.state.scale}
-                  chord={this.state.currentChordTones}
-                  chord2={this.state.currentChordTones2}
+                  scaleChord1={this.state.currentChordTones}
+                  scaleChord2={this.state.currentChordTones2}
                   view={this.state.view}
                   chordOneSelected={this.state.chordOneSelected}
                   chordTwoSelected={this.state.chordTwoSelected}
@@ -965,6 +1005,8 @@ class App extends React.Component {
                   selNote={this.state.selNote}
                   chordObjKey={this.state.chordObjKey}
                   chord2ObjKey={this.state.chord2ObjKey}
+                  calcChord1={this.state.calcChord1}
+                  calcChord2={this.state.calcChord2}
                 />
               </div>
             </div>
@@ -1050,8 +1092,30 @@ class App extends React.Component {
           :
           this.state.renderView === 'test' ?
             <div className="testContainer">
-              <ChordCalculator/>
-              <ChordCalculator/>
+              <ChordCalculator
+                handleRootChange={this.handleRootChange}
+                handleVoicingChange={this.handleVoicingChange}
+                root={this.state.root1}
+                voicing={this.state.voicing1}
+                whichCalculator={'1'}
+                chordDegrees={this.state.chordDegrees}
+                chordDegreesUpper={this.state.chordDegreesUpper}
+                chordTypes={this.state.chordTypes}
+                noteRefs={this.state.noteRefs}
+                getChord={this.getChord}
+                />
+              <ChordCalculator
+                handleRootChange={this.handleRootChange}
+                handleVoicingChange={this.handleVoicingChange}
+                root={this.state.root2}
+                voicing={this.state.voicing2}
+                whichCalculator={'2'}
+                chordDegrees={this.state.chordDegrees}
+                chordDegreesUpper={this.state.chordDegreesUpper}
+                chordTypes={this.state.chordTypes}
+                noteRefs={this.state.noteRefs}
+                getChord={this.getChord}
+              />
             </div>
           :null
         }

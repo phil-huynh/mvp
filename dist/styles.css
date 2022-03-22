@@ -119,7 +119,6 @@ html {
   margin-left: 2%;
   margin-right: 2%;
   background-color: #363B4A;
-
   border-radius: 10px ;
   padding: 1%;
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
@@ -130,7 +129,7 @@ html {
   background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
   background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
   background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
-  opacity: .9;
+  opacity: .8;
 }
 
 .neckDashLayout {
@@ -198,10 +197,18 @@ align-content: center;
   border-radius: 10px;;
   border: white solid 3px;
   font-family: 'Comic Neue', cursive;
-  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18,  0 0 25px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 50px #49ff18, 38px 19px 8px rgba(206,89,55,0);
   color: #FFFFFF;
-  -webkit-box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 1.6rem #49ff18;
-  box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 1.6rem #49ff18;
+  -webkit-box-shadow: 2px 2px 20px 5px #49ff18, inset 0 0 2.6rem #49ff18;
+  box-shadow: 2px 2px 20px 5px #49ff18, inset 0 0 2.6rem #49ff18;
+  text-shadow: 0 0 5px #49ff18,
+              0 0 10px #49ff18,
+              0 0 15px #49ff18,
+              0 0 20px #49ff18,
+              0 0 25px #49ff18,
+              0 0 30px #49ff18,
+              0 0 40px #49ff18,
+              0 0 50px #49ff18,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .sharedLight_container {
@@ -651,7 +658,7 @@ align-content: center;
   font-size: 1.4vh;
   font-weight: 600;
   text-align: center;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   border: white solid 1px;
@@ -841,7 +848,7 @@ align-content: center;
 }
 
 .chordDegButton {
-  font-size: 2.2åvh;
+  font-size: 2.2vh;
   border: white solid 3px;
   border-radius: 10px;
   padding: 1%;
@@ -1009,13 +1016,23 @@ align-content: center;
 
 .calculatorContainer {
   cursor: pointer;
-  width: 98.5%;
+  width: 97%;
   height: 100%;
   border-radius: 10px;
   display: grid;
-  grid-template-rows: 20% 80%;
+  grid-template-rows: 15% 15% 70%;
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
   box-shadow: 5px 5px 15px 5px #000000;
+  color: #FFFFFF;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+  opacity: .9;
+}
+
+.calc_header_container {
   color: #FFFFFF;
   background: #697179;
   background: #357A95;
@@ -1060,12 +1077,11 @@ align-content: center;
 }
 
 .whiteNote {
-  background-color: #232634;
-  width: 60%;
-  height: 40%;
-  font-size: 1.7vh;
-  color: white;
-  border: white double 4px;
+  width: 50%;
+  height: 50%;
+  font-size: 1.5vh;
+  font-weight: 600;
+  color: black;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -1086,10 +1102,9 @@ align-content: center;
 
 .blackNoteName {
   height: 80%;
-  width: 60%;
-  font-size: 1.7vh;
+  width: 45%;
+  font-size: 1.5vh;
   color: white;
-  border: white solid 2px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -1097,10 +1112,9 @@ align-content: center;
 }
 
 
-
 .chordTypeSelector {
   display: grid;
-  grid-template-rows: repeat(8, 12.5%);
+  grid-template-rows: repeat(7, 1fr);
   padding: .5%;
 }
 
@@ -1140,18 +1154,37 @@ align-content: center;
 .whiteNote:hover,
 .blackNoteName:hover,
 .types_col:hover {
-  -webkit-box-shadow: 2px 2px 15px 8px blue, inset 0 0 3.7rem blue;
-  box-shadow: 2px 2px 15px 8px blue, inset 0 0 3.7rem blue;
-  text-shadow: 0 0 5px blue, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
-}
-
-.whiteNote:active,
-.blackNoteName:active,
-.types_col:active {
   -webkit-box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 2.2rem #49ff18;
   box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 2.2rem #49ff18;
   text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
 }
+
+.whiteNote:hover,
+.blackNoteName:hover{
+  color: white;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+}
+
+.selectedRoot,
+.selectedVoicing,
+.selectedRoot:hover,
+.selectedVoicing:hover {
+  color: white;
+  -webkit-box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
+  box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
+  text-shadow: 0 0 5px blue, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+}
+
+
 
 
 

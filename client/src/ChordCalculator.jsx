@@ -1,80 +1,30 @@
 import React from 'react'
 
-var ChordCalculator = () => {
+var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, whichCalculator, chordTypes, noteRefs, chordDegrees, chordDegreesUpper, getChord}) => {
 
-const sharp = '#';
-const flat = '\u266D';
-const dblSharp = '\u{1D12A}';
-const dblFlat = '\u{1D12B}';
-const natural = '\u266E'
-const dim = '\u00B0'
+  const sharp = '#';
+  const flat = '\u266D';
+  const dblSharp = '\u{1D12A}';
+  const dblFlat = '\u{1D12B}';
+  const natural = '\u266E'
+  const dim = '\u00B0'
+
+  const notes = ['C', [`C${sharp}`, `D${flat}`],'D', [`D${sharp}`, `E${flat}`], 'E', 'F',[`F${sharp}`, `G${flat}`], 'G', [`G${sharp}`, `A${flat}`], 'A', [`A${sharp}`, `B${flat}`], 'B']
+
+  const rowOne = ['','','','','','','','','']
+  const rowTwo = ['maj','min',`${dim}`,'+',`maj(${flat}5)`,'sus2','sus4','7sus4','maj7(sus4)']
+  const rowThree = ['6','m6',`${dim}7`,`7(${flat}13)`,`add${sharp}11`,'add9',`maj7(9, ${sharp}11)`,'maj7(9, 13)',`maj7(${sharp}11, 13)`]
+  const rowFour = ['maj7','m(maj7)',`${dim}(maj7)`,'+(maj7)',`maj7(${flat}5)`,'maj9',`maj7(${sharp}11)`,'maj7(13)','Whole Tone Scale']
+  const rowFive = ['m9','m7(11)','m7(13)','m7(9, 11)','m7(9, 13)','m7(11, 13)','m7(9, 11, 13)','maj13','Whole/Half Scale']
+  const rowSix = ['7','m7',`m7(${flat}5)`,`7(${sharp}5)`,`7(${flat}5)`,'7(9)',`7(${sharp}11)`,'7(13)','Half/Whole Scale']
+  const rowSeven = [`7(${flat}9)`, `7(${sharp}9)`, `7(9, ${sharp}11)`, `7(9, ${flat}13)`, `7(${flat}9, ${flat}13)`,'7(9, 13)',`7(9, ${sharp}11, 13)`,`7(9, ${sharp}11, ${flat}13)`,'Altered Scale']
+  const rowEight = ['maj Pentatonic','min Pentatonic','Domininant Pentatonic',`Dominant${sharp}4 Pentatonic`,`maj${sharp}4 Pentatonic`,'Altered Pentatonic','m(maj7) Pentatonic','Japanese Pentatonic','Egyptian Pentatonic']
+
+
 
   return (
     <div className="calculatorContainer">
-      <div className="rootSelector">
-        <div className="whiteNoteContainer">
-          <div className="whiteNote">C</div>
-        </div>
-        <div className="blackNote">
-          <div className="blackNoteContainer">
-            <div className="blackNoteName">{`C${sharp}`}</div>
-          </div>
-          <div className="blackNoteContainer">
-            <div className="blackNoteName">{`D${flat}`}</div>
-          </div>
-        </div>
-        <div className="whiteNoteContainer">
-          <div className="whiteNote">D</div>
-        </div>
-        <div className="blackNote">
-          <div className="blackNoteContainer">
-            <div className="blackNoteName">{`D${sharp}`}</div>
-          </div>
-          <div className="blackNoteContainer">
-            <div className="blackNoteName">{`E${flat}`}</div>
-          </div>
-        </div>
-        <div className="whiteNoteContainer">
-          <div className="whiteNote">E</div>
-        </div>
-        <div className="whiteNoteContainer">
-          <div className="whiteNote">F</div>
-        </div>
-        <div className="blackNote">
-          <div className="blackNoteContainer">
-            <div className="blackNoteName">{`F${sharp}`}</div>
-          </div>
-          <div className="blackNoteContainer">
-            <div className="blackNoteName">{`G${flat}`}</div>
-          </div>
-        </div>
-        <div className="whiteNoteContainer">
-          <div className="whiteNote">G</div>
-        </div>
-        <div className="blackNote">
-          <div className="blackNoteContainer">
-            <div className="blackNoteName">{`G${sharp}`}</div>
-          </div>
-          <div className="blackNoteContainer">
-            <div className="blackNoteName">{`A${flat}`}</div>
-          </div>
-        </div>
-        <div className="whiteNoteContainer">
-          <div className="whiteNote">A</div>
-        </div>
-        <div className="blackNote">
-          <div className="blackNoteContainer">
-            <div className="blackNoteName">{`A${sharp}`}</div>
-          </div>
-          <div className="blackNoteContainer">
-            <div className="blackNoteName">{`B${flat}`}</div>
-          </div>
-        </div>
-        <div className="whiteNoteContainer">
-          <div className="whiteNote">B</div>
-        </div>
-      </div>
-      <div className="chordTypeSelector">
+      <div className="calc_header_container">
         <div className="types_row row_one">
           <div className="type_choice_container">
             <div className="types_col col_one"></div>
@@ -104,217 +54,260 @@ const dim = '\u00B0'
             <div className="types_col col_nine"></div>
           </div>
         </div>
+      </div>
+      <div className="rootSelector">
+        {notes.map((note) => (
+          note.length === 1 && root && note === root ?
+            <div className="whiteNoteContainer">
+              <div
+                className="whiteNote selectedRoot"
+                title={note}
+                onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+              >{note}
+              </div>
+            </div>
+          :
+          note.length === 1 ?
+            <div className="whiteNoteContainer">
+              <div
+                className="whiteNote"
+                title={note}
+                onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+              >{note}
+              </div>
+            </div>
+          :
+          note.length === 2 && root && note[0] === root ?
+            <div className="blackNote">
+              <div className="blackNoteContainer">
+                <div
+                  className="blackNoteName selectedRoot"
+                  title={note[0]}
+                  onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+                >{note[0]}
+                </div>
+              </div>
+              <div className="blackNoteContainer">
+                <div
+                  className="blackNoteName"
+                  title={note[1]}
+                  onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+                >{note[1]}
+                </div>
+              </div>
+              </div>
+          :
+          note.length === 2 && root && note[1] === root ?
+            <div className="blackNote">
+              <div className="blackNoteContainer">
+                <div
+                  className="blackNoteName"
+                  title={note[0]}
+                  onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+                >{note[0]}
+                </div>
+              </div>
+              <div className="blackNoteContainer">
+                <div
+                  className="blackNoteName selectedRoot"
+                  title={note[1]}
+                  onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+                >{note[1]}
+                </div>
+              </div>
+            </div>
+          :
+          note.length === 2 ?
+            <div className="blackNote">
+              <div className="blackNoteContainer">
+                <div
+                  className="blackNoteName"
+                  title={note[0]}
+                  onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+                >{note[0]}
+                </div>
+              </div>
+              <div className="blackNoteContainer">
+                <div
+                  className="blackNoteName"
+                  title={note[1]}
+                  onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+                >{note[1]}
+                </div>
+              </div>
+            </div>
+            :null
+        ))}
+      </div>
+      <div className="chordTypeSelector">
         <div className="types_row row_two">
-          <div className="type_choice_container">
-            <div className="types_col col_one">maj</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_two">min</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_three">{`${dim}`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_four">+</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_five">{`maj(${flat}5)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_six">sus2</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_seven">sus4</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_eight">7sus4</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_nine">maj7(sus4)</div>
-          </div>
+          {rowTwo.map((type) => (
+            voicing && type === voicing ?
+              <div
+                className="type_choice_container"
+                >
+                <div
+                  className="types_col selectedVoicing"
+                  onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+                >{type}
+                </div>
+              </div>
+            :
+            <div
+              className="type_choice_container"
+              >
+              <div
+              className="types_col"
+              onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+              >{type}
+              </div>
+            </div>
+          ))}
         </div>
         <div className="types_row row_three">
-          <div className="type_choice_container">
-            <div className="types_col col_one">6</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_two">m6</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_three">{`${dim}7`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_four">{`7(${flat}13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_five">{`add${sharp}11`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_six">add9</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_seven">{`maj7(9, ${sharp}11)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_eight">{`maj7(9, 13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_nine">{`maj7(${sharp}11, 13)`}</div>
-          </div>
+          {rowThree.map((type) => (
+            voicing && type === voicing ?
+              <div
+                className="type_choice_container"
+                >
+                <div
+                  className="types_col selectedVoicing"
+                  onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+                >{type}
+                </div>
+              </div>
+            :
+            <div
+              className="type_choice_container"
+              >
+              <div
+              className="types_col"
+              onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+              >{type}
+              </div>
+            </div>
+          ))}
         </div>
         <div className="types_row row_four">
-          <div className="type_choice_container">
-            <div className="types_col col_one">maj7</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_two">m(maj7)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_three">{`${dim}(maj7)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_four">+(maj7)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_five">{`maj7(${flat}5)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_six">maj9</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_seven">{`maj7(${sharp}11)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_eight">{`maj7(13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_nine">Whole Tone Scale</div>
-          </div>
+          {rowFour.map((type) => (
+            voicing && type === voicing ?
+              <div
+                className="type_choice_container"
+                >
+                <div
+                  className="types_col selectedVoicing"
+                  onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+                >{type}
+                </div>
+              </div>
+            :
+            <div
+              className="type_choice_container"
+              >
+              <div
+              className="types_col"
+              onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+              >{type}
+              </div>
+            </div>
+          ))}
         </div>
         <div className="types_row row_five">
-          <div className="type_choice_container">
-            <div className="types_col col_one">m9</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_two">m7(11)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_three">m7(13)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_four">m7(9, 11)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_five">m7(9, 13)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_six">m7(11,13)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_seven">m7(9,11,13)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_eight">{'maj13'}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_nine">Whole/Half Scale</div>
-          </div>
+          {rowFive.map((type) => (
+            voicing && type === voicing ?
+              <div
+                className="type_choice_container"
+                >
+                <div
+                  className="types_col selectedVoicing"
+                  onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+                >{type}
+                </div>
+              </div>
+            :
+            <div
+              className="type_choice_container"
+              >
+              <div
+              className="types_col"
+              onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+              >{type}
+              </div>
+            </div>
+          ))}
         </div>
         <div className="types_row row_six">
-          <div className="type_choice_container">
-            <div className="types_col col_one">7</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_two">m7</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_three">{`m7(${flat}5)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_four">{`7(${sharp}5)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_five">{`7(${flat}5)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_six">7(9)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_seven">{`7(${sharp}11)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_eight">7(13)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_nine">Half/Whole Scale</div>
-          </div>
+          {rowSix.map((type) => (
+            voicing && type === voicing ?
+              <div
+                className="type_choice_container"
+                >
+                <div
+                  className="types_col selectedVoicing"
+                  onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+                >{type}
+                </div>
+              </div>
+            :
+            <div
+              className="type_choice_container"
+              >
+              <div
+              className="types_col"
+              onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+              >{type}
+              </div>
+            </div>
+          ))}
         </div>
         <div className="types_row row_seven">
-          <div className="type_choice_container">
-            <div className="types_col col_one">{`7(${flat}9)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_two">{`7(${sharp}9)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_three">{`7(9, ${sharp}11)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_four">{`7(9, ${flat}13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_five">{`7(${flat}9, ${flat}13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_six">7(9, 13)</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_seven">{`7(9, ${sharp}11, 13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_eight">{`7(9, ${sharp}11, ${flat}13)`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_nine">Altered Scale</div>
-          </div>
+          {rowSeven.map((type) => (
+            voicing && type === voicing ?
+              <div
+                className="type_choice_container"
+                >
+                <div
+                  className="types_col selectedVoicing"
+                  onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+                >{type}
+                </div>
+              </div>
+            :
+            <div
+              className="type_choice_container"
+              >
+              <div
+              className="types_col"
+              onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+              >{type}
+              </div>
+            </div>
+          ))}
         </div>
         <div className="types_row row_eight">
-          <div className="type_choice_container">
-            <div className="types_col col_one">maj Pentatonic</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_two">min Pentatonic</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_three">Domininant Pentatonic</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_four">{`Dominant${sharp}4 Pentatonic`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_five">{`maj${sharp}4 Pentatonic`}</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_six">Altered Pentatonic</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_seven">m(maj7) Pentatonic</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_eight">Japanese Pentatonic</div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_nine">Egyptian Pentatonic</div>
-          </div>
+          {rowEight.map((type) => (
+            voicing && type === voicing ?
+              <div
+                className="type_choice_container"
+                >
+                <div
+                  className="types_col selectedVoicing"
+                  onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+                >{type}
+                </div>
+              </div>
+            :
+            <div
+              className="type_choice_container"
+              >
+              <div
+              className="types_col"
+              onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+              >{type}
+              </div>
+            </div>
+          ))}
         </div>
-
-
-
-
-
-
-
-
       </div>
     </div>
   )

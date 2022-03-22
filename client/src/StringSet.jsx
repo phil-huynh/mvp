@@ -1,7 +1,7 @@
 import React from 'react';
 import String from './String.jsx';
 
-var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord, chord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, render, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey})  => {
+var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, scaleChord1, scaleChord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, render, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey, calcChord1, calcChord2})  => {
   var list;
   var neckClass;
   var firstString;
@@ -29,8 +29,8 @@ var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord,
           allStrings={allStrings}
           stringsLeft={stringsLeft}
           scale={scale}
-          chord={chord}
-          chord2={chord2}
+          scaleChord1={scaleChord1}
+          scaleChord2={scaleChord2}
           view={view}
           chordOneSelected={chordOneSelected}
           chordTwoSelected={chordTwoSelected}
@@ -52,6 +52,8 @@ var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, chord,
           selNote={selNote}
           chordObjKey={chordObjKey}
           chord2ObjKey={chord2ObjKey}
+          calcChord1={calcChord1}
+          calcChord2={calcChord2}
         />
       )): null}
     </div>
