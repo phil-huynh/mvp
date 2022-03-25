@@ -40,7 +40,7 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
 
 
 
-  if(render === 'Map Scales' || render === 'Welcome') {
+  if(render === 'Map Scales' || render === 'Welcome' || render === 'Tutorial') {
     chord = scaleChord1
     chord2 = scaleChord2
     keyKey = keyCenter.notesToDegrees
@@ -122,7 +122,7 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
     noteClass = 'noteLeft'
   }
 
-  if (currentString && (render === 'Map Scales' || render === 'Welcome')) {
+  if (currentString && (render === 'Map Scales' || render === 'Welcome' || render ==="Tutorial")) {
     for(var i = 0; i < currentString.length; i++) {
       var containsNote = false;
       for(var j = 0; j < currentString[i].length; j++) {

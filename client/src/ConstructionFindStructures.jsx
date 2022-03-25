@@ -29,6 +29,13 @@ var ConstructionFindStructures = ({showConstructionFindStructures, handleConstru
           <div className="middle_construction_message">When available, this feature will allow the you to identify unknown chords or scales that you are playing by inputting them on the neck. It will identify chords and scales as well a provide alternative options and suggestions for related structures. Updates will be coming soon.</div>
           <div className="bottom_construction_message">In the meantime, try one of these currently available features.</div>
           <div className='construction_options'>
+          <span
+              title="mapChords"
+              className='construction_choice toggle_on'
+              onClick={(e)=>{handleNavChoice(e)}}
+              >
+              Map Chords
+            </span>
             <span
               title="mapScales"
               className='construction_choice toggle_on'

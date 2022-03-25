@@ -528,8 +528,6 @@ class App extends React.Component {
     if(this.state.showConstructionFindStructures===true) {
       this.setState({
         showConstructionFindStructures: false,
-        renderView: 'Map Scales',
-        mapScalesToggle: 'navOption toggle_on',
         findStructuresToggle: 'navOption',
       })
     }
