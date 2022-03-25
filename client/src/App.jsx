@@ -86,7 +86,7 @@ class App extends React.Component {
       noteNameToggle: 'toggle_on',
       noteRefs1: {},
       noteRefs2: {},
-      renderView: 'test',
+      renderView: 'Welcome',
       resetVoicingCount: 0,
       root1: '',
       root2: '',
@@ -120,7 +120,7 @@ class App extends React.Component {
       showTonicMenu: false,
       showTutorial: false,
       showViewMenu: false,
-      showWelcome: false,
+      showWelcome: true,
       singleOrCompareButton: 'Single Chord',
       solfege: {},
       solfegeToggle: 'toggle_off',
@@ -203,6 +203,8 @@ class App extends React.Component {
       [keyType]: {},
       [keyVoicing]: '',
       [keyRoot]: '',
+      chordFocus: 'Neutral',
+      sharedNotes: []
     })
   }
 
@@ -230,6 +232,48 @@ class App extends React.Component {
           [keyRefs]: res.data.noteRefs,
           [keyType]: res.data.type
         })
+         if (this.state.calcChord1.length > 0 && this.state.calcChord2.length > 0) {
+          let copy = this.state.calcChord1.slice()
+          let copy2 = this.state.calcChord2.slice()
+          let sharedNotes = []
+          let checker = {}
+          let checker2 = {}
+          let final = {}
+
+          for (var i = 0; i < copy.length; i++) {
+            let enharm = this.enharmonic(copy[i])
+            checker[copy[i]] = true
+            checker[enharm] = true
+          }
+          for (var j = 0; j < copy2.length; j++) {
+            let enharm = this.enharmonic(copy2[j])
+            checker2[copy2[j]] = true
+            checker2[enharm] = true
+          }
+          console.log('checker', checker)
+          console.log('checker2', checker2)
+
+          for (var k = 0; k < copy.length; k++) {
+            let enharm = this.enharmonic(copy[k])
+            console.log("🚀 ~ file: App.jsx ~ line 256 ~ App ~ .then ~ enharm ", enharm )
+            if (checker2[copy[k]] || checker2[enharm]) {
+              final[copy[k]] = true
+              final[enharm] = true
+            }
+          }
+          for (var l = 0; l < copy2.length; l++) {
+            let enharm = this.enharmonic(copy2[l])
+            console.log("🚀 ~ file: App.jsx ~ line 263 ~ App ~ .then ~ enharm", enharm)
+            if (checker[copy2[l]] || checker[enharm]) {
+              final[copy2[l]] = true
+              final[enharm] = true
+            }
+          }
+          for (var finalNote in final) {
+            sharedNotes.push(finalNote)
+          }
+          this.updateShared(sharedNotes)
+        }
       })
       .catch((err) => {
       console.log("🚀 ~ file: App.jsx ~ line 213 ~ App ~ getChord ~ err", err)
@@ -262,6 +306,9 @@ class App extends React.Component {
           chords: res.data.chords,
         })
       })
+      .catch((err) => {
+        console.log("🚀 ~ file: App.jsx ~ line 266 ~ App ~ getScale ~ err", err)
+      })
   }
 
   getScale2 (key, scale) {
@@ -273,6 +320,9 @@ class App extends React.Component {
           scale2: res.data.scale,
           chords2: res.data.chords
         })
+      })
+      .catch((err) => {
+        console.log("🚀 ~ file: App.jsx ~ line 278 ~ App ~ getScale2 ~ err", err)
       })
   }
 
@@ -448,8 +498,6 @@ class App extends React.Component {
     if(this.state.showWelcome===true) {
       this.setState({
         showWelcome: false,
-        renderView: 'Map Scales',
-        mapScalesToggle: 'navOption toggle_on',
         hideScale: 'Show Scale'
       })
     }
@@ -573,9 +621,53 @@ class App extends React.Component {
         findChordsToggle: 'navOption',
         findScalesToggle: 'navOption',
         tutorialToggle: 'navOption',
-        settingsToggle: 'navOption',
+        renderView: 'Map Chords',
+        sharedNotes: [],
+        displayChordDegrees: false,
+        chordFocus: 'Neutral',
       })
-      this.handleConstructionMapChordsWindow()
+      if (this.state.calcChord1.length > 0 && this.state.calcChord2.length > 0) {
+        let copy = this.state.calcChord1.slice()
+        let copy2 = this.state.calcChord2.slice()
+        let sharedNotes = []
+        let checker = {}
+        let checker2 = {}
+        let final = {}
+
+        for (var i = 0; i < copy.length; i++) {
+          let enharm = this.enharmonic(copy[i])
+          checker[copy[i]] = true
+          checker[enharm] = true
+        }
+        for (var j = 0; j < copy2.length; j++) {
+          let enharm = this.enharmonic(copy2[j])
+          checker2[copy2[j]] = true
+          checker2[enharm] = true
+        }
+        console.log('checker', checker)
+        console.log('checker2', checker2)
+
+        for (var k = 0; k < copy.length; k++) {
+          let enharm = this.enharmonic(copy[k])
+          console.log("🚀 ~ file: App.jsx ~ line 256 ~ App ~ .then ~ enharm ", enharm )
+          if (checker2[copy[k]] || checker2[enharm]) {
+            final[copy[k]] = true
+            final[enharm] = true
+          }
+        }
+        for (var l = 0; l < copy2.length; l++) {
+          let enharm = this.enharmonic(copy2[l])
+          console.log("🚀 ~ file: App.jsx ~ line 263 ~ App ~ .then ~ enharm", enharm)
+          if (checker[copy2[l]] || checker[enharm]) {
+            final[copy2[l]] = true
+            final[enharm] = true
+          }
+        }
+        for (var finalNote in final) {
+          sharedNotes.push(finalNote)
+        }
+        this.updateShared(sharedNotes)
+      }
     }
     if (choice === 'mapScales') {
       this.setState({
@@ -583,8 +675,26 @@ class App extends React.Component {
         mapScalesToggle: 'navOption toggle_on',
         findStructuresToggle: 'navOption',
         tutorialToggle: 'navOption',
-        renderView: 'Map Scales'
+        renderView: 'Map Scales',
+        sharedNotes: [],
+        displayChordDegrees: false,
+        chordFocus: 'Neutral',
       })
+      if (this.state.currentChordTones.length > 0 && this.state.currentChordTones2.length > 0) {
+        let checker = {}
+        let sharedNotes = []
+        var notes = this.state.currentChordTones
+        var notes2 = this.state.currentChordTones2
+        for(var i = 0; i < notes.length; i++) {
+          checker[notes[i]] = true
+        }
+        for (var j = 0; j < notes2.length; j++) {
+          if (checker[notes2[j]]) {
+            sharedNotes.push(notes2[j])
+          }
+        }
+        this.updateShared(sharedNotes)
+      }
     }
     if (choice === 'findStructures') {
       this.setState({
@@ -834,22 +944,34 @@ class App extends React.Component {
   }
 
   resetAll() {
-    this.resetChords()
-    this.setState({
-      selectedChord:{},
-      selectedChord2:{},
-      currentChordTones: [],
-      currentChordTones2: [],
-      chordOneSelected: false,
-      chordTwoSelected: false,
-      sharedNotes: [],
-      compare: false,
-      displayChordDegrees: false,
-      chordDegButtonClass: 'chordDegButton',
-      chordFocus: 'Neutral',
-      selNote: '',
-      resetVoicingCount: 0,
-    })
+    if (this.state.renderView ==='Map Scales') {
+      this.resetChords()
+      this.setState({
+        selectedChord:{},
+        selectedChord2:{},
+        currentChordTones: [],
+        currentChordTones2: [],
+        chordOneSelected: false,
+        chordTwoSelected: false,
+        sharedNotes: [],
+        compare: false,
+        displayChordDegrees: false,
+        chordDegButtonClass: 'chordDegButton',
+        chordFocus: 'Neutral',
+        selNote: '',
+        resetVoicingCount: 0,
+      })
+    }
+    if (this.state.renderView ==='Map Chords') {
+      this.clear('1')
+      this.clear('2')
+      this.setState({
+        sharedNotes: [],
+        displayChordDegrees: false,
+        chordDegButtonClass: 'chordDegButton',
+        chordFocus: 'Neutral',
+      })
+    }
   }
 
   selectChord (chord, tones, key) {
@@ -1035,6 +1157,12 @@ class App extends React.Component {
             render={this.state.renderView}
             chordDegButtonClass={this.state.chordDegButtonClass}
             handleChordDegrees={this.handleChordDegrees}
+            root1={this.state.root1}
+            root2={this.state.root2}
+            voicing1={this.state.voicing1}
+            voicing2={this.state.voicing2}
+            displayChordDegrees={this.state.displayChordDegrees}
+            chordFocus={this.state.chordFocus}
             />
         </div>
         <div className="middle">
@@ -1163,43 +1291,20 @@ class App extends React.Component {
           </div>
           :
           this.state.renderView === 'Map Chords' ?
-          <MapChordsRender/>
-          :
-          this.state.renderView === 'test' ?
-            <div className="testContainer">
-              <ChordCalculator
-                handleRootChange={this.handleRootChange}
-                handleVoicingChange={this.handleVoicingChange}
-                root={this.state.root1}
-                voicing={this.state.voicing1}
-                whichCalculator={'1'}
-                chordDegrees={this.state.chordDegrees}
-                chordDegreesUpper={this.state.chordDegreesUpper}
-                chordTypes={this.state.chordTypes}
-                noteRefs={this.state.noteRefs}
-                getChord={this.getChord}
-                clear={this.clear}
-                chord={this.state.calcChord1}
-                handleChordFocus={this.handleChordFocus}
-                chordFocus={this.state.chordFocus}
-                />
-              <ChordCalculator
-                handleRootChange={this.handleRootChange}
-                handleVoicingChange={this.handleVoicingChange}
-                root={this.state.root2}
-                voicing={this.state.voicing2}
-                whichCalculator={'2'}
-                chordDegrees={this.state.chordDegrees}
-                chordDegreesUpper={this.state.chordDegreesUpper}
-                chordTypes={this.state.chordTypes}
-                noteRefs={this.state.noteRefs}
-                getChord={this.getChord}
-                clear={this.clear}
-                chord={this.state.calcChord2}
-                handleChordFocus={this.handleChordFocus}
-                chordFocus={this.state.chordFocus}
-              />
-            </div>
+          <MapChordsRender
+            handleRootChange={this.handleRootChange}
+            handleVoicingChange={this.handleVoicingChange}
+            root1={this.state.root1}
+            root2={this.state.root2}
+            voicing1={this.state.voicing1}
+            voicing2={this.state.voicing2}
+            chord1={this.state.calcChord1}
+            chord2={this.state.calcChord2}
+            clear={this.clear}
+            handleChordFocus={this.handleChordFocus}
+            chordFocus={this.state.chordFocus}
+            sharedNotes={this.state.sharedNotes}
+          />
           :null
         }
       </div>

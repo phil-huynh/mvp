@@ -30,6 +30,13 @@ var Welcome = ({showWelcome, handleWelcomeWindow, handleNavChoice}) => {
           <div className="bottom_welcome_message">In the meantime, try one of these currently available features.</div>
           <div className='construction_options'>
             <span
+              title="mapChords"
+              className='construction_choice toggle_on'
+              onClick={(e)=>{handleNavChoice(e)}}
+              >
+              Map Chords
+            </span>
+            <span
               title="mapScales"
               className='construction_choice toggle_on'
               onClick={(e)=>{handleNavChoice(e)}}

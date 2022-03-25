@@ -1,6 +1,6 @@
 import React from 'react'
 
-var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, whichCalculator, chordTypes, noteRefs, chordDegrees, chordDegreesUpper, getChord, clear, chord, handleChordFocus, chordFocus}) => {
+var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, whichCalculator, chordDegrees, chordDegreesUpper, clear, chord, handleChordFocus, chordFocus, sharedNotes}) => {
 
   const sharp = '#';
   const flat = '\u266D';
@@ -24,6 +24,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
   var chordNoteClass = `calc_notes${whichCalculator}`
   var clearClass = 'clear_button'
 
+
   if (root || voicing) {
     chordNameClass += ` calc_header_on_${whichCalculator}`
     clearClass += ' clear_on'
@@ -31,9 +32,6 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
   if(chord.length > 0) {
     chordNoteClass += ` calc_header_on_${whichCalculator}`
   }
-
-
-
 
   return (
     <div className="calculatorContainer">
@@ -46,7 +44,10 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             className={chordNoteClass}
           >
             {chord.map((note) => (
-              <span className="calc_note">{note}</span>
+              sharedNotes.length > 0 && sharedNotes.includes(note) ?
+                <span className="calc_note calc_shared_note">{note}</span>
+              :
+                <span className="calc_note">{note}</span>
             ))}
           </div>
         </div>

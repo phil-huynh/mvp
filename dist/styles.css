@@ -1561,7 +1561,14 @@ align-content: center;
               38px 19px 8px rgba(206,89,55,0);
 }
 
-
+.calc_shared_note {
+  text-shadow: 0 0 5px #49ff18,
+  0 0 10px #49ff18,
+  0 0 15px #49ff18,
+  0 0 20px #49ff18,
+  0 0 30px #49ff18,
+  0 0 40px #49ff18;
+}
 
 
 

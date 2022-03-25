@@ -1,11 +1,11 @@
 import React from 'react'
 import HideScaleMenu from './HideScaleMenu.jsx'
 
-var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote, render, chordDegButtonClass, handleChordDegrees}) => {
+var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote, render, chordDegButtonClass, handleChordDegrees, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus}) => {
 
   var resetClass = "reset_button resetAll"
 
-  if (selNote || chordOneSelected || resetVoicingCount) {
+  if ((render === 'Map Scales' && (selNote || chordOneSelected || resetVoicingCount)) || (render === 'Map Chords' && (root1 || root2 || voicing1 || voicing2 || displayChordDegrees || chordFocus !== 'Neutral'))) {
     resetClass = "reset_button resetAll can_reset"
   }
 
@@ -35,7 +35,7 @@ var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow
           scaleVisibleLabel={scaleVisibleLabel}
         />
         :
-        render === 'test' ?
+        render === 'Map Chords' ?
           <div className="chordDegree_container">
             <span
               className={chordDegButtonClass}
