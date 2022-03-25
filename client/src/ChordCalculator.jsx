@@ -52,9 +52,6 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
           </div>
         </div>
         <div className="type_choice_container">
-          <div className="types_col col_three"></div>
-        </div>
-        <div className="type_choice_container">
           {chordFocus === 'Neutral' ?
             <div
               className="types_col"
@@ -82,7 +79,10 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
           }
         </div>
         <div className="type_choice_container">
-          <div className="types_col col_five"></div>
+          <div className="col_three"></div>
+        </div>
+        <div className="type_choice_container">
+          <div className="col_five"></div>
         </div>
         <div className="clear_button_container">
           <div
