@@ -11,7 +11,9 @@ const clockwise = ['G', 'D', 'A', 'E', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}
 
 const counterClockwise = ["F", `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`, `B${dblFlat}`, `E${dblFlat}`, `A${dblFlat}`, `D${dblFlat}`, `G${dblFlat}`, `C${dblFlat}`, `F${dblFlat}`, `B${dblFlat}${flat}`, `E${dblFlat}${flat}`, `A${dblFlat}${flat}`, `D${dblFlat}${flat}`]
 
-var chromaticScale = [['C', `B${sharp}`, `D${dblFlat}`], [`C${sharp}`, `D${flat}`, `B${dblSharp}`], ["D", `C${dblSharp}`, `E${dblFlat}`], [`D${sharp}`, `E${flat}`, `F${dblFlat}`], ["E", `F${flat}`, `D${dblSharp}`], ["F", `E${sharp}`, `G${dblFlat}`], [`F${sharp}`, `G${flat}`, `E${dblSharp}`], ["G", `F${dblSharp}`, `A${dblFlat}`], [`G${sharp}`, `A${flat}`], ["A", `G${dblSharp}`, `B${dblFlat}`], [`A${sharp}`, `B${flat}`, `C${dblFlat}`], ["B", `C${flat}`, `A${dblSharp}`]];
+var chromaticScale = [['C', `B${sharp}`, `D${dblFlat}`], [`C${sharp}`, `D${flat}`, `B${dblSharp}`], ["D", `C${dblSharp}`, `E${dblFlat}`], [`D${sharp}`, `E${flat}`, `F${dblFlat}`], ["E", `F${flat}`, `D${dblSharp}`], ["F", `E${sharp}`, `G${dblFlat}`], [`F${sharp}`, `G${flat}`, `E${dblSharp}`], ["G", `F${dblSharp}`, `A${dblFlat}`], [`G${sharp}`, `A${flat}`, `F${dblSharp}${sharp}`], ["A", `G${dblSharp}`, `B${dblFlat}`], [`A${sharp}`, `B${flat}`, `C${dblFlat}`], ["B", `C${flat}`, `A${dblSharp}`]];
+
+var chromaticScaleSimple = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
 
 var allScales = {};
 var chordTypes = {};
@@ -105,7 +107,7 @@ var addChordType = (key, degrees, label, useUpper)=> {
   chordTypes[key] = {}
   chordTypes[key].degrees = degrees
   chordTypes[key].label = label
-  useUpper ? chordTypes[key].useUpper = true : null
+  chordTypes[key].useUpper = useUpper
 }
 
 addChordType('maj', ['one', 'three', 'five'], '', false)
@@ -120,7 +122,7 @@ addChordType(`${dim}7`, ['one', 'flatThree', 'flatFive', 'dblFlatSeven'], `${dim
 addChordType(`${dim}(maj7)`, ['one', 'flatThree', 'flatFive', 'seven'], `${dim}(maj7)`, false)
 addChordType('+', ['one', 'three', 'sharpFive'], '+', false)
 addChordType('+(maj7)', ['one', 'three', 'sharpFive', 'seven'], '+(maj7)', false)
-addChordType(`7(${sharp}5)`, ['one', 'three', 'sharpFive', 'flatSevn'], `7(${sharp}5)`, false)
+addChordType(`7(${sharp}5)`, ['one', 'three', 'sharpFive', 'flatSeven'], `7(${sharp}5)`, false)
 addChordType(`maj(${flat}5)`, ['one', 'three', 'flatFive'], `maj(${flat}5)`, false)
 addChordType(`maj7(${flat}5)`, ['one', 'three', 'flatFive', 'seven'], `maj7(${flat}5)`, false)
 addChordType(`7(${flat}5)`, ['one', 'three', 'flatFive', 'flatSeven'], `7(${flat}5)`, false)
@@ -161,8 +163,8 @@ addChordType(`7(${flat}9, ${flat}13)`, ['one', 'three', 'five', 'flatSeven', 'fl
 addChordType('maj Pentatonic', ['one', 'two', 'three', 'five', 'six'], 'maj Pentatonic', false)
 addChordType('min Pentatonic', ['one', 'flatThree', 'four', 'five', 'flatSeven'], 'min Pentatonic', false)
 addChordType('Dominant Pentatonic', ['one', 'two', 'three', 'five', 'flatSeven'], 'Dominant Pentatonic')
-addChordType(`Dominant ${sharp}4 Pentatonic`, ['one', 'two', 'three', 'sharpFour', 'flatSeven'], `Dominant${sharp}4 Pentatonic`, false)
-addChordType(`maj ${sharp}4 Pentatonic`, ['one', 'two', 'three', 'sharpFour', 'six'], `maj${sharp}4 Pentatonic`, false)
+addChordType(`Dominant ${sharp}4 Pentatonic`, ['one', 'two', 'three', 'sharpFour', 'flatSeven'], `Dominant ${sharp}4 Pentatonic`, false)
+addChordType(`maj ${sharp}4 Pentatonic`, ['one', 'two', 'three', 'sharpFour', 'six'], `maj ${sharp}4 Pentatonic`, false)
 addChordType('Altered Pentatonic', ['one', 'flatTwo', 'three', 'five', 'flatSeven'], `Altered Pentatonic`, false)
 addChordType('m(maj7) Pentatonic', ['one', 'flatThree', 'four', 'five', 'seven'], 'm(maj7) Pentatonic', false)
 addChordType('Egyptian Pentatonic', ['one', 'two', 'four', 'five', 'flatSeven'], 'Egyptian Pentatonic', false)
@@ -207,7 +209,7 @@ var flatNote = (note) => {
 
 var findEnharmonicEquivalent = (note) => {
   var noteBase = note[0];
-  var indexOfNoteBase = chromaticScale.indexOf(noteBase);
+  var indexOfNoteBase = chromaticScaleSimple.indexOf(noteBase);
   var distanceToMove = 0;
   var enharmonicEquivalent = ""
   for (var i = 1; i < note.length; i++) {
@@ -226,7 +228,7 @@ var findEnharmonicEquivalent = (note) => {
       }
   }
   var newIndex = indexOfNoteBase + distanceToMove;
-  if (newIndex >= chromaticScale.length) {
+  if (newIndex >= chromaticScaleSimple.length) {
       newIndex = indexOfNoteBase - (12 - distanceToMove);
   } else if (newIndex < 0) {
       newIndex = indexOfNoteBase + (distanceToMove + 12);
@@ -234,20 +236,20 @@ var findEnharmonicEquivalent = (note) => {
   if (distanceToMove === 0) {
       enharmonicEquivalent = noteBase;
   } else if (note.length > 1 && (note[1] === `${sharp}` || note.includes(`${dblSharp}`))) {
-      if (distanceToMove === 1 && chromaticScale[newIndex].length === 2) {
-          enharmonicEquivalent = chromaticScale[newIndex][1];
-      } else if (chromaticScale[newIndex].length === 2) {
-          enharmonicEquivalent = chromaticScale[newIndex][0];
+      if (distanceToMove === 1 && chromaticScaleSimple[newIndex].length === 2) {
+          enharmonicEquivalent = chromaticScaleSimple[newIndex][1];
+      } else if (chromaticScaleSimple[newIndex].length === 2) {
+          enharmonicEquivalent = chromaticScaleSimple[newIndex][0];
       } else {
-          enharmonicEquivalent = chromaticScale[newIndex];
+          enharmonicEquivalent = chromaticScaleSimple[newIndex];
       }
   } else if (note.length > 1 && note[1] === `${flat}` || note.includes(`${dblFlat}`)) {
-      if (distanceToMove === -1 && chromaticScale[newIndex].length === 2) {
-          enharmonicEquivalent = chromaticScale[newIndex][0];
-      } else if (chromaticScale[newIndex].length === 2) {
-          enharmonicEquivalent = chromaticScale[newIndex][1];
+      if (distanceToMove === -1 && chromaticScaleSimple[newIndex].length === 2) {
+          enharmonicEquivalent = chromaticScaleSimple[newIndex][0];
+      } else if (chromaticScaleSimple[newIndex].length === 2) {
+          enharmonicEquivalent = chromaticScaleSimple[newIndex][1];
       } else {
-          enharmonicEquivalent = chromaticScale[newIndex];
+          enharmonicEquivalent = chromaticScaleSimple[newIndex];
       }
   }
   return enharmonicEquivalent;

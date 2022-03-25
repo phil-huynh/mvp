@@ -102,7 +102,15 @@ html {
 
 .navTitle {
   font-size: 3vh;
-  /*text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px rgb(41, 0, 135), 0 0 30px rgb(41, 0, 135), 0 0 40px rgb(41, 0, 135), 0 0 55px rgb(41, 0, 135), 0 0 75px rgb(41, 0, 135), 38px 19px 8px rgba(206,89,55,0);*/
+  /*text-shadow: 0 0 5px #FFF,
+                0 0 10px #FFF,
+                0 0 15px #FFF,
+                0 0 20px rgb(41, 0, 135),
+                0 0 30px rgb(41, 0, 135),
+                0 0 40px rgb(41, 0, 135),
+                0 0 55px rgb(41, 0, 135),
+                0 0 75px rgb(41, 0, 135),
+                38px 19px 8px rgba(206,89,55,0);*/
 }
 
 .navOption {
@@ -185,7 +193,14 @@ align-content: center;
 
 .viewLabel:hover ,
 .tuningLabel:hover {
-  text-shadow: 0 0 5px , 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px blue,
+              0 0 10px blue,
+              0 0 15px blue,
+              0 0 20px blue,
+              0 0 30px blue,
+              0 0 40px blue,
+              0 0 55px blue,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .sharedLight{
@@ -234,15 +249,29 @@ align-content: center;
 }
 
 .can_reset {
-  text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 55px, 38px 19px 8px rgba(206,89,55,0);
   -webkit-box-shadow: 2px 2px 15px 3px red, inset 0 0 1.6rem red;
   box-shadow: 2px 2px 15px 3px red, inset 0 0 1.6rem red;
+  text-shadow: 0 0 5px red,
+              0 0 10px red,
+              0 0 15px red,
+              0 0 20px red,
+              0 0 25px red,
+              0 0 30px red,
+              0 0 40px red,
+              0 0 55px, 38px 19px 8px rgba(206,89,55,0);
 }
 
 .can_reset:hover {
-  text-shadow: 0 0 5px white, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 55px, 38px 19px 8px rgba(206,89,55,0);
   -webkit-box-shadow: 2px 2px 15px 10px red, inset 0 0 2rem red;
   box-shadow: 2px 2px 15px 10px red, inset 0 0 3rem red;
+  text-shadow: 0 0 5px white,
+              0 0 10px red,
+              0 0 15px red,
+              0 0 20px red,
+              0 0 25px red,
+              0 0 30px red,
+              0 0 40px red,
+              0 0 55px, 38px 19px 8px rgba(206,89,55,0);
 }
 
 /*****************************************************************************
@@ -309,7 +338,15 @@ align-content: center;
   cursor: pointer;
 }
 .welcome_choice:hover {
-  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #49ff18,
+              0 0 10px #49ff18,
+              0 0 15px #49ff18,
+              0 0 20px #49ff18,
+              0 0 30px #49ff18,
+              0 0 40px #49ff18,
+              0 0 45px #49ff18,
+              0 0 75px #49ff18,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .construction .modal-content {
@@ -365,7 +402,15 @@ align-content: center;
   cursor: pointer;
 }
 .construction_choice:hover {
-  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #49ff18,
+              0 0 10px #49ff18,
+              0 0 15px #49ff18,
+              0 0 20px #49ff18,
+              0 0 30px #49ff18,
+              0 0 40px #49ff18,
+              0 0 45px #49ff18,
+              0 0 75px #49ff18,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .tutorial .modal-content {
@@ -445,13 +490,29 @@ align-content: center;
 .dashTonicLabel:hover,
 .dashScaleLabel:hover,
 .defaultVoicing:hover {
-  text-shadow: 0 0 5px #FFF, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #FFF,
+              0 0 10px blue,
+              0 0 15px blue,
+              0 0 20px blue,
+              0 0 30px blue,
+              0 0 40px blue,
+              0 0 55px blue,
+              0 0 75px blue,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .modalMenuChoice:active {
   background-color: #363B4A;
   color: white;
-  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 25px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #49ff18,
+              0 0 10px #49ff18,
+              0 0 15px #49ff18,
+              0 0 20px #49ff18,
+              0 0 25px #49ff18,
+              0 0 30px #49FF18,
+              0 0 40px #49FF18,
+              0 0 55px #49FF18,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .labelToggle {
@@ -473,7 +534,15 @@ align-content: center;
 
 
 .reset_button:active {
-  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #FFF,
+              0 0 10px #FFF,
+              0 0 15px #FFF,
+              0 0 20px #49ff18,
+              0 0 30px #49FF18,
+              0 0 40px #49FF18,
+              0 0 55px #49FF18,
+              0 0 75px #49ff18,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 /*****************************************************************************
@@ -749,38 +818,38 @@ align-content: center;
   padding-top: 3px;
   color: white;
   box-shadow: 0 0 .2rem #fff,
-  0 0 .2rem #fff,
-  0 0 0.5rem yellow,
-  0 0 0.2rem yellow,
-  0 0 0.7rem yellow,
-  inset 0 0 1.7rem yellow;
+              0 0 .2rem #fff,
+              0 0 0.5rem yellow,
+              0 0 0.2rem yellow,
+              0 0 0.7rem yellow,
+              inset 0 0 1.7rem yellow;
 }
 
 .selectedNote2 {
   box-shadow: 0 0 .2rem #fff,
-  0 0 .2rem #fff,
-  0 0 0.5rem #0095ec,
-  0 0 0.2rem #0095ec,
-  0 0 0.7rem #0095ec,
-  inset 0 0 1.7rem #0095ec;
+              0 0 .2rem #fff,
+              0 0 0.5rem #0095ec,
+              0 0 0.2rem #0095ec,
+              0 0 0.7rem #0095ec,
+              inset 0 0 1.7rem #0095ec;
 }
 
 .sharedNeckNote {
   box-shadow: 0 0 .2rem #fff,
-  0 0 .2rem #fff,
-  0 0 0.5rem #49ff18,
-  0 0 0.2rem #49ff18,
-  0 0 0.7rem #49ff18,
-  inset 0 0 1.7rem #49ff18;
+              0 0 .2rem #fff,
+              0 0 0.5rem #49ff18,
+              0 0 0.2rem #49ff18,
+              0 0 0.7rem #49ff18,
+              inset 0 0 1.7rem #49ff18;
 }
 
 .selNoteNeckToggle {
   box-shadow: 0 0 .2rem #fff,
-  0 0 .2rem #fff,
-  0 0 0.5rem red,
-  0 0 0.2rem red,
-  0 0 1.4rem red,
-  inset 0 0 2rem red;
+              0 0 .2rem #fff,
+              0 0 0.5rem red,
+              0 0 0.2rem red,
+              0 0 1.4rem red,
+              inset 0 0 2rem red;
 }
 
 .unfocus {
@@ -901,18 +970,32 @@ align-content: center;
 }
 
 .selectedChord2 {
-  text-shadow: 0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 0 0 40px #0095ec, 0 0 55px #0095ec, 38px 19px 8px rgba(206,89,55,0);
   color: #0095ec;
   -webkit-box-shadow: 2px 2px 15px 7px #0095ec;
   box-shadow: 2px 2px 15px 7px #0095ec;
+  text-shadow: 0 0 5px #0095ec,
+              0 0 10px #0095ec,
+              0 0 15px #0095ec,
+              0 0 20px #0095ec,
+              0 0 25px #0095ec,
+              0 0 30px #0095ec,
+              0 0 40px #0095ec,
+              0 0 55px #0095ec,
+              38px 19px 8px rgba(206,89,55,0);
 
 }
 
 .selectedChord {
-  text-shadow: yellow 0px 0px 7px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
   color: #FFFFFF;
   -webkit-box-shadow: 2px 2px 15px 5px yellow;
   box-shadow: 2px 2px 15px 5px yellow;
+  text-shadow: 0px 0px 7px yellow,
+              0px 0px 10px yellow,
+              0px 0px 15px yellow,
+              0px 0px 20px yellow,
+              0px 0px 30px yellow,
+              0px 0px 40px yellow,
+              0px 0px 75px red;
 }
 
 
@@ -946,10 +1029,27 @@ align-content: center;
 }
 
 .resetCardButton {
-  text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 45px red, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px red,
+              0 0 10px red,
+              0 0 15px red,
+              0 0 20px red,
+              0 0 25px red,
+              0 0 30px red,
+              0 0 40px red,
+              0 0 45px red,
+              38px 19px 8px rgba(206,89,55,0);
 }
 .resetCardButton:hover  {
-  text-shadow: 0 0 5px white, 0 0 10px red, 0 0 15px #FFF, 0 0 20px red, 0 0 25px red, 0 0 30px red, 0 0 40px red, 0 0 55px red, 0 0 75px red, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px white,
+              0 0 10px red,
+              0 0 15px red,
+              0 0 20px red,
+              0 0 25px red,
+              0 0 30px red,
+              0 0 40px red,
+              0 0 55px red,
+              0 0 75px red,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .noteRef:hover,
@@ -957,17 +1057,41 @@ align-content: center;
 .alterChordButton:hover,
 .lock:hover,
 .focusButton:hover {
-  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #04D3FF, 0 0 30px #04D3FF, 0 0 40px #04D3FF, 0 0 55px #04D3FF, 0 0 75px #04D3FF, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #FFF,
+              0 0 10px #FFF,
+              0 0 15px #FFF,
+              0 0 20px #04D3FF,
+              0 0 30px #04D3FF,
+              0 0 40px #04D3FF,
+              0 0 55px #04D3FF,
+              0 0 75px #04D3FF,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 
 
 .toggle_on {
-  text-shadow: 0 0 7px blue, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 45px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 7px blue,
+              0 0 10px blue,
+              0 0 15px blue,
+              0 0 20px blue,
+              0 0 30px blue,
+              0 0 40px blue,
+              0 0 45px blue,
+              0 0 75px blue,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .targetNote {
-  text-shadow: 0 0 5px #FFF, 0 0 10px red, 0 0 15px red, 0 0 20px red, 0 0 30px red, 0 0 40px red, 0 0 45px red, 0 0 75px red, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #FFF,
+              0 0 10px red,
+              0 0 15px red,
+              0 0 20px red,
+              0 0 30px red,
+              0 0 40px red,
+              0 0 45px red,
+              0 0 75px red,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .spelledScale {
@@ -976,31 +1100,85 @@ align-content: center;
 }
 
 .sharedCardNote {
-  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #49ff18,
+              0 0 10px #49ff18,
+              0 0 15px #49ff18,
+              0 0 20px #49ff18,
+              0 0 30px #49ff18,
+              0 0 40px #49ff18,
+              0 0 45px #49ff18,
+              0 0 75px #49ff18,
+              38px 19px 8px rgba(206,89,55,0);
 }
 .sharedNoteInScale {
-  text-shadow: 0 0 2px #49ff18, 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 2px #49ff18,
+              0 0 5px #49ff18,
+              0 0 10px #49ff18,
+              0 0 15px #49ff18,
+              0 0 20px #49ff18,
+              0 0 30px #49ff18,
+              0 0 40px #49ff18,
+              0 0 45px #49ff18,
+              38px 19px 8px rgba(206,89,55,0);
 }
 .chord1NoteInScale {
-  text-shadow: yellow 0px 0px 5px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, red 0px 0px 75px;
+  text-shadow: 0px 0px 5px yellow,
+              0px 0px 10px yellow,
+              0px 0px 15px yellow,
+              0px 0px 20px yellow,
+              0px 0px 30px yellow,
+              0px 0px 40px yellow,
+              0px 0px 75px red;
 }
 .chord2NoteInScale {
-  text-shadow: 0 0 2px #0095ec,0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 2px #0095ec,
+              0 0 5px #0095ec,
+              0 0 10px #0095ec,
+              0 0 15px #0095ec,
+              0 0 20px #0095ec,
+              0 0 25px #0095ec,
+              0 0 30px #0095ec,
+              0 0 3px #0095ec,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .chord1Tutorial {
-  text-shadow: yellow 0px 0px 5px, yellow 0px 0px 10px, 0px 0px 15px yellow, yellow 0px 0px 20px, yellow 0px 0px 30px, red 0px 0px 75px;
+  text-shadow:  0px 0px 5px yellow,
+                0px 0px 10px yellow,
+                0px 0px 15px yellow,
+                0px 0px 20px yellow,
+                0px 0px 30px yellow,
+                0px 0px 75px red;
 }
 .targetNoteTutorial {
-  text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red, 0 0 20px red, 0 0 30px red, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px red,
+              0 0 10px red,
+              0 0 15px red,
+              0 0 20px red,
+              0 0 30px red,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .chord2Tutorial {
-  text-shadow: 0 0 2px #0095ec,0 0 5px #0095ec, 0 0 10px #0095ec, 0 0 15px #0095ec, 0 0 20px #0095ec, 0 0 25px #0095ec, 0 0 30px #0095ec, 0 0 3px #0095ec, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 2px #0095ec,
+              0 0 5px #0095ec,
+              0 0 10px #0095ec,
+              0 0 15px #0095ec,
+              0 0 20px #0095ec,
+              0 0 25px #0095ec,
+              0 0 30px #0095ec,
+              0 0 3px #0095ec,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .sharedNoteTutorial {
-  text-shadow: 0 0 2px #49ff18, 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 2px #49ff18,
+              0 0 5px #49ff18,
+              0 0 10px #49ff18,
+              0 0 15px #49ff18,
+              0 0 20px #49ff18,
+              0 0 30px #49ff18,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 
@@ -1033,12 +1211,146 @@ align-content: center;
 }
 
 .calc_header_container {
+  display: grid;
+  grid-template-columns: 30% 38% 8% 8% 8% 8%;
+  padding-top: 1%;
+  padding-bottom: 1%;
   color: #FFFFFF;
   background: #697179;
   background: #357A95;
   background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
   background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
   background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+}
+.calc_notes_container,
+.calc_chord_name_container,
+.clear_button_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+.calc_chord_name1,
+.calc_chord_name2 {
+  font-size: 2vh;
+  font-weight: 100;
+  width: 92%;
+  height: 90%;
+  padding:1%;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Balsamiq Sans', cursive;
+  color: #FFFFFF;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+  -webkit-box-shadow: 1px 1px 1px 1px black;
+  box-shadow: 1px 1px 1px 1px black;
+  text-shadow: 0px 0px 5px yellow,
+              0px 0px 10px yellow,
+              0px 0px 15px yellow,
+              0px 0px 20px yellow,
+              0px 0px 30px yellow,
+              0px 0px 40px yellow,
+              0px 0px 75px red;
+}
+
+.calc_notes1,
+.calc_notes2 {
+  font-size: 2vh;
+  width: 92%;
+  height: 90%;
+  padding:1%;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Balsamiq Sans', cursive;
+  color: #e7dede;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+  -webkit-box-shadow: 1px 1px 1px 1px black;
+  box-shadow: 1px 1px 1px 1px black;
+  text-shadow:0px 0px 5px yellow,
+              0px 0px 10px yellow;
+
+
+
+}
+
+
+.calc_chord_name2,
+.calc_notes2 {
+  text-shadow: 0 0 5px #0095ec,
+              0 0 10px #0095ec,
+              0 0 15px #0095ec,
+              0 0 20px #0095ec,
+              0 0 25px #0095ec,
+              0 0 30px #0095ec,
+              0 0 40px #0095ec,
+              0 0 55px #0095ec,
+              38px 19px 8px rgba(206,89,55,0);
+
+}
+
+.calc_note {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.clear_button {
+  font-size: 1.8vh;
+  width: 92%;
+  height: 90%;
+  padding:1%;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Balsamiq Sans', cursive;
+  color: #FFFFFF;
+  background: #697179;
+  background: #357A95;
+  background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
+  background: -webkit-linear-gradient(top, black 0%, #363B4A 100%, black  100%);
+  background: linear-gradient(to bottom, black  0%, #363B4A 100%, black 100%);
+  -webkit-box-shadow: 1px 1px 1px 1px black;
+  box-shadow: 1px 1px 1px 1px black;
+}
+
+.clear_on {
+  border: solid white 2px;
+  -webkit-box-shadow: 2px 2px 15px 3px red, inset 0 0 1.6rem red;
+  box-shadow: 2px 2px 15px 3px red, inset 0 0 1.6rem red;
+  text-shadow: 0 0 5px red,
+              0 0 10px red,
+              0 0 15px red,
+              0 0 20px red,
+              0 0 25px red,
+              0 0 30px red,
+              0 0 40px red,
+              0 0 55px, 38px 19px 8px rgba(206,89,55,0);
+}
+
+.calc_header_on_1 {
+  -webkit-box-shadow: 2px 2px 15px 5px yellow;
+  box-shadow: 2px 2px 15px 5px yellow;
+}
+.calc_header_on_2 {
+  -webkit-box-shadow: 2px 2px 15px 7px #0095ec;
+  box-shadow: 2px 2px 15px 7px #0095ec;
 }
 
 .rootSelector,
@@ -1061,7 +1373,6 @@ align-content: center;
   padding-top: 1%;
   padding-left: 1%;
   padding-right: 1%;
-
 }
 
 .whiteNoteContainer,
@@ -1154,9 +1465,18 @@ align-content: center;
 .whiteNote:hover,
 .blackNoteName:hover,
 .types_col:hover {
+  border: white solid 2px;
   -webkit-box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 2.2rem #49ff18;
   box-shadow: 2px 2px 15px 7px #49ff18, inset 0 0 2.2rem #49ff18;
-  text-shadow: 0 0 5px #49ff18, 0 0 10px #49ff18, 0 0 15px #49ff18, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 45px #49ff18, 0 0 75px #49ff18, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px #49ff18,
+              0 0 10px #49ff18,
+              0 0 15px #49ff18,
+              0 0 20px #49ff18,
+              0 0 30px #49ff18,
+              0 0 40px #49ff18,
+              0 0 45px #49ff18,
+              0 0 75px #49ff18,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .whiteNote:hover,
@@ -1173,10 +1493,19 @@ align-content: center;
 .selectedVoicing,
 .selectedRoot:hover,
 .selectedVoicing:hover {
+  border: white solid 2px;
   color: white;
   -webkit-box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
   box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
-  text-shadow: 0 0 5px blue, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue, 0 0 75px blue, 38px 19px 8px rgba(206,89,55,0);
+  text-shadow: 0 0 5px blue,
+              0 0 10px blue,
+              0 0 15px blue,
+              0 0 20px blue,
+              0 0 30px blue,
+              0 0 40px blue,
+              0 0 55px blue,
+              0 0 75px blue,
+              38px 19px 8px rgba(206,89,55,0);
   background: #697179;
   background: #357A95;
   background: -moz-linear-gradient(top, black 0%, #363B4A 100%, black 100%);
@@ -1185,14 +1514,52 @@ align-content: center;
 }
 
 
+.doubleName {
+  border-radius: 20%;
+  font-size: 1.2vh;
+  width: 4.8vh;
+}
+
+.fromOne {
+  color: yellow;
+  text-shadow:0px 0px 5px yellow,
+
+}
+.fromTwo {
+  color: white;
+  text-shadow: 0 0 2px #0095ec,
+              0 0 5px #0095ec,
+              0 0 10px #0095ec,
+              0 0 15px #0095ec,
+              0 0 20px #0095ec,
+              0 0 25px #0095ec,
+              0 0 30px #0095ec,
+              0 0 40px #0095ec,
+              0 0 55px #0095ec,
+              38px 19px 8px rgba(206,89,55,0);
+}
+.divider {
+  color: white;
+  font-size: 2.5vh;
+  font-weight: 100;
+}
 
 
-
-
-
-
-
-
+.calc_toggle_on {
+  border: white solid 2px;
+  color: white;
+  -webkit-box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
+  box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
+  text-shadow: 0 0 5px blue,
+              0 0 10px blue,
+              0 0 15px blue,
+              0 0 20px blue,
+              0 0 30px blue,
+              0 0 40px blue,
+              0 0 55px blue,
+              0 0 75px blue,
+              38px 19px 8px rgba(206,89,55,0);
+}
 
 
 

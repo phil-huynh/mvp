@@ -1,7 +1,7 @@
 import React from 'react'
 import HideScaleMenu from './HideScaleMenu.jsx'
 
-var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote}) => {
+var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote, render, chordDegButtonClass, handleChordDegrees}) => {
 
   var resetClass = "reset_button resetAll"
 
@@ -23,16 +23,30 @@ var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow
       >
         {`${instrument} : ${tuning}`}
       </span>
-      <HideScaleMenu
-        name={'hideScaleMenu'}
-        handleHide={handleHide}
-        scaleHiddenToggle={scaleHiddenToggle}
-        scaleUnfocusedToggle={scaleUnfocusedToggle}
-        scaleVisibleToggle={scaleVisibleToggle}
-        scaleHiddenLabel={scaleHiddenLabel}
-        scaleUnfocusedLabel={scaleUnfocusedLabel}
-        scaleVisibleLabel={scaleVisibleLabel}
-      />
+      {render === 'Map Scales' ?
+        <HideScaleMenu
+          name={'hideScaleMenu'}
+          handleHide={handleHide}
+          scaleHiddenToggle={scaleHiddenToggle}
+          scaleUnfocusedToggle={scaleUnfocusedToggle}
+          scaleVisibleToggle={scaleVisibleToggle}
+          scaleHiddenLabel={scaleHiddenLabel}
+          scaleUnfocusedLabel={scaleUnfocusedLabel}
+          scaleVisibleLabel={scaleVisibleLabel}
+        />
+        :
+        render === 'test' ?
+          <div className="chordDegree_container">
+            <span
+              className={chordDegButtonClass}
+              onClick={()=>handleChordDegrees()}
+            >
+              Chord Degrees
+            </span>
+          </div>
+        :
+        <span></span>
+      }
       {sharedNotes.length > 0 ?
         <span className="sharedLight_container">
           <span className="sharedLight">Shared Notes</span>

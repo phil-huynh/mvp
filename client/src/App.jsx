@@ -58,7 +58,8 @@ class App extends React.Component {
       chord2ObjKey: '',
       chordOptRoot: '',
       chordTwoSelected: false,
-      chordTypes: {},
+      chordType1: {},
+      chordType2: {},
       chordFocus: 'Neutral',
       currentCard: '',
       compare: false,
@@ -83,7 +84,8 @@ class App extends React.Component {
       middle: 'inner_middle',
       moreSeventhsButton: 'Show 7th Chords',
       noteNameToggle: 'toggle_on',
-      noteRefs: {},
+      noteRefs1: {},
+      noteRefs2: {},
       renderView: 'test',
       resetVoicingCount: 0,
       root1: '',
@@ -134,13 +136,14 @@ class App extends React.Component {
       voicing2: '',
 
     }
-
-    this.getChord = this.getChord.bind(this)
-    this.getChoices = this.getChoices.bind(this)
+    this.clear = this.clear.bind(this);
+    this.getChord = this.getChord.bind(this);
+    this.getChoices = this.getChoices.bind(this);
     this.getDegrees = this.getDegrees.bind(this);
     this.getScale = this.getScale.bind(this);
     this.getScale2 = this.getScale2.bind(this);
     this.getStrings = this.getStrings.bind(this);
+    this.enharmonic = this.enharmonic.bind(this);
     this.handleAlterChord = this.handleAlterChord.bind(this);
     this.handleAlterChordWindow = this.handleAlterChordWindow.bind(this);
     this.handleViewMenuWindow = this.handleViewMenuWindow.bind(this);
@@ -188,6 +191,21 @@ class App extends React.Component {
 
   }
 
+  clear (which) {
+    var keyNotes = `calcChord${which}`
+    var keyRefs = `noteRefs${which}`
+    var keyType = `chordType${which}`
+    var keyVoicing = `voicing${which}`
+    var keyRoot = `root${which}`
+    this.setState ({
+      [keyNotes]: [],
+      [keyRefs]: {},
+      [keyType]: {},
+      [keyVoicing]: '',
+      [keyRoot]: '',
+    })
+  }
+
   getChoices () {
     axios.get('/choices')
       .then((res) => {
@@ -201,15 +219,16 @@ class App extends React.Component {
   }
 
   getChord (root, type, which) {
-    var key = `calcChord${which}`
-    console.log(key)
-    console.log(root)
-    console.log(type)
+    var keyNotes = `calcChord${which}`
+    var keyRefs = `noteRefs${which}`
+    var keyType = `chordType${which}`
+
     axios.get('/chord', { params: { root: root, type: type } })
       .then((res) => {
-        console.log(res)
         this.setState({
-          [key]: res.data
+          [keyNotes]: res.data.chordNotes,
+          [keyRefs]: res.data.noteRefs,
+          [keyType]: res.data.type
         })
       })
       .catch((err) => {
@@ -270,7 +289,55 @@ class App extends React.Component {
     })
   }
 
+  enharmonic (note) {
+    var chromaticScale = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
 
+    var noteBase = note[0];
+    var indexOfNoteBase = chromaticScale.indexOf(noteBase);
+    var distanceToMove = 0;
+    var enharmonicEquivalent = ""
+    for (var i = 1; i < note.length; i++) {
+        if (note[i] === `${flat}`) {
+            distanceToMove--;
+        } else if (note[i] === `${sharp}`) {
+            distanceToMove++;
+        } else if ((note[i] + note[i + 1]) === `${dblSharp}`) {
+            distanceToMove += 2
+        } else if ((note[i] + note[i + 1]) === `${dblFlat}`) {
+            distanceToMove -= 2
+        } else if ((note[i - 1] + note[i]) === `${dblSharp}`) {
+            continue;
+        } else if ((note[i - 1] + note[i]) === `${dblFlat}`) {
+            continue;
+        }
+    }
+    var newIndex = indexOfNoteBase + distanceToMove;
+    if (newIndex >= chromaticScale.length) {
+        newIndex = indexOfNoteBase - (12 - distanceToMove);
+    } else if (newIndex < 0) {
+        newIndex = indexOfNoteBase + (distanceToMove + 12);
+    }
+    if (distanceToMove === 0) {
+        enharmonicEquivalent = noteBase;
+    } else if (note.length > 1 && (note[1] === `${sharp}` || note.includes(`${dblSharp}`))) {
+        if (distanceToMove === 1 && chromaticScale[newIndex].length === 2) {
+            enharmonicEquivalent = chromaticScale[newIndex][1];
+        } else if (chromaticScale[newIndex].length === 2) {
+            enharmonicEquivalent = chromaticScale[newIndex][0];
+        } else {
+            enharmonicEquivalent = chromaticScale[newIndex];
+        }
+    } else if (note.length > 1 && note[1] === `${flat}` || note.includes(`${dblFlat}`)) {
+        if (distanceToMove === -1 && chromaticScale[newIndex].length === 2) {
+            enharmonicEquivalent = chromaticScale[newIndex][0];
+        } else if (chromaticScale[newIndex].length === 2) {
+            enharmonicEquivalent = chromaticScale[newIndex][1];
+        } else {
+            enharmonicEquivalent = chromaticScale[newIndex];
+        }
+    }
+    return enharmonicEquivalent;
+  }
 
   handleAlterChord (e) {
     let type = e.target.title
@@ -965,6 +1032,9 @@ class App extends React.Component {
             scaleUnfocusedLabel={this.state.scaleUnfocusedLabel}
             scaleVisibleLabel={this.state.scaleVisibleLabel}
             selNote={this.state.selNote}
+            render={this.state.renderView}
+            chordDegButtonClass={this.state.chordDegButtonClass}
+            handleChordDegrees={this.handleChordDegrees}
             />
         </div>
         <div className="middle">
@@ -1007,6 +1077,11 @@ class App extends React.Component {
                   chord2ObjKey={this.state.chord2ObjKey}
                   calcChord1={this.state.calcChord1}
                   calcChord2={this.state.calcChord2}
+                  noteRefs1={this.state.noteRefs1}
+                  noteRefs2={this.state.noteRefs2}
+                  chordType1={this.state.chordType1}
+                  chordType2={this.state.chordType2}
+                  enharmonic={this.enharmonic}
                 />
               </div>
             </div>
@@ -1103,6 +1178,10 @@ class App extends React.Component {
                 chordTypes={this.state.chordTypes}
                 noteRefs={this.state.noteRefs}
                 getChord={this.getChord}
+                clear={this.clear}
+                chord={this.state.calcChord1}
+                handleChordFocus={this.handleChordFocus}
+                chordFocus={this.state.chordFocus}
                 />
               <ChordCalculator
                 handleRootChange={this.handleRootChange}
@@ -1115,6 +1194,10 @@ class App extends React.Component {
                 chordTypes={this.state.chordTypes}
                 noteRefs={this.state.noteRefs}
                 getChord={this.getChord}
+                clear={this.clear}
+                chord={this.state.calcChord2}
+                handleChordFocus={this.handleChordFocus}
+                chordFocus={this.state.chordFocus}
               />
             </div>
           :null

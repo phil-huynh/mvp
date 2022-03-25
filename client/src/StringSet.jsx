@@ -1,7 +1,7 @@
 import React from 'react';
 import String from './String.jsx';
 
-var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, scaleChord1, scaleChord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, render, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey, calcChord1, calcChord2})  => {
+var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, scaleChord1, scaleChord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, render, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey, calcChord1, calcChord2, noteRefs1, noteRefs2, enharmonic, chordType1, chordType2})  => {
   var list;
   var neckClass;
   var firstString;
@@ -54,6 +54,11 @@ var StringSet = ({strings, stringsMirror, allStrings, stringsLeft, scale, scaleC
           chord2ObjKey={chord2ObjKey}
           calcChord1={calcChord1}
           calcChord2={calcChord2}
+          noteRefs1={noteRefs1}
+          noteRefs2={noteRefs2}
+          chordType1={chordType1}
+          chordType2={chordType2}
+          enharmonic={enharmonic}
         />
       )): null}
     </div>

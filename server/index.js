@@ -31,9 +31,7 @@ app.get('/scales', (req, res) => {
   } else {
     objKey = scale;
   }
-  // console.log(Music.scales[key][objKey])
   res.json(Music.scales[key][objKey])
-
 })
 
 app.get('/strings', (req, res) => {
@@ -53,6 +51,7 @@ app.get('/degrees', (req, res) => {
 })
 
 app.get('/chord', (req, res) => {
+  let obj = {};
   let root = req.query.root;
   let type = req.query.type;
   let noteRefs = Music.noteRefs[root].degsToNotes;
@@ -62,9 +61,12 @@ app.get('/chord', (req, res) => {
     let note = noteRefs[degs[i]];
     chordNotes.push(note)
   }
-  console.log(chordNotes)
-  res.json(chordNotes)
+  obj.chordNotes = chordNotes
+  obj.noteRefs = Music.noteRefs[root]
+  obj.type = Music.chordTypes[type]
+  res.json(obj)
 })
+
 
 app.get('/choices', (req, res) => {
   res.json(Music.scaleChoices)

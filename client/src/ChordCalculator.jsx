@@ -1,6 +1,6 @@
 import React from 'react'
 
-var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, whichCalculator, chordTypes, noteRefs, chordDegrees, chordDegreesUpper, getChord}) => {
+var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, whichCalculator, chordTypes, noteRefs, chordDegrees, chordDegreesUpper, getChord, clear, chord, handleChordFocus, chordFocus}) => {
 
   const sharp = '#';
   const flat = '\u266D';
@@ -18,40 +18,76 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
   const rowFive = ['m9','m7(11)','m7(13)','m7(9, 11)','m7(9, 13)','m7(11, 13)','m7(9, 11, 13)','maj13','Whole/Half Scale']
   const rowSix = ['7','m7',`m7(${flat}5)`,`7(${sharp}5)`,`7(${flat}5)`,'7(9)',`7(${sharp}11)`,'7(13)','Half/Whole Scale']
   const rowSeven = [`7(${flat}9)`, `7(${sharp}9)`, `7(9, ${sharp}11)`, `7(9, ${flat}13)`, `7(${flat}9, ${flat}13)`,'7(9, 13)',`7(9, ${sharp}11, 13)`,`7(9, ${sharp}11, ${flat}13)`,'Altered Scale']
-  const rowEight = ['maj Pentatonic','min Pentatonic','Domininant Pentatonic',`Dominant${sharp}4 Pentatonic`,`maj${sharp}4 Pentatonic`,'Altered Pentatonic','m(maj7) Pentatonic','Japanese Pentatonic','Egyptian Pentatonic']
+  const rowEight = ['maj Pentatonic','min Pentatonic','Dominant Pentatonic',`Dominant ${sharp}4 Pentatonic`,`maj ${sharp}4 Pentatonic`,'Altered Pentatonic','m(maj7) Pentatonic','Japanese Pentatonic','Egyptian Pentatonic']
+
+  var chordNameClass = `calc_chord_name${whichCalculator}`
+  var chordNoteClass = `calc_notes${whichCalculator}`
+  var clearClass = 'clear_button'
+
+  if (root || voicing) {
+    chordNameClass += ` calc_header_on_${whichCalculator}`
+    clearClass += ' clear_on'
+  }
+  if(chord.length > 0) {
+    chordNoteClass += ` calc_header_on_${whichCalculator}`
+  }
+
 
 
 
   return (
     <div className="calculatorContainer">
       <div className="calc_header_container">
-        <div className="types_row row_one">
-          <div className="type_choice_container">
-            <div className="types_col col_one"></div>
+        <div className="calc_chord_name_container type_choice_container">
+          <div className={chordNameClass}>{`${root} ${voicing}`}</div>
+        </div>
+        <div className="calc_notes_container type_choice_container">
+          <div
+            className={chordNoteClass}
+          >
+            {chord.map((note) => (
+              <span className="calc_note">{note}</span>
+            ))}
           </div>
-          <div className="type_choice_container">
-            <div className="types_col col_two"></div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_three"></div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_four"></div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_five"></div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_six"></div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_seven"></div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_eight"></div>
-          </div>
-          <div className="type_choice_container">
-            <div className="types_col col_nine"></div>
+        </div>
+        <div className="type_choice_container">
+          <div className="types_col col_three"></div>
+        </div>
+        <div className="type_choice_container">
+          {chordFocus === 'Neutral' ?
+            <div
+              className="types_col"
+              onClick={()=>{handleChordFocus(`Focus ${whichCalculator}`)}}
+            >
+              Focus
+            </div>
+            :
+            chordFocus === `Focus ${whichCalculator}` ?
+              <div
+                className="types_col calc_toggle_on"
+                onClick={()=>{handleChordFocus('Neutral')}}
+              >
+                Focused
+              </div>
+            :
+            chordFocus !== 'Neutral' && chordFocus !== `Focus ${whichCalculator}` ?
+              <div
+                className="types_col"
+                onClick={()=>{handleChordFocus(`Focus ${whichCalculator}`)}}
+              >
+                Unfocused
+              </div>
+            :null
+          }
+        </div>
+        <div className="type_choice_container">
+          <div className="types_col col_five"></div>
+        </div>
+        <div className="clear_button_container">
+          <div
+            className={clearClass}
+            onClick={()=>{clear(whichCalculator)}}
+          >clear
           </div>
         </div>
       </div>
