@@ -80,7 +80,7 @@ class App extends React.Component {
       keyCenter2: {},
       labelType: 'Note Names',
       mapChordsToggle: 'navOption',
-      mapScalesToggle: 'navOption toggle_on',
+      mapScalesToggle: 'navOption',
       middle: 'inner_middle',
       moreSeventhsButton: 'Show 7th Chords',
       noteNameToggle: 'toggle_on',
