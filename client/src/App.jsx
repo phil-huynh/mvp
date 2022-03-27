@@ -75,18 +75,21 @@ class App extends React.Component {
       findStructuresToggle: 'navOption',
       hideScale: 'Hide Scale',
       hideScaleButton: 'hide scale',
+      highestFret: 17,
       instrument: 'Guitar',
       keyCenter: {},
       keyCenter2: {},
       labelType: 'Note Names',
+      lowestFret: 0,
       mapChordsToggle: 'navOption',
       mapScalesToggle: 'navOption',
       middle: 'inner_middle',
       moreSeventhsButton: 'Show 7th Chords',
+      neckWindowMode: 'none',
       noteNameToggle: 'toggle_on',
       noteRefs1: {},
       noteRefs2: {},
-      renderView: 'Welcome',
+      renderView: 'Map Scales',
       resetVoicingCount: 0,
       root1: '',
       root2: '',
@@ -120,7 +123,7 @@ class App extends React.Component {
       showTonicMenu: false,
       showTutorial: false,
       showViewMenu: false,
-      showWelcome: true,
+      showWelcome: false,
       singleOrCompareButton: 'Single Chord',
       solfege: {},
       solfegeToggle: 'toggle_off',
@@ -134,6 +137,7 @@ class App extends React.Component {
       view: 'Traditional View',
       voicing1: '',
       voicing2: '',
+      windowCycle: 'start'
 
     }
     this.clear = this.clear.bind(this);
@@ -178,6 +182,11 @@ class App extends React.Component {
     this.resetChords = this.resetChords.bind(this)
     this.selectChord = this.selectChord.bind(this);
     this.selectChord2 = this.selectChord2.bind(this);
+    this.setStart = this.setStart.bind(this);
+    this.setEnd = this.setEnd.bind(this);
+    this.setNeckWindowMode = this.setNeckWindowMode.bind(this);
+    this.setWholeNeck = this.setWholeNeck.bind(this);
+    this.setWindowCycle = this.setWindowCycle.bind(this);
     this.setTones = this.setTones.bind(this);
     this.setTones2 = this.setTones2.bind(this);
     this.updateShared = this.updateShared.bind(this)
@@ -958,6 +967,8 @@ class App extends React.Component {
         chordFocus: 'Neutral',
         selNote: '',
         resetVoicingCount: 0,
+        lowestFret: 0,
+        highestFret: 17
       })
     }
     if (this.state.renderView ==='Map Chords') {
@@ -968,6 +979,8 @@ class App extends React.Component {
         displayChordDegrees: false,
         chordDegButtonClass: 'chordDegButton',
         chordFocus: 'Neutral',
+        lowestFret: 0,
+        highestFret: 17
       })
     }
   }
@@ -1068,6 +1081,61 @@ class App extends React.Component {
     }
   }
 
+  setStart(fret) {
+    let end = this.state.highestFret
+    if (end < fret) {
+      this.setState({
+        lowestFret: end,
+        highestFret: fret
+      })
+    }
+    if (fret <= end) {
+      this.setState ({
+        lowestFret: fret
+      })
+    }
+  }
+
+  setEnd(fret) {
+    let start = this.state.lowestFret
+    if (start > fret) {
+      this.setState({
+        lowestFret: fret,
+        highestFret: start
+      })
+    }
+    if (start <= fret) {
+      this.setState ({
+        highestFret: fret
+      })
+    }
+  }
+
+  setNeckWindowMode (choice) {
+    let current = this.state.neckWindowMode
+    choice !== current ?
+    this.setState({
+      neckWindowMode: choice
+    })
+    :
+    this.setState({
+      neckWindowMode: 'none'
+    })
+  }
+
+  setWindowCycle(stage) {
+    this.setState({
+      windowCycle: stage
+    })
+  }
+
+  setWholeNeck () {
+    this.setState({
+      lowestFret:0,
+      highestFret:17,
+      neckWindowMode: 'none'
+    })
+  }
 
   setTones (tones, key) {
     this.setState({
@@ -1161,6 +1229,16 @@ class App extends React.Component {
             voicing2={this.state.voicing2}
             displayChordDegrees={this.state.displayChordDegrees}
             chordFocus={this.state.chordFocus}
+            handleNeckNotes={this.handleNeckNotes}
+            solfegeToggle={this.state.solfegeToggle}
+            scaleDegreeToggle={this.state.scaleDegreeToggle}
+            noteNameToggle={this.state.noteNameToggle}
+            setWholeNeck={this.setWholeNeck}
+            setNeckWindowMode={this.setNeckWindowMode}
+            neckWindowMode={this.state.neckWindowMode}
+            start={this.state.lowestFret}
+            end={this.state.highestFret}
+            setWindowCycle={this.setWindowCycle}
             />
         </div>
         <div className="middle">
@@ -1170,6 +1248,11 @@ class App extends React.Component {
               <FretGuide
                 name ={'guideContainerUpper'}
                 view={this.state.view}
+                neckWindowMode={this.state.neckWindowMode}
+                setStart={this.setStart}
+                setEnd={this.setEnd}
+                windowCycle={this.state.windowCycle}
+                setWindowCycle={this.setWindowCycle}
               />: null
             }
             <div className={`${this.state.middle}`}>
@@ -1208,6 +1291,8 @@ class App extends React.Component {
                   chordType1={this.state.chordType1}
                   chordType2={this.state.chordType2}
                   enharmonic={this.enharmonic}
+                  lowestFret={this.state.lowestFret}
+                  highestFret={this.state.highestFret}
                 />
               </div>
             </div>
@@ -1215,6 +1300,11 @@ class App extends React.Component {
               <FretGuide
                 name ={'guideContainerLower'}
                 view={this.state.view}
+                neckWindowMode={this.state.neckWindowMode}
+                setStart={this.setStart}
+                setEnd={this.setEnd}
+                windowCycle={this.state.windowCycle}
+                setWindowCycle={this.setWindowCycle}
               />: null
             }
           </div>

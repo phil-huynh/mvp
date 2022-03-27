@@ -66,22 +66,13 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
             )): null}
           </div>
         </div>
-          <div className="labels_and_voicings">
-            <LabelMenu
-              handleNeckNotes={handleNeckNotes}
-              name={'labelMenu'}
-              noteNameToggle={noteNameToggle}
-              scaleDegreeToggle={scaleDegreeToggle}
-              solfegeToggle={solfegeToggle}
-            />
-          <div className="defaultChordLabel_container">
-            <span
-              className="defaultChordLabel"
-            >
-              <span>{`Default Voicing : `}</span>
-              <span className="defaultVoicing" onClick={(e) => handleSevenths(e)}>{`${defaultType}`}</span>
-            </span>
-          </div>
+        <div className="defaultChordLabel_container">
+          <span
+            className="defaultChordLabel"
+          >
+            <span>{`Default Voicing : `}</span>
+            <span className="defaultVoicing" onClick={(e) => handleSevenths(e)}>{`${defaultType}`}</span>
+          </span>
         </div>
         {chordOneSelected ?
           <div className="chordDegree_container">
