@@ -89,7 +89,7 @@ class App extends React.Component {
       noteNameToggle: 'toggle_on',
       noteRefs1: {},
       noteRefs2: {},
-      renderView: 'Map Scales',
+      renderView: 'Welcome',
       resetVoicingCount: 0,
       root1: '',
       root2: '',
@@ -123,7 +123,7 @@ class App extends React.Component {
       showTonicMenu: false,
       showTutorial: false,
       showViewMenu: false,
-      showWelcome: false,
+      showWelcome: true,
       singleOrCompareButton: 'Single Chord',
       solfege: {},
       solfegeToggle: 'toggle_off',
@@ -134,6 +134,7 @@ class App extends React.Component {
       tonic2: '',
       tuning: ' E A D G B E ',
       tutorialToggle: 'navOption',
+      useCapo: false,
       view: 'Traditional View',
       voicing1: '',
       voicing2: '',
@@ -184,6 +185,7 @@ class App extends React.Component {
     this.selectChord2 = this.selectChord2.bind(this);
     this.setStart = this.setStart.bind(this);
     this.setEnd = this.setEnd.bind(this);
+    this.setCapo = this.setCapo.bind(this);
     this.setNeckWindowMode = this.setNeckWindowMode.bind(this);
     this.setWholeNeck = this.setWholeNeck.bind(this);
     this.setWindowCycle = this.setWindowCycle.bind(this);
@@ -901,7 +903,12 @@ class App extends React.Component {
     this.setState({
       view: view,
       middle: middle,
-      stringbox: stringbox
+      stringbox: stringbox,
+      lowestFret: 0,
+      highestFret: 17,
+      neckWindowMode: 'none',
+      useCapo: false
+
     })
   }
 
@@ -1082,33 +1089,28 @@ class App extends React.Component {
   }
 
   setStart(fret) {
-    let end = this.state.highestFret
-    if (end < fret) {
-      this.setState({
-        lowestFret: end,
-        highestFret: fret
-      })
-    }
-    if (fret <= end) {
-      this.setState ({
-        lowestFret: fret
-      })
-    }
+    this.setState ({
+      lowestFret: fret
+    })
   }
 
   setEnd(fret) {
-    let start = this.state.lowestFret
-    if (start > fret) {
-      this.setState({
-        lowestFret: fret,
-        highestFret: start
-      })
+    this.setState ({
+      highestFret: fret
+    })
+  }
+
+  setCapo(fret) {
+    if(this.state.view === 'Traditional View' || this.state.view === 'Mirror View') {
+      this.setStart(fret)
     }
-    if (start <= fret) {
-      this.setState ({
-        highestFret: fret
-      })
+    if (this.state.view === 'Lefty Traditional View' || this.state.view === 'Lefty Mirror View') {
+      this.setEnd(fret)
     }
+    this.setState({
+      useCapo: true,
+      neckWindowMode: 'none'
+    })
   }
 
   setNeckWindowMode (choice) {
@@ -1127,6 +1129,9 @@ class App extends React.Component {
     this.setState({
       windowCycle: stage
     })
+    if (stage === 'off') {
+      this.setNeckWindowMode('none')
+    }
   }
 
   setWholeNeck () {
@@ -1251,6 +1256,7 @@ class App extends React.Component {
                 neckWindowMode={this.state.neckWindowMode}
                 setStart={this.setStart}
                 setEnd={this.setEnd}
+                setCapo={this.setCapo}
                 windowCycle={this.state.windowCycle}
                 setWindowCycle={this.setWindowCycle}
               />: null
@@ -1293,6 +1299,7 @@ class App extends React.Component {
                   enharmonic={this.enharmonic}
                   lowestFret={this.state.lowestFret}
                   highestFret={this.state.highestFret}
+                  useCapo={this.state.useCapo}
                 />
               </div>
             </div>
@@ -1303,6 +1310,7 @@ class App extends React.Component {
                 neckWindowMode={this.state.neckWindowMode}
                 setStart={this.setStart}
                 setEnd={this.setEnd}
+                setCapo={this.setCapo}
                 windowCycle={this.state.windowCycle}
                 setWindowCycle={this.setWindowCycle}
               />: null

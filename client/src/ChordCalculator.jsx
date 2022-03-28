@@ -14,9 +14,9 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
   const rowOne = ['','','','','','','','','']
   const rowTwo = ['maj','min',`${dim}`,'+',`maj(${flat}5)`,'sus2','sus4','7sus4','maj7(sus4)']
   const rowThree = ['6','m6',`${dim}7`,`7(${flat}13)`,`add${sharp}11`,'add9',`maj7(9, ${sharp}11)`,'maj7(9, 13)',`maj7(${sharp}11, 13)`]
-  const rowFour = ['maj7','m(maj7)',`${dim}(maj7)`,'+(maj7)',`maj7(${flat}5)`,'maj9',`maj7(${sharp}11)`,'maj7(13)','Whole Tone Scale']
-  const rowFive = ['m9','m7(11)','m7(13)','m7(9, 11)','m7(9, 13)','m7(11, 13)','m7(9, 11, 13)','maj13','Whole/Half Scale']
-  const rowSix = ['7','m7',`m7(${flat}5)`,`7(${sharp}5)`,`7(${flat}5)`,'7(9)',`7(${sharp}11)`,'7(13)','Half/Whole Scale']
+  const rowFour = ['maj7','m(maj7)',`${dim}(maj7)`,'+(maj7)',`maj7(${flat}5)`,'maj9',`maj7(${sharp}11)`,'maj7(13)','maj13']
+  const rowFive = ['7','m7',`m7(${flat}5)`,`7(${sharp}5)`,`7(${flat}5)`,'7(9)',`7(${sharp}11)`,'7(13)','Whole Tone Scale']
+  const rowSix = ['m9','m7(11)','m7(13)','m7(9, 11)','m7(9, 13)','m7(11, 13)','m7(9, 11, 13)','Half/Whole Scale','Whole/Half Scale']
   const rowSeven = [`7(${flat}9)`, `7(${sharp}9)`, `7(9, ${sharp}11)`, `7(9, ${flat}13)`, `7(${flat}9, ${flat}13)`,'7(9, 13)',`7(9, ${sharp}11, 13)`,`7(9, ${sharp}11, ${flat}13)`,'Altered Scale']
   const rowEight = ['maj Pentatonic','min Pentatonic','Dominant Pentatonic',`Dominant ${sharp}4 Pentatonic`,`maj ${sharp}4 Pentatonic`,'Altered Pentatonic','m(maj7) Pentatonic','Japanese Pentatonic','Egyptian Pentatonic']
 

@@ -8,6 +8,7 @@ import { CgArrowsHAlt } from 'react-icons/cg'
 
 var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote, render, chordDegButtonClass, handleChordDegrees, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, handleNeckNotes, noteNameToggle, scaleDegreeToggle, solfegeToggle, setWholeNeck, setNeckWindowMode, neckWindowMode, start, end, setWindowCycle}) => {
 
+  let lefty = (view === 'Lefty Traditional View' || view === 'Lefty Mirror View')
   var resetClass = "reset_button resetAll"
 
   if ((render === 'Map Scales' && (selNote || chordOneSelected || resetVoicingCount)) || (render === 'Map Chords' && (root1 || root2 || voicing1 || voicing2 || displayChordDegrees || chordFocus !== 'Neutral'))) {
@@ -18,11 +19,13 @@ var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow
   var toClass;
   var windowClass;
   var resetIconClass;
+  var capoClass;
   var iconClass = 'range_option_icons'
 
   neckWindowMode === 'from start' ? fromClass = iconClass + ' icon_toggle' : fromClass = iconClass
   neckWindowMode === 'to end' ? toClass = iconClass + ' icon_toggle' : toClass = iconClass
   neckWindowMode === 'window' ? windowClass = iconClass + ' icon_toggle' : windowClass = iconClass
+  neckWindowMode === 'capo' ? capoClass = iconClass + ' capo_toggle capo' : capoClass = iconClass + ' capo'
   start !== 0 || end !== 17 ? resetIconClass = iconClass + ' neck_window_reset' : resetIconClass = iconClass
 
 
@@ -83,19 +86,39 @@ var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow
       <div className="note_range_opts_container">
         <div className="range_option_icon_row">
           <div className={fromClass}>
-            <BiArrowFromLeft onClick={()=>{setNeckWindowMode('from start')}} size={30}/>
+            <BiArrowFromLeft
+              size={26}
+              onClick={()=>{setNeckWindowMode('from start')}}
+            />
           </div>
           <div className={resetIconClass}>
-            <CgArrowsHAlt onClick={()=>{setWholeNeck()}} size={30}/>
+            <CgArrowsHAlt
+              size={26}
+              onClick={()=>{setWholeNeck()}}
+            />
           </div>
         </div>
         <div className="range_option_icon_row">
           <div className={toClass}>
-            <BiArrowFromRight onClick={()=>{setNeckWindowMode('to end')}} size={30}/>
+            <BiArrowFromRight
+              size={26}
+              onClick={()=>{setNeckWindowMode('to end')}}
+            />
           </div>
           <div className={windowClass}>
-            <CgArrowsShrinkH onClick={()=>{setNeckWindowMode('window'); setWindowCycle('start')}} size={30}/>
+            <CgArrowsShrinkH
+              size={26}
+              onClick={()=>{setNeckWindowMode('window'); lefty ? setWindowCycle('end') : setWindowCycle('start')}}
+            />
           </div>
+        </div>
+      </div>
+      <div className="capo_container">
+        <div
+        className={capoClass}
+        onClick={()=>{setNeckWindowMode('capo')}}
+        >
+          Capo
         </div>
       </div>
       {sharedNotes.length > 0 ?

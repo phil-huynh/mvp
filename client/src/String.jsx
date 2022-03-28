@@ -7,7 +7,7 @@ const dblFlat = '\u{1D12B}';
 const natural = '\u266E'
 const dim = '\u00B0'
 
-var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, firstString, lastString, render, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey, calcChord1, calcChord2, noteRefs1, noteRefs2, chordType1, chordType2, enharmonic, lowestFret, highestFret }) => {
+var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, firstString, lastString, render, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey, calcChord1, calcChord2, noteRefs1, noteRefs2, chordType1, chordType2, enharmonic, lowestFret, highestFret, useCapo }) => {
   var notes=[];
   var currentString;
   var name;
@@ -24,7 +24,10 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
   var labelContainer2;
   var fretClass;
   var chord;
-  var chord2
+  var chord2;
+  var capo;
+  var capoClass;
+  var lefty = (view === 'Lefty Traditional View' || view === 'Lefty Mirror View')
 
   var start = lowestFret
   var end = highestFret
@@ -40,7 +43,6 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
   } else {
     fretClass = 'fret'
   }
-
 
 
   if(render === 'Map Scales' || render === 'Welcome' || render === 'Tutorial') {
@@ -115,6 +117,7 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
     openClass = 'open'
     openNoteClass = 'openNote'
     noteClass = 'note'
+    capoClass = 'capo_neck_fret'
   }
 
   if (view === 'Lefty Mirror View' || view === 'Lefty Traditional View') {
@@ -123,6 +126,7 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
     openClass = 'open-left'
     openNoteClass = 'openNoteLeft'
     noteClass = 'noteLeft'
+    capoClass = 'capo_neck_fret_lefty'
   }
 
   if (currentString && (render === 'Map Scales' || render === 'Welcome' || render ==="Tutorial")) {
@@ -394,10 +398,24 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
           <span className={`${openClass}`}>
             </span>
           :
+          render ==='Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord.includes(note) && chord2.includes(note) && displayChordDegrees && chordFocus === 'Focus 1' ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {altLabelContainer[chordKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render ==='Map Chords' && i >= start && i <= end && chord.includes(note) && chord2.includes(note) && displayChordDegrees && chordFocus === 'Focus 1' ?
           <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} sharedNeckNote`}>
                 {altLabelContainer[chordKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render ==='Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord.includes(note) && chord2.includes(note) && displayChordDegrees && chordFocus === 'Focus 2' ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {altLabelContainer[chordKey2[note]]}
               </span>_________________________________________________________________________________________________________________
             </span>
           :
@@ -408,10 +426,24 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Scales' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord.includes(note) && chord2.includes(note) && displayChordDegrees ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {altLabelContainer[chordKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Scales' && i >= start && i <= end && chord.includes(note) && chord2.includes(note) && displayChordDegrees ?
           <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} sharedNeckNote`}>
                 {altLabelContainer[chordKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && Array.isArray(note) && (chord.includes(note[0]) && chord2.includes(note[1])) && displayChordDegrees && chordFocus === 'Focus 1' ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {altLabelContainer[chordKey[note[0]]]}
               </span>_________________________________________________________________________________________________________________
             </span>
           :
@@ -422,10 +454,24 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && Array.isArray(note) && (chord.includes(note[0]) && chord2.includes(note[1])) && chordFocus === 'Focus 1' ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {labelContainer[keyKey[note[0]]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Chords' && i >= start && i <= end && Array.isArray(note) && (chord.includes(note[0]) && chord2.includes(note[1])) && chordFocus === 'Focus 1' ?
           <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} sharedNeckNote`}>
                 {labelContainer[keyKey[note[0]]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && Array.isArray(note) && (chord.includes(note[0]) && chord2.includes(note[1])) && displayChordDegrees && chordFocus === 'Focus 2' ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+              {altLabelContainer[chordKey2[note[1]]]}
               </span>_________________________________________________________________________________________________________________
             </span>
           :
@@ -436,10 +482,26 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && Array.isArray(note) && (chord.includes(note[0]) && chord2.includes(note[1])) && chordFocus === 'Focus 2' ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {labelContainer2[keyKey2[note[1]]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Chords' && i >= start && i <= end && Array.isArray(note) && (chord.includes(note[0]) && chord2.includes(note[1])) && chordFocus === 'Focus 2' ?
           <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} sharedNeckNote`}>
                 {labelContainer2[keyKey2[note[1]]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && Array.isArray(note) && (chord.includes(note[0]) && chord2.includes(note[1])) ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote doubleName`}>
+                <span className="fromOne">{labelContainer[keyKey[note[0]]]}</span>
+                <span className="divider">|</span>
+                <span className="fromTwo">{labelContainer2[keyKey2[note[1]]]}</span>
               </span>_________________________________________________________________________________________________________________
             </span>
           :
@@ -452,10 +514,24 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && Array.isArray(note) && (chord.includes(note[1]) && chord2.includes(note[0])) && displayChordDegrees && chordFocus === 'Focus 1' ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {altLabelContainer[chordKey[note[1]]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Chords' && i >= start && i <= end && Array.isArray(note) && (chord.includes(note[1]) && chord2.includes(note[0])) && displayChordDegrees && chordFocus === 'Focus 1' ?
           <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} sharedNeckNote`}>
                 {altLabelContainer[chordKey[note[1]]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && Array.isArray(note) && (chord.includes(note[1]) && chord2.includes(note[0])) && chordFocus === 'Focus 1' ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {labelContainer[keyKey[note[1]]]}
               </span>_________________________________________________________________________________________________________________
             </span>
           :
@@ -466,6 +542,13 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && Array.isArray(note) && (chord.includes(note[1]) && chord2.includes(note[0])) && displayChordDegrees && chordFocus === 'Focus 2' ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {altLabelContainer[chordKey2[note[0]]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Chords' && i >= start && i <= end && Array.isArray(note) && (chord.includes(note[1]) && chord2.includes(note[0])) && displayChordDegrees && chordFocus === 'Focus 2' ?
           <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} sharedNeckNote`}>
@@ -473,10 +556,26 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && Array.isArray(note) && (chord.includes(note[1]) && chord2.includes(note[0])) && chordFocus === 'Focus 2' ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {labelContainer2[keyKey2[note[0]]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Chords' && i >= start && i <= end && Array.isArray(note) && (chord.includes(note[1]) && chord2.includes(note[0])) && chordFocus === 'Focus 2' ?
           <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} sharedNeckNote`}>
                 {labelContainer2[keyKey2[note[0]]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && Array.isArray(note) && (chord.includes(note[1]) && chord2.includes(note[0])) ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote doubleName`}>
+                <span className="fromOne">{labelContainer[keyKey[note[1]]]}</span>
+                <span className="divider">|</span>
+                <span className="fromTwo">{labelContainer2[keyKey2[note[0]]]}</span>
               </span>_________________________________________________________________________________________________________________
             </span>
           :
@@ -489,6 +588,13 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          chord.includes(note) && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord2.includes(note) ?
+          <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} sharedNeckNote`}>
+                {labelContainer[keyKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           chord.includes(note) && i >= start && i <= end && chord2.includes(note) ?
           <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} sharedNeckNote`}>
@@ -496,8 +602,22 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord.includes(note) && displayChordDegrees && (chordFocus === 'Focus 1' || chord2.length === 0 ) ?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selectedNote`}>
+                {altLabelContainer[chordKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Chords' && i >= start && i <= end && chord.includes(note) && displayChordDegrees && (chordFocus === 'Focus 1' || chord2.length === 0 ) ?
             <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selectedNote`}>
+                {altLabelContainer[chordKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render === 'Map Scales' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord.includes(note) && displayChordDegrees && (chordFocus === 'Focus 1' || !chordTwoSelected ) ?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} selectedNote`}>
                 {altLabelContainer[chordKey[note]]}
               </span>_________________________________________________________________________________________________________________
@@ -510,9 +630,23 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          chord.includes(note) && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chordFocus === 'Focus 2'  ?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selectedNote unfocus`}>
+                {labelContainer[keyKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           chord.includes(note) && i >= start && i <= end && chordFocus === 'Focus 2'  ?
             <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} selectedNote unfocus`}>
+                {labelContainer[keyKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          chord.includes(note) && (useCapo && ((!lefty && i === start) || (lefty && i === end))) ?
+            <span className={`${fretClass}  ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selectedNote`}>
                 {labelContainer[keyKey[note]]}
               </span>_________________________________________________________________________________________________________________
             </span>
@@ -524,10 +658,24 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord2.includes(note) && displayChordDegrees && chordFocus === 'Focus 2' ?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selectedNote2`}>
+                {altLabelContainer[chordKey2[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Chords' && i >= start && i <= end && chord2.includes(note) && displayChordDegrees && chordFocus === 'Focus 2' ?
             <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} selectedNote2`}>
                 {altLabelContainer[chordKey2[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render === 'Map Scales' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord2.includes(note) && displayChordDegrees && chordFocus === 'Focus 2' ?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selectedNote2`}>
+                {altLabelContainer[chordKey[note]]}
               </span>_________________________________________________________________________________________________________________
             </span>
           :
@@ -538,10 +686,24 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord2.includes(note) && chordFocus === 'Focus 1' ?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selectedNote2 unfocus`}>
+                {labelContainer2[keyKey2[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Chords' && i >= start && i <= end && chord2.includes(note) && chordFocus === 'Focus 1' ?
             <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} selectedNote2 unfocus`}>
                 {labelContainer2[keyKey2[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render === 'Map Scales' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord2.includes(note) && chordFocus === 'Focus 1' ?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selectedNote2 unfocus`}>
+                {labelContainer[keyKey[note]]}
               </span>_________________________________________________________________________________________________________________
             </span>
           :
@@ -552,6 +714,13 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Chords' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord2.includes(note) ?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selectedNote2`}>
+                {labelContainer2[keyKey2[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Chords' && i >= start && i <= end && chord2.includes(note) ?
             <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} selectedNote2`}>
@@ -559,9 +728,23 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Scales' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && chord2.includes(note) ?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selectedNote2`}>
+                {labelContainer[keyKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Scales' && i >= start && i <= end && chord2.includes(note) ?
             <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass} selectedNote2`}>
+                {labelContainer[keyKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render === 'Map Scales' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && scale.includes(note) && !chordOneSelected && !chordTwoSelected && selNote && selNote === note ?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} selNoteNeckToggle`}>
                 {labelContainer[keyKey[note]]}
               </span>_________________________________________________________________________________________________________________
             </span>
@@ -573,9 +756,23 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
               </span>_________________________________________________________________________________________________________________
             </span>
           :
+          render === 'Map Scales' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && scale.includes(note) && !(chordOneSelected && chordTwoSelected) && hideScale === 'Show Scale'?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass}`}>
+                {labelContainer[keyKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
           render === 'Map Scales' && i >= start && i <= end && scale.includes(note) && !(chordOneSelected && chordTwoSelected) && hideScale === 'Show Scale'?
             <span className={`${fretClass}`}>_________________________________________________________________________________________________________________
               <span className={`${noteClass}`}>
+                {labelContainer[keyKey[note]]}
+              </span>_________________________________________________________________________________________________________________
+            </span>
+          :
+          render === 'Map Scales' && (useCapo && ((!lefty && i === start) || (lefty && i === end))) && scale.includes(note) && !(chordOneSelected && chordTwoSelected) && hideScale === 'Unfocus Scale'?
+            <span className={`${fretClass} ${capoClass}`}>_________________________________________________________________________________________________________________
+              <span className={`${noteClass} unfocus`}>
                 {labelContainer[keyKey[note]]}
               </span>_________________________________________________________________________________________________________________
             </span>
@@ -586,8 +783,11 @@ var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2
                 {labelContainer[keyKey[note]]}
               </span>_________________________________________________________________________________________________________________
             </span>
+          : useCapo && ((!lefty && i === start) || (lefty && i === end)) ?
+            <span className={`${fretClass} ${capoClass}`}>___________________________________________________________________________________________________________________________________________________________________________________________________________________________</span>
           :
             <span className={`${fretClass}`}>___________________________________________________________________________________________________________________________________________________________________________________________________________________________</span>
+
         )): null}
       </div>
   )

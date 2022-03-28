@@ -876,7 +876,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     addVoicing(['one', 'two', 'three', 'sharpFour', 'flatSeven'], 'lydianDomninantPentatonic', `  Dominant ${sharp}4 Pentatonic`, null, 'Lydian Dominant Pentatonic', 'Lydian Dominant Pentatonic');
     addVoicing(['one', 'two', 'three', 'sharpFour', 'six'], 'majSharp4Pentatonic', `  Major ${sharp}4 Pentatonic`, null, `Major ${sharp}4 Pentatonic`, `maj${sharp}4 Pentatonic`);
     addVoicing(['one', 'flatTwo', 'three', 'five', 'flatSeven'], 'alteredPentatonic', `  Altered Pentatonic`, null, `Altered Pentatonic`, `Altered Pentatonic`);
-    addVoicing(['one', 'flatThree', 'four', 'five', 'seven'], 'minorMaj7Pentatonic', '  Minor Major 7 Pentatonic', null, 'Minor Major 7 Pentatonic', 'm(maj7 Pentatonic');
+    addVoicing(['one', 'flatThree', 'four', 'five', 'seven'], 'minorMaj7Pentatonic', '  Minor Major 7 Pentatonic', null, 'Minor Major 7 Pentatonic', 'm(maj7) Pentatonic');
     addVoicing(['one', 'two', 'four', 'five', 'flatSeven'], 'egyptianPentatonic', '  Egyptian Pentatonic', null, 'Egyptian Pentatonic', '');
     addVoicing(['one', 'flatTwo', 'four', 'five', 'flatSix'], 'japanesePentatonic', '  Japanese Pentatonic', null, 'Japanese Pentatonic', '');
 
