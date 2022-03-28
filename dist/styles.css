@@ -251,23 +251,22 @@ align-content: center;
   margin-bottom: 1%;
 }
 
-.icon_toggle {
-  filter: drop-shadow();
-  color: #FFFFFF;
-  -webkit-box-shadow: 2px 2px 20px 5px #49ff18, inset 0 0 2.6rem #49ff18;
-  box-shadow: 2px 2px 20px 5px #49ff18, inset 0 0 2.6rem #49ff18;
-  text-shadow: 0 0 5px #49ff18,
-              0 0 10px #49ff18,
-              0 0 15px #49ff18,
-              0 0 20px #49ff18,
-              0 0 25px #49ff18,
-              0 0 30px #49ff18,
-              0 0 40px #49ff18,
-              0 0 50px #49ff18,
+.range_option_icons:hover {
+  -webkit-box-shadow: 0px 0px 15px 8px white, inset 0 0 2.6rem white;
+  box-shadow: 0px 0px 15px 8px white, inset 0 0 2.6rem white;
+  text-shadow: 0 0 5px white,
+              0 0 10px white,
+              0 0 15px white,
+              0 0 20px white,
+              0 0 30px white,
+              0 0 40px white,
               38px 19px 8px rgba(206,89,55,0);
 }
 
-.range_option_icons:hover {
+.icon_toggle,
+.icon_toggle:hover {
+  filter: drop-shadow();
+  color: #FFFFFF;
   -webkit-box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
   box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
   text-shadow: 0 0 5px blue,
@@ -280,6 +279,7 @@ align-content: center;
               0 0 75px blue,
               38px 19px 8px rgba(206,89,55,0);
 }
+
 
 .neck_window_reset {
   filter: drop-shadow(0 0 5px red,
@@ -306,20 +306,31 @@ align-content: center;
 }
 
 .capo {
-  border: none;
+  border: white solid 2px;
+  border-radius: 10px;
+  padding-left: 7%;
+  padding-right: 7%;
+
 }
 
 .capo:hover {
-  box-shadow: none;
+  -webkit-box-shadow: 0px 0px 10px 5px white, inset 0 0 1.4rem white;
+  box-shadow: 0px 0px 10px 5px white, inset 0 0 1.4rem white;
 }
 
-.capo_toggle {
-  text-shadow:
-  0 0 10px white,
-  0 0 15px white,
-  0 0 20px white,
-  0 0 30px white,
-  0 0 40px white;
+.capo_toggle,
+.capo_toggle:hover {
+  -webkit-box-shadow: 0px 0px 10px 5px blue, inset 0 0 2rem blue;
+  box-shadow: 0px 0px 10px 5px blue, inset 0 0 2rem blue;
+  text-shadow: 0 0 5px blue,
+  0 0 10px blue,
+  0 0 15px blue,
+  0 0 20px blue,
+  0 0 30px blue,
+  0 0 40px blue,
+  0 0 55px blue,
+  0 0 75px blue,
+  38px 19px 8px rgba(206,89,55,0);
 }
 
 
@@ -796,6 +807,7 @@ align-content: center;
 
 
 .from_fret:hover {
+  filter: drop-shadow();
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -820,6 +832,7 @@ align-content: center;
 
 
 .to_fret:hover {
+  filter: drop-shadow();
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -829,8 +842,8 @@ align-content: center;
   border: white solid 1px;
   border-radius: 5px;
   padding-bottom: 0%;
-  -webkit-box-shadow: 2px 2px 15px 3px red, inset 0 0 1.6rem red;
-  box-shadow: 2px 2px 15px 3px red, inset 0 0 1.6rem red;
+  -webkit-box-shadow: 2px 2px 15px 3px red, inset 0 0 2.6rem red;
+  box-shadow: 2px 2px 15px 3px red, inset 0 0 2.6rem red;
   text-shadow: 0 0 5px red,
   0 0 10px red,
   0 0 15px red,
