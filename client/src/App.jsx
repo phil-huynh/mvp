@@ -1123,6 +1123,12 @@ class App extends React.Component {
     this.setState({
       neckWindowMode: 'none'
     })
+    if(choice !== 'capo') {
+      this.setState({
+        useCapo: false
+      })
+    }
+
   }
 
   setWindowCycle(stage) {
