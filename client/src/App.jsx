@@ -957,7 +957,17 @@ class App extends React.Component {
     })
   }
 
+  setWholeNeck () {
+    this.setState({
+      lowestFret:0,
+      highestFret:17,
+      neckWindowMode: 'none',
+      useCapo: false
+    })
+  }
+
   resetAll() {
+    this.setWholeNeck();
     if (this.state.renderView ==='Map Scales') {
       this.resetChords()
       this.setState({
@@ -1140,13 +1150,7 @@ class App extends React.Component {
     }
   }
 
-  setWholeNeck () {
-    this.setState({
-      lowestFret:0,
-      highestFret:17,
-      neckWindowMode: 'none'
-    })
-  }
+
 
   setTones (tones, key) {
     this.setState({

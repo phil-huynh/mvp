@@ -9,18 +9,13 @@ import { CgArrowsHAlt } from 'react-icons/cg'
 var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote, render, chordDegButtonClass, handleChordDegrees, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, handleNeckNotes, noteNameToggle, scaleDegreeToggle, solfegeToggle, setWholeNeck, setNeckWindowMode, neckWindowMode, start, end, setWindowCycle}) => {
 
   let lefty = (view === 'Lefty Traditional View' || view === 'Lefty Mirror View')
-  var resetClass = "reset_button resetAll"
-
-  if ((render === 'Map Scales' && (selNote || chordOneSelected || resetVoicingCount)) || (render === 'Map Chords' && (root1 || root2 || voicing1 || voicing2 || displayChordDegrees || chordFocus !== 'Neutral'))) {
-    resetClass = "reset_button resetAll can_reset"
-  }
-
-  var fromClass;
-  var toClass;
-  var windowClass;
-  var resetIconClass;
-  var capoClass;
-  var iconClass = 'range_option_icons'
+  let resetClass = "reset_button resetAll"
+  let fromClass;
+  let toClass;
+  let windowClass;
+  let resetIconClass;
+  let capoClass;
+  let iconClass = 'range_option_icons'
 
   neckWindowMode === 'from start' ? fromClass = iconClass + ' icon_toggle' : fromClass = iconClass
   neckWindowMode === 'to end' ? toClass = iconClass + ' icon_toggle' : toClass = iconClass
@@ -28,6 +23,9 @@ var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow
   neckWindowMode === 'capo' ? capoClass = iconClass + ' capo_toggle capo' : capoClass = iconClass + ' capo'
   start !== 0 || end !== 17 ? resetIconClass = iconClass + ' neck_window_reset' : resetIconClass = iconClass
 
+  if (neckWindowMode !== 'none' || (render === 'Map Scales' && (selNote || chordOneSelected || resetVoicingCount)) || (render === 'Map Chords' && (root1 || root2 || voicing1 || voicing2 || displayChordDegrees || chordFocus !== 'Neutral'))) {
+    resetClass = "reset_button resetAll can_reset"
+  }
 
 
   return (
