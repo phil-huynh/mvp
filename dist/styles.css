@@ -269,7 +269,7 @@ align-content: center;
   color: #FFFFFF;
   -webkit-box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
   box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
-  text-shadow: 0 0 5px blue,
+  text-shadow: 0 0 5px white,
               0 0 10px blue,
               0 0 15px blue,
               0 0 20px blue,
@@ -320,10 +320,12 @@ align-content: center;
 
 .capo_toggle,
 .capo_toggle:hover {
-  -webkit-box-shadow: 0px 0px 10px 5px blue, inset 0 0 2rem blue;
-  box-shadow: 0px 0px 10px 5px blue, inset 0 0 2rem blue;
-  text-shadow: 0 0 5px blue,
-  0 0 10px blue,
+  -webkit-box-shadow: 0px 0px 10px 5px blue, inset 0 0 1.2rem blue;
+  box-shadow: 0px 0px 10px 5px blue, inset 0 0 1.2rem blue;
+  text-shadow:
+  0 0 2px blue,
+  0 0 5px white,
+  0 0 10px white,
   0 0 15px blue,
   0 0 20px blue,
   0 0 30px blue,
@@ -1231,15 +1233,14 @@ align-content: center;
   font-size: 1.5vh;
   font-weight: 200;
   font-family: 'Comic Neue', cursive;
-  margin-top: 3rem;
-  margin-bottom: .6rem;
+  padding-top: 3rem;
+  padding-bottom: 2.5rem;
 }
 
 .footerButton {
   font-size: 1.9vh;
   font-weight: 200;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   font-family: 'Comic Neue', cursive;
   text-shadow: none;
 }
@@ -1765,7 +1766,8 @@ align-content: center;
 }
 
 
-.calc_toggle_on {
+.calc_toggle_on,
+.calc_toggle_on:hover {
   border: white solid 2px;
   color: white;
   -webkit-box-shadow: 0px 0px 15px 8px blue, inset 0 0 3.7rem blue;
@@ -1782,7 +1784,8 @@ align-content: center;
 }
 
 .calc_shared_note {
-  text-shadow: 0 0 5px #49ff18,
+  text-shadow:
+  0 0 5px #49ff18,
   0 0 10px #49ff18,
   0 0 15px #49ff18,
   0 0 20px #49ff18,

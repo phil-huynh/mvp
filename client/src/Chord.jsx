@@ -465,7 +465,8 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
             {name}
           </Card.Header>
         </div>
-        <Card.Body
+        <Card.Body>
+          <div
           className='cardBody'
           onClick={chordOneSelected && compareChords ? ()=>{selectChord2(chord, tones, objKey)} : ()=>{selectChord(chord, tones, objKey)}}>
           <Card.Text>{tones.map ((tone) => (
@@ -477,35 +478,43 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
 
             <span>&nbsp;{tone}&nbsp;</span>
           ))}
-
           </Card.Text>
+
+          </div>
         </Card.Body>
         <div className='footerButton'>
-            {selected && both && chordFocus === 'Neutral' ?
-              <Card.Footer>
-                <span className="focusButton" onClick={()=>handleChordFocus('Focus 1')}>Focus</span>
-              </Card.Footer>
-              :selected && both && chordFocus === "Focus 1" ?
-              <Card.Footer>
-                <span className="focusButton toggle_on" onClick={()=>handleChordFocus('Neutral')}>Focused</span>
-              </Card.Footer>
-              :selected && both && chordFocus === "Focus 2" ?
-              <Card.Footer>
-                <span className="focusButton" onClick={()=>handleChordFocus('Focus 1')}>Unfocused</span>
-              </Card.Footer>
-              :selected2 && both && chordFocus === 'Neutral' ?
-              <Card.Footer>
-                <span className="focusButton" onClick={()=>handleChordFocus('Focus 2')}>Focus</span>
-              </Card.Footer>
-              :selected2 && both && chordFocus === "Focus 1" ?
-              <Card.Footer>
-                <span className="focusButton" onClick={()=>handleChordFocus('Focus 2')}>Unfocused</span>
-              </Card.Footer>
-              :selected2 && both && chordFocus === "Focus 2" ?
-              <Card.Footer>
-                <span className="focusButton toggle_on" onClick={()=>handleChordFocus('Neutral')}>Focused</span>
-              </Card.Footer>
-              :null
+          <Card.Footer
+            className='alterChordButton'
+            onClick={()=>{handleAlterChordWindow(whichChordAmI, list, root)}}
+          >
+            Alter Me
+          </Card.Footer>
+          <Card.Footer></Card.Footer>
+          {selected && both && chordFocus === 'Neutral' ?
+            <Card.Footer>
+              <span className="focusButton" onClick={()=>handleChordFocus('Focus 1')}>Focus</span>
+            </Card.Footer>
+            :selected && both && chordFocus === "Focus 1" ?
+            <Card.Footer>
+              <span className="focusButton toggle_on" onClick={()=>handleChordFocus('Neutral')}>Focused</span>
+            </Card.Footer>
+            :selected && both && chordFocus === "Focus 2" ?
+            <Card.Footer>
+              <span className="focusButton" onClick={()=>handleChordFocus('Focus 1')}>Unfocused</span>
+            </Card.Footer>
+            :selected2 && both && chordFocus === 'Neutral' ?
+            <Card.Footer>
+              <span className="focusButton" onClick={()=>handleChordFocus('Focus 2')}>Focus</span>
+            </Card.Footer>
+            :selected2 && both && chordFocus === "Focus 1" ?
+            <Card.Footer>
+              <span className="focusButton" onClick={()=>handleChordFocus('Focus 2')}>Unfocused</span>
+            </Card.Footer>
+            :selected2 && both && chordFocus === "Focus 2" ?
+            <Card.Footer>
+              <span className="focusButton toggle_on" onClick={()=>handleChordFocus('Neutral')}>Focused</span>
+            </Card.Footer>
+            :null
           }
           <Card.Footer></Card.Footer>
           {selected && !compareChords ?
@@ -518,13 +527,6 @@ var Chord = ({chord, sevenths, selectChord, selectChord2, currentChord, currentC
             </Card.Footer>
             : null
           }
-          <Card.Footer></Card.Footer>
-          <Card.Footer
-            className='alterChordButton'
-            onClick={()=>{handleAlterChordWindow(whichChordAmI, list, root)}}
-          >
-            Alter Me
-          </Card.Footer>
           <Card.Footer></Card.Footer>
           {wasAltered ?
             <Card.Footer
