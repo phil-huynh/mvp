@@ -85,13 +85,13 @@ var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow
         <div className="range_option_icon_row">
           <div className={fromClass}>
             <BiArrowFromLeft
-              size={26}
+              size={25}
               onClick={()=>{setNeckWindowMode('from start')}}
             />
           </div>
           <div className={resetIconClass}>
             <CgArrowsHAlt
-              size={26}
+              size={25}
               onClick={()=>{setWholeNeck()}}
             />
           </div>
@@ -99,13 +99,13 @@ var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow
         <div className="range_option_icon_row">
           <div className={toClass}>
             <BiArrowFromRight
-              size={26}
+              size={25}
               onClick={()=>{setNeckWindowMode('to end')}}
             />
           </div>
           <div className={windowClass}>
             <CgArrowsShrinkH
-              size={26}
+              size={25}
               onClick={()=>{setNeckWindowMode('window'); lefty ? setWindowCycle('end') : setWindowCycle('start')}}
             />
           </div>

@@ -66,28 +66,28 @@ var FretGuide = ({name, view, setStart, setEnd, setCapo, neckWindowMode, setWind
     setFret = setStart
     guideboxClass += ' from_fret'
     unMarkedClass += ' from_fret'
-    marker = <BiArrowFromLeft size={25}/>
+    marker = <BiArrowFromLeft size={19}/>
   }
 
   if (lefty && (startMode || (windowMode && cycleStart))) {
     setFret = setStart
     guideboxClass += ' to_fret'
     unMarkedClass += ' to_fret'
-    marker = <BiArrowFromLeft size={25}/>
+    marker = <BiArrowFromLeft size={19}/>
   }
 
   if (!lefty && (endMode || (windowMode && cycleEnd))) {
     setFret = setEnd
     guideboxClass += ' to_fret'
     unMarkedClass += ' to_fret'
-    marker = <BiArrowFromRight size={25}/>
+    marker = <BiArrowFromRight size={19}/>
   }
 
   if (lefty && (endMode || (windowMode && cycleEnd))) {
     setFret = setEnd
     guideboxClass += ' from_fret'
     unMarkedClass += ' from_fret'
-    marker = <BiArrowFromRight size={25}/>
+    marker = <BiArrowFromRight size={19}/>
   }
 
   return (
