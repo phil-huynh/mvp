@@ -26,8 +26,8 @@ const dim = '\u00B0';
   var stringAsharp = `A${sharp},B${flat},C${dblFlat}`
   var stringEflat = `D${sharp},E${flat},F${dblFlat}`
   var stringDsharp = `D${sharp},E${flat},F${dblFlat}`
-  var stringGsharp = `G${sharp},A${flat}`
-  var stringAflat = `G${sharp},A${flat}`
+  var stringGsharp = `G${sharp},A${flat},F${dblSharp}${sharp}`
+  var stringAflat = `G${sharp},A${flat},F${dblSharp}${sharp}`
 
 
   return (
