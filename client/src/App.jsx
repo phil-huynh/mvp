@@ -1125,6 +1125,7 @@ class App extends React.Component {
 
   setNeckWindowMode (choice) {
     let current = this.state.neckWindowMode
+    let lefty = (this.state.view === 'Lefty Traditional View' || this.state.view === 'Lefty Mirror View')
     choice !== current ?
     this.setState({
       neckWindowMode: choice
@@ -1133,7 +1134,7 @@ class App extends React.Component {
     this.setState({
       neckWindowMode: 'none'
     })
-    if(choice !== 'capo') {
+    if((!lefty && choice === 'from start') || (lefty && choice === 'to end') || choice === 'window') {
       this.setState({
         useCapo: false
       })
