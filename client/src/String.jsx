@@ -8,29 +8,28 @@ const natural = '\u266E'
 const dim = '\u00B0'
 
 var String = ({ string, allStrings, stringsLeft, scale, scaleChord1, scaleChord2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, firstString, lastString, render, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey, calcChord1, calcChord2, noteRefs1, noteRefs2, chordType1, chordType2, enharmonic, lowestFret, highestFret, useCapo }) => {
-  var notes=[];
-  var currentString;
-  var name;
-  var open;
-  var openClass;
-  var openNoteClass;
-  var noteClass;
-  var altLabelContainer;
-  var chordKey;
-  var chordKey2;
-  var keyKey;
-  var keyKey2;
-  var labelContainer;
-  var labelContainer2;
-  var fretClass;
-  var chord;
-  var chord2;
-  var capo;
-  var capoClass;
-  var lefty = (view === 'Lefty Traditional View' || view === 'Lefty Mirror View')
-
-  var start = lowestFret
-  var end = highestFret
+  let notes=[];
+  let currentString;
+  let name;
+  let open;
+  let openClass;
+  let openNoteClass;
+  let noteClass;
+  let altLabelContainer;
+  let chordKey;
+  let chordKey2;
+  let keyKey;
+  let keyKey2;
+  let labelContainer;
+  let labelContainer2;
+  let fretClass;
+  let chord;
+  let chord2;
+  let capo;
+  let capoClass;
+  let lefty = (view === 'Lefty Traditional View' || view === 'Lefty Mirror View')
+  let start = lowestFret
+  let end = highestFret
 
   if (['Violin', 'Viola', 'Cello'].includes(instrument)) {
     fretClass = 'orchestral'
