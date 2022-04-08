@@ -67,6 +67,10 @@ app.get('/chord', (req, res) => {
   res.json(obj)
 })
 
+app.get('/beginner', (req, res) => {
+  console.log('beginner route in server')
+})
+
 
 app.get('/choices', (req, res) => {
   res.json(Music.scaleChoices)

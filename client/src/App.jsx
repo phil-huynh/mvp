@@ -16,6 +16,7 @@ import Tutorial from './Tutorial.jsx'
 import AlterChordOpt from './AlterChordOpt.jsx'
 import Welcome from './Welcome.jsx'
 import ChordCalculator from './ChordCalculator.jsx'
+import BeginnerNeck from './BeginnerNeck.jsx'
 import ConstructionMapChords from './ConstructionMapChords.jsx'
 import ConstructionFindStructures from './ConstructionFindStructures.jsx'
 import axios from 'axios';
@@ -1412,6 +1413,8 @@ class App extends React.Component {
             chordFocus={this.state.chordFocus}
             sharedNotes={this.state.sharedNotes}
           />
+          : this.state.renderView === 'Beginner' ?
+          <BeginnerNeck/>
           :null
         }
       </div>

@@ -11,9 +11,11 @@ const clockwise = ['G', 'D', 'A', 'E', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}
 
 const counterClockwise = ["F", `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`, `B${dblFlat}`, `E${dblFlat}`, `A${dblFlat}`, `D${dblFlat}`, `G${dblFlat}`, `C${dblFlat}`, `F${dblFlat}`, `B${dblFlat}${flat}`, `E${dblFlat}${flat}`, `A${dblFlat}${flat}`, `D${dblFlat}${flat}`]
 
-var chromaticScale = [['C', `B${sharp}`, `D${dblFlat}`], [`C${sharp}`, `D${flat}`, `B${dblSharp}`], ["D", `C${dblSharp}`, `E${dblFlat}`], [`D${sharp}`, `E${flat}`, `F${dblFlat}`], ["E", `F${flat}`, `D${dblSharp}`], ["F", `E${sharp}`, `G${dblFlat}`], [`F${sharp}`, `G${flat}`, `E${dblSharp}`], ["G", `F${dblSharp}`, `A${dblFlat}`], [`G${sharp}`, `A${flat}`, `F${dblSharp}${sharp}`], ["A", `G${dblSharp}`, `B${dblFlat}`], [`A${sharp}`, `B${flat}`, `C${dblFlat}`], ["B", `C${flat}`, `A${dblSharp}`]];
+const chromaticScale = [['C', `B${sharp}`, `D${dblFlat}`], [`C${sharp}`, `D${flat}`, `B${dblSharp}`], ["D", `C${dblSharp}`, `E${dblFlat}`], [`D${sharp}`, `E${flat}`, `F${dblFlat}`], ["E", `F${flat}`, `D${dblSharp}`], ["F", `E${sharp}`, `G${dblFlat}`], [`F${sharp}`, `G${flat}`, `E${dblSharp}`], ["G", `F${dblSharp}`, `A${dblFlat}`], [`G${sharp}`, `A${flat}`, `F${dblSharp}${sharp}`], ["A", `G${dblSharp}`, `B${dblFlat}`], [`A${sharp}`, `B${flat}`, `C${dblFlat}`], ["B", `C${flat}`, `A${dblSharp}`]];
 
-var chromaticScaleSimple = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
+const chromaticScaleSimple = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
+
+const tonicsToUse = ['C', 'D', 'E', 'F', 'G', 'A', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}`, `D${sharp}`, `A${sharp}`, `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`, `E${sharp}`, `B${sharp}`]
 
 var allScales = {};
 var chordTypes = {};
@@ -962,7 +964,6 @@ var add7NoteScale = (name, degrees, makeChords) => {
     objKey = name;
   }
 
-  var tonicsToUse = ['C', 'D', 'E', 'F', 'G', 'A', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}`, `D${sharp}`, `A${sharp}`, `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`, `E${sharp}`, `B${sharp}`]
   let checker = {}
 
   tonicsToUse.forEach((note) => {
@@ -1027,11 +1028,9 @@ add7NoteScale('arabian', ['one', 'two', 'three', 'four', 'flatFive', 'flatSix', 
 
 
 var chordsRefNotes = () => {
-  let validRoots = ['C', 'D', 'E', 'F', 'G', 'A', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}`, `D${sharp}`, `A${sharp}`, `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`, `E${sharp}`, `B${sharp}`];
   noteRefs = {};
-
   for (let tonic in allScales) {
-    if (validRoots.includes(tonic)) {
+    if (tonicsToUse.includes(tonic)) {
       noteRefs[tonic] = {}
       noteRefs[tonic].degsToNotes = allScales[tonic].scaleDegrees
       noteRefs[tonic].notesToDegs = allScales[tonic].major.notesToDegrees
@@ -1083,6 +1082,7 @@ module.exports.chordDegrees = chordDegrees
 module.exports.chordDegreesUpper = chordDegreesUpper
 module.exports.chordTypes = chordTypes
 module.exports.noteRefs = noteRefs
+module.exports.tonicsToUse =tonicsToUse
 
 
 var findChordSpellings = () => {
