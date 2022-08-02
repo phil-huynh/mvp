@@ -8,11 +8,12 @@ var Welcome = ({showWelcome, handleWelcomeWindow, handleNavChoice}) => {
     <Modal
       className='welcome'
       show={showWelcome}
+      backdrop="static"
       onHide={() => {handleWelcomeWindow()}}
     >
       <Modal.Header
-        closeButton
-        closeVariant='white'
+
+
       >
         <Modal.Title>
           <h2>
@@ -22,7 +23,6 @@ var Welcome = ({showWelcome, handleWelcomeWindow, handleNavChoice}) => {
       </Modal.Header>
         <div
           className='welcome_message'
-          onClick={(e)=>{handleWelcomeWindow()}}
         >
           <div className="welcome_header toggle_on">Welcome to Strings Theory!</div>
           <div className="upper_welcome_message">The intent of this app is to be a tool that strings players of all skill levels can use to continue to grow and find new sounds. Players can explore new scales or tunings that they have not used before or they can study structures that they already use in greater depth. New features, tunings, scales, and techniques will be added to the app frequently. </div>
@@ -32,21 +32,21 @@ var Welcome = ({showWelcome, handleWelcomeWindow, handleNavChoice}) => {
             <span
               title="mapChords"
               className='construction_choice toggle_on'
-              onClick={(e)=>{handleNavChoice(e)}}
+              onClick={(e)=>{handleNavChoice(e); handleWelcomeWindow()}}
               >
               Map Chords
             </span>
             <span
               title="mapScales"
               className='construction_choice toggle_on'
-              onClick={(e)=>{handleNavChoice(e)}}
+              onClick={(e)=>{handleNavChoice(e); handleWelcomeWindow()}}
               >
               Map Scales
             </span>
             <span
               title="tutorial"
               className='construction_choice toggle_on'
-              onClick={(e)=>{handleNavChoice(e)}}
+              onClick={(e)=>{handleNavChoice(e); handleWelcomeWindow()}}
             >
               Tutorial
             </span>

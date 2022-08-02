@@ -1102,7 +1102,7 @@ var findChordSpellings = () => {
   }
 }
 
-
+console.log(intervals)
 
 
 
