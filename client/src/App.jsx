@@ -17,7 +17,6 @@ import AlterChordOpt from './AlterChordOpt.jsx'
 import Welcome from './Welcome.jsx'
 import ChordCalculator from './ChordCalculator.jsx'
 import BeginnerNeck from './BeginnerNeck.jsx'
-import ConstructionMapChords from './ConstructionMapChords.jsx'
 import ConstructionFindStructures from './ConstructionFindStructures.jsx'
 import axios from 'axios';
 
@@ -71,9 +70,6 @@ class App extends React.Component {
       currentStringsMirror: [`E,F${flat},D${dblSharp}`, `A,G${dblSharp},B${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `G,F${dblSharp},A${dblFlat}`, `B,C${flat},A${dblSharp}`, `E,F${flat},D${dblSharp}`],
       defaultType: 'Triads',
       displayChordDegrees: false,
-      findChordsToggle: 'navOption',
-      findScalesToggle: 'navOption',
-      findStructuresToggle: 'navOption',
       hideScale: 'Hide Scale',
       hideScaleButton: 'hide scale',
       highestFret: 17,
@@ -82,8 +78,6 @@ class App extends React.Component {
       keyCenter2: {},
       labelType: 'Note Names',
       lowestFret: 0,
-      mapChordsToggle: 'navOption',
-      mapScalesToggle: 'navOption',
       middle: 'inner_middle',
       moreSeventhsButton: 'Show 7th Chords',
       neckWindowMode: 'none',
@@ -115,7 +109,6 @@ class App extends React.Component {
       sevenths2: false,
       sharedNotes: [],
       showAlter: false,
-      showConstructionMapChords: false,
       showConstructionFindStructures: false,
       showScaleMenu: false,
       showStringsMenu: false,
@@ -131,7 +124,6 @@ class App extends React.Component {
       tonic: '',
       tonic2: '',
       tuning: ' E A D G B E ',
-      tutorialToggle: 'navOption',
       useCapo: false,
       view: 'Traditional View',
       voicing1: '',
@@ -573,37 +565,13 @@ class App extends React.Component {
   handleHide(e) {
     var hideScale = e.target.title
     if(hideScale === 'Hide Scale') {
-      this.setState({
-        hideScale: hideScale,
-        scaleHiddenToggle: 'toggle_on',
-        scaleUnfocusedToggle: 'toggle_off',
-        scaleVisibleToggle: 'toggle_off',
-        scaleVisibleLabel: 'Show Scale',
-        scaleHiddenLabel: 'Scale Hidden',
-        scaleUnfocusedLabel: 'Unfocus Scale',
-      })
+      this.setState({ hideScale: hideScale })
     }
     if(hideScale === 'Show Scale') {
-      this.setState({
-        hideScale: hideScale,
-        scaleHiddenToggle: 'toggle_off',
-        scaleUnfocusedToggle: 'toggle_off',
-        scaleVisibleToggle: 'toggle_on',
-        scaleVisibleLabel: 'Scale Visible',
-        scaleHiddenLabel: 'Hide Scale',
-        scaleUnfocusedLabel: 'Unfocus Scale',
-      })
+      this.setState({ hideScale: hideScale })
     }
     if(hideScale === 'Unfocus Scale') {
-      this.setState({
-        hideScale: hideScale,
-        scaleHiddenToggle: 'toggle_off',
-        scaleUnfocusedToggle: 'toggle_on',
-        scaleVisibleToggle: 'toggle_off',
-        scaleVisibleLabel: 'Show Scale',
-        scaleHiddenLabel: 'Hide Scale',
-        scaleUnfocusedLabel: 'Scale Unfocused',
-      })
+      this.setState({ hideScale: hideScale })
     }
   }
 
@@ -623,11 +591,6 @@ class App extends React.Component {
     let choice = e.target.title
     if (choice === 'mapChords') {
       this.setState({
-        mapChordsToggle: 'navOption toggle_on',
-        mapScalesToggle: 'navOption',
-        findChordsToggle: 'navOption',
-        findScalesToggle: 'navOption',
-        tutorialToggle: 'navOption',
         renderView: 'Map Chords',
         sharedNotes: [],
         displayChordDegrees: false,
@@ -678,10 +641,6 @@ class App extends React.Component {
     }
     if (choice === 'mapScales') {
       this.setState({
-        mapChordsToggle: 'navOption',
-        mapScalesToggle: 'navOption toggle_on',
-        findStructuresToggle: 'navOption',
-        tutorialToggle: 'navOption',
         renderView: 'Map Scales',
         sharedNotes: [],
         displayChordDegrees: false,
@@ -704,20 +663,10 @@ class App extends React.Component {
       }
     }
     if (choice === 'findStructures') {
-      this.setState({
-        mapChordsToggle: 'navOption',
-        mapScalesToggle: 'navOption',
-        findStructuresToggle: 'navOption toggle_on',
-        tutorialToggle: 'navOption',
-      })
       this.handleConstructionFindStructuresWindow()
     }
     if (choice === 'tutorial') {
       this.setState({
-        mapChordsToggle: 'navOption',
-        mapScalesToggle: 'navOption',
-        findStructuresToggle: 'navOption',
-        tutorialToggle: 'navOption toggle_on',
         renderView: "Tutorial"
       })
       this.handleTutorialWindow()
@@ -1169,20 +1118,11 @@ class App extends React.Component {
         <div className="top">
           <Header
             handleNavChoice={this.handleNavChoice}
-            mapChordsToggle={this.state.mapChordsToggle}
-            mapScalesToggle={this.state.mapScalesToggle}
-            findStructuresToggle={this.state.findStructuresToggle}
-            tutorialToggle={this.state.tutorialToggle}
-            settingsToggle={this.state.settingsToggle}
+            renderView={this.state.renderView}
           />
           <Welcome
             showWelcome={this.state.showWelcome}
             handleWelcomeWindow={this.handleWelcomeWindow}
-            handleNavChoice={this.handleNavChoice}
-            />
-          <ConstructionMapChords
-            showConstructionMapChords={this.state.showConstructionMapChords}
-            handleConstructionMapChordsWindow={this.handleConstructionMapChordsWindow}
             handleNavChoice={this.handleNavChoice}
             />
           <ConstructionFindStructures
@@ -1219,12 +1159,6 @@ class App extends React.Component {
             handleHide={this.handleHide}
             resetAll={this.resetAll}
             resetVoicingCount={this.state.resetVoicingCount}
-            scaleHiddenToggle={this.state.scaleHiddenToggle}
-            scaleUnfocusedToggle={this.state.scaleUnfocusedToggle}
-            scaleVisibleToggle={this.state.scaleVisibleToggle}
-            scaleHiddenLabel={this.state.scaleHiddenLabel}
-            scaleUnfocusedLabel={this.state.scaleUnfocusedLabel}
-            scaleVisibleLabel={this.state.scaleVisibleLabel}
             selNote={this.state.selNote}
             render={this.state.renderView}
             chordDegButtonClass={this.state.chordDegButtonClass}
@@ -1243,6 +1177,7 @@ class App extends React.Component {
             end={this.state.highestFret}
             setWindowCycle={this.setWindowCycle}
             labelType={this.state.labelType}
+            hideScale={this.state.hideScale}
             />
         </div>
         <div className="middle">
