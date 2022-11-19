@@ -11,10 +11,7 @@ var Welcome = ({showWelcome, handleWelcomeWindow, handleNavChoice}) => {
       backdrop="static"
       onHide={() => {handleWelcomeWindow()}}
     >
-      <Modal.Header
-
-
-      >
+      <Modal.Header>
         <Modal.Title>
           <h2>
             A Message from Strings Theory

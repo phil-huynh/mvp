@@ -6,7 +6,7 @@ import { BiArrowFromRight } from 'react-icons/bi'
 import { CgArrowsShrinkH } from 'react-icons/cg'
 import { CgArrowsHAlt } from 'react-icons/cg'
 
-var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote, render, chordDegButtonClass, handleChordDegrees, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, handleNeckNotes, noteNameToggle, scaleDegreeToggle, solfegeToggle, setWholeNeck, setNeckWindowMode, neckWindowMode, start, end, setWindowCycle}) => {
+var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote, render, chordDegButtonClass, handleChordDegrees, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, handleNeckNotes,  setWholeNeck, setNeckWindowMode, neckWindowMode, start, end, setWindowCycle, labelType}) => {
 
   let lefty = (view === 'Lefty Traditional View' || view === 'Lefty Mirror View')
   let resetClass = "reset_button resetAll"
@@ -60,11 +60,9 @@ var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow
           scaleVisibleLabel={scaleVisibleLabel}
         />
         <LabelMenu
-        handleNeckNotes={handleNeckNotes}
-        name={'labelMenu'}
-        noteNameToggle={noteNameToggle}
-        scaleDegreeToggle={scaleDegreeToggle}
-        solfegeToggle={solfegeToggle}
+          handleNeckNotes={handleNeckNotes}
+          labelType={labelType}
+          name={'labelMenu'}
         />
       </div>
         :

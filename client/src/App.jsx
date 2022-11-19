@@ -87,7 +87,6 @@ class App extends React.Component {
       middle: 'inner_middle',
       moreSeventhsButton: 'Show 7th Chords',
       neckWindowMode: 'none',
-      noteNameToggle: 'toggle_on',
       noteRefs1: {},
       noteRefs2: {},
       renderView: 'Welcome',
@@ -97,7 +96,6 @@ class App extends React.Component {
       scale: [],
       scale2: [],
       scaleDegrees: {},
-      scaleDegreeToggle: 'toggle_off',
       scaleHiddenLabel: 'Hide Scale',
       scaleHiddenToggle: 'toggle_off',
       scaleName:'Major',
@@ -127,7 +125,6 @@ class App extends React.Component {
       showWelcome: true,
       singleOrCompareButton: 'Single Chord',
       solfege: {},
-      solfegeToggle: 'toggle_off',
       strings: {},
       stringbox: 'stringbox',
       stringsLeft: {},
@@ -732,25 +729,16 @@ class App extends React.Component {
     if (labelType === 'Note Names') {
       this.setState({
         labelType: labelType,
-        noteNameToggle: 'toggle_on',
-        scaleDegreeToggle: 'toggle_off',
-        solfegeToggle: 'toggle_off'
       })
     }
     if (labelType === 'Scale Degrees') {
       this.setState({
         labelType: labelType,
-        noteNameToggle: 'toggle_off',
-        scaleDegreeToggle: 'toggle_on',
-        solfegeToggle: 'toggle_off'
       })
     }
     if (labelType === 'Solfege') {
       this.setState({
         labelType: labelType,
-        noteNameToggle: 'toggle_off',
-        scaleDegreeToggle: 'toggle_off',
-        solfegeToggle: 'toggle_on'
       })
     }
   }
@@ -780,7 +768,8 @@ class App extends React.Component {
     this.setState({
       second: false,
       secondButton: 'Compare a Scale'
-    }) :
+    })
+    :
     this.setState({
       second: true,
       secondButton: 'Just One Scale'
@@ -792,7 +781,8 @@ class App extends React.Component {
     this.setState({
       sevenths: false,
       defaultType: 'Triads'
-    }) :
+    })
+    :
     this.setState({
       sevenths: true,
       defaultType: 'Seventh Chords'
@@ -1140,7 +1130,6 @@ class App extends React.Component {
         useCapo: false
       })
     }
-
   }
 
   setWindowCycle(stage) {
@@ -1247,15 +1236,13 @@ class App extends React.Component {
             displayChordDegrees={this.state.displayChordDegrees}
             chordFocus={this.state.chordFocus}
             handleNeckNotes={this.handleNeckNotes}
-            solfegeToggle={this.state.solfegeToggle}
-            scaleDegreeToggle={this.state.scaleDegreeToggle}
-            noteNameToggle={this.state.noteNameToggle}
             setWholeNeck={this.setWholeNeck}
             setNeckWindowMode={this.setNeckWindowMode}
             neckWindowMode={this.state.neckWindowMode}
             start={this.state.lowestFret}
             end={this.state.highestFret}
             setWindowCycle={this.setWindowCycle}
+            labelType={this.state.labelType}
             />
         </div>
         <div className="middle">
