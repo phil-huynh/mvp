@@ -1,8 +1,7 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal } from 'react-bootstrap'
 
-var ScalesMenu = ({showScaleMenu, handleScaleMenuWindow, handleScaleChange}) => {
+export const ScalesMenu = ({showScaleMenu, handleScaleMenuWindow, handleScaleChange}) => {
 
   const sharp = '#';
   const flat = '\u266D';
@@ -10,6 +9,10 @@ var ScalesMenu = ({showScaleMenu, handleScaleMenuWindow, handleScaleChange}) => 
   const dblFlat = '\u{1D12B}';
   const natural = '\u266E'
   const dim = '\u00B0';
+
+  const titles = ['major','naturalMinor','harmonicMinor','melodicMinor','dorian','phrygian','lydian','mixolydian','locrian','persian','double harmonic major','hungarian gypsy minor','romanian major','romanian minor','lydian dominant','ukrainian dorian','phrygian dominant','lydian augmented','locrian natural6','ionian sharp5','phrygian dorian','mixolydian flat13','aeoleon flat5','altered','gypsy','hungarian major','neapolitan major','neapolitan minor',
+  'arabian']
+  const labels = ['Major','Natural Minor','Harmonic Minor','Melodic Minor','Dorian','Phrygian','Lydian','Mixolydian','Locrian','Persian','Double Harmonic Major','Hungarian Gypsy Minor','Romanian Major','Romanian Minor','Lydian Dominant','Ukrainian Dorian','Phrygian Dominant','Lydian Augmented','Locrian #6','Ionian #5','Phrygian Dorian','Mixolydian b13','Aeoleon b13','Altered Scale','Gypsy Scale','Hungarian Major','Neapolitan Major','Neapolitan Minor','Arabian']
 
   return (
     <Modal
@@ -24,124 +27,14 @@ var ScalesMenu = ({showScaleMenu, handleScaleMenuWindow, handleScaleChange}) => 
           </h2>
         </Modal.Title>
       </Modal.Header>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='major'>Major</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='naturalMinor'>Natural Minor</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='harmonicMinor'>Harmonic Minor</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='melodicMinor'>Melodic Minor</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='dorian'>Dorian</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='phrygian'>Phrygian</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='lydian'>Lydian</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='mixolydian'>Mixolydian</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='locrian'>Locrian</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='persian'>Persian</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='double harmonic major'>Double Harmonic Major</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='hungarian gypsy minor'>Hungarian Gypsy Minor</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='romanian major'>Romanian Major</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='romanian minor'>Romanian Minor</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='lydian dominant'>Lydian Dominant</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='ukrainian dorian'>Ukrainian Dorian</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='phrygian dominant'>Phrygian Dominant</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='lydian augmented'>Lydian Augmented</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='locrian natural6'>Locrian #6</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='ionian sharp5'>Ionian #5</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='phrygian dorian'>Phrygian Dorian</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='mixolydian flat13'>Mixolydian b13</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='aeoleon flat5'>Aeoleon b13</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='altered'>Altered Scale</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='gypsy'>Gypsy Scale</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='hungarian major'>Hungarian Major</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='neapolitan major'>Neapolitan Major</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='neapolitan minor'>Neapolitan</div>
-      <div
-        className="modalMenuChoice"
-        onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
-        title='arabian'>Arabian</div>
+      {labels.map((label, i) => (
+        <div
+          key={`${i}${label}`}
+          className="modalMenuChoice"
+          onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+          title={titles[i]}>{label}</div>
+      ))}
     </Modal>
   )
 }
 
-export default ScalesMenu;

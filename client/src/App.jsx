@@ -1,25 +1,25 @@
-import React from 'react';
-import StringSet from './StringSet.jsx'
-import StringsMenu from './StringsMenu.jsx'
-import TonicMenu from './TonicMenu.jsx'
-import ScalesMenu from './ScalesMenu.jsx'
-import ScaleChords from './ScaleChords.jsx'
-import ViewMenu from './ViewMenu.jsx'
-import LabelMenu from './LabelMenu.jsx'
-import Header from './Header.jsx'
-import NeckDash from './NeckDash.jsx'
-import MapScalesRender from './MapScalesRender.jsx'
-import MapChordsRender from './MapChordsRender.jsx'
-import Dropdown from './Dropdown.jsx'
-import FretGuide from './FretGuide.jsx'
-import Tutorial from './Tutorial.jsx'
-import AlterChordOpt from './AlterChordOpt.jsx'
-import Welcome from './Welcome.jsx'
-import ChordCalculator from './ChordCalculator.jsx'
-import BeginnerNeck from './BeginnerNeck.jsx'
-import ConstructionMapChords from './ConstructionMapChords.jsx'
-import ConstructionFindStructures from './ConstructionFindStructures.jsx'
+import React, { useState, useEffect } from 'react';
+import { StringSet } from './StringSet.jsx'
+import { StringsMenu } from './StringsMenu.jsx'
+import { TonicMenu } from './TonicMenu.jsx'
+import { ScalesMenu } from './ScalesMenu.jsx'
+import { ScaleChords } from './ScaleChords.jsx'
+import { ViewMenu } from './ViewMenu.jsx'
+import { LabelMenu } from './LabelMenu.jsx'
+import { Header } from './Header.jsx'
+import { NeckDash } from './NeckDash.jsx'
+import { MapScalesRender } from './MapScalesRender.jsx'
+import { MapChordsRender } from './MapChordsRender.jsx'
+import { Dropdown } from './Dropdown.jsx'
+import { FretGuide } from './FretGuide.jsx'
+import { Tutorial } from './Tutorial.jsx'
+import { AlterChordOpt } from './AlterChordOpt.jsx'
+import { Welcome } from './Welcome.jsx'
+import { ChordCalculator } from './ChordCalculator.jsx'
+import { BeginnerNeck } from './BeginnerNeck.jsx'
+import { ConstructionFindStructures } from './ConstructionFindStructures.jsx'
 import axios from 'axios';
+
 
 const sharp = '#';
 const flat = '\u266D';
@@ -28,333 +28,268 @@ const dblFlat = '\u{1D12B}';
 const natural = '\u266E';
 const dim = '\u00B0';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      calcChord1: [],
-      calcChord2: [],
-      ch0: 'Triad',
-      ch1: 'Triad',
-      ch2: 'Triad',
-      ch3: 'Triad',
-      ch4: 'Triad',
-      ch5: 'Triad',
-      ch6: 'Triad',
-      ch0Alt: false,
-      ch1Alt: false,
-      ch2Alt: false,
-      ch3Alt: false,
-      ch4Alt: false,
-      ch5Alt: false,
-      ch6Alt: false,
-      choices: [],
-      chords: {},
-      chords2: {},
-      chordDegrees: {},
-      chordDegreesUpper: {},
-      chordDegButtonClass: 'chordDegButton',
-      chordOneSelected: false,
-      chordObjKey: '',
-      chord2ObjKey: '',
-      chordOptRoot: '',
-      chordTwoSelected: false,
-      chordType1: {},
-      chordType2: {},
-      chordFocus: 'Neutral',
-      currentCard: '',
-      compare: false,
-      currentChordTones: [],
-      currentChordTones2: [],
-      currentList: '',
-      currentStrings: [`E,F${flat},D${dblSharp}`, `B,C${flat},A${dblSharp}`, `G,F${dblSharp},A${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `A,G${dblSharp},B${dblFlat}`, `E,F${flat},D${dblSharp}`],
-      currentStringsMirror: [`E,F${flat},D${dblSharp}`, `A,G${dblSharp},B${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `G,F${dblSharp},A${dblFlat}`, `B,C${flat},A${dblSharp}`, `E,F${flat},D${dblSharp}`],
-      defaultType: 'Triads',
-      displayChordDegrees: false,
-      findChordsToggle: 'navOption',
-      findScalesToggle: 'navOption',
-      findStructuresToggle: 'navOption',
-      hideScale: 'Hide Scale',
-      hideScaleButton: 'hide scale',
-      highestFret: 17,
-      instrument: 'Guitar',
-      keyCenter: {},
-      keyCenter2: {},
-      labelType: 'Note Names',
-      lowestFret: 0,
-      mapChordsToggle: 'navOption',
-      mapScalesToggle: 'navOption',
-      middle: 'inner_middle',
-      moreSeventhsButton: 'Show 7th Chords',
-      neckWindowMode: 'none',
-      noteRefs1: {},
-      noteRefs2: {},
-      renderView: 'Welcome',
-      resetVoicingCount: 0,
-      root1: '',
-      root2: '',
-      scale: [],
-      scale2: [],
-      scaleDegrees: {},
-      scaleHiddenLabel: 'Hide Scale',
-      scaleHiddenToggle: 'toggle_off',
-      scaleName:'Major',
-      scaleType:'major',
-      scaleType2: 'major',
-      scaleUnfocusedToggle: 'toggle_off',
-      scaleVisibleLabel: 'Scale Visible',
-      scaleUnfocusedLabel: 'Unfocus Scale',
-      scaleVisibleToggle: 'toggle_on',
-      second: false,
-      secondButton: 'Compare a scale',
-      selectedChord:{},
-      selectedChord2:{},
-      selNote: '',
-      settingsToggle: 'navOption',
-      sevenths: false,
-      sevenths2: false,
-      sharedNotes: [],
-      showAlter: false,
-      showConstructionMapChords: false,
-      showConstructionFindStructures: false,
-      showScaleMenu: false,
-      showStringsMenu: false,
-      showTonicMenu: false,
-      showTutorial: false,
-      showViewMenu: false,
-      showWelcome: true,
-      singleOrCompareButton: 'Single Chord',
-      solfege: {},
-      strings: {},
-      stringbox: 'stringbox',
-      stringsLeft: {},
-      tonic: '',
-      tonic2: '',
-      tuning: ' E A D G B E ',
-      tutorialToggle: 'navOption',
-      useCapo: false,
-      view: 'Traditional View',
-      voicing1: '',
-      voicing2: '',
-      windowCycle: 'start'
+const App = () => {
 
+  const [calcChord1, setCalcChord1] = useState([])
+  const [calcChord2, setCalcChord2] = useState([])
+  const [ch0, setCh0] = useState('Triad')
+  const [ch1, setCh1] = useState('Triad')
+  const [ch2, setCh2] = useState('Triad')
+  const [ch3, setCh3] = useState('Triad')
+  const [ch4, setCh4] = useState('Triad')
+  const [ch5, setCh5] = useState('Triad')
+  const [ch6, setCh6] = useState('Triad')
+  const [ch0Alt, setCh0Alt]  = useState(false)
+  const [ch1Alt, setCh1Alt]  = useState(false)
+  const [ch2Alt, setCh2Alt]  = useState(false)
+  const [ch3Alt, setCh3Alt]  = useState(false)
+  const [ch4Alt, setCh4Alt]  = useState(false)
+  const [ch5Alt, setCh5Alt]  = useState(false)
+  const [ch6Alt, setCh6Alt]  = useState(false)
+  const [choices, setChoices] = useState([])
+  const [chords, setChords] = useState({})
+  const [chords2, setChords2] = useState({})
+  const [chordDegrees, setChordDegrees] = useState({})
+  const [chordDegreesUpper, setChordDegreesUpper] = useState({})
+  const [chordDegButtonClass, setChordDegButtonClass] = useState('chordDegButton')
+  const [chordOneSelected, setChordOneSelected] = useState(false)
+  const [chordObjKey, setChordObjKey] = useState('')
+  const [chord2ObjKey, setChord2ObjKey] = useState('')
+  const [chordOptRoot, setChordOptRoot] = useState('')
+  const [chordTwoSelected, setChordTwoSelected] = useState(false)
+  const [chordType1, setChordType1] = useState({})
+  const [chordType2, setChordType2] = useState({})
+  const [chordFocus, setChordFocus] = useState('Neutral')
+  const [currentCard, setCurrentCard] = useState('')
+  const [compare, setCompare] = useState(false)
+  const [currentChordTones, setCurrentChordTones] = useState([])
+  const [currentChordTones2, setCurrentChordTones2] = useState([])
+  const [currentList, setCurrentList] = useState('')
+
+  const [currentStrings, setCurrentStrings] = useState([`E,F${flat},D${dblSharp}`, `B,C${flat},A${dblSharp}`, `G,F${dblSharp},A${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `A,G${dblSharp},B${dblFlat}`, `E,F${flat},D${dblSharp}`])
+
+  const [currentStringsMirror, setCurrentStringsMirror] = useState([`E,F${flat},D${dblSharp}`, `A,G${dblSharp},B${dblFlat}`, `D,C${dblSharp},E${dblFlat}`, `G,F${dblSharp},A${dblFlat}`, `B,C${flat},A${dblSharp}`, `E,F${flat},D${dblSharp}`])
+
+  const [defaultType, setDefaultType] = useState('Triads')
+  const [displayChordDegrees, setDisplayChordDegrees] = useState(false)
+  const [hideScale, setHideScale] = useState('Show Scale')
+  const [highestFret, setHighestFret] = useState(17)
+  const [instrument, setInstrument] = useState('Guitar')
+  const [keyCenter, setKeyCenter] = useState({})
+  const [keyCenter2, setKeyCenter2] = useState({})
+  const [labelType, setLabelType] = useState('Note Names')
+  const [lowestFret, setLowestFret] = useState(0)
+  const [middle, setMiddle] = useState('inner_middle')
+  const [moreSeventhsButton, setMoreSeventhsButton] = useState('Show 7th Chords')
+  const [neckWindowMode, setNeckWindowMode] = useState('none')
+  const [noteRefs1, setNoteRefs1] = useState({})
+  const [noteRefs2, setNoteRefs2] = useState({})
+  const [renderView, setRenderView] = useState('Welcome')
+  const [resetVoicingCount, setResetVoicingCount] = useState(0)
+  const [root1, setRoot1] = useState('')
+  const [root2, setRoot2] = useState('')
+  const [scale, setScale] = useState([])
+  const [scale2, setScale2] = useState([])
+  const [scaleDegrees, setScaleDegrees] = useState({})
+  const [scaleName, setScaleName] = useState('Major')
+  const [scaleType, setScaleType] = useState('major')
+  const [scaleType2, setScaleType2] = useState('major')
+  const [second, setSecond] = useState(false)
+  const [secondButton, setSecondButton] = useState('Compare a scale')
+  const [selectedChord, setSelectedChord] = useState({})
+  const [selectedChord2, setSelectedChord2] = useState({})
+  const [selNote, setSelNote] = useState('')
+  const [sevenths, setSevenths] = useState(false)
+  const [sevenths2, setSevenths2] = useState(false)
+  const [sharedNotes, setSharedNotes] = useState([])
+  const [showAlter, setShowAlter] = useState(false)
+  const [showFindStructures, setShowFindStructures] = useState(false)
+  const [showScaleMenu, setShowScaleMenu] = useState(false)
+  const [showStringsMenu, setShowStringsMenu] = useState(false)
+  const [showTonicMenu, setShowTonicMenu] = useState(false)
+  const [showTutorial, setShowTutorial] = useState(false)
+  const [showViewMenu, setShowViewMenu] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(true)
+  const [singleOrCompareButton, setSingleOrCompareButton] = useState('Single Chord')
+  const [solfege, setSolfege] = useState({})
+  const [strings, setStrings] = useState({})
+  const [stringbox, setStringbox] = useState('stringbox')
+  const [stringsLeft, setStringsLeft] = useState({})
+  const [tonic, setTonic] = useState('')
+  const [tonic2, setTonic2] = useState('')
+  const [tuning, setTuning] = useState(' E A D G B E ')
+  const [useCapo, setUseCapo] = useState(false)
+  const [view, setView] = useState('Traditional View')
+  const [voicing1, setVoicing1] = useState('')
+  const [voicing2, setVoicing2] = useState('')
+  const [windowCycle, setWindowCycle] = useState('start')
+
+  const traditional = view === "Traditional View"
+  const lefty = view === "Lefty Traditional View"
+  const mirror = view === "Mirror View"
+  const leftyMirror = view === "Lefty Mirror View"
+
+
+  useEffect(() => {
+    getStrings();
+    getDegrees();
+    getScale('C', 'major');
+    getScale2('C', 'major');
+  }, [])
+
+  useEffect(() => {
+    updatedSharedNotes()
+  }, [calcChord1, calcChord2])
+
+  const clear = (which) => {
+    if (which === '1') {
+      setCalcChord1([])
+      setNoteRefs1({})
+      setChordType1({})
+      setVoicing1('')
+      setRoot1('')
+      setChordFocus('Neutral')
+      setSharedNotes([])
     }
-    this.clear = this.clear.bind(this);
-    this.getChord = this.getChord.bind(this);
-    this.getChoices = this.getChoices.bind(this);
-    this.getDegrees = this.getDegrees.bind(this);
-    this.getScale = this.getScale.bind(this);
-    this.getScale2 = this.getScale2.bind(this);
-    this.getStrings = this.getStrings.bind(this);
-    this.enharmonic = this.enharmonic.bind(this);
-    this.handleAlterChord = this.handleAlterChord.bind(this);
-    this.handleAlterChordWindow = this.handleAlterChordWindow.bind(this);
-    this.handleViewMenuWindow = this.handleViewMenuWindow.bind(this);
-    this.handleTonicMenuWindow = this.handleTonicMenuWindow.bind(this);
-    this.handleScaleMenuWindow = this.handleScaleMenuWindow.bind(this);
-    this.handleStringsMenuWindow = this.handleStringsMenuWindow.bind(this);
-    this.handleTutorialWindow = this.handleTutorialWindow.bind(this);
-    this.handleConstructionMapChordsWindow = this.handleConstructionMapChordsWindow.bind(this);
-    this.handleConstructionFindStructuresWindow = this.handleConstructionFindStructuresWindow.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleChordFocus = this.handleChordFocus.bind(this);
-    this.handleChordDegrees = this.handleChordDegrees.bind(this);
-    this.handleHide = this.handleHide.bind(this);
-    this.handleMoreSevenths = this.handleMoreSevenths.bind(this);
-    this.handleNavChoice = this.handleNavChoice.bind(this);
-    this.handleNeckNotes = this.handleNeckNotes.bind(this);
-    this.handleRootChange = this.handleRootChange.bind(this);
-    this.handleScaleChange = this.handleScaleChange.bind(this);
-    this.handleScaleChange2 = this.handleScaleChange2.bind(this);
-    this.handleSecondScale = this.handleSecondScale.bind(this);
-    this.handleSevenths = this.handleSevenths.bind(this);
-    this.handleSingleOrCompare = this.handleSingleOrCompare.bind(this);
-    this.handleStringChoice = this.handleStringChoice.bind(this);
-    this.handleTonicChange = this.handleTonicChange.bind(this);
-    this.handleTonicChange2 = this.handleTonicChange2.bind(this);
-    this.handleView = this.handleView.bind(this);
-    this.handleVoicingChange = this.handleVoicingChange.bind(this);
-    this.handleWelcomeWindow = this.handleWelcomeWindow.bind(this);
-    this.markNote = this.markNote.bind(this);
-    this.resetAll = this.resetAll.bind(this);
-    this.resetCard = this.resetCard.bind(this);
-    this.resetChords = this.resetChords.bind(this)
-    this.selectChord = this.selectChord.bind(this);
-    this.selectChord2 = this.selectChord2.bind(this);
-    this.setStart = this.setStart.bind(this);
-    this.setEnd = this.setEnd.bind(this);
-    this.setCapo = this.setCapo.bind(this);
-    this.setNeckWindowMode = this.setNeckWindowMode.bind(this);
-    this.setWholeNeck = this.setWholeNeck.bind(this);
-    this.setWindowCycle = this.setWindowCycle.bind(this);
-    this.setTones = this.setTones.bind(this);
-    this.setTones2 = this.setTones2.bind(this);
-    this.updateShared = this.updateShared.bind(this)
+    if (which === '2') {
+      setCalcChord2([])
+      setNoteRefs2({})
+      setChordType2({})
+      setVoicing2('')
+      setRoot2('')
+      setChordFocus('Neutral')
+      setSharedNotes([])
+    }
   }
 
-  componentDidMount () {
-    this.getStrings();
-    this.getDegrees();
-    this.getScale('C', 'major');
-    this.getScale2('C', 'major');
-
-  }
-
-  clear (which) {
-    var keyNotes = `calcChord${which}`
-    var keyRefs = `noteRefs${which}`
-    var keyType = `chordType${which}`
-    var keyVoicing = `voicing${which}`
-    var keyRoot = `root${which}`
-    this.setState ({
-      [keyNotes]: [],
-      [keyRefs]: {},
-      [keyType]: {},
-      [keyVoicing]: '',
-      [keyRoot]: '',
-      chordFocus: 'Neutral',
-      sharedNotes: []
-    })
-  }
-
-  getChoices () {
+  const getChoices = () => {
     axios.get('/choices')
       .then((res) => {
-        this.setState({
-          choices: res.data
-        })
+          setChoices(res.data)
       })
       .catch((err) => {
         console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err)
       })
   }
 
-  getChord (root, type, which) {
-    var keyNotes = `calcChord${which}`
-    var keyRefs = `noteRefs${which}`
-    var keyType = `chordType${which}`
+  const getChord = (root, type, which) => {
 
+    console.log('root', root, 'type', type, 'which', which)
     axios.get('/chord', { params: { root: root, type: type } })
       .then((res) => {
-        this.setState({
-          [keyNotes]: res.data.chordNotes,
-          [keyRefs]: res.data.noteRefs,
-          [keyType]: res.data.type
-        })
-         if (this.state.calcChord1.length > 0 && this.state.calcChord2.length > 0) {
-          let copy = this.state.calcChord1.slice()
-          let copy2 = this.state.calcChord2.slice()
-          let sharedNotes = []
-          let checker = {}
-          let checker2 = {}
-          let final = {}
-
-          for (var i = 0; i < copy.length; i++) {
-            let enharm = this.enharmonic(copy[i])
-            checker[copy[i]] = true
-            checker[enharm] = true
-          }
-          for (var j = 0; j < copy2.length; j++) {
-            let enharm = this.enharmonic(copy2[j])
-            checker2[copy2[j]] = true
-            checker2[enharm] = true
-          }
-          console.log('checker', checker)
-          console.log('checker2', checker2)
-
-          for (var k = 0; k < copy.length; k++) {
-            let enharm = this.enharmonic(copy[k])
-            console.log("🚀 ~ file: App.jsx ~ line 256 ~ App ~ .then ~ enharm ", enharm )
-            if (checker2[copy[k]] || checker2[enharm]) {
-              final[copy[k]] = true
-              final[enharm] = true
-            }
-          }
-          for (var l = 0; l < copy2.length; l++) {
-            let enharm = this.enharmonic(copy2[l])
-            console.log("🚀 ~ file: App.jsx ~ line 263 ~ App ~ .then ~ enharm", enharm)
-            if (checker[copy2[l]] || checker[enharm]) {
-              final[copy2[l]] = true
-              final[enharm] = true
-            }
-          }
-          for (var finalNote in final) {
-            sharedNotes.push(finalNote)
-          }
-          this.updateShared(sharedNotes)
+        if (which === '1') {
+          setCalcChord1(res.data.chordNotes)
+          setNoteRefs1(res.data.noteRefs)
+          setChordType1(res.data.type)
+        }
+        if (which === '2') {
+          setCalcChord2(res.data.chordNotes)
+          setNoteRefs2(res.data.noteRefs)
+          setChordType2(res.data.type)
         }
       })
       .catch((err) => {
-      console.log("🚀 ~ file: App.jsx ~ line 213 ~ App ~ getChord ~ err", err)
+        console.log("🚀 ~ file: App.jsx ~ line 213 ~ App ~ getChord ~ err", err)
       })
   }
 
-  getDegrees () {
+
+  const updatedSharedNotes = () => {
+    if (calcChord1.length > 0 && calcChord2.length > 0) {
+      let [copy, copy2] = [calcChord1.slice(), calcChord2.slice()]
+      let [shared, checker, checker2, final] = [[], {}, {}, {}]
+
+      copy.forEach((note) => {
+        checker[note] = true
+        checker[enharmonic(note)] = true
+      })
+
+      copy2.forEach((note) => {
+        checker2[note] = true
+        checker2[enharmonic(note)] = true
+      })
+
+      copy.forEach((note) => {
+        let enharm = enharmonic(note)
+        if (checker2[note] || checker2[enharm]) {
+          final[note] = true
+          final[enharm] = true
+        }
+      })
+
+      copy2.forEach((note) => {
+        let enharm = enharmonic(note)
+        if (checker[note] || checker[enharm]) {
+          final[note] = true
+          final[enharm] = true
+        }
+      })
+      for (var finalNote in final) {
+        if(copy.includes(finalNote) || copy2.includes(finalNote)){
+          shared.push(finalNote)
+        }
+      }
+      console.log("shared", shared)
+      setSharedNotes(shared)
+    }
+  }
+
+  const getDegrees = () => {
     axios.get('/degrees')
       .then((res) => {
-        this.setState({
-          solfege: res.data.solfege,
-          scaleDegrees: res.data.scaleDegrees,
-          chordDegrees: res.data.chordDegrees,
-          chordDegreesUpper: res.data.chordDegreesUpper
-        })
+        setSolfege(res.data.solfege)
+        setScaleDegrees(res.data.scaleDegrees)
+        setChordDegrees(res.data.chordDegrees)
+        setChordDegreesUpper(res.data.chordDegreesUpper)
       })
       .catch((err) => {
-      console.log("🚀 ~ file: App.jsx ~ line 85 ~ App ~ getDegrees ~ err", err)
+        console.log("🚀 ~ file: App.jsx ~ line 85 ~ App ~ getDegrees ~ err", err)
       })
   }
 
-  getScale (key, scale) {
-    this.resetAll()
+  const getScale = (key, scale) => {
+    resetAll()
     axios.get('/scales', { params: { key: key, scale: scale } })
       .then((res) => {
-        this.setState({
-          keyCenter: res.data,
-          tonic: res.data.tonic,
-          scale: res.data.scale,
-          chords: res.data.chords,
-        })
+        setKeyCenter(res.data)
+        setTonic(res.data.tonic)
+        setScale(res.data.scale)
+        setChords(res.data.chords)
       })
       .catch((err) => {
         console.log("🚀 ~ file: App.jsx ~ line 266 ~ App ~ getScale ~ err", err)
       })
   }
 
-  getScale2 (key, scale) {
+  const getScale2 = (key, scale) => {
     axios.get('/scales', { params: { key: key, scale: scale } })
       .then((res) => {
-        this.setState({
-          keyCenter2: res.data,
-          tonic2: res.data.tonic,
-          scale2: res.data.scale,
-          chords2: res.data.chords
-        })
+        setKeyCenter2(res.data)
+        setTonic2(res.data.tonic)
+        setScale2(res.data.scale)
+        setChords2(res.data.chords)
       })
       .catch((err) => {
         console.log("🚀 ~ file: App.jsx ~ line 278 ~ App ~ getScale2 ~ err", err)
       })
   }
 
-  getStrings () {
+  const getStrings = () => {
     axios.get('/strings')
     .then((res) => {
-      this.setState({
-        strings: res.data.right,
-        stringsLeft: res.data.left
-      })
+      setStrings(res.data.right)
+      setStringsLeft(res.data.left)
     })
     .catch((err) => {
       console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err)
     })
   }
 
-  enharmonic (note) {
-    var chromaticScale = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
+  const enharmonic = (note) => {
+    let chromaticScale = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
 
-    var noteBase = note[0];
-    var indexOfNoteBase = chromaticScale.indexOf(noteBase);
-    var distanceToMove = 0;
-    var enharmonicEquivalent = ""
+    let [noteBase, distanceToMove, enharmonicEquivalent] = [note[0], 0, '']
+    let indexOfNoteBase = chromaticScale.indexOf(noteBase);
     for (var i = 1; i < note.length; i++) {
         if (note[i] === `${flat}`) {
             distanceToMove--;
@@ -370,7 +305,7 @@ class App extends React.Component {
             continue;
         }
     }
-    var newIndex = indexOfNoteBase + distanceToMove;
+    let newIndex = indexOfNoteBase + distanceToMove;
     if (newIndex >= chromaticScale.length) {
         newIndex = indexOfNoteBase - (12 - distanceToMove);
     } else if (newIndex < 0) {
@@ -398,1015 +333,698 @@ class App extends React.Component {
     return enharmonicEquivalent;
   }
 
-  handleAlterChord (e) {
-    let type = e.target.title
-    let typeKey = this.state.currentCard
-    let alterKey = `${typeKey}Alt`
-    let count = this.state.resetVoicingCount
-    count ++
-    this.setState({
-      [typeKey]: type,
-      [alterKey]: true,
-      resetVoicingCount: count
-    })
+  const handleAlterChord = (e) => {
+    const type = e.target.title
+    const cards = ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6']
+    const index = cards.indexOf(currentCard)
+    const typeFunc = [setCh0, setCh1, setCh2, setCh3, setCh4, setCh5, setCh6]
+    const altFunc = [setCh0Alt, setCh1Alt, setCh2Alt, setCh3Alt, setCh4Alt, setCh5Alt, setCh6Alt]
+    const count = resetVoicingCount + 1
+    typeFunc[index](type)
+    altFunc[index](true)
+    setResetVoicingCount(count)
   }
 
-  handleAlterChordWindow (chord, list, root) {
-    if(this.state.showAlter===false) {
-      this.setState({
-        showAlter: true,
-        currentCard: chord,
-        currentList: list,
-        chordOptRoot: root
-      })
+  const handleAlterChordWindow = (chord, list, root) => {
+    if(!showAlter) {
+      setShowAlter(true)
+      setCurrentCard(chord)
+      setCurrentList(list)
+      setChordOptRoot(root)
     }
-    if(this.state.showAlter===true) {
-      this.setState({
-        showAlter: false,
-        currentCard: '',
-        currentList: '',
-        chordOptRoot: ''
-      })
+    if(showAlter) {
+      setShowAlter(false)
+      setCurrentCard('')
+      setCurrentList('')
+      setChordOptRoot('')
     }
   }
 
-  handleViewMenuWindow () {
-    if(this.state.showViewMenu===false) {
-      this.setState({
-        showViewMenu: true,
-      })
+  const handleViewMenuWindow = () => {
+    showViewMenu===true ? setShowViewMenu(false) : setShowViewMenu(true)
+  }
+
+  const handleTonicMenuWindow = () => {
+    showTonicMenu ? setShowTonicMenu(false) : setShowTonicMenu(true)
+  }
+
+  const handleScaleMenuWindow = () => {
+    showScaleMenu ? setShowScaleMenu(false) : setShowScaleMenu(true)
+  }
+
+  const handleStringsMenuWindow = () => {
+    showStringsMenu===true ? setShowStringsMenu(false) : setShowStringsMenu(true)
+  }
+
+  const handleTutorialWindow = () => {
+    if(!showTutorial) {
+      setShowTutorial(true)
     }
-    if(this.state.showViewMenu===true) {
-      this.setState({
-        showViewMenu: false,
-      })
+    if(showTutorial) {
+      setShowTutorial(false)
+      setRenderView('Map Scales')
     }
   }
 
-  handleTonicMenuWindow () {
-    if(this.state.showTonicMenu===false) {
-      this.setState({
-        showTonicMenu: true,
-      })
+  const handleWelcomeWindow = () => {
+    if(!showWelcome) {
+      setShowWelcome(true)
     }
-    if(this.state.showTonicMenu===true) {
-      this.setState({
-        showTonicMenu: false,
-      })
+    if(showWelcome) {
+      setShowWelcome(false)
+      setHideScale('Show Scale')
     }
   }
 
-  handleScaleMenuWindow () {
-    if(this.state.showScaleMenu===false) {
-      this.setState({
-        showScaleMenu: true,
-      })
+  const handleConstructionFindStructuresWindow = () => {
+    showFindStructures ? setShowFindStructures(false) : setShowFindStructures(true)
+  }
+
+  const handleChordFocus = (f) => {
+    setChordFocus(f)
+  }
+
+  const handleChordDegrees = () => {
+    if (displayChordDegrees) {
+      setDisplayChordDegrees(false)
+      setChordDegButtonClass('chordDegButton')
+      setChordFocus('Neutral')
     }
-    if(this.state.showScaleMenu===true) {
-      this.setState({
-        showScaleMenu: false,
-      })
+    if (!displayChordDegrees) {
+        setDisplayChordDegrees(true)
+        setChordDegButtonClass('chordDegButton toggle_on chordDegToggle')
     }
   }
 
-  handleStringsMenuWindow () {
-    if(this.state.showStringsMenu===false) {
-      this.setState({
-        showStringsMenu: true,
-      })
+  const handleHide = (e) => { setHideScale(e.target.title) }
+
+  const handleMoreSevenths = () => {
+    if (sevenths2) {
+      setSevenths2(false)
+       setMoreSeventhsButton('Show 7th Chords')
     }
-    if(this.state.showStringsMenu===true) {
-      this.setState({
-        showStringsMenu: false,
-      })
+    else {
+      setSevenths2(true)
+      setMoreSeventhsButton('Show Triads')
     }
   }
 
-  handleTutorialWindow () {
-    if(this.state.showTutorial===false) {
-      this.setState({
-        showTutorial: true,
-      })
-    }
-    if(this.state.showTutorial===true) {
-      this.setState({
-        showTutorial: false,
-        renderView: 'Map Scales',
-        mapScalesToggle: 'navOption toggle_on',
-        tutorialToggle: 'navOption',
-      })
-    }
-  }
-
-  handleWelcomeWindow () {
-    if(this.state.showWelcome===false) {
-      this.setState({
-        showWelcome: true,
-      })
-    }
-    if(this.state.showWelcome===true) {
-      this.setState({
-        showWelcome: false,
-        hideScale: 'Show Scale'
-      })
-    }
-  }
-
-  handleConstructionMapChordsWindow () {
-    if(this.state.showConstructionMapChords===false) {
-      this.setState({
-        showConstructionMapChords: true,
-      })
-    }
-    if(this.state.showConstructionMapChords===true) {
-      this.setState({
-        showConstructionMapChords: false,
-        renderView: 'Map Scales',
-        mapScalesToggle: 'navOption toggle_on',
-        mapChordsToggle: 'navOption',
-      })
-    }
-  }
-
-  handleConstructionFindStructuresWindow () {
-    if(this.state.showConstructionFindStructures===false) {
-      this.setState({
-        showConstructionFindStructures: true,
-      })
-    }
-    if(this.state.showConstructionFindStructures===true) {
-      this.setState({
-        showConstructionFindStructures: false,
-        findStructuresToggle: 'navOption',
-      })
-    }
-  }
-
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  handleChordFocus (focus) {
-    this.setState({
-      chordFocus: focus
-    })
-  }
-
-  handleChordDegrees() {
-    if (this.state.displayChordDegrees) {
-      this.setState({
-        displayChordDegrees: false,
-        chordDegButtonClass: 'chordDegButton',
-        chordFocus: 'Neutral'
-      })
-    }
-    if (!this.state.displayChordDegrees) {
-      this.setState({
-        displayChordDegrees: true,
-        chordDegButtonClass: 'chordDegButton toggle_on chordDegToggle'
-      })
-    }
-  }
-
-  handleHide(e) {
-    var hideScale = e.target.title
-    if(hideScale === 'Hide Scale') {
-      this.setState({
-        hideScale: hideScale,
-        scaleHiddenToggle: 'toggle_on',
-        scaleUnfocusedToggle: 'toggle_off',
-        scaleVisibleToggle: 'toggle_off',
-        scaleVisibleLabel: 'Show Scale',
-        scaleHiddenLabel: 'Scale Hidden',
-        scaleUnfocusedLabel: 'Unfocus Scale',
-      })
-    }
-    if(hideScale === 'Show Scale') {
-      this.setState({
-        hideScale: hideScale,
-        scaleHiddenToggle: 'toggle_off',
-        scaleUnfocusedToggle: 'toggle_off',
-        scaleVisibleToggle: 'toggle_on',
-        scaleVisibleLabel: 'Scale Visible',
-        scaleHiddenLabel: 'Hide Scale',
-        scaleUnfocusedLabel: 'Unfocus Scale',
-      })
-    }
-    if(hideScale === 'Unfocus Scale') {
-      this.setState({
-        hideScale: hideScale,
-        scaleHiddenToggle: 'toggle_off',
-        scaleUnfocusedToggle: 'toggle_on',
-        scaleVisibleToggle: 'toggle_off',
-        scaleVisibleLabel: 'Show Scale',
-        scaleHiddenLabel: 'Hide Scale',
-        scaleUnfocusedLabel: 'Scale Unfocused',
-      })
-    }
-  }
-
-  handleMoreSevenths () {
-    this.state.sevenths2 === true ?
-    this.setState({
-      sevenths2: false,
-      moreSeventhsButton: 'Show 7th Chords'
-    }) :
-    this.setState({
-      sevenths2: true,
-      moreSeventhsButton: 'Show Triads'
-    })
-  }
-
-  handleNavChoice(e) {
+  const handleNavChoice = (e) => {
     let choice = e.target.title
     if (choice === 'mapChords') {
-      this.setState({
-        mapChordsToggle: 'navOption toggle_on',
-        mapScalesToggle: 'navOption',
-        findChordsToggle: 'navOption',
-        findScalesToggle: 'navOption',
-        tutorialToggle: 'navOption',
-        renderView: 'Map Chords',
-        sharedNotes: [],
-        displayChordDegrees: false,
-        chordFocus: 'Neutral',
+      setRenderView('Map Chords')
+      setSharedNotes([])
+      setDisplayChordDegrees(false)
+      setChordFocus('Neutral')
+    }
+    if (calcChord1.length > 0 && calcChord2.length > 0) {
+      let copy = calcChord1.slice()
+      let copy2 = calcChord2.slice()
+      let [shared, checker, checker2, final] = [[], {}, {}, {}]
+
+      copy.forEach((note) => {
+        checker[note] = true
+        checker[enharmonic(note)] = true
       })
-      if (this.state.calcChord1.length > 0 && this.state.calcChord2.length > 0) {
-        let copy = this.state.calcChord1.slice()
-        let copy2 = this.state.calcChord2.slice()
-        let sharedNotes = []
-        let checker = {}
-        let checker2 = {}
-        let final = {}
 
-        for (var i = 0; i < copy.length; i++) {
-          let enharm = this.enharmonic(copy[i])
-          checker[copy[i]] = true
-          checker[enharm] = true
-        }
-        for (var j = 0; j < copy2.length; j++) {
-          let enharm = this.enharmonic(copy2[j])
-          checker2[copy2[j]] = true
-          checker2[enharm] = true
-        }
-        console.log('checker', checker)
-        console.log('checker2', checker2)
+      copy2.forEach((note) => {
+        checker2[note] = true
+        checker2[enharmonic(note)] = true
+      })
 
-        for (var k = 0; k < copy.length; k++) {
-          let enharm = this.enharmonic(copy[k])
-          console.log("🚀 ~ file: App.jsx ~ line 256 ~ App ~ .then ~ enharm ", enharm )
-          if (checker2[copy[k]] || checker2[enharm]) {
-            final[copy[k]] = true
-            final[enharm] = true
-          }
+      copy.forEach((note) => {
+        let enharm = enharmonic(note)
+        if (checker2[note] || checker2[enharm]) {
+          final[note] = true
+          final[enharm] = true
         }
-        for (var l = 0; l < copy2.length; l++) {
-          let enharm = this.enharmonic(copy2[l])
-          console.log("🚀 ~ file: App.jsx ~ line 263 ~ App ~ .then ~ enharm", enharm)
-          if (checker[copy2[l]] || checker[enharm]) {
-            final[copy2[l]] = true
-            final[enharm] = true
-          }
+      })
+
+      copy2.forEach((note) => {
+        let enharm = enharmonic(note)
+        if (checker[note] || checker[enharm]) {
+          final[note] = true
+          final[enharm] = true
         }
-        for (var finalNote in final) {
-          sharedNotes.push(finalNote)
-        }
-        this.updateShared(sharedNotes)
+      })
+
+      for (let finalNote in final) {
+        shared.push(finalNote)
       }
+      updateShared(shared)
     }
     if (choice === 'mapScales') {
-      this.setState({
-        mapChordsToggle: 'navOption',
-        mapScalesToggle: 'navOption toggle_on',
-        findStructuresToggle: 'navOption',
-        tutorialToggle: 'navOption',
-        renderView: 'Map Scales',
-        sharedNotes: [],
-        displayChordDegrees: false,
-        chordFocus: 'Neutral',
-      })
-      if (this.state.currentChordTones.length > 0 && this.state.currentChordTones2.length > 0) {
-        let checker = {}
-        let sharedNotes = []
-        var notes = this.state.currentChordTones
-        var notes2 = this.state.currentChordTones2
-        for(var i = 0; i < notes.length; i++) {
-          checker[notes[i]] = true
-        }
-        for (var j = 0; j < notes2.length; j++) {
-          if (checker[notes2[j]]) {
-            sharedNotes.push(notes2[j])
-          }
-        }
-        this.updateShared(sharedNotes)
+      setRenderView('Map Scales')
+      setSharedNotes([])
+      setDisplayChordDegrees(false)
+      setChordFocus('Neutral')
+
+      if (currentChordTones.length > 0 && currentChordTones2.length > 0) {
+        let [checker, shared] = [{}, []]
+        let notes = currentChordTones
+        let notes2 = currentChordTones2
+        notes.forEach((note) => { checker[note] = true })
+        notes2.forEach((note) => {
+          if (checker[note]) { shared.push(note) }
+        })
+        updateShared(shared)
       }
     }
-    if (choice === 'findStructures') {
-      this.setState({
-        mapChordsToggle: 'navOption',
-        mapScalesToggle: 'navOption',
-        findStructuresToggle: 'navOption toggle_on',
-        tutorialToggle: 'navOption',
-      })
-      this.handleConstructionFindStructuresWindow()
-    }
+    if (choice === 'findStructures') { handleConstructionFindStructuresWindow() }
     if (choice === 'tutorial') {
-      this.setState({
-        mapChordsToggle: 'navOption',
-        mapScalesToggle: 'navOption',
-        findStructuresToggle: 'navOption',
-        tutorialToggle: 'navOption toggle_on',
-        renderView: "Tutorial"
-      })
-      this.handleTutorialWindow()
+      setRenderView("Tutorial")
+      handleTutorialWindow()
     }
   }
 
-  handleNeckNotes (e) {
-    var labelType = e.target.title
-    if (labelType === 'Note Names') {
-      this.setState({
-        labelType: labelType,
-      })
+  const handleNeckNotes = (e) => { setLabelType(e.target.title) }
+
+  const handleScaleChange = (e) => {
+    let scale = e.target.title
+    let name = e.target.outerText
+    setScaleType(scale)
+    setScaleName(name)
+    getScale(tonic, scale)
+  }
+
+  const handleScaleChange2 = (e) => {
+    let scale = e.target.value
+    setScaleType(scale)
+    getScale2(tonic2, scale)
+  }
+
+  const handleSecondScale = () => {
+    if (second) {
+      setSecond(false)
+      setSecondButton('Compare a Scale')
     }
-    if (labelType === 'Scale Degrees') {
-      this.setState({
-        labelType: labelType,
-      })
-    }
-    if (labelType === 'Solfege') {
-      this.setState({
-        labelType: labelType,
-      })
-    }
-  }
-
-  handleScaleChange(e) {
-    var key = this.state.tonic
-    var scale = e.target.title
-    var name = e.target.outerText
-    this.setState({
-      scaleType: scale,
-      scaleName: name
-    })
-    this.getScale(key, scale)
-  }
-
-  handleScaleChange2(e) {
-    var key = this.state.tonic2
-    var scale = e.target.value
-    this.setState({
-      scaleType: scale
-    })
-    this.getScale2(key, scale)
-  }
-
-  handleSecondScale () {
-    this.state.second === true ?
-    this.setState({
-      second: false,
-      secondButton: 'Compare a Scale'
-    })
-    :
-    this.setState({
-      second: true,
-      secondButton: 'Just One Scale'
-    })
-  }
-
-  handleSevenths () {
-    this.state.sevenths === true ?
-    this.setState({
-      sevenths: false,
-      defaultType: 'Triads'
-    })
-    :
-    this.setState({
-      sevenths: true,
-      defaultType: 'Seventh Chords'
-    })
-  }
-
-  handleSingleOrCompare (e) {
-    if(this.state.compare) {
-      this.setState({
-        compare: false,
-        selectedChord2: {},
-        currentChordTones2: [],
-        chordTwoSelected: false,
-        sharedNotes: false,
-        chordFocus: 'Neutral',
-        chord2ObjKey: '',
-      })
-    }
-    if(!this.state.compare) {
-      this.setState({
-        compare: true,
-      })
+    else {
+      setSecond(true)
+      setSecondButton('Just One Scale')
     }
   }
 
-  handleStringChoice(e) {
-    var mirror=[];
-    var data = e.target.title
-    var dataArray = data.split('.')
-    var instrument = dataArray[0]
-    var tuning = dataArray[1]
-    var strings = dataArray.slice(2)
+  const handleSevenths = () => {
+    if (sevenths) {
+      setSevenths(false)
+      setDefaultType('Triads')
+    }
+    else {
+      setSevenths(true)
+      setDefaultType('Seventh Chords')
+    }
+  }
+
+  const handleSingleOrCompare = (e) => {
+    if(compare) {
+      setCompare(false)
+      setCurrentChordTones2([])
+      setChordTwoSelected(false)
+      setChord2ObjKey('')
+      setChordFocus('Neutral')
+      setSharedNotes(false)
+      setSelectedChord2({})
+    }
+    if(!compare) {
+      setCompare(true)
+    }
+  }
+
+  const handleStringChoice = (e) => {
+    let dataArray = e.target.split('.')
+    let [instrument, tuning] = [dataArray[0], dataArray[1]]
+    let [strings, mirrored] = [dataArray.slice(2), []]
     strings.forEach((string) => {
-      mirror.unshift(string)
+      mirrored.unshift(string)
     })
-    this.setState({
-      currentStrings: strings,
-      currentStringsMirror: mirror,
-      instrument: instrument,
-      tuning: tuning
-    })
+    setCurrentStrings(strings)
+    setCurrentStringsMirror(mirrored)
+    setInstrument(instrument)
+    setTuning(tuning)
   }
 
-  handleSubmit (e) {
-    axios.post('/notes', {
-      user: this.state.username,
-      notes: this.state.noteBody
-    })
-    .then(() => {
-      console.log('notes sent')
-    })
-    .catch((err) => {
-    console.log("🚀 ~ file: App.jsx ~ line 178 ~ App ~ handleSubmit ~ err", err)
-    })
-  }
+  const handleTonicChange = (e) => { getScale(e.target.title, scaleType) }
 
-  handleTonicChange(e) {
-    var key = e.target.title
-    var scale = this.state.scaleType
-    this.getScale(key, scale)
-  }
+  const handleTonicChange2 = (e) => { getScale2(e.target.value, scaleType2) }
 
-  handleTonicChange2(e) {
-    var key = e.target.value
-    var scale = this.state.scaleType2
-    this.getScale2(key, scale)
-  }
-
-  handleRootChange(e, which) {
-    let rootKey = `root${which}`
-    let voicingKey = `voicing${which}`
+  const handleRootChange = (e, which) => {
     let root = e.target.outerText
-    this.setState({
-      [rootKey]: root
-    })
-    if(this.state[voicingKey]) {
-      this.getChord(root, this.state[voicingKey], which)
+    if (which === '1'){
+      setRoot1(root)
+      if(voicing1) {
+        getChord(root, voicing1, which)
+      }
+    }
+    if (which === '2'){
+      setRoot2(root)
+      if(voicing2) {
+        getChord(root, voicing2, which)
+      }
     }
   }
 
-  handleVoicingChange(e, which) {
-    let rootKey = `root${which}`
-    let voicingKey = `voicing${which}`
-    let voicing = e.target.outerText
-    this.setState({
-      [voicingKey]: voicing
-    })
-    if(this.state[rootKey]) {
-      this.getChord(this.state[rootKey], voicing, which)
+  const handleVoicingChange = (e, which) => {
+    let spelling = e.target.outerText
+    if(which === '1') {
+      setVoicing1(spelling)
+      if(root1) {
+        getChord(root1, spelling, which)
+      }
+    }
+    if(which === '2') {
+      setVoicing2(spelling)
+      if(root2) {
+        getChord(root2, spelling, which)
+      }
     }
   }
 
-
-  handleView (e) {
-    let view = e.target.title
+  const handleView = (e) => {
+    let v = e.target.title
     let middle;
     let stringbox;
 
-    if (view === 'Traditional View' || view === 'Mirror View') {
+    if (v === 'Traditional View' || v === 'Mirror View') {
       middle = 'inner_middle';
       stringbox = 'stringbox';
     }
 
-    if (view === 'Lefty Traditional View' || view === 'Lefty Mirror View') {
+    if (v === "Lefty Traditional View" || v === "Lefty Mirror View") {
       middle = 'inner_middle_left';
       stringbox = 'stringbox_left';
     }
-
-    this.setState({
-      view: view,
-      middle: middle,
-      stringbox: stringbox,
-      lowestFret: 0,
-      highestFret: 17,
-      neckWindowMode: 'none',
-      useCapo: false
-
-    })
+    setView(v)
+    setMiddle(middle)
+    setStringbox(stringbox)
+    setLowestFret(0)
+    setHighestFret(17)
+    setNeckWindowMode('none')
+    setUseCapo(false)
   }
 
-  markNote (note) {
-    if(this.state.selNote === note) {
-      this.setState({
-        selNote: ''
-      })
+  const markNote = (note) => { selNote === note ? setSelNote('') : setSelNote(note) }
+
+  const resetCard = (chord) => {
+    const count = resetVoicingCount - 1
+    const cards = ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6']
+    const index = cards.indexOf(chord)
+    const typeFunc = [setCh0, setCh1, setCh2, setCh3, setCh4, setCh5, setCh6]
+    const altFunc = [setCh0Alt, setCh1Alt, setCh2Alt, setCh3Alt, setCh4Alt, setCh5Alt, setCh6Alt]
+
+    typeFunc[index]('Triad')
+    altFunc[index](false)
+    setResetVoicingCount(count)
+  }
+
+  const resetChords = () => {
+    setCh0('Triad')
+    setCh1('Triad')
+    setCh2('Triad')
+    setCh3('Triad')
+    setCh4('Triad')
+    setCh5('Triad')
+    setCh6('Triad')
+    setCh0Alt(false)
+    setCh1Alt(false)
+    setCh2Alt(false)
+    setCh3Alt(false)
+    setCh4Alt(false)
+    setCh5Alt(false)
+    setCh6Alt(false)
+    setResetVoicingCount(0)
+  }
+
+  const setWholeNeck = () => {
+    setLowestFret(0)
+    setHighestFret(17)
+    setNeckWindowMode('none')
+    setUseCapo(false)
+  }
+
+  const resetAll = () => {
+    setWholeNeck();
+    if (renderView ==='Map Scales') {
+      resetChords()
+      setSelectedChord({})
+      setSelectedChord2({})
+      setCurrentChordTones([])
+      setCurrentChordTones2([])
+      setChordOneSelected(false)
+      setChordTwoSelected(false)
+      setSharedNotes([])
+      setCompare(false)
+      setDisplayChordDegrees(false)
+      setChordDegButtonClass('chordDegButton')
+      setChordFocus('Neutral')
+      setSelNote('')
+      setResetVoicingCount(0)
+      setLowestFret(0)
+      setHighestFret(17)
     }
-    if(this.state.selNote !== note) {
-      this.setState({
-        selNote: note
-      })
-    }
-  }
-
-  resetCard(chord) {
-    let typeKey = chord
-    let alterKey = `${typeKey}Alt`
-    let count = this.state.resetVoicingCount
-    count--
-    this.setState({
-      [typeKey]: 'Triad',
-      [alterKey]: false,
-      resetVoicingCount: count,
-    })
-  }
-
-  resetChords() {
-    this.setState({
-      ch0: 'Triad',
-      ch1: 'Triad',
-      ch2: 'Triad',
-      ch3: 'Triad',
-      ch4: 'Triad',
-      ch5: 'Triad',
-      ch6: 'Triad',
-      ch0Alt: false,
-      ch1Alt: false,
-      ch2Alt: false,
-      ch3Alt: false,
-      ch4Alt: false,
-      ch5Alt: false,
-      ch6Alt: false,
-      resetVoicingCount: 0,
-    })
-  }
-
-  setWholeNeck () {
-    this.setState({
-      lowestFret:0,
-      highestFret:17,
-      neckWindowMode: 'none',
-      useCapo: false
-    })
-  }
-
-  resetAll() {
-    this.setWholeNeck();
-    if (this.state.renderView ==='Map Scales') {
-      this.resetChords()
-      this.setState({
-        selectedChord:{},
-        selectedChord2:{},
-        currentChordTones: [],
-        currentChordTones2: [],
-        chordOneSelected: false,
-        chordTwoSelected: false,
-        sharedNotes: [],
-        compare: false,
-        displayChordDegrees: false,
-        chordDegButtonClass: 'chordDegButton',
-        chordFocus: 'Neutral',
-        selNote: '',
-        resetVoicingCount: 0,
-        lowestFret: 0,
-        highestFret: 17
-      })
-    }
-    if (this.state.renderView ==='Map Chords') {
-      this.clear('1')
-      this.clear('2')
-      this.setState({
-        sharedNotes: [],
-        displayChordDegrees: false,
-        chordDegButtonClass: 'chordDegButton',
-        chordFocus: 'Neutral',
-        lowestFret: 0,
-        highestFret: 17
-      })
+    if (renderView === 'Map Chords') {
+      clear('1')
+      clear('2')
+      setSharedNotes([])
+      setDisplayChordDegrees(false)
+      setChordDegButtonClass('chordDegButton')
+      setChordFocus('Neutral')
+      setLowestFret(0)
+      setHighestFret(17)
     }
   }
 
-  selectChord (chord, tones, key) {
-    if(chord === this.state.selectedChord && this.state.compare && this.state.chordTwoSelected === false) {
-      this.setState({
-        selectedChord: {},
-        currentChordTones: [],
-        chordOneSelected: false,
-        compare: false,
-        displayChordDegrees: false,
-        chordDegButtonClass: 'chordDegButton',
-        chordObjKey: '',
-      })
+  const selectChord = (chord, tones, key) => {
+    if(chord === selectedChord && compare && !chordTwoSelected) {
+      setSelectedChord({})
+      setCurrentChordTones([])
+      setChordOneSelected(false)
+      setChordObjKey('')
+      setCompare(false)
+      setDisplayChordDegrees(false)
+      setChordDegButtonClass('chordDegButton')
     }
-    if(!this.state.chordOneSelected || !this.state.compare) {
-      this.setState({
-        selectedChord: chord,
-        currentChordTones: tones,
-        chordOneSelected: true,
-        selNote: '',
-        chordObjKey: key,
-      })
+    if(!chordOneSelected || !compare) {
+      setCurrentChordTones(tones)
+      setChordOneSelected(true)
+      setChordObjKey(key)
+      setSelectedChord(chord)
     }
-    if (chord === this.state.selectedChord && !this.state.compare && this.state.chordOneSelected) {
-      this.setState({
-        selectedChord: {},
-        currentChordTones: [],
-        chordOneSelected: false,
-        displayChordDegrees: false,
-        chordDegButtonClass: 'chordDegButton',
-        chordObjKey: '',
-      })
+    if (chord === selectedChord && !compare && chordOneSelected) {
+      setSelectedChord({})
+      setCurrentChordTones([])
+      setChordOneSelected(false)
+      setChordObjKey('')
+      setDisplayChordDegrees(false)
+      setChordDegButtonClass('chordDegButton')
     }
   }
 
-  selectChord2 (chord, tones, key) {
-    console.log(chord)
-    console.log(tones)
-    let checker = {}
-    let notes = this.state.currentChordTones
-    var sharedNotes = []
-
-    for(var i = 0; i < notes.length; i++) {
-      checker[notes[i]] = true
+  const selectChord2 = (chord, tones, key) => {
+    let [notes, checker, shared] = [currentChordTones, {}, []]
+    notes.forEach((note) => { checker[note] = true })
+    tones.forEach((tone) => { if (checker[tone]) { shared.push(tone) } })
+    if(!compare) {
+      setSelectedChord2({})
+      setCurrentChordTones2([])
+      setChordTwoSelected(false)
+      setChord2ObjKey('')
+      setChordFocus('Neutral')
+      setSharedNotes([])
     }
-
-    for (var j = 0; j < tones.length; j++) {
-      if (checker[tones[j]]) {
-        sharedNotes.push(tones[j])
-      }
+    if (chord === selectedChord) {
+      setSelectedChord({})
+      setSelectedChord2({})
+      setCurrentChordTones([])
+      setCurrentChordTones2([])
+      setChordOneSelected(false)
+      setChordTwoSelected(false)
+      setChordFocus('Neutral')
+      setSharedNotes([])
+      setCompare(false)
+      setDisplayChordDegrees(false)
+      setChordDegButtonClass('chordDegButton')
+      setChordObjKey('')
+      setChord2ObjKey('')
     }
-
-    if(this.state.compare === false) {
-      this.setState({
-        selectedChord2: {},
-        currentChordTones2: [],
-        chordTwoSelected: false,
-        chordFocus: 'Neutral',
-        sharedNotes: [],
-        chord2ObjKey: '',
-      })
+    else if (chord === selectedChord2) {
+      setSelectedChord2({})
+      setCurrentChordTones2([])
+      setChordTwoSelected(false)
+      setChordFocus('Neutral')
+      setSharedNotes([])
+      setChord2ObjKey('')
     }
-    if (chord === this.state.selectedChord) {
-      this.setState({
-        selectedChord: {},
-        currentChordTones: [],
-        selectedChord2: {},
-        currentChordTones2: [],
-        chordOneSelected: false,
-        chordTwoSelected: false,
-        chordFocus: 'Neutral',
-        sharedNotes: [],
-        compare: false,
-        displayChordDegrees: false,
-        chordDegButtonClass: 'chordDegButton',
-        chordObjKey: '',
-        chord2ObjKey: '',
-      })
-    } else if (chord === this.state.selectedChord2) {
-      this.setState({
-        selectedChord2: {},
-        currentChordTones2: [],
-        chordTwoSelected: false,
-        chordFocus: 'Neutral',
-        sharedNotes: [],
-        chord2ObjKey: '',
-      })
-    } else {
-      this.setState({
-        selectedChord2: chord,
-        currentChordTones2: tones,
-        chordTwoSelected: true,
-        sharedNotes: sharedNotes,
-        chord2ObjKey: key,
-      })
+    else {
+      setSelectedChord2(chord)
+      setCurrentChordTones2(tones)
+      setChordTwoSelected(true)
+      setSharedNotes(shared)
+      setChord2ObjKey(key)
     }
   }
 
-  setStart(fret) {
-    this.setState ({
-      lowestFret: fret
-    })
+  const setStart = (fret) => { setLowestFret(fret) }
+  const setEnd = (fret) => { setHighestFret(fret) }
+
+  const setCapo = (fret) => {
+    if(traditional || mirror) { setStart(fret) }
+    if (lefty || leftyMirror) { setEnd(fret) }
+    setUseCapo(true)
+    setNeckWindowMode('none')
   }
 
-  setEnd(fret) {
-    this.setState ({
-      highestFret: fret
-    })
-  }
-
-  setCapo(fret) {
-    if(this.state.view === 'Traditional View' || this.state.view === 'Mirror View') {
-      this.setStart(fret)
-    }
-    if (this.state.view === 'Lefty Traditional View' || this.state.view === 'Lefty Mirror View') {
-      this.setEnd(fret)
-    }
-    this.setState({
-      useCapo: true,
-      neckWindowMode: 'none'
-    })
-  }
-
-  setNeckWindowMode (choice) {
-    let current = this.state.neckWindowMode
-    let lefty = (this.state.view === 'Lefty Traditional View' || this.state.view === 'Lefty Mirror View')
-    choice !== current ?
-    this.setState({
-      neckWindowMode: choice
-    })
-    :
-    this.setState({
-      neckWindowMode: 'none'
-    })
-    if((!lefty && choice === 'from start') || (lefty && choice === 'to end') || choice === 'window') {
-      this.setState({
-        useCapo: false
-      })
+  const changeNeckWindowMode = (choice) => {
+    let current = neckWindowMode
+    let left = (lefty || leftyMirror)
+    choice !== current ? setNeckWindowMode(choice) : setNeckWindowMode('none')
+    if((!left && choice === 'from start') || (left && choice === 'to end') || choice === 'window') {
+      setUseCapo(false)
     }
   }
 
-  setWindowCycle(stage) {
-    this.setState({
-      windowCycle: stage
-    })
-    if (stage === 'off') {
-      this.setNeckWindowMode('none')
-    }
+  const updateWindowCycle = (stage) => {
+    setWindowCycle(stage)
+    if (stage === 'off') { setNeckWindowMode('none') }
   }
 
-
-
-  setTones (tones, key) {
-    this.setState({
-      currentChordTones: tones,
-      chordObjKey: key,
-    })
+  const setTones = (tones, key) => {
+    setCurrentChordTones(tones)
+    setChordObjKey(key)
   }
 
-  setTones2 (tones, key) {
-    this.setState({
-      currentChordTones2: tones,
-      chord2ObjKey: key,
-    })
+  const setTones2 = (tones, key) => {
+    setCurrentChordTones2(tones)
+    setChord2ObjKey(key)
   }
 
-  updateShared (notes) {
-    this.setState({
-      sharedNotes: notes
-    })
-  }
+  const updateShared = (notes) => { setSharedNotes(notes) }
 
-  render() {
-    return (
-      <div className = "page">
-        <div className="top">
-          <Header
-            handleNavChoice={this.handleNavChoice}
-            mapChordsToggle={this.state.mapChordsToggle}
-            mapScalesToggle={this.state.mapScalesToggle}
-            findStructuresToggle={this.state.findStructuresToggle}
-            tutorialToggle={this.state.tutorialToggle}
-            settingsToggle={this.state.settingsToggle}
+  return (
+    <div className = "page">
+      <div className="top">
+        <Header
+          handleNavChoice={handleNavChoice}
+          renderView={renderView}
+        />
+        <Welcome
+          showWelcome={showWelcome}
+          handleWelcomeWindow={handleWelcomeWindow}
+          handleNavChoice={handleNavChoice}
           />
-          <Welcome
-            showWelcome={this.state.showWelcome}
-            handleWelcomeWindow={this.handleWelcomeWindow}
-            handleNavChoice={this.handleNavChoice}
-            />
-          <ConstructionMapChords
-            showConstructionMapChords={this.state.showConstructionMapChords}
-            handleConstructionMapChordsWindow={this.handleConstructionMapChordsWindow}
-            handleNavChoice={this.handleNavChoice}
-            />
-          <ConstructionFindStructures
-            showConstructionFindStructures={this.state.showConstructionFindStructures}
-            handleConstructionFindStructuresWindow={this.handleConstructionFindStructuresWindow}
-            handleNavChoice={this.handleNavChoice}
-          />
-          <Tutorial
-            showTutorial={this.state.showTutorial}
-            handleTutorialWindow={this.handleTutorialWindow}
-          />
-        </div>
-          <ViewMenu
-            handleView={this.handleView}
-            handleViewMenuWindow={this.handleViewMenuWindow}
-            showViewMenu={this.state.showViewMenu}
-          />
-          <StringsMenu
-            handleStringChoice={this.handleStringChoice}
-            handleStringsMenuWindow={this.handleStringsMenuWindow}
-            showStringsMenu={this.state.showStringsMenu}
-            name={'stringsMenu'}
-          />
-        <div className="neckDash">
-          <NeckDash
-            chordOneSelected={this.state.chordOneSelected}
-            handleViewMenuWindow={this.handleViewMenuWindow}
-            handleStringsMenuWindow={this.handleStringsMenuWindow}
-            view={this.state.view}
-            instrument={this.state.instrument}
-            tuning={this.state.tuning}
-            sharedNotes={this.state.sharedNotes}
-            name={'hideScaleMenu'}
-            handleHide={this.handleHide}
-            resetAll={this.resetAll}
-            resetVoicingCount={this.state.resetVoicingCount}
-            scaleHiddenToggle={this.state.scaleHiddenToggle}
-            scaleUnfocusedToggle={this.state.scaleUnfocusedToggle}
-            scaleVisibleToggle={this.state.scaleVisibleToggle}
-            scaleHiddenLabel={this.state.scaleHiddenLabel}
-            scaleUnfocusedLabel={this.state.scaleUnfocusedLabel}
-            scaleVisibleLabel={this.state.scaleVisibleLabel}
-            selNote={this.state.selNote}
-            render={this.state.renderView}
-            chordDegButtonClass={this.state.chordDegButtonClass}
-            handleChordDegrees={this.handleChordDegrees}
-            root1={this.state.root1}
-            root2={this.state.root2}
-            voicing1={this.state.voicing1}
-            voicing2={this.state.voicing2}
-            displayChordDegrees={this.state.displayChordDegrees}
-            chordFocus={this.state.chordFocus}
-            handleNeckNotes={this.handleNeckNotes}
-            setWholeNeck={this.setWholeNeck}
-            setNeckWindowMode={this.setNeckWindowMode}
-            neckWindowMode={this.state.neckWindowMode}
-            start={this.state.lowestFret}
-            end={this.state.highestFret}
-            setWindowCycle={this.setWindowCycle}
-            labelType={this.state.labelType}
-            />
-        </div>
-        <div className="middle">
-          <div className="neckComponent">
-
-            {!['Violin', 'Viola', 'Cello'].includes(this.state.instrument) ?
-              <FretGuide
-                name ={'guideContainerUpper'}
-                view={this.state.view}
-                neckWindowMode={this.state.neckWindowMode}
-                setStart={this.setStart}
-                setEnd={this.setEnd}
-                setCapo={this.setCapo}
-                windowCycle={this.state.windowCycle}
-                setWindowCycle={this.setWindowCycle}
-              />: null
-            }
-            <div className={`${this.state.middle}`}>
-              <div className={`${this.state.stringbox}`}>
-                <StringSet
-                  allStrings={this.state.strings}
-                  strings={this.state.currentStrings}
-                  stringsMirror={this.state.currentStringsMirror}
-                  stringsLeft={this.state.stringsLeft}
-                  scale={this.state.scale}
-                  scaleChord1={this.state.currentChordTones}
-                  scaleChord2={this.state.currentChordTones2}
-                  view={this.state.view}
-                  chordOneSelected={this.state.chordOneSelected}
-                  chordTwoSelected={this.state.chordTwoSelected}
-                  selectedChord={this.state.selectedChord}
-                  selectedChord2={this.state.selectedChord2}
-                  hideScale={this.state.hideScale}
-                  solfege={this.state.solfege}
-                  scaleDegrees={this.state.scaleDegrees}
-                  chordDegrees={this.state.chordDegrees}
-                  chordDegreesUpper={this.state.chordDegreesUpper}
-                  keyCenter={this.state.keyCenter}
-                  labelType={this.state.labelType}
-                  chordFocus={this.state.chordFocus}
-                  displayChordDegrees={this.state.displayChordDegrees}
-                  instrument={this.state.instrument}
-                  render={this.state.renderView}
-                  selNote={this.state.selNote}
-                  chordObjKey={this.state.chordObjKey}
-                  chord2ObjKey={this.state.chord2ObjKey}
-                  calcChord1={this.state.calcChord1}
-                  calcChord2={this.state.calcChord2}
-                  noteRefs1={this.state.noteRefs1}
-                  noteRefs2={this.state.noteRefs2}
-                  chordType1={this.state.chordType1}
-                  chordType2={this.state.chordType2}
-                  enharmonic={this.enharmonic}
-                  lowestFret={this.state.lowestFret}
-                  highestFret={this.state.highestFret}
-                  useCapo={this.state.useCapo}
-                />
-              </div>
-            </div>
-            {!['Violin', 'Viola', 'Cello'].includes(this.state.instrument) ?
-              <FretGuide
-                name ={'guideContainerLower'}
-                view={this.state.view}
-                neckWindowMode={this.state.neckWindowMode}
-                setStart={this.setStart}
-                setEnd={this.setEnd}
-                setCapo={this.setCapo}
-                windowCycle={this.state.windowCycle}
-                setWindowCycle={this.setWindowCycle}
-              />: null
-            }
-          </div>
-        </div>
-        {this.state.renderView === 'Map Scales' ?
-          <div className='map_scales_bottom_render'>
-            <MapScalesRender
-              ch0={this.state.ch0}
-              ch1={this.state.ch1}
-              ch2={this.state.ch2}
-              ch3={this.state.ch3}
-              ch4={this.state.ch4}
-              ch5={this.state.ch5}
-              ch6={this.state.ch6}
-              ch0Alt={this.state.ch0Alt}
-              ch1Alt={this.state.ch1Alt}
-              ch2Alt={this.state.ch2Alt}
-              ch3Alt={this.state.ch3Alt}
-              ch4Alt={this.state.ch4Alt}
-              ch5Alt={this.state.ch5Alt}
-              ch6Alt={this.state.ch6Alt}
-              chordDegButtonClass={this.state.chordDegButtonClass}
-              chordFocus={this.state.chordFocus}
-              chordOneSelected={this.state.chordOneSelected}
-              chordTwoSelected={this.state.chordTwoSelected}
-              compareChords={this.state.compare}
-              currentCard={this.state.currentCard}
-              currentChord={this.state.selectedChord}
-              currentChord2={this.state.selectedChord2}
-              currentChordTones={this.state.currentChordTones}
-              currentChordTones2={this.state.currentChordTones2}
-              defaultType={this.state.defaultType}
-              displayChordDegrees={this.state.displayChordDegrees}
-              handleAlterChord={this.handleAlterChord}
-              handleAlterChordWindow={this.handleAlterChordWindow}
-              handleChordDegrees={this.handleChordDegrees}
-              handleChordFocus={this.handleChordFocus}
-              handleLock={this.handleSingleOrCompare}
-              handleNeckNotes={this.handleNeckNotes}
-              handleScaleChange={this.handleScaleChange}
-              handleScaleChange2={this.handleScaleChange2}
-              handleScaleMenuWindow={this.handleScaleMenuWindow}
-              handleSevenths={this.handleSevenths}
-              handleTonicChange={this.handleTonicChange}
-              handleTonicChange2={this.handleTonicChange2}
-              handleTonicMenuWindow={this.handleTonicMenuWindow}
-              keyCenter={this.state.keyCenter}
-              list={this.state.currentList}
-              markNote={this.markNote}
-              noteNameToggle={this.state.noteNameToggle}
-              resetCard={this.resetCard}
-              resetChords={this.resetChords}
-              resetVoicingCount={this.state.resetVoicingCount}
-              root={this.state.chordOptRoot}
-              scale={this.state.scale}
-              scaleDegreeToggle={this.state.scaleDegreeToggle}
-              scaleName={this.state.scaleName}
-              selectChord={this.selectChord}
-              selectChord2={this.selectChord2}
-              selNote={this.state.selNote}
-              setTones={this.setTones}
-              setTones2={this.setTones2}
-              sevenths={this.state.sevenths}
-              sharedNotes={this.state.sharedNotes}
-              showAlter={this.state.showAlter}
-              showScaleMenu={this.state.showScaleMenu}
-              showTonicMenu={this.state.showTonicMenu}
-              solfegeToggle={this.state.solfegeToggle}
-              tonic={this.state.tonic}
-              updateShared={this.updateShared}
-            />
-          </div>
-          :
-          this.state.renderView === 'Map Chords' ?
-          <MapChordsRender
-            handleRootChange={this.handleRootChange}
-            handleVoicingChange={this.handleVoicingChange}
-            root1={this.state.root1}
-            root2={this.state.root2}
-            voicing1={this.state.voicing1}
-            voicing2={this.state.voicing2}
-            chord1={this.state.calcChord1}
-            chord2={this.state.calcChord2}
-            clear={this.clear}
-            handleChordFocus={this.handleChordFocus}
-            chordFocus={this.state.chordFocus}
-            sharedNotes={this.state.sharedNotes}
-          />
-          : this.state.renderView === 'Beginner' ?
-          <BeginnerNeck/>
-          :null
-        }
+        <ConstructionFindStructures
+          showConstructionFindStructures={showFindStructures}
+          handleConstructionFindStructuresWindow={handleConstructionFindStructuresWindow}
+          handleNavChoice={handleNavChoice}
+        />
+        <Tutorial
+          showTutorial={showTutorial}
+          handleTutorialWindow={handleTutorialWindow}
+        />
       </div>
-    )
-  }
+        <ViewMenu
+          handleView={handleView}
+          handleViewMenuWindow={handleViewMenuWindow}
+          showViewMenu={showViewMenu}
+        />
+        <StringsMenu
+          handleStringChoice={handleStringChoice}
+          handleStringsMenuWindow={handleStringsMenuWindow}
+          showStringsMenu={showStringsMenu}
+          name={'stringsMenu'}
+        />
+      <div className="neckDash">
+        <NeckDash
+          chordOneSelected={chordOneSelected}
+          handleViewMenuWindow={handleViewMenuWindow}
+          handleStringsMenuWindow={handleStringsMenuWindow}
+          view={view}
+          instrument={instrument}
+          tuning={tuning}
+          sharedNotes={sharedNotes}
+          name={'hideScaleMenu'}
+          handleHide={handleHide}
+          resetAll={resetAll}
+          resetVoicingCount={resetVoicingCount}
+          selNote={selNote}
+          render={renderView}
+          chordDegButtonClass={chordDegButtonClass}
+          handleChordDegrees={handleChordDegrees}
+          root1={root1}
+          root2={root2}
+          voicing1={voicing1}
+          voicing2={voicing2}
+          displayChordDegrees={displayChordDegrees}
+          chordFocus={chordFocus}
+          handleNeckNotes={handleNeckNotes}
+          setWholeNeck={setWholeNeck}
+          setNeckWindowMode={changeNeckWindowMode}
+          neckWindowMode={neckWindowMode}
+          start={lowestFret}
+          end={highestFret}
+          setWindowCycle={updateWindowCycle}
+          labelType={labelType}
+          hideScale={hideScale}
+          />
+      </div>
+      <div className="middle">
+        <div className="neckComponent">
+
+          {!['Violin', 'Viola', 'Cello'].includes(instrument) ?
+            <FretGuide
+              name ={'guideContainerUpper'}
+              view={view}
+              neckWindowMode={neckWindowMode}
+              setStart={setStart}
+              setEnd={setEnd}
+              setCapo={setCapo}
+              windowCycle={windowCycle}
+              setWindowCycle={updateWindowCycle}
+            />: null
+          }
+          <div className={`${middle}`}>
+            <div className={`${stringbox}`}>
+              <StringSet
+                allStrings={strings}
+                strings={currentStrings}
+                stringsMirror={currentStringsMirror}
+                stringsLeft={stringsLeft}
+                scale={scale}
+                scaleChord1={currentChordTones}
+                scaleChord2={currentChordTones2}
+                view={view}
+                chordOneSelected={chordOneSelected}
+                chordTwoSelected={chordTwoSelected}
+                selectedChord={selectedChord}
+                selectedChord2={selectedChord2}
+                hideScale={hideScale}
+                solfege={solfege}
+                scaleDegrees={scaleDegrees}
+                chordDegrees={chordDegrees}
+                chordDegreesUpper={chordDegreesUpper}
+                keyCenter={keyCenter}
+                labelType={labelType}
+                chordFocus={chordFocus}
+                displayChordDegrees={displayChordDegrees}
+                instrument={instrument}
+                render={renderView}
+                selNote={selNote}
+                chordObjKey={chordObjKey}
+                chord2ObjKey={chord2ObjKey}
+                calcChord1={calcChord1}
+                calcChord2={calcChord2}
+                noteRefs1={noteRefs1}
+                noteRefs2={noteRefs2}
+                chordType1={chordType1}
+                chordType2={chordType2}
+                enharmonic={enharmonic}
+                lowestFret={lowestFret}
+                highestFret={highestFret}
+                useCapo={useCapo}
+              />
+            </div>
+          </div>
+          {!['Violin', 'Viola', 'Cello'].includes(instrument) ?
+            <FretGuide
+              name ={'guideContainerLower'}
+              view={view}
+              neckWindowMode={neckWindowMode}
+              setStart={setStart}
+              setEnd={setEnd}
+              setCapo={setCapo}
+              windowCycle={windowCycle}
+              setWindowCycle={updateWindowCycle}
+            />: null
+          }
+        </div>
+      </div>
+      {renderView === 'Map Scales' ?
+        <div className='map_scales_bottom_render'>
+          <MapScalesRender
+            ch0={ch0}
+            ch1={ch1}
+            ch2={ch2}
+            ch3={ch3}
+            ch4={ch4}
+            ch5={ch5}
+            ch6={ch6}
+            ch0Alt={ch0Alt}
+            ch1Alt={ch1Alt}
+            ch2Alt={ch2Alt}
+            ch3Alt={ch3Alt}
+            ch4Alt={ch4Alt}
+            ch5Alt={ch5Alt}
+            ch6Alt={ch6Alt}
+            chordDegButtonClass={chordDegButtonClass}
+            chordFocus={chordFocus}
+            chordOneSelected={chordOneSelected}
+            chordTwoSelected={chordTwoSelected}
+            compareChords={compare}
+            currentCard={currentCard}
+            currentChord={selectedChord}
+            currentChord2={selectedChord2}
+            currentChordTones={currentChordTones}
+            currentChordTones2={currentChordTones2}
+            defaultType={defaultType}
+            displayChordDegrees={displayChordDegrees}
+            handleAlterChord={handleAlterChord}
+            handleAlterChordWindow={handleAlterChordWindow}
+            handleChordDegrees={handleChordDegrees}
+            handleChordFocus={handleChordFocus}
+            handleLock={handleSingleOrCompare}
+            handleNeckNotes={handleNeckNotes}
+            handleScaleChange={handleScaleChange}
+            handleScaleChange2={handleScaleChange2}
+            handleScaleMenuWindow={handleScaleMenuWindow}
+            handleSevenths={handleSevenths}
+            handleTonicChange={handleTonicChange}
+            handleTonicChange2={handleTonicChange2}
+            handleTonicMenuWindow={handleTonicMenuWindow}
+            keyCenter={keyCenter}
+            list={currentList}
+            markNote={markNote}
+            resetCard={resetCard}
+            resetChords={resetChords}
+            resetVoicingCount={resetVoicingCount}
+            root={chordOptRoot}
+            scale={scale}
+            scaleName={scaleName}
+            selectChord={selectChord}
+            selectChord2={selectChord2}
+            selNote={selNote}
+            setTones={setTones}
+            setTones2={setTones2}
+            sevenths={sevenths}
+            sharedNotes={sharedNotes}
+            showAlter={showAlter}
+            showScaleMenu={showScaleMenu}
+            showTonicMenu={showTonicMenu}
+            tonic={tonic}
+            updateShared={updateShared}
+          />
+        </div>
+        :
+        renderView === 'Map Chords' ?
+        <MapChordsRender
+          handleRootChange={handleRootChange}
+          handleVoicingChange={handleVoicingChange}
+          root1={root1}
+          root2={root2}
+          voicing1={voicing1}
+          voicing2={voicing2}
+          chord1={calcChord1}
+          chord2={calcChord2}
+          clear={clear}
+          handleChordFocus={handleChordFocus}
+          chordFocus={chordFocus}
+          sharedNotes={sharedNotes}
+        />
+        : renderView === 'Beginner' ?
+        <BeginnerNeck/>
+        :null
+      }
+    </div>
+  )
 }
 
 export default App;
+

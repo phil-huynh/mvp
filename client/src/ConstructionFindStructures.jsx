@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal } from 'react-bootstrap'
 
-var ConstructionFindStructures = ({showConstructionFindStructures, handleConstructionFindStructuresWindow, handleNavChoice}) => {
+export const ConstructionFindStructures = ({showConstructionFindStructures, handleConstructionFindStructuresWindow, handleNavChoice}) => {
 
   return (
     <Modal
@@ -56,4 +56,3 @@ var ConstructionFindStructures = ({showConstructionFindStructures, handleConstru
   )
 }
 
-export default ConstructionFindStructures;

@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal } from 'react-bootstrap'
 
-var Welcome = ({showWelcome, handleWelcomeWindow, handleNavChoice}) => {
+export const Welcome = ({showWelcome, handleWelcomeWindow, handleNavChoice}) => {
 
   return (
     <Modal
@@ -53,4 +53,3 @@ var Welcome = ({showWelcome, handleWelcomeWindow, handleNavChoice}) => {
   )
 }
 
-export default Welcome;

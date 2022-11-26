@@ -1,14 +1,13 @@
 import React from 'react'
-import Chord from './Chord.jsx'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { Chord } from './Chord.jsx'
 import { Container, Row, Col } from 'react-bootstrap'
 
-var ScaleChords = ({keyCenter, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, compareChords, ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt, handleAlterChordWindow, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleLock, displayChordDegrees, handleChordFocus, chordFocus, chordTwoSelected, sharedNotes, selNote, updateShared}) => {
+export const ScaleChords = ({keyCenter, sevenths, selectChord, selectChord2, currentChord, currentChord2, chordOneSelected, compareChords, ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt, handleAlterChordWindow, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleLock, displayChordDegrees, handleChordFocus, chordFocus, chordTwoSelected, sharedNotes, selNote, updateShared}) => {
 
-  var chords = keyCenter.chords
-  var type = [ch0, ch1, ch2, ch3, ch4, ch5, ch6]
-  var whichChordAmI = ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6']
-  var wasAltered = [ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt]
+  let chords = keyCenter.chords
+  let type = [ch0, ch1, ch2, ch3, ch4, ch5, ch6]
+  let whichChordAmI = ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6']
+  let wasAltered = [ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt]
   if(chords) {
     var keyChords = [chords.oneChord, chords.twoChord, chords.threeChord, chords.fourChord, chords.fiveChord, chords.sixChord, chords.sevenChord]
   }
@@ -16,7 +15,7 @@ var ScaleChords = ({keyCenter, sevenths, selectChord, selectChord2, currentChord
   return (
     <Row>
       {chords && keyChords ? keyChords.map((chord, i) => (
-        <Col>
+        <Col key={`${i}${chord}`}>
           <Chord
             chord={chord}
             sevenths={sevenths}
@@ -51,6 +50,5 @@ var ScaleChords = ({keyCenter, sevenths, selectChord, selectChord2, currentChord
   )
 }
 
-export default ScaleChords;
 
 

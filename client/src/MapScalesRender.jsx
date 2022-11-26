@@ -1,12 +1,12 @@
 import React from 'react'
-import TonicMenu from './TonicMenu.jsx'
-import ScalesMenu from './ScalesMenu.jsx'
-import LabelMenu from './LabelMenu.jsx'
-import AlterChordOpt from './AlterChordOpt.jsx'
-import ScaleChords from './ScaleChords.jsx'
+import { TonicMenu } from './TonicMenu.jsx'
+import { ScalesMenu } from './ScalesMenu.jsx'
+import { LabelMenu } from './LabelMenu.jsx'
+import { AlterChordOpt } from './AlterChordOpt.jsx'
+import { ScaleChords } from './ScaleChords.jsx'
 
 
-var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt, chordDegButtonClass, chordFocus, chordOneSelected, chordTwoSelected, compareChords, currentCard, currentChord, currentChord2, currentChordTones, currentChordTones2, defaultType, displayChordDegrees, handleAlterChord, handleAlterChordWindow, handleChordDegrees, handleChordFocus, handleLock, handleScaleChange, handleScaleChange2, handleScaleMenuWindow, handleSevenths, handleTonicChange, handleTonicChange2, handleTonicMenuWindow, keyCenter, list, markNote, noteNameToggle, resetCard, resetChords, resetVoicingCount,root, scale, scaleDegreeToggle, scaleName, selectChord, selectChord2, selNote, setTones, setTones2, sevenths, sharedNotes, showAlter, showScaleMenu, showTonicMenu, solfegeToggle, tonic, updateShared}) => {
+export const MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt, chordDegButtonClass, chordFocus, chordOneSelected, chordTwoSelected, compareChords, currentCard, currentChord, currentChord2, currentChordTones, currentChordTones2, defaultType, displayChordDegrees, handleAlterChord, handleAlterChordWindow, handleChordDegrees, handleChordFocus, handleLock, handleScaleChange, handleScaleChange2, handleScaleMenuWindow, handleSevenths, handleTonicChange, handleTonicChange2, handleTonicMenuWindow, keyCenter, list, markNote, resetCard, resetChords, resetVoicingCount,root, scale, scaleName, selectChord, selectChord2, selNote, setTones, setTones2, sevenths, sharedNotes, showAlter, showScaleMenu, showTonicMenu, tonic, updateShared}) => {
 
 
   var resetClass = 'reset_button resetVoicings '
@@ -49,20 +49,18 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
         </div>
         <div className="spelledScale_container">
           <div className="spelledScale">
-            {scale ? scale.map((note) => (
-              sharedNotes.length > 0 && sharedNotes.includes(note) ?
-                <span className="sharedNoteInScale">{`   ${note}   `}</span>
+            {scale ? scale.map((note, i) => (
+                note === selNote ?
+                  <span className="noteRef targetNote" key={`${i}${note}`} onClick={()=>markNote(note)}>{`   ${note}   `}</span>
+                : sharedNotes.length > 0 && sharedNotes.includes(note) ?
+                  <span className="sharedNoteInScale" key={`${i}${note}`} onClick={()=>markNote(note)}>{`   ${note}   `}</span>
                 : currentChordTones.length > 0 && currentChordTones.includes(note) ?
-                  <span className="chord1NoteInScale">{`   ${note}   `}</span>
+                  <span className="chord1NoteInScale" key={`${i}${note}`} onClick={()=>markNote(note)}>{`   ${note}   `}</span>
                 : currentChordTones2.length > 0 && currentChordTones2.includes(note) ?
-                  <span className="chord2NoteInScale">{`   ${note}   `}</span>
-                : currentChordTones2.length > 0 && currentChordTones2.includes(note) ?
-                  <span className="chord2NoteInScale">{`   ${note}   `}</span>
-                : chordOneSelected=== false && chordTwoSelected === false && note === selNote?
-                  <span className="noteRef targetNote" onClick={()=>markNote(note)}>{`   ${note}   `}</span>
-                : chordOneSelected=== false && chordTwoSelected === false ?
-                  <span className="noteRef" onClick={()=>markNote(note)}>{`   ${note}   `}</span>
-                : <span>{`   ${note}   `}</span>
+                  <span className="chord2NoteInScale" key={`${i}${note}`} onClick={()=>markNote(note)}>{`   ${note}   `}</span>
+                :
+                  <span className="noteRef" key={`${i}${note}`} onClick={()=>markNote(note)}>{`   ${note}   `}</span>
+
             )): null}
           </div>
         </div>
@@ -151,4 +149,4 @@ var MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2A
   )
 }
 
-export default MapScalesRender
+export default MapScalesRender;

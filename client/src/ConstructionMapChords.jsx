@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal } from 'react-bootstrap'
 
-var ConstructionMapChords = ({showConstructionMapChords, handleConstructionMapChordsWindow, handleNavChoice}) => {
+export const ConstructionMapChords = ({showConstructionMapChords, handleConstructionMapChordsWindow, handleNavChoice}) => {
 
   return (
     <Modal
@@ -49,4 +49,3 @@ var ConstructionMapChords = ({showConstructionMapChords, handleConstructionMapCh
   )
 }
 
-export default ConstructionMapChords;

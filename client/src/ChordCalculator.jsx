@@ -1,6 +1,6 @@
 import React from 'react'
 
-var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, whichCalculator, chordDegrees, chordDegreesUpper, clear, chord, handleChordFocus, chordFocus, sharedNotes}) => {
+export const ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, whichCalculator, chordDegrees, chordDegreesUpper, clear, chord, handleChordFocus, chordFocus, sharedNotes}) => {
 
   const sharp = '#';
   const flat = '\u266D';
@@ -20,9 +20,9 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
   const rowSeven = [`7(${flat}9)`, `7(${sharp}9)`, `7(9, ${sharp}11)`, `7(9, ${flat}13)`, `7(${flat}9, ${flat}13)`,'7(9, 13)',`7(9, ${sharp}11, 13)`,`7(9, ${sharp}11, ${flat}13)`,'Altered Scale']
   const rowEight = ['maj Pentatonic','min Pentatonic','Dominant Pentatonic',`Dominant ${sharp}4 Pentatonic`,`maj ${sharp}4 Pentatonic`,'Altered Pentatonic','m(maj7) Pentatonic','Japanese Pentatonic','Egyptian Pentatonic']
 
-  var chordNameClass = `calc_chord_name${whichCalculator}`
-  var chordNoteClass = `calc_notes${whichCalculator}`
-  var clearClass = 'clear_button'
+  let chordNameClass = `calc_chord_name${whichCalculator}`
+  let chordNoteClass = `calc_notes${whichCalculator}`
+  let clearClass = 'clear_button'
 
 
   if (root || voicing) {
@@ -43,11 +43,11 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
           <div
             className={chordNoteClass}
           >
-            {chord.map((note) => (
+            {chord.map((note, i) => (
               sharedNotes.length > 0 && sharedNotes.includes(note) ?
-                <span className="calc_note calc_shared_note">{note}</span>
+                <span className="calc_note calc_shared_note" key={`note${i}-${note}`}>{note}</span>
               :
-                <span className="calc_note">{note}</span>
+                <span className="calc_note" key={`note${i}-${note}`}>{note}</span>
             ))}
           </div>
         </div>
@@ -93,9 +93,9 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
         </div>
       </div>
       <div className="rootSelector">
-        {notes.map((note) => (
+        {notes.map((note, i) => (
           note.length === 1 && root && note === root ?
-            <div className="whiteNoteContainer">
+            <div className="whiteNoteContainer" key={`note${i}-${note}`}>
               <div
                 className="whiteNote selectedRoot"
                 title={note}
@@ -105,7 +105,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             </div>
           :
           note.length === 1 ?
-            <div className="whiteNoteContainer">
+            <div className="whiteNoteContainer" key={`note${i}-${note}`}>
               <div
                 className="whiteNote"
                 title={note}
@@ -115,7 +115,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             </div>
           :
           note.length === 2 && root && note[0] === root ?
-            <div className="blackNote">
+            <div className="blackNote" key={`note${i}-${note}`}>
               <div className="blackNoteContainer">
                 <div
                   className="blackNoteName selectedRoot"
@@ -132,10 +132,10 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
                 >{note[1]}
                 </div>
               </div>
-              </div>
+            </div>
           :
           note.length === 2 && root && note[1] === root ?
-            <div className="blackNote">
+            <div className="blackNote" key={`note${i}-${note}`}>
               <div className="blackNoteContainer">
                 <div
                   className="blackNoteName"
@@ -155,7 +155,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             </div>
           :
           note.length === 2 ?
-            <div className="blackNote">
+            <div className="blackNote" key={`note${i}-${note}`}>
               <div className="blackNoteContainer">
                 <div
                   className="blackNoteName"
@@ -182,6 +182,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             voicing && type === voicing ?
               <div
                 className="type_choice_container"
+                key={`${type}-calc${whichCalculator}`}
                 >
                 <div
                   className="types_col selectedVoicing"
@@ -192,6 +193,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             :
             <div
               className="type_choice_container"
+              key={`${type}-calc${whichCalculator}`}
               >
               <div
               className="types_col"
@@ -206,6 +208,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             voicing && type === voicing ?
               <div
                 className="type_choice_container"
+                key={`${type}-calc${whichCalculator}`}
                 >
                 <div
                   className="types_col selectedVoicing"
@@ -216,6 +219,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             :
             <div
               className="type_choice_container"
+              key={`${type}-calc${whichCalculator}`}
               >
               <div
               className="types_col"
@@ -230,6 +234,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             voicing && type === voicing ?
               <div
                 className="type_choice_container"
+                key={`${type}-calc${whichCalculator}`}
                 >
                 <div
                   className="types_col selectedVoicing"
@@ -240,6 +245,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             :
             <div
               className="type_choice_container"
+              key={`${type}-calc${whichCalculator}`}
               >
               <div
               className="types_col"
@@ -254,6 +260,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             voicing && type === voicing ?
               <div
                 className="type_choice_container"
+                key={`${type}-calc${whichCalculator}`}
                 >
                 <div
                   className="types_col selectedVoicing"
@@ -264,6 +271,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             :
             <div
               className="type_choice_container"
+              key={`${type}-calc${whichCalculator}`}
               >
               <div
               className="types_col"
@@ -278,6 +286,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             voicing && type === voicing ?
               <div
                 className="type_choice_container"
+                key={`${type}-calc${whichCalculator}`}
                 >
                 <div
                   className="types_col selectedVoicing"
@@ -288,6 +297,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             :
             <div
               className="type_choice_container"
+              key={`${type}-calc${whichCalculator}`}
               >
               <div
               className="types_col"
@@ -302,6 +312,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             voicing && type === voicing ?
               <div
                 className="type_choice_container"
+                key={`${type}-calc${whichCalculator}`}
                 >
                 <div
                   className="types_col selectedVoicing"
@@ -312,6 +323,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             :
             <div
               className="type_choice_container"
+              key={`${type}-calc${whichCalculator}`}
               >
               <div
               className="types_col"
@@ -326,6 +338,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             voicing && type === voicing ?
               <div
                 className="type_choice_container"
+                key={`${type}-calc${whichCalculator}`}
                 >
                 <div
                   className="types_col selectedVoicing"
@@ -336,6 +349,7 @@ var ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, wh
             :
             <div
               className="type_choice_container"
+              key={`${type}-calc${whichCalculator}`}
               >
               <div
               className="types_col"

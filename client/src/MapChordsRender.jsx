@@ -1,7 +1,7 @@
 import React from 'react'
-import ChordCalculator from './ChordCalculator.jsx'
+import { ChordCalculator } from './ChordCalculator.jsx'
 
-var MapChordsRender = ({handleRootChange, handleVoicingChange, root1, root2, voicing1, voicing2, chord1, chord2, clear, handleChordFocus, chordFocus, sharedNotes}) => {
+export const MapChordsRender = ({handleRootChange, handleVoicingChange, root1, root2, voicing1, voicing2, chord1, chord2, clear, handleChordFocus, chordFocus, sharedNotes}) => {
 
   return (
     <div className="testContainer">
@@ -33,4 +33,3 @@ var MapChordsRender = ({handleRootChange, handleVoicingChange, root1, root2, voi
   )
 }
 
-export default MapChordsRender

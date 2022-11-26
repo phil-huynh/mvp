@@ -1,12 +1,12 @@
 import React from 'react'
-import HideScaleMenu from './HideScaleMenu.jsx'
-import LabelMenu from './LabelMenu.jsx'
+import { HideScaleMenu } from './HideScaleMenu.jsx'
+import { LabelMenu } from './LabelMenu.jsx'
 import { BiArrowFromLeft } from 'react-icons/bi'
 import { BiArrowFromRight } from 'react-icons/bi'
 import { CgArrowsShrinkH } from 'react-icons/cg'
 import { CgArrowsHAlt } from 'react-icons/cg'
 
-var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote, render, chordDegButtonClass, handleChordDegrees, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, handleNeckNotes,  setWholeNeck, setNeckWindowMode, neckWindowMode, start, end, setWindowCycle, labelType}) => {
+export const NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow, instrument, tuning, view, sharedNotes, name, handleHide, scaleHiddenToggle, scaleHiddenLabel, scaleUnfocusedToggle, scaleUnfocusedLabel, scaleVisibleToggle, scaleVisibleLabel, resetAll, resetVoicingCount, selNote, render, chordDegButtonClass, handleChordDegrees, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, handleNeckNotes,  setWholeNeck, setNeckWindowMode, neckWindowMode, start, end, setWindowCycle, labelType, hideScale}) => {
 
   let lefty = (view === 'Lefty Traditional View' || view === 'Lefty Mirror View')
   let resetClass = "reset_button resetAll"
@@ -52,12 +52,7 @@ var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow
         <HideScaleMenu
           name={'hideScaleMenu'}
           handleHide={handleHide}
-          scaleHiddenToggle={scaleHiddenToggle}
-          scaleUnfocusedToggle={scaleUnfocusedToggle}
-          scaleVisibleToggle={scaleVisibleToggle}
-          scaleHiddenLabel={scaleHiddenLabel}
-          scaleUnfocusedLabel={scaleUnfocusedLabel}
-          scaleVisibleLabel={scaleVisibleLabel}
+          hideScale={hideScale}
         />
         <LabelMenu
           handleNeckNotes={handleNeckNotes}
@@ -135,5 +130,4 @@ var NeckDash = ({chordOneSelected, handleViewMenuWindow, handleStringsMenuWindow
   )
 }
 
-export default NeckDash
 

@@ -1,15 +1,11 @@
 import React from 'react';
 
-var LabelMenu = ({name, handleNeckNotes, labelType})  => {
+export const LabelMenu = ({name, handleNeckNotes, labelType})  => {
 
-  let noteNames;
-  let scaleDegrees;
-  let solfege;
-
-
-  labelType === "Note Names" ? noteNames = "toggle_on" : noteNames = ''
-  labelType === "Scale Degrees" ? scaleDegrees = "toggle_on" : scaleDegrees = ''
-  labelType === "Solfege" ? solfege = "toggle_on" : solfege = ''
+  let [noteNames, scaleDegrees, solfege] = ['', '', ''];
+  labelType === "Note Names" ? noteNames = "toggle_on" : noteNames = '';
+  labelType === "Scale Degrees" ? scaleDegrees = "toggle_on" : scaleDegrees = '';
+  labelType === "Solfege" ? solfege = "toggle_on" : solfege = '';
 
   return (
     <div className="labelMenu_container">
@@ -40,4 +36,3 @@ var LabelMenu = ({name, handleNeckNotes, labelType})  => {
   )
 }
 
-export default LabelMenu;

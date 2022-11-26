@@ -1,6 +1,14 @@
 import React from 'react'
 
-var Header = ({handleNavChoice, mapChordsToggle, mapScalesToggle, findStructuresToggle, tutorialToggle, settingsToggle}) => {
+export const Header = ({handleNavChoice, renderView}) => {
+   let mapScales;
+   let mapChords;
+   let tutorial;
+
+   renderView === 'Map Scales' ? mapScales = 'toggle_on' : ''
+   renderView === 'Map Chords' ? mapChords = 'toggle_on' : ''
+   renderView === 'Tutorial' ? tutorial = 'toggle_on' : ''
+
   return (
     <span className="navbar">
       <span className="navTitle">
@@ -8,28 +16,28 @@ var Header = ({handleNavChoice, mapChordsToggle, mapScalesToggle, findStructures
       </span>
       <span></span>
       <span
-        className={mapChordsToggle}
+        className={`navOption ${mapChords}`}
         onClick={(e)=>handleNavChoice(e)}
         title="mapChords"
         >
         Map Chords
       </span>
       <span
-        className={mapScalesToggle}
+        className={`navOption ${mapScales}`}
         onClick={(e)=>handleNavChoice(e)}
         title="mapScales"
         >
         Map Scales
       </span>
       <span
-        className={findStructuresToggle}
+        className='navOption'
         onClick={(e)=>handleNavChoice(e)}
         title="findStructures"
         >
         Find Structures
       </span>
       <span
-        className={tutorialToggle}
+        className={`navOption ${tutorial}`}
         onClick={(e)=>handleNavChoice(e)}
         title="tutorial"
         >
@@ -41,4 +49,3 @@ var Header = ({handleNavChoice, mapChordsToggle, mapScalesToggle, findStructures
 }
 
 
-export default Header

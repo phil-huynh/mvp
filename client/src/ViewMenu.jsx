@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal } from 'react-bootstrap'
 
-var ViewMenu = ({showViewMenu, handleViewMenuWindow, handleView}) => {
+export const ViewMenu = ({showViewMenu, handleViewMenuWindow, handleView}) => {
 
   var views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View']
 
@@ -34,4 +34,3 @@ var ViewMenu = ({showViewMenu, handleViewMenuWindow, handleView}) => {
   )
 }
 
-export default ViewMenu;

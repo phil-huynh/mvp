@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { BiArrowFromLeft } from 'react-icons/bi'
 import { BiArrowFromRight } from 'react-icons/bi'
 
-var FretGuide = ({name, view, setStart, setEnd, setCapo, neckWindowMode, setWindowCycle, windowCycle}) => {
+export const FretGuide = ({name, view, setStart, setEnd, setCapo, neckWindowMode, setWindowCycle, windowCycle}) => {
 
 
   const dot = '\u2022'
@@ -345,7 +345,7 @@ var FretGuide = ({name, view, setStart, setEnd, setCapo, neckWindowMode, setWind
   )
 }
 
-export default FretGuide;
+
 
 
 

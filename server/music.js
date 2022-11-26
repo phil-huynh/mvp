@@ -17,10 +17,10 @@ const chromaticScaleSimple = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`,
 
 const tonicsToUse = ['C', 'D', 'E', 'F', 'G', 'A', 'B', `F${sharp}`, `C${sharp}`, `G${sharp}`, `D${sharp}`, `A${sharp}`, `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `C${flat}`, `F${flat}`, `E${sharp}`, `B${sharp}`]
 
-var allScales = {};
-var chordTypes = {};
+let allScales = {};
+let chordTypes = {};
 
-var solfege = {
+const solfege = {
   one: 'Do',
   sharpOne: 'Di',
   flatTwo: 'Ra',
@@ -40,7 +40,7 @@ var solfege = {
   seven: 'Ti'
 }
 
-var scaleDegrees = {
+const scaleDegrees = {
   one: '1',
   sharpOne: `${sharp}1`,
   flatTwo: `${flat}2`,
@@ -61,7 +61,7 @@ var scaleDegrees = {
   seven: '7'
 }
 
-var chordDegrees = {
+const chordDegrees = {
   one: 'R',
   sharpOne: `${sharp}1`,
   flatTwo: `${flat}2`,
@@ -82,7 +82,7 @@ var chordDegrees = {
   seven: '7'
 }
 
-var chordDegreesUpper = {
+const chordDegreesUpper = {
   one: 'R',
   sharpOne: `${sharp}1`,
   flatTwo: `${flat}9`,
@@ -102,8 +102,6 @@ var chordDegreesUpper = {
   flatSeven: `${flat}7`,
   seven: '7'
 }
-
-var chordTypes = {}
 
 var addChordType = (key, degrees, label, useUpper)=> {
   chordTypes[key] = {}
@@ -210,10 +208,8 @@ var flatNote = (note) => {
 }
 
 var findEnharmonicEquivalent = (note) => {
-  var noteBase = note[0];
-  var indexOfNoteBase = chromaticScaleSimple.indexOf(noteBase);
-  var distanceToMove = 0;
-  var enharmonicEquivalent = ""
+  let [noteBase, distanceToMove, enharmonicEquivalent] = [note[0], 0, ''];
+  let indexOfNoteBase = chromaticScaleSimple.indexOf(noteBase);
   for (var i = 1; i < note.length; i++) {
       if (note[i] === `${flat}`) {
           distanceToMove--;
@@ -258,7 +254,7 @@ var findEnharmonicEquivalent = (note) => {
 }
 
 var shiftNotes = (note, scale) => {
-  var shiftedScale = [];
+  let shiftedScale = [];
   if (scale[0] === note) {
     return scale;
   }
@@ -271,9 +267,7 @@ var shiftNotes = (note, scale) => {
           newStartIndex = i;
         }
       }
-    } else {
-      continue;
-    }
+    } else { continue; }
   }
   var back = scale.slice(0, newStartIndex);
   var front = scale.slice(newStartIndex);
@@ -282,13 +276,13 @@ var shiftNotes = (note, scale) => {
   return shiftedScale;
 }
 
-var initiateScaleObjects = () => {
+const initiateScaleObjects = () => {
   allScales.C = {}
   allScales.C.tonic = "C";
   allScales.C.natScaleDegrees = whiteNotes;
   allScales.C.scaleDegrees = {};
-  var sd = allScales.C.scaleDegrees
-  var scaleDegree = allScales.C.natScaleDegrees
+  let sd = allScales.C.scaleDegrees
+  let scaleDegree = allScales.C.natScaleDegrees
 
   sd.one = scaleDegree[0];
   sd.sharpOne = sharpNote(scaleDegree[0]);
@@ -311,7 +305,7 @@ var initiateScaleObjects = () => {
   sd.seven = scaleDegree[6];
 
 
-  var clockwiseScale = whiteNotes.slice();
+  let clockwiseScale = whiteNotes.slice();
   for (var i = 0; i < clockwise.length; i++) {
     clockwiseScale = shiftNotes(clockwise[i], clockwiseScale);
     clockwiseScale[6] = sharpNote(clockwiseScale[6]);
@@ -345,7 +339,7 @@ var initiateScaleObjects = () => {
 
   }
 
-  var counterClockwiseScale = whiteNotes.slice();
+  let counterClockwiseScale = whiteNotes.slice();
   for (var i = 0; i < counterClockwise.length; i++) {
     counterClockwiseScale = shiftNotes(counterClockwise[i], counterClockwiseScale);
     counterClockwiseScale[3] = flatNote(counterClockwiseScale[3]);
@@ -381,7 +375,7 @@ var initiateScaleObjects = () => {
   return allScales;
 }
 
-var allScales = initiateScaleObjects()
+allScales = initiateScaleObjects()
 
 var populateIntervalsObject = () => {
     var intervals = {};
@@ -421,7 +415,6 @@ var populateIntervalsObject = () => {
     intervals.min7[allScales[key].tonic] = allScales[key].scaleDegrees.flatSeven;
     intervals.maj7[allScales[key].tonic] = allScales[key].scaleDegrees.seven;
     }
-
     return intervals;
 }
 
@@ -669,7 +662,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].options.octaves.notes = [chordTones[0]]
     chords[key].options.octaves.name = `${chordName} Octaves`
     chords[key].options.octaves.label = `${chordLabel} Octaves`
-    chords[key].options.list.push('  Octaves')
+    chords[key].options.list.push(['  Octaves', 'octaves'])
 
     var addVoicing = (voicing, objKey, listName, name, label, quality, useUpper) => {
       let notes = []
@@ -694,7 +687,7 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
         if (label == null) {chords[key].options[objKey].label = `${chLabel}${quality}`;}
         if (label != null) {chords[key].options[objKey].label = `${label}`;}
         if (useUpper) {chords[key].options[objKey].useUpper = useUpper;}
-        chords[key].options.list.push(`${listName}`)
+        chords[key].options.list.push([`${listName}`, objKey])
       }
     }
 
@@ -708,9 +701,9 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhName = `${chordName}maj7`
       seventhLabel = `${chordLabel}maj7`
       seventhChord = 'major 7'
-      chords[key].options.list.push(' Triad')
-      chords[key].options.list.push('maj7')
-      chords[key].options.list.push('maj7 (shell)')
+      chords[key].options.list.push([' Triad', 'triad'])
+      chords[key].options.list.push(['maj7', 'seventhChord'])
+      chords[key].options.list.push(['maj7 (shell)', 'shell'])
     } // maj7
 
     if (chordTonesRef === JSON.stringify(['one', 'three', 'five', 'flatSeven'])) {
@@ -718,9 +711,9 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhName = `${chordName}7`
       seventhLabel = `${chordLabel}7`
       seventhChord = 'dominant 7'
-      chords[key].options.list.push(' Triad')
-      chords[key].options.list.push('7')
-      chords[key].options.list.push('7 (shell)')
+      chords[key].options.list.push([' Triad', 'triad'])
+      chords[key].options.list.push(['7', 'seventhChord'])
+      chords[key].options.list.push(['7 (shell)', 'shell'])
     } //dom7
 
     if (chordTonesRef === JSON.stringify(['one', 'three', 'sharpFive', 'seven'])) {
@@ -730,8 +723,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhName = `${chordName}(maj7)`
       seventhLabel = `${chordLabel}(maj7)`
       seventhChord = ' augmented major 7'
-      chords[key].options.list.push('+ Triad')
-      chords[key].options.list.push('+(maj7)')
+      chords[key].options.list.push(['+ Triad', 'triad'])
+      chords[key].options.list.push(['+(maj7)', 'seventhChord'])
     } //aug(maj7)
 
     if (chordTonesRef === JSON.stringify(['one', 'three', 'sharpFive', 'flatSeven'])) {
@@ -741,8 +734,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhName = `${chordName}7(${sharp}5)`
       seventhLabel = `${chordLabel}7(${sharp}5)`
       seventhChord = `dominant 7(${sharp}5)`
-      chords[key].options.list.push('+ Triad')
-      chords[key].options.list.push(`7(${sharp}5)`)
+      chords[key].options.list.push(['+ Triad', 'triad'])
+      chords[key].options.list.push([`7(${sharp}5)`, 'seventhChord'])
     } //dom #5
 
     if (chordTonesRef === JSON.stringify(['one', 'flatThree', 'five', 'seven'])) {
@@ -752,9 +745,9 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhName = `${chordName}(maj7)`
       seventhLabel = `${chordLabel}(maj7)`
       seventhChord = 'minor(major 7)'
-      chords[key].options.list.push('m Triad')
-      chords[key].options.list.push(`m(maj7)`)
-      chords[key].options.list.push(`m(maj7) (shell)`)
+      chords[key].options.list.push(['m Triad', 'triad'])
+      chords[key].options.list.push([`m(maj7)`, 'seventhChord'])
+      chords[key].options.list.push([`m(maj7) (shell)`, 'shell'])
     } //min(maj7)
 
     if (chordTonesRef === JSON.stringify(['one', 'flatThree', 'five', 'flatSeven'])) {
@@ -764,9 +757,9 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhName = `${chordName}7`
       seventhLabel = `${chordLabel}7`
       seventhChord = 'minor 7'
-      chords[key].options.list.push('m Triad')
-      chords[key].options.list.push(`m7`)
-      chords[key].options.list.push(`m7 (shell)`)
+      chords[key].options.list.push(['m Triad', 'triad'])
+      chords[key].options.list.push([`m7`, 'seventhChord'])
+      chords[key].options.list.push([`m7 (shell)`, 'shell'])
     } //min7
 
     if (chordTonesRef === JSON.stringify(['one', 'flatThree', 'flatFive', 'flatSeven'])) {
@@ -776,8 +769,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhName = `${chordTones[0]}m7(${flat}5)`
       seventhLabel = `${labelsSeven.roman}m7(${flat}5)`
       seventhChord = `minor 7(${flat}5)`
-      chords[key].options.list.push(`${dim} Triad`)
-      chords[key].options.list.push(`m7(${flat}5)`)
+      chords[key].options.list.push([`${dim} Triad`, 'triad'])
+      chords[key].options.list.push([`m7(${flat}5)`, 'seventhChord'])
     } //min7(b5)
 
     if (chordTonesRef === JSON.stringify(['one', 'flatThree', 'flatFive', 'dblFlatSeven'])) {
@@ -788,8 +781,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       seventhName = `${chordName}7`
       seventhLabel = `${chordLabel}7`
       seventhChord = 'full diminished 7'
-      chords[key].options.list.push(`${dim} Triad`)
-      chords[key].options.list.push(`${dim}7`)
+      chords[key].options.list.push([`${dim} Triad`, 'triad'])
+      chords[key].options.list.push([`${dim}7`, 'seventhChord'])
     } // full dim
 
     if (chordTonesRef === JSON.stringify(['one', 'three', 'flatFive', 'flatSeven'])) {
@@ -799,8 +792,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       chordQ = `major(${flat}5)`
       chordName += `maj(${flat}5)`
       chordLabel += `maj(${flat}5)`
-      chords[key].options.list.push(`maj ${flat}5 Triad`)
-      chords[key].options.list.push(`7(${flat}5)`)
+      chords[key].options.list.push([`maj ${flat}5 Triad`, 'triad'])
+      chords[key].options.list.push([`7(${flat}5)`, 'seventhChord'])
     } // dominant (b5)
 
     if (chordTonesRef === JSON.stringify(['one', 'three', 'flatFive', 'seven'])) {
@@ -810,8 +803,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       chordQ = `major(${flat}5)`
       chordName += `maj(${flat}5)`
       chordLabel += `maj(${flat}5)`
-      chords[key].options.list.push(`maj${flat}5 Triad`)
-      chords[key].options.list.push(`maj7(${flat}5)`)
+      chords[key].options.list.push([`maj${flat}5 Triad`, 'triad'])
+      chords[key].options.list.push([`maj7(${flat}5)`, 'seventhChord'])
     } // maj7 (b5)
 
     chords[key].options.triad.name = chordName
@@ -892,8 +885,8 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
     chords[key].options.fifthsVoicing.label = '5ths voicing'
     chords[key].options.fifthsVoicing.voicingObjKey = 'fifthsVoicing'
 
-    chords[key].options.list.push(`  Quartal Voicing`)
-    chords[key].options.list.push(`  Fifths Voicing`)
+    chords[key].options.list.push([`  Quartal Voicing`, 'quartalVoicing'])
+    chords[key].options.list.push([`  Fifths Voicing`, 'fifthsVoicing'])
 
     chords[key].tensions = {};
     chords[key].tensions.notes = tensions;
@@ -942,8 +935,6 @@ var makeChordsFor7NoteScale = (scale, tonic) => {
       chords[key].tensions.thirteen.avoid = false
     }
   }
-
-  // console.log(failed)
   return chords;
 }
 
@@ -1102,7 +1093,7 @@ var findChordSpellings = () => {
   }
 }
 
-console.log(intervals)
+
 
 
 

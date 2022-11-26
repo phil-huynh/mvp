@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal } from 'react-bootstrap'
 
-var Tutorial = ({showTutorial, handleTutorialWindow}) => {
+export const Tutorial = ({showTutorial, handleTutorialWindow}) => {
 
   var views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View']
 
@@ -96,4 +96,3 @@ var Tutorial = ({showTutorial, handleTutorialWindow}) => {
   )
 }
 
-export default Tutorial;

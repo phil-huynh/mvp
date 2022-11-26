@@ -1,7 +1,6 @@
 import React from 'react'
 
-var BeginnerNeck = () =>{
+export const BeginnerNeck = () =>{
 
 }
 
-export default BeginnerNeck

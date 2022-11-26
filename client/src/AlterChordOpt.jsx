@@ -1,8 +1,7 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal } from 'react-bootstrap'
 
-var AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterChord, list, root}) => {
+export const AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterChord, list, root}) => {
 
   const sharp = '#';
   const flat = '\u266D';
@@ -26,11 +25,12 @@ var AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterChord, list,
       </Modal.Header>
       {list ? list.map((choice) => (
         <div
+          key={choice}
           className='modalMenuChoice'
-          title={choice}
+          title={choice[1]}
           onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}
         >
-          {root}{choice}
+          {root}{choice[0]}
         </div>
       )):  null
       }
