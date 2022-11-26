@@ -551,7 +551,7 @@ const App = () => {
   }
 
   const handleStringChoice = (e) => {
-    let dataArray = e.target.split('.')
+    let dataArray = e.target.title.split('.')
     let [instrument, tuning] = [dataArray[0], dataArray[1]]
     let [strings, mirrored] = [dataArray.slice(2), []]
     strings.forEach((string) => {
