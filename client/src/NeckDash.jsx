@@ -9,15 +9,16 @@ import { useStoreContext } from '../StoreContext.js'
 
 export const NeckDash = () => {
 
-  const {handleViewMenuWindow, handleStringsMenuWindow, neckWindowMode, view, lowestFret, highestFret, handleChordDegrees, setNeckWindowMode, setWholeNeck, setWindowCycle, renderView, selNote, chordOneSelected, resetVoicingCount, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, sharedNotes, resetAll, instrument, tuning, chordDegButtonClass} = useStoreContext()
+  const {State, Setters, Conditions} = useStoreContext()
 
-  let lefty = (view === 'Lefty Traditional View' || view === 'Lefty Mirror View')
+  const {neckWindowMode, view, lowestFret, highestFret, renderView, selNote, chordOneSelected, resetVoicingCount, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, sharedNotes, instrument, tuning, chordDegButtonClass} = State
+
+  const {handleViewMenuWindow, handleStringsMenuWindow, handleChordDegrees, setNeckWindowMode, setWholeNeck, setWindowCycle, resetAll} = Setters
+
+  const {lefty, mapScales, mapChords, neutral} = Conditions
+
+  let [fromClass, toClass, windowClass, resetIconClass, capoClass] = ['', '', '', '', '']
   let resetClass = "reset_button resetAll"
-  let fromClass;
-  let toClass;
-  let windowClass;
-  let resetIconClass;
-  let capoClass;
   let iconClass = 'range_option_icons'
 
   neckWindowMode === 'from start' ? fromClass = iconClass + ' icon_toggle' : fromClass = iconClass
@@ -26,7 +27,9 @@ export const NeckDash = () => {
   neckWindowMode === 'capo' ? capoClass = iconClass + ' capo_toggle capo' : capoClass = iconClass + ' capo'
   lowestFret !== 0 || highestFret !== 17 ? resetIconClass = iconClass + ' neck_window_reset' : resetIconClass = iconClass
 
-  if (neckWindowMode !== 'none' || (renderView === 'Map Scales' && (selNote || chordOneSelected || resetVoicingCount)) || (renderView === 'Map Chords' && (root1 || root2 || voicing1 || voicing2 || displayChordDegrees || chordFocus !== 'Neutral'))) {
+  if (neckWindowMode !== 'none' || lowestFret !== 0 || highestFret !== 17 ||
+    (mapScales && (selNote || chordOneSelected || resetVoicingCount)) ||
+    (mapChords && (root1 || root2 || voicing1 || voicing2 || displayChordDegrees || !neutral))) {
     resetClass = "reset_button resetAll can_reset"
   }
 
@@ -49,13 +52,13 @@ export const NeckDash = () => {
           {`${instrument} : ${tuning}`}
         </span>
       </div>
-      {renderView === 'Map Scales' ?
+      {mapScales ?
       <div className="scale_neck_options">
         <HideScaleMenu/>
         <LabelMenu/>
       </div>
         :
-        renderView === 'Map Chords' ?
+        mapChords ?
           <div className="chordDegree_container">
             <span
               className={chordDegButtonClass}
@@ -106,11 +109,15 @@ export const NeckDash = () => {
           Capo
         </div>
       </div>
-      {sharedNotes.length > 0 ?
+      {sharedNotes.length > 1 ?
         <span className="sharedLight_container">
-          <span className="sharedLight">Shared Notes</span>
+          <span className="sharedLight">{`${sharedNotes.length} Shared Notes`}</span>
         </span>
-        : null
+        : sharedNotes.length === 1 ?
+        <span className="sharedLight_container">
+          <span className="sharedLight">{'1 Shared Note'}</span>
+        </span>
+        :null
       }
       <span className="resetAll_container">
         <span

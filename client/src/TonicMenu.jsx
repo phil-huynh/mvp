@@ -1,12 +1,14 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { useStoreContext } from '../StoreContext.js'
+import { Constants } from '../Constants.js'
 
 export const TonicMenu = () => {
 
-  const {sharp, flat, dblSharp, dblFlat, natural, dim, showTonicMenu, handleTonicMenuWindow, handleTonicChange} = useStoreContext()
-
-  const tonics = ['C', 'D', 'E', 'F', 'G', 'A', 'B', `B${flat}`, `E${flat}`, `A${flat}`, `D${flat}`, `G${flat}`, `F${sharp}`, `C${sharp}`, `G${sharp}`, `D${sharp}`, `A${sharp}`]
+  const {State, Setters, Conditions} = useStoreContext()
+  const {sharp, flat, dblSharp, dblFlat, natural, dim, tonics} = Constants
+  const {showTonicMenu} = State
+  const {handleTonicMenuWindow, handleTonicChange} = Setters
 
   return (
     <Modal

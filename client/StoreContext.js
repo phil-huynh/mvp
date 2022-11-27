@@ -1,29 +1,8 @@
 import React, { useState, createContext, useContext } from 'react';
+import { Constants } from './Constants.js'
 import axios from 'axios';
 
-const sharp = '#';
-const flat = '\u266D';
-const dblSharp = '\u{1D12A}';
-const dblFlat = '\u{1D12B}';
-const natural = '\u266E';
-const dim = '\u00B0';
-
-const standard = [
-    `E,F${flat},D${dblSharp}`,
-    `B,C${flat},A${dblSharp}`,
-    `G,F${dblSharp},A${dblFlat}`,
-    `D,C${dblSharp},E${dblFlat}`,
-    `A,G${dblSharp},B${dblFlat}`,
-    `E,F${flat},D${dblSharp}`
-]
-const standardMirror = [
-    `E,F${flat},D${dblSharp}`,
-    `A,G${dblSharp},B${dblFlat}`,
-    `D,C${dblSharp},E${dblFlat}`,
-    `G,F${dblSharp},A${dblFlat}`,
-    `B,C${flat},A${dblSharp}`,
-    `E,F${flat},D${dblSharp}`
-]
+const {sharp, flat, dblSharp, dblFlat, natural, dim, standard, standardMirror, enharmonic} = Constants
 
 export const StoreContext = createContext(null)
 
@@ -44,9 +23,7 @@ export default ({ children }) => {
   const [ch4Alt, setCh4Alt]  = useState(false)
   const [ch5Alt, setCh5Alt]  = useState(false)
   const [ch6Alt, setCh6Alt]  = useState(false)
-  const [choices, setChoices] = useState([])
   const [chords, setChords] = useState({})
-  const [chords2, setChords2] = useState({})
   const [chordDegrees, setChordDegrees] = useState({})
   const [chordDegreesUpper, setChordDegreesUpper] = useState({})
   const [chordDegButtonClass, setChordDegButtonClass] = useState('chordDegButton')
@@ -71,11 +48,9 @@ export default ({ children }) => {
   const [highestFret, setHighestFret] = useState(17)
   const [instrument, setInstrument] = useState('Guitar')
   const [keyCenter, setKeyCenter] = useState({})
-  const [keyCenter2, setKeyCenter2] = useState({})
   const [labelType, setLabelType] = useState('Note Names')
   const [lowestFret, setLowestFret] = useState(0)
   const [middle, setMiddle] = useState('inner_middle')
-  const [moreSeventhsButton, setMoreSeventhsButton] = useState('Show 7th Chords')
   const [neckWindowMode, setNeckWindowMode] = useState('none')
   const [noteRefs1, setNoteRefs1] = useState({})
   const [noteRefs2, setNoteRefs2] = useState({})
@@ -84,18 +59,13 @@ export default ({ children }) => {
   const [root1, setRoot1] = useState('')
   const [root2, setRoot2] = useState('')
   const [scale, setScale] = useState([])
-  const [scale2, setScale2] = useState([])
   const [scaleDegrees, setScaleDegrees] = useState({})
-  const [scaleName, setScaleName] = useState('Major')
   const [scaleType, setScaleType] = useState('major')
-  const [scaleType2, setScaleType2] = useState('major')
-  const [second, setSecond] = useState(false)
-  const [secondButton, setSecondButton] = useState('Compare a scale')
+  const [scaleName, setScaleName] = useState('Major')
   const [selectedChord, setSelectedChord] = useState({})
   const [selectedChord2, setSelectedChord2] = useState({})
   const [selNote, setSelNote] = useState('')
   const [sevenths, setSevenths] = useState(false)
-  const [sevenths2, setSevenths2] = useState(false)
   const [sharedNotes, setSharedNotes] = useState([])
   const [showAlter, setShowAlter] = useState(false)
   const [showFindStructures, setShowFindStructures] = useState(false)
@@ -105,13 +75,11 @@ export default ({ children }) => {
   const [showTutorial, setShowTutorial] = useState(false)
   const [showViewMenu, setShowViewMenu] = useState(false)
   const [showWelcome, setShowWelcome] = useState(true)
-  const [singleOrCompareButton, setSingleOrCompareButton] = useState('Single Chord')
   const [solfege, setSolfege] = useState({})
   const [strings, setStrings] = useState({})
   const [stringbox, setStringbox] = useState('stringbox')
   const [stringsLeft, setStringsLeft] = useState({})
   const [tonic, setTonic] = useState('')
-  const [tonic2, setTonic2] = useState('')
   const [tuning, setTuning] = useState(' E A D G B E ')
   const [useCapo, setUseCapo] = useState(false)
   const [view, setView] = useState('Traditional View')
@@ -119,15 +87,33 @@ export default ({ children }) => {
   const [voicing2, setVoicing2] = useState('')
   const [windowCycle, setWindowCycle] = useState('start')
 
-  const traditional = view === "Traditional View"
-  const lefty = view === "Lefty Traditional View"
-  const mirror = view === "Mirror View"
-  const leftyMirror = view === "Lefty Mirror View"
+
 
   const mapScales = renderView === 'Map Scales'
   const mapChords = renderView === 'Map Chords'
   const welcome = renderView === 'Welcome'
   const tutorial = renderView === 'Tutorial'
+
+  const trad = view === 'Traditional View'
+  const mirror = view === 'Mirror View'
+  const leftyTrad = view === 'Lefty Traditional View'
+  const leftyMirror = view === 'Lefty Mirror View'
+  const lefty = (leftyTrad || leftyMirror)
+  const mirrorViews = (mirror || leftyMirror)
+
+  const focus1 = chordFocus === 'Focus 1'
+  const focus2 = chordFocus === 'Focus 2'
+  const neutral = chordFocus === 'Neutral'
+
+  const showScale = hideScale === 'Show Scale'
+  const hiddenScale= hideScale === 'Hide Scale'
+  const unfocusScale = hideScale === 'Unfocus Scale'
+
+  const noteNameLabels = labelType === 'Note Names'
+  const scaleDegLabels = labelType === 'Scale Degrees'
+  const solfegeLabels = labelType === 'Solfege'
+
+
 
   const clear = (which) => {
     if (which === '1') {
@@ -150,19 +136,8 @@ export default ({ children }) => {
     }
   }
 
-  const getChoices = () => {
-    axios.get('/choices')
-      .then((res) => {
-          setChoices(res.data)
-      })
-      .catch((err) => {
-        console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err)
-      })
-  }
 
   const getChord = (root, type, which) => {
-
-    console.log('root', root, 'type', type, 'which', which)
     axios.get('/chord', { params: { root: root, type: type } })
       .then((res) => {
         if (which === '1') {
@@ -182,7 +157,7 @@ export default ({ children }) => {
   }
 
 
-  const updatedSharedNotes = () => {
+  const updateSharedNotes = () => {
     let [chord1, chord2] = [[], []]
     if(mapChords) {
       calcChord1 ? chord1 = calcChord1 : chord1 = []
@@ -200,7 +175,6 @@ export default ({ children }) => {
         checker[note] = true
         checker[enharmonic(note)] = true
       })
-
       copy2.forEach((note) => {
         checker2[note] = true
         checker2[enharmonic(note)] = true
@@ -213,7 +187,6 @@ export default ({ children }) => {
           final[enharm] = true
         }
       })
-
       copy2.forEach((note) => {
         let enharm = enharmonic(note)
         if (checker[note] || checker[enharm]) {
@@ -226,7 +199,6 @@ export default ({ children }) => {
           shared.push(finalNote)
         }
       }
-      console.log("shared", shared)
       setSharedNotes(shared)
     }
   }
@@ -258,19 +230,6 @@ export default ({ children }) => {
       })
   }
 
-  const getScale2 = (key, scale) => {
-    axios.get('/scales', { params: { key: key, scale: scale } })
-      .then((res) => {
-        setKeyCenter2(res.data)
-        setTonic2(res.data.tonic)
-        setScale2(res.data.scale)
-        setChords2(res.data.chords)
-      })
-      .catch((err) => {
-        console.log("🚀 ~ file: App.jsx ~ line 278 ~ App ~ getScale2 ~ err", err)
-      })
-  }
-
   const getStrings = () => {
     axios.get('/strings')
     .then((res) => {
@@ -280,54 +239,6 @@ export default ({ children }) => {
     .catch((err) => {
       console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err)
     })
-  }
-
-  const enharmonic = (note) => {
-    let chromaticScale = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
-
-    let [noteBase, distanceToMove, enharmonicEquivalent] = [note[0], 0, '']
-    let indexOfNoteBase = chromaticScale.indexOf(noteBase);
-    for (var i = 1; i < note.length; i++) {
-        if (note[i] === `${flat}`) {
-            distanceToMove--;
-        } else if (note[i] === `${sharp}`) {
-            distanceToMove++;
-        } else if ((note[i] + note[i + 1]) === `${dblSharp}`) {
-            distanceToMove += 2
-        } else if ((note[i] + note[i + 1]) === `${dblFlat}`) {
-            distanceToMove -= 2
-        } else if ((note[i - 1] + note[i]) === `${dblSharp}`) {
-            continue;
-        } else if ((note[i - 1] + note[i]) === `${dblFlat}`) {
-            continue;
-        }
-    }
-    let newIndex = indexOfNoteBase + distanceToMove;
-    if (newIndex >= chromaticScale.length) {
-        newIndex = indexOfNoteBase - (12 - distanceToMove);
-    } else if (newIndex < 0) {
-        newIndex = indexOfNoteBase + (distanceToMove + 12);
-    }
-    if (distanceToMove === 0) {
-        enharmonicEquivalent = noteBase;
-    } else if (note.length > 1 && (note[1] === `${sharp}` || note.includes(`${dblSharp}`))) {
-        if (distanceToMove === 1 && chromaticScale[newIndex].length === 2) {
-            enharmonicEquivalent = chromaticScale[newIndex][1];
-        } else if (chromaticScale[newIndex].length === 2) {
-            enharmonicEquivalent = chromaticScale[newIndex][0];
-        } else {
-            enharmonicEquivalent = chromaticScale[newIndex];
-        }
-    } else if (note.length > 1 && note[1] === `${flat}` || note.includes(`${dblFlat}`)) {
-        if (distanceToMove === -1 && chromaticScale[newIndex].length === 2) {
-            enharmonicEquivalent = chromaticScale[newIndex][0];
-        } else if (chromaticScale[newIndex].length === 2) {
-            enharmonicEquivalent = chromaticScale[newIndex][1];
-        } else {
-            enharmonicEquivalent = chromaticScale[newIndex];
-        }
-    }
-    return enharmonicEquivalent;
   }
 
   const handleAlterChord = (e) => {
@@ -341,6 +252,7 @@ export default ({ children }) => {
     altFunc[index](true)
     setResetVoicingCount(count)
   }
+
 
   const handleAlterChordWindow = (chord, list, root) => {
     if(!showAlter) {
@@ -358,7 +270,7 @@ export default ({ children }) => {
   }
 
   const handleViewMenuWindow = () => {
-    showViewMenu===true ? setShowViewMenu(false) : setShowViewMenu(true)
+    showViewMenu ? setShowViewMenu(false) : setShowViewMenu(true)
   }
 
   const handleTonicMenuWindow = () => {
@@ -370,7 +282,7 @@ export default ({ children }) => {
   }
 
   const handleStringsMenuWindow = () => {
-    showStringsMenu===true ? setShowStringsMenu(false) : setShowStringsMenu(true)
+    showStringsMenu ? setShowStringsMenu(false) : setShowStringsMenu(true)
   }
 
   const handleTutorialWindow = () => {
@@ -504,23 +416,6 @@ export default ({ children }) => {
     getScale(tonic, scale)
   }
 
-  const handleScaleChange2 = (e) => {
-    let scale = e.target.value
-    setScaleType(scale)
-    getScale2(tonic2, scale)
-  }
-
-  const handleSecondScale = () => {
-    if (second) {
-      setSecond(false)
-      setSecondButton('Compare a Scale')
-    }
-    else {
-      setSecond(true)
-      setSecondButton('Just One Scale')
-    }
-  }
-
   const handleSevenths = () => {
     if (sevenths) {
       setSevenths(false)
@@ -562,7 +457,6 @@ export default ({ children }) => {
 
   const handleTonicChange = (e) => { getScale(e.target.title, scaleType) }
 
-  const handleTonicChange2 = (e) => { getScale2(e.target.value, scaleType2) }
 
   const handleRootChange = (e, which) => {
     let root = e.target.outerText
@@ -627,7 +521,6 @@ export default ({ children }) => {
     const index = cards.indexOf(chord)
     const typeFunc = [setCh0, setCh1, setCh2, setCh3, setCh4, setCh5, setCh6]
     const altFunc = [setCh0Alt, setCh1Alt, setCh2Alt, setCh3Alt, setCh4Alt, setCh5Alt, setCh6Alt]
-
     typeFunc[index]('Triad')
     altFunc[index](false)
     setResetVoicingCount(count)
@@ -660,7 +553,7 @@ export default ({ children }) => {
 
   const resetAll = () => {
     setWholeNeck();
-    if (renderView ==='Map Scales') {
+    if (mapScales) {
       resetChords()
       setSelectedChord({})
       setSelectedChord2({})
@@ -678,7 +571,7 @@ export default ({ children }) => {
       setLowestFret(0)
       setHighestFret(17)
     }
-    if (renderView === 'Map Chords') {
+    if (mapChords) {
       clear('1')
       clear('2')
       setSharedNotes([])
@@ -760,21 +653,16 @@ export default ({ children }) => {
     }
   }
 
-  const setStart = (fret) => { setLowestFret(fret) }
-  const setEnd = (fret) => { setHighestFret(fret) }
 
   const setCapo = (fret) => {
-    if(traditional || mirror) { setStart(fret) }
-    if (lefty || leftyMirror) { setEnd(fret) }
+    lefty ? setHighestFret(fret) : setLowestFret(fret)
     setUseCapo(true)
     setNeckWindowMode('none')
   }
 
   const changeNeckWindowMode = (choice) => {
-    let current = neckWindowMode
-    let left = (lefty || leftyMirror)
-    choice !== current ? setNeckWindowMode(choice) : setNeckWindowMode('none')
-    if((!left && choice === 'from start') || (left && choice === 'to end') || choice === 'window') {
+    choice !== neckWindowMode ? setNeckWindowMode(choice) : setNeckWindowMode('none')
+    if((!lefty && choice === 'from start') || (lefty && choice === 'to end') || choice === 'window') {
       setUseCapo(false)
     }
   }
@@ -794,254 +682,161 @@ export default ({ children }) => {
     setChord2ObjKey(key)
   }
 
-  const updateShared = (notes) => { setSharedNotes(notes) }
+
 
 
   const store = {
-    sharp: sharp,
-    flat: flat,
-    dblSharp: dblSharp,
-    dblFlat: dblFlat,
-    natural: natural,
-    dim: dim,
-    calcChord1: calcChord1,
-    calcChord2: calcChord2,
-    ch0: ch0,
-    ch1: ch1,
-    ch2: ch2,
-    ch3: ch3,
-    ch4: ch4,
-    ch5: ch5,
-    ch6: ch6,
-    ch0Alt: ch0Alt,
-    ch1Alt: ch1Alt,
-    ch2Alt: ch2Alt,
-    ch3Alt: ch3Alt,
-    ch4Alt: ch4Alt,
-    ch5Alt: ch5Alt,
-    ch6Alt: ch6Alt,
-    choices: choices,
-    chords: chords,
-    chords2: chords2,
-    chordDegrees: chordDegrees,
-    chordDegreesUpper: chordDegreesUpper,
-    chordDegButtonClass: chordDegButtonClass,
-    chordOneSelected: chordOneSelected,
-    chordObjKey: chordObjKey,
-    chord2ObjKey: chord2ObjKey,
-    chordOptRoot: chordOptRoot,
-    chordTwoSelected: chordTwoSelected,
-    chordType1: chordType1,
-    chordType2: chordType2,
-    chordFocus: chordFocus,
-    currentCard: currentCard,
-    compare: compare,
-    currentChordTones: currentChordTones,
-    currentChordTones2: currentChordTones2,
-    currentList: currentList,
-    currentStrings: currentStrings,
-    currentStringsMirror: currentStringsMirror,
-    defaultType: defaultType,
-    displayChordDegrees: displayChordDegrees,
-    hideScale: hideScale,
-    highestFret: highestFret,
-    instrument: instrument,
-    keyCenter: keyCenter,
-    keyCenter2: keyCenter2,
-    labelType: labelType,
-    lowestFret: lowestFret,
-    middle: middle,
-    moreSeventhsButton: moreSeventhsButton,
-    neckWindowMode: neckWindowMode,
-    noteRefs1: noteRefs1,
-    noteRefs2: noteRefs2,
-    renderView: renderView,
-    resetVoicingCount: resetVoicingCount,
-    root1: root1,
-    root2: root2,
-    scale: scale,
-    scale2: scale2,
-    scaleDegrees: scaleDegrees,
-    scaleName: scaleName,
-    scaleType: scaleType,
-    scaleType2: scaleType2,
-    second: second,
-    secondButton: secondButton,
-    selectedChord: selectedChord,
-    selectedChord2: selectedChord2,
-    selNote: selNote,
-    sevenths: sevenths,
-    sevenths2: sevenths2,
-    sharedNotes: sharedNotes,
-    showAlter: showAlter,
-    showFindStructures: showFindStructures,
-    showScaleMenu: showScaleMenu,
-    showStringsMenu: showStringsMenu,
-    showTonicMenu: showTonicMenu,
-    showTutorial: showTutorial,
-    showViewMenu: showViewMenu,
-    showWelcome: showWelcome,
-    singleOrCompareButton: singleOrCompareButton,
-    solfege: solfege,
-    strings: strings,
-    stringbox: stringbox,
-    stringsLeft: stringsLeft,
-    tonic: tonic,
-    tonic2: tonic2,
-    tuning: tuning,
-    useCapo: useCapo,
-    view: view,
-    voicing1: voicing1,
-    voicing2: voicing2,
-    windowCycle: windowCycle,
-    setCalcChord1: setCalcChord1,
-    setCalcChord2: setCalcChord2,
-    setCh0: setCh0,
-    setCh1: setCh1,
-    setCh2: setCh2,
-    setCh3: setCh3,
-    setCh4: setCh4,
-    setCh5: setCh5,
-    setCh6: setCh6,
-    setCh0Alt: setCh0Alt,
-    setCh1Alt: setCh1Alt,
-    setCh2Alt: setCh2Alt,
-    setCh3Alt: setCh3Alt,
-    setCh4Alt: setCh4Alt,
-    setCh5Alt: setCh5Alt,
-    setCh6Alt: setCh6Alt,
-    setChoices: setChoices,
-    setChords: setChords,
-    setChords2: setChords2,
-    setChordDegrees: setChordDegrees,
-    setChordDegreesUpper: setChordDegreesUpper,
-    setChordDegButtonClass: setChordDegButtonClass,
-    setChordOneSelected: setChordOneSelected,
-    setChordObjKey: setChordObjKey,
-    setChord2ObjKey: setChord2ObjKey,
-    setChordOptRoot: setChordOptRoot,
-    setChordTwoSelected: setChordTwoSelected,
-    setChordType1: setChordType1,
-    setChordType2: setChordType2,
-    setChordFocus: setChordFocus,
-    setCurrentCard: setCurrentCard,
-    setCompare: setCompare,
-    setCurrentChordTones: setCurrentChordTones,
-    setCurrentChordTones2: setCurrentChordTones2,
-    setCurrentList: setCurrentList,
-    setCurrentStrings: setCurrentStrings,
-    setCurrentStringsMirror: setCurrentStringsMirror,
-    setDefaultType: setDefaultType,
-    setDisplayChordDegrees: setDisplayChordDegrees,
-    setHideScale: setHideScale,
-    setHighestFret: setHighestFret,
-    setInstrument: setInstrument,
-    setKeyCenter: setKeyCenter,
-    setKeyCenter2: setKeyCenter2,
-    setLabelType: setLabelType,
-    setLowestFret: setLowestFret,
-    setMiddle: setMiddle,
-    setMoreSeventhsButton: setMoreSeventhsButton,
-    setNeckWindowMode: setNeckWindowMode,
-    setNoteRefs1: setNoteRefs1,
-    setNoteRefs2: setNoteRefs2,
-    setRenderView: setRenderView,
-    setResetVoicingCount: setResetVoicingCount,
-    setRoot1: setRoot1,
-    setRoot2: setRoot2,
-    setScale: setScale,
-    setScale2: setScale2,
-    setScaleDegrees: setScaleDegrees,
-    setScaleName: setScaleName,
-    setScaleType: setScaleType,
-    setScaleType2: setScaleType2,
-    setSecond: setSecond,
-    setSecondButton: setSecondButton,
-    setSelectedChord: setSelectedChord,
-    setSelectedChord2: setSelectedChord2,
-    setSelNote: setSelNote,
-    setSevenths: setSevenths,
-    setSevenths2: setSevenths2,
-    setSharedNotes: setSharedNotes,
-    setShowAlter: setShowAlter,
-    setShowFindStructures: setShowFindStructures,
-    setShowScaleMenu: setShowScaleMenu,
-    setShowStringsMenu: setShowStringsMenu,
-    setShowTonicMenu: setShowTonicMenu,
-    setShowTutorial: setShowTutorial,
-    setShowViewMenu: setShowViewMenu,
-    setShowWelcome: setShowWelcome,
-    setSingleOrCompareButton: setSingleOrCompareButton,
-    setSolfege: setSolfege,
-    setStrings: setStrings,
-    setStringbox: setStringbox,
-    setStringsLeft: setStringsLeft,
-    setTonic: setTonic,
-    setTonic2: setTonic2,
-    setTuning: setTuning,
-    setUseCapo: setUseCapo,
-    setView: setView,
-    setVoicing1: setVoicing1,
-    setVoicing2: setVoicing2,
-    setWindowCycle: setWindowCycle,
-    clear: clear,
-    getChoices: getChoices,
-    getChord: getChord,
-    updatedSharedNotes: updatedSharedNotes,
-    getDegrees: getDegrees,
-    getScale: getScale,
-    getScale2: getScale2,
-    getStrings: getStrings,
-    enharmonic: enharmonic,
-    handleAlterChord: handleAlterChord,
-    handleAlterChordWindow: handleAlterChordWindow,
-    handleViewMenuWindow: handleViewMenuWindow,
-    handleTonicMenuWindow: handleTonicMenuWindow,
-    handleScaleMenuWindow: handleScaleMenuWindow,
-    handleStringsMenuWindow: handleStringsMenuWindow,
-    handleTutorialWindow: handleTutorialWindow,
-    handleWelcomeWindow: handleWelcomeWindow,
-    handleConstructionFindStructuresWindow: handleConstructionFindStructuresWindow,
-    handleChordFocus: handleChordFocus,
-    handleChordDegrees: handleChordDegrees,
-    handleHide: handleHide,
-    handleMoreSevenths: handleMoreSevenths,
-    handleNavChoice: handleNavChoice,
-    handleNeckNotes: handleNeckNotes,
-    handleScaleChange: handleScaleChange,
-    handleScaleChange2: handleScaleChange2,
-    handleSecondScale: handleSecondScale,
-    handleSevenths: handleSevenths,
-    handleSingleOrCompare: handleSingleOrCompare,
-    handleStringChoice: handleStringChoice,
-    handleTonicChange: handleTonicChange,
-    handleTonicChange2: handleTonicChange2,
-    handleRootChange: handleRootChange,
-    handleVoicingChange: handleVoicingChange,
-    handleView: handleView,
-    markNote: markNote,
-    resetCard: resetCard,
-    resetChords: resetChords,
-    setWholeNeck: setWholeNeck,
-    resetAll: resetAll,
-    selectChord: selectChord,
-    selectChord2: selectChord2,
-    setStart: setStart,
-    setEnd  : setEnd  ,
-    setCapo  : setCapo  ,
-    changeNeckWindowMode  : changeNeckWindowMode  ,
-    updateWindowCycle: updateWindowCycle,
-    setTones: setTones,
-    setTones2: setTones2,
-    updateShared: updateShared,
+    State: {
+      calcChord1: calcChord1,
+      calcChord2: calcChord2,
+      ch0: ch0,
+      ch1: ch1,
+      ch2: ch2,
+      ch3: ch3,
+      ch4: ch4,
+      ch5: ch5,
+      ch6: ch6,
+      ch0Alt: ch0Alt,
+      ch1Alt: ch1Alt,
+      ch2Alt: ch2Alt,
+      ch3Alt: ch3Alt,
+      ch4Alt: ch4Alt,
+      ch5Alt: ch5Alt,
+      ch6Alt: ch6Alt,
+      chordDegrees: chordDegrees,
+      chordDegreesUpper: chordDegreesUpper,
+      chordDegButtonClass: chordDegButtonClass,
+      chordOneSelected: chordOneSelected,
+      chordObjKey: chordObjKey,
+      chord2ObjKey: chord2ObjKey,
+      chordOptRoot: chordOptRoot,
+      chordTwoSelected: chordTwoSelected,
+      chordType1: chordType1,
+      chordType2: chordType2,
+      chordFocus: chordFocus,
+      currentCard: currentCard,
+      compare: compare,
+      currentChordTones: currentChordTones,
+      currentChordTones2: currentChordTones2,
+      currentList: currentList,
+      currentStrings: currentStrings,
+      currentStringsMirror: currentStringsMirror,
+      defaultType: defaultType,
+      displayChordDegrees: displayChordDegrees,
+      hideScale: hideScale,
+      highestFret: highestFret,
+      instrument: instrument,
+      keyCenter: keyCenter,
+      labelType: labelType,
+      lowestFret: lowestFret,
+      middle: middle,
+      neckWindowMode: neckWindowMode,
+      noteRefs1: noteRefs1,
+      noteRefs2: noteRefs2,
+      renderView: renderView,
+      resetVoicingCount: resetVoicingCount,
+      root1: root1,
+      root2: root2,
+      scale: scale,
+      scaleDegrees: scaleDegrees,
+      scaleName: scaleName,
+      selectedChord: selectedChord,
+      selectedChord2: selectedChord2,
+      selNote: selNote,
+      sevenths: sevenths,
+      sharedNotes: sharedNotes,
+      showAlter: showAlter,
+      showFindStructures: showFindStructures,
+      showScaleMenu: showScaleMenu,
+      showStringsMenu: showStringsMenu,
+      showTonicMenu: showTonicMenu,
+      showTutorial: showTutorial,
+      showViewMenu: showViewMenu,
+      showWelcome: showWelcome,
+      solfege: solfege,
+      strings: strings,
+      stringbox: stringbox,
+      stringsLeft: stringsLeft,
+      tonic: tonic,
+      tuning: tuning,
+      useCapo: useCapo,
+      view: view,
+      voicing1: voicing1,
+      voicing2: voicing2,
+      windowCycle: windowCycle,
+    },
+    Setters: {
+      setNeckWindowMode: setNeckWindowMode,
+      setWindowCycle: setWindowCycle,
+      clear: clear,
+      updateSharedNotes: updateSharedNotes,
+      getDegrees: getDegrees,
+      getScale: getScale,
+      getStrings: getStrings,
+      enharmonic: enharmonic,
+      handleAlterChord: handleAlterChord,
+      handleAlterChordWindow: handleAlterChordWindow,
+      handleViewMenuWindow: handleViewMenuWindow,
+      handleTonicMenuWindow: handleTonicMenuWindow,
+      handleScaleMenuWindow: handleScaleMenuWindow,
+      handleStringsMenuWindow: handleStringsMenuWindow,
+      handleTutorialWindow: handleTutorialWindow,
+      handleWelcomeWindow: handleWelcomeWindow,
+      handleConstructionFindStructuresWindow: handleConstructionFindStructuresWindow,
+      handleChordFocus: handleChordFocus,
+      handleChordDegrees: handleChordDegrees,
+      handleHide: handleHide,
+      handleNavChoice: handleNavChoice,
+      handleNeckNotes: handleNeckNotes,
+      handleScaleChange: handleScaleChange,
+      handleSevenths: handleSevenths,
+      handleSingleOrCompare: handleSingleOrCompare,
+      handleStringChoice: handleStringChoice,
+      handleTonicChange: handleTonicChange,
+      handleRootChange: handleRootChange,
+      handleVoicingChange: handleVoicingChange,
+      handleView: handleView,
+      markNote: markNote,
+      resetCard: resetCard,
+      resetChords: resetChords,
+      setWholeNeck: setWholeNeck,
+      resetAll: resetAll,
+      selectChord: selectChord,
+      selectChord2: selectChord2,
+      setLowestFret: setLowestFret,
+      setHighestFret: setHighestFret,
+      setCapo: setCapo,
+      setSharedNotes: setSharedNotes,
+      setTones: setTones,
+      setTones2: setTones2,
+      updateWindowCycle: updateWindowCycle
+    },
+    Conditions: {
+      mapScales: mapScales,
+      mapChords: mapChords,
+      welcome: welcome,
+      tutorial: tutorial,
+      trad: trad,
+      mirror: mirror,
+      leftyTrad: leftyTrad,
+      leftyMirror: leftyMirror,
+      lefty: lefty,
+      mirrorViews: mirrorViews,
+      focus1: focus1,
+      focus2: focus2,
+      neutral: neutral,
+      showScale: showScale,
+      hiddenScale: hiddenScale,
+      unfocusScale: unfocusScale,
+      noteNameLabels: noteNameLabels,
+      scaleDegLabels: scaleDegLabels,
+      solfegeLabels: solfegeLabels
+    }
  }
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
 
 export const useStoreContext = () => useContext(StoreContext)
-
-
-
 
 
 

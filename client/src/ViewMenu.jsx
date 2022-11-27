@@ -5,7 +5,10 @@ import { useStoreContext } from '../StoreContext.js'
 
 export const ViewMenu = () => {
 
-  const { showViewMenu, handleViewMenuWindow, handleView } = useStoreContext()
+  const {State, Setters, Conditions} = useStoreContext()
+  const {showViewMenu} = State
+  const {handleViewMenuWindow, handleView} = Setters
+
   const views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View']
 
   return (

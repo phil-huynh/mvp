@@ -2,20 +2,20 @@ import React from 'react';
 import { useStoreContext } from '../StoreContext.js'
 
 export const HideScaleMenu = ()  => {
+  const {State, Setters, Conditions} = useStoreContext()
 
-  const {handleHide, hideScale} = useStoreContext()
+  const {handleHide} = Setters
+  const {showScale, unfocusScale, hiddenScale} = Conditions
 
   let [scaleVisible, scaleUnfocused, scaleHidden] = ['', '', '']
-  let visibleLabel;
-  let unfocusedLabel;
-  let hiddenLabel;
+  let [visibleLabel, unfocusedLabel, hiddenLabel] = ['', '', '']
 
-  hideScale === "Show Scale" ? scaleVisible = 'toggle_on' : scaleVisible = ''
-  hideScale === "Unfocus Scale" ? scaleUnfocused = 'toggle_on' : scaleUnfocused = ''
-  hideScale === "Hide Scale" ? scaleHidden = 'toggle_on' : scaleHidden= ''
-  hideScale === "Show Scale" ? visibleLabel = 'Scale Visible' : visibleLabel = 'Show Scale'
-  hideScale === "Unfocus Scale" ? unfocusedLabel = 'Scale Unfocused' : unfocusedLabel = 'Unfocus Scale'
-  hideScale === "Hide Scale" ? hiddenLabel = 'Scale Hidden' : hiddenLabel= 'Hide Scale'
+  showScale ? scaleVisible = 'toggle_on' : scaleVisible = ''
+  unfocusScale ? scaleUnfocused = 'toggle_on' : scaleUnfocused = ''
+  hiddenScale ? scaleHidden = 'toggle_on' : scaleHidden= ''
+  showScale ? visibleLabel = 'Scale Visible' : visibleLabel = 'Show Scale'
+  unfocusScale ? unfocusedLabel = 'Scale Unfocused' : unfocusedLabel = 'Unfocus Scale'
+  hiddenScale ? hiddenLabel = 'Scale Hidden' : hiddenLabel= 'Hide Scale'
 
   return (
     <div

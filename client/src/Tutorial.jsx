@@ -5,8 +5,9 @@ import { useStoreContext } from '../StoreContext.js'
 
 export const Tutorial = () => {
 
-  const {showTutorial, handleTutorialWindow} = useStoreContext()
-  const views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View']
+  const {State, Setters, Conditions} = useStoreContext()
+  const {showTutorial} = State
+  const {handleTutorialWindow} = Setters
 
   return (
     <Modal

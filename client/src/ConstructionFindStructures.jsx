@@ -4,11 +4,15 @@ import { Modal } from 'react-bootstrap'
 import { useStoreContext } from '../StoreContext.js'
 
 export const ConstructionFindStructures = () => {
-  const {showConstructionFindStructures, handleConstructionFindStructuresWindow, handleNavChoice} = useStoreContext()
+  const {State, Setters} = useStoreContext()
+
+  const {showFindStructures} = State
+  const {handleConstructionFindStructuresWindow, handleNavChoice} = Setters
+
   return (
     <Modal
       className='construction'
-      show={showConstructionFindStructures}
+      show={showFindStructures}
       onHide={() => {handleConstructionFindStructuresWindow()}}
     >
       <Modal.Header

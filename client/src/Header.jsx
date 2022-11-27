@@ -2,15 +2,17 @@ import React from 'react'
 import { useStoreContext } from '../StoreContext.js'
 
 export const Header = () => {
+  const {State, Setters, Conditions} = useStoreContext()
 
-  const {handleNavChoice, renderView} = useStoreContext()
-  let mapScales;
-  let mapChords;
-  let tutorial;
+  const {renderView} = State
+  const {handleNavChoice} = Setters
+  const {mapScales, mapChords, tutorial} = Conditions
 
-  renderView === 'Map Scales' ? mapScales = 'toggle_on' : ''
-  renderView === 'Map Chords' ? mapChords = 'toggle_on' : ''
-  renderView === 'Tutorial' ? tutorial = 'toggle_on' : ''
+  let [mapScalesToggle, mapChordsToggle, tutorialToggle] = ['', '', '']
+
+  mapScales ? mapScalesToggle = 'toggle_on' : ''
+  mapChords ? mapChordsToggle = 'toggle_on' : ''
+  tutorial ? tutorialToggle = 'toggle_on' : ''
 
   return (
     <span className="navbar">
@@ -19,14 +21,14 @@ export const Header = () => {
       </span>
       <span></span>
       <span
-        className={`navOption ${mapChords}`}
+        className={`navOption ${mapChordsToggle}`}
         onClick={(e)=>handleNavChoice(e)}
         title="mapChords"
         >
         Map Chords
       </span>
       <span
-        className={`navOption ${mapScales}`}
+        className={`navOption ${mapScalesToggle}`}
         onClick={(e)=>handleNavChoice(e)}
         title="mapScales"
         >
@@ -40,7 +42,7 @@ export const Header = () => {
         Find Structures
       </span>
       <span
-        className={`navOption ${tutorial}`}
+        className={`navOption ${tutorialToggle}`}
         onClick={(e)=>handleNavChoice(e)}
         title="tutorial"
         >

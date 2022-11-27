@@ -11,7 +11,12 @@ export const MapScalesRender = () => {
 
   let resetClass = 'reset_button resetVoicings '
 
-  const {handleTonicMenuWindow, handleScaleMenuWindow, markNote, handleSevenths, handleChordDegrees, resetChords, showAlter, handleAlterChord, handleAlterChordWindow, currentCard, root, currentList, sharedNotes, selNote, scale, scaleName, currentChordTones, currentChordTones2, chordOneSelected, resetVoicingCount, tonic, defaultType, chordDegButtonClass} = useStoreContext()
+  const {State, Setters, Conditions} = useStoreContext()
+
+  const {showAlter, currentCard, currentList, sharedNotes, selNote, scale, scaleName, currentChordTones, currentChordTones2, chordOneSelected, resetVoicingCount, tonic, defaultType, chordDegButtonClass} = State
+
+  const {handleTonicMenuWindow, handleScaleMenuWindow, markNote, handleSevenths, handleChordDegrees, resetChords, handleAlterChord, handleAlterChordWindow} = Setters
+
 
   if (resetVoicingCount) {
     resetClass = 'reset_button resetVoicings can_reset'

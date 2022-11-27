@@ -5,7 +5,9 @@ import { useStoreContext } from '../StoreContext.js'
 
 export const Welcome = () => {
 
-  const {showWelcome, handleWelcomeWindow, handleNavChoice} = useStoreContext()
+  const {State, Setters, Conditions} = useStoreContext()
+  const {showWelcome} = State
+  const {handleNavChoice, handleWelcomeWindow} = Setters
 
   return (
     <Modal

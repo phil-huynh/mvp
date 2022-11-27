@@ -3,32 +3,37 @@ import { useStoreContext } from '../StoreContext.js'
 
 export const LabelMenu = ()  => {
 
-  const {handleNeckNotes, labelType} = useStoreContext()
+  const {State, Setters, Conditions} = useStoreContext()
 
-  let [noteNames, scaleDegrees, solfege] = ['', '', ''];
-  labelType === "Note Names" ? noteNames = "toggle_on" : noteNames = '';
-  labelType === "Scale Degrees" ? scaleDegrees = "toggle_on" : scaleDegrees = '';
-  labelType === "Solfege" ? solfege = "toggle_on" : solfege = '';
+  const {labelType} = State
+  const {handleNeckNotes} = Setters
+  const {noteNameLabels, scaleDegLabels, solfegeLabels} = Conditions
+
+  let [noteNamesClass, scaleDegreesClass, solfegeClass] = ['', '', ''];
+
+  noteNameLabels ? noteNamesClass = "toggle_on" : noteNamesClass = '';
+  scaleDegLabels ? scaleDegreesClass = "toggle_on" : scaleDegreesClass = '';
+  solfegeLabels ? solfegeClass = "toggle_on" : solfegeClass = '';
 
   return (
     <div className="labelMenu_container">
       <span className='labelMenu'>
         <span
-          className={`labelToggle ${noteNames}`}
+          className={`labelToggle ${noteNamesClass}`}
           onClick={(e) => {handleNeckNotes(e)}}
           title='Note Names'
         >
           Note Names
         </span>
         <span
-          className={`labelToggle ${scaleDegrees}`}
+          className={`labelToggle ${scaleDegreesClass}`}
           onClick={(e) => {handleNeckNotes(e)}}
           title='Scale Degrees'
         >
           Scale Degrees
         </span>
         <span
-          className={`labelToggle ${solfege}`}
+          className={`labelToggle ${solfegeClass}`}
           onClick={(e) => {handleNeckNotes(e)}}
           title='Solfege'
         >

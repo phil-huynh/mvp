@@ -1,17 +1,23 @@
 import React from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { useStoreContext } from '../StoreContext.js'
+import { Constants } from '../Constants.js'
 
 
 export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
 
+  const {State, Setters, Conditions} = useStoreContext()
 
-  const {sharp, flat, dblSharp, dblFlat, natural, dim, sevenths, selectChord, selectChord2, selectedChord, selectedChord2, chordOneSelected, chordTwoSelected, keyCenter, compare, handleAlterChordWindow, setTones, setTones2, currentChordTones, currentChordTones2, resetCard, handleSingleOrCompare, displayChordDegrees, handleChordFocus, chordFocus, sharedNotes, selNote, updateShared} = useStoreContext()
+  const {sharp, flat, dblSharp, dblFlat, natural, dim} = Constants
+
+  const {sevenths, selectedChord, selectedChord2, chordOneSelected, chordTwoSelected, keyCenter, compare, currentChordTones, currentChordTones2, displayChordDegrees, chordFocus, sharedNotes, selNote} = State
+
+  const {handleAlterChordWindow, setTones, setTones2, selectChord, selectChord2, resetCard, handleSingleOrCompare, handleChordFocus, setSharedNotes} = Setters
 
 
   let name;
   let label;
-  let objKey='hello'
+  let objKey=''
   let cardClass='text-center chordCard'
   let tones;
   let root = chord.root.note
@@ -49,7 +55,7 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
           sharedNotes.push(tone)
         }
       })
-      updateShared(sharedNotes)
+      setSharedNotes(sharedNotes)
     }
   }
   if (isChord2 && currentChordTones2 !== tones) {
@@ -64,7 +70,7 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
           sharedNotes.push(tone)
         }
       })
-      updateShared(sharedNotes)
+      setSharedNotes(sharedNotes)
     }
   }
 

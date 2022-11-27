@@ -4,16 +4,18 @@ import { useStoreContext } from '../StoreContext.js'
 
 export const StringSet = ()  => {
 
-  const {currentStrings, currentStringsMirror, view} = useStoreContext()
-  let list = []
-  let neckClass;
-  let firstString;
-  let lastString;
-  (view==='Mirror View' || view==='Lefty Mirror View') ? list = currentStringsMirror : list = currentStrings
+  const {State, Setters, Conditions} = useStoreContext()
+
+  const {currentStrings, currentStringsMirror, view} = State
+  const {mirrorViews} = Conditions
+
+  let [list, neckClass, firstString, lastString] = [[], '', '', '']
+
+  mirrorViews ? list = currentStringsMirror : list = currentStrings
   if (list && list.length === 4){neckClass = 'four_string_neck'}
   if (list && list.length === 5){neckClass = 'five_string_neck'}
   if (list && list.length === 6){neckClass = 'six_string_neck'}
-  console.log("list", list)
+
   return (
 
     <div className={`${neckClass}`}>
@@ -24,6 +26,8 @@ export const StringSet = ()  => {
           <String
             key={i}
             string={string}
+            // firstString={firstString}
+            // lastString={lastString}
           />
         )
       }): null}

@@ -1,10 +1,14 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { useStoreContext } from '../StoreContext.js'
+import { Constants } from '../Constants.js'
 
 export const AlterChordOpt = () => {
 
-  const {sharp, flat, dblSharp, dblFlat, natural, dim, showAlter, handleAlterChordWindow, handleAlterChord, currentList, root} = useStoreContext()
+  const {State, Setters, Conditions} = useStoreContext()
+  const {sharp, flat, dblSharp, dblFlat, natural, dim } = Constants
+  const {showAlter, currentList, chordOptRoot} = State
+  const {handleAlterChordWindow, handleAlterChord } = Setters
 
   return (
     <Modal
@@ -26,7 +30,7 @@ export const AlterChordOpt = () => {
           title={choice[1]}
           onClick={(e)=>{handleAlterChord(e); handleAlterChordWindow()}}
         >
-          {root}{choice[0]}
+          {chordOptRoot}{choice[0]}
         </div>
       )):  null
       }
