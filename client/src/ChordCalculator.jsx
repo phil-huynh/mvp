@@ -1,13 +1,9 @@
 import React from 'react'
+import { useStoreContext } from '../StoreContext.js'
 
-export const ChordCalculator = ({handleRootChange, root, handleVoicingChange, voicing, whichCalculator, chordDegrees, chordDegreesUpper, clear, chord, handleChordFocus, chordFocus, sharedNotes}) => {
+export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
 
-  const sharp = '#';
-  const flat = '\u266D';
-  const dblSharp = '\u{1D12A}';
-  const dblFlat = '\u{1D12B}';
-  const natural = '\u266E'
-  const dim = '\u00B0'
+const {sharp, flat, dblSharp, dblFlat, natural, dim, chordDegrees, chordDegreesUpper, clear, handleRootChange, handleVoicingChange, handleChordFocus, chordFocus, sharedNotes} = useStoreContext()
 
   const notes = ['C', [`C${sharp}`, `D${flat}`],'D', [`D${sharp}`, `E${flat}`], 'E', 'F',[`F${sharp}`, `G${flat}`], 'G', [`G${sharp}`, `A${flat}`], 'A', [`A${sharp}`, `B${flat}`], 'B']
 
@@ -29,9 +25,12 @@ export const ChordCalculator = ({handleRootChange, root, handleVoicingChange, vo
     chordNameClass += ` calc_header_on_${whichCalculator}`
     clearClass += ' clear_on'
   }
-  if(chord.length > 0) {
+  if(chord && chord.length > 0) {
     chordNoteClass += ` calc_header_on_${whichCalculator}`
   }
+
+  console.log('!!!!!!', chord)
+  console.log('!!!!!!', chordNoteClass)
 
   return (
     <div className="calculatorContainer">
@@ -43,12 +42,12 @@ export const ChordCalculator = ({handleRootChange, root, handleVoicingChange, vo
           <div
             className={chordNoteClass}
           >
-            {chord.map((note, i) => (
+            {chord ? chord.map((note, i) => (
               sharedNotes.length > 0 && sharedNotes.includes(note) ?
                 <span className="calc_note calc_shared_note" key={`note${i}-${note}`}>{note}</span>
               :
                 <span className="calc_note" key={`note${i}-${note}`}>{note}</span>
-            ))}
+            )):null}
           </div>
         </div>
         <div className="type_choice_container">

@@ -1,6 +1,9 @@
 import React from 'react';
+import { useStoreContext } from '../StoreContext.js'
 
-export const LabelMenu = ({name, handleNeckNotes, labelType})  => {
+export const LabelMenu = ()  => {
+
+  const {handleNeckNotes, labelType} = useStoreContext()
 
   let [noteNames, scaleDegrees, solfege] = ['', '', ''];
   labelType === "Note Names" ? noteNames = "toggle_on" : noteNames = '';
@@ -9,7 +12,7 @@ export const LabelMenu = ({name, handleNeckNotes, labelType})  => {
 
   return (
     <div className="labelMenu_container">
-      <span className={name}>
+      <span className='labelMenu'>
         <span
           className={`labelToggle ${noteNames}`}
           onClick={(e) => {handleNeckNotes(e)}}

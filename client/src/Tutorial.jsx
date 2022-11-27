@@ -1,10 +1,12 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal } from 'react-bootstrap'
+import { useStoreContext } from '../StoreContext.js'
 
-export const Tutorial = ({showTutorial, handleTutorialWindow}) => {
+export const Tutorial = () => {
 
-  var views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View']
+  const {showTutorial, handleTutorialWindow} = useStoreContext()
+  const views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View']
 
   return (
     <Modal

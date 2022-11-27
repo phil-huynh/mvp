@@ -1,13 +1,16 @@
 import React from 'react'
+import { useStoreContext } from '../StoreContext.js'
 
-export const Header = ({handleNavChoice, renderView}) => {
-   let mapScales;
-   let mapChords;
-   let tutorial;
+export const Header = () => {
 
-   renderView === 'Map Scales' ? mapScales = 'toggle_on' : ''
-   renderView === 'Map Chords' ? mapChords = 'toggle_on' : ''
-   renderView === 'Tutorial' ? tutorial = 'toggle_on' : ''
+  const {handleNavChoice, renderView} = useStoreContext()
+  let mapScales;
+  let mapChords;
+  let tutorial;
+
+  renderView === 'Map Scales' ? mapScales = 'toggle_on' : ''
+  renderView === 'Map Chords' ? mapChords = 'toggle_on' : ''
+  renderView === 'Tutorial' ? tutorial = 'toggle_on' : ''
 
   return (
     <span className="navbar">

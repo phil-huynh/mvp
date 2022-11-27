@@ -1,10 +1,12 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal } from 'react-bootstrap'
+import { useStoreContext } from '../StoreContext.js'
 
-export const ViewMenu = ({showViewMenu, handleViewMenuWindow, handleView}) => {
+export const ViewMenu = () => {
 
-  var views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View']
+  const { showViewMenu, handleViewMenuWindow, handleView } = useStoreContext()
+  const views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View']
 
   return (
     <Modal
@@ -21,6 +23,7 @@ export const ViewMenu = ({showViewMenu, handleViewMenuWindow, handleView}) => {
       </Modal.Header>
       {views.map((view) => (
         <div
+          key={view}
           className='modalMenuChoice'
           title = {view}
           onClick={(e)=>{handleView(e); handleViewMenuWindow()}}
@@ -29,7 +32,6 @@ export const ViewMenu = ({showViewMenu, handleViewMenuWindow, handleView}) => {
         </div>
       ))
       }
-
     </Modal>
   )
 }

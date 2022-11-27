@@ -4,12 +4,14 @@ import { ScalesMenu } from './ScalesMenu.jsx'
 import { LabelMenu } from './LabelMenu.jsx'
 import { AlterChordOpt } from './AlterChordOpt.jsx'
 import { ScaleChords } from './ScaleChords.jsx'
+import { useStoreContext } from '../StoreContext.js'
 
 
-export const MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt, chordDegButtonClass, chordFocus, chordOneSelected, chordTwoSelected, compareChords, currentCard, currentChord, currentChord2, currentChordTones, currentChordTones2, defaultType, displayChordDegrees, handleAlterChord, handleAlterChordWindow, handleChordDegrees, handleChordFocus, handleLock, handleScaleChange, handleScaleChange2, handleScaleMenuWindow, handleSevenths, handleTonicChange, handleTonicChange2, handleTonicMenuWindow, keyCenter, list, markNote, resetCard, resetChords, resetVoicingCount,root, scale, scaleName, selectChord, selectChord2, selNote, setTones, setTones2, sevenths, sharedNotes, showAlter, showScaleMenu, showTonicMenu, tonic, updateShared}) => {
+export const MapScalesRender = () => {
 
+  let resetClass = 'reset_button resetVoicings '
 
-  var resetClass = 'reset_button resetVoicings '
+  const {handleTonicMenuWindow, handleScaleMenuWindow, markNote, handleSevenths, handleChordDegrees, resetChords, showAlter, handleAlterChord, handleAlterChordWindow, currentCard, root, currentList, sharedNotes, selNote, scale, scaleName, currentChordTones, currentChordTones2, chordOneSelected, resetVoicingCount, tonic, defaultType, chordDegButtonClass} = useStoreContext()
 
   if (resetVoicingCount) {
     resetClass = 'reset_button resetVoicings can_reset'
@@ -17,16 +19,8 @@ export const MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1
 
   return (
     <React.Fragment>
-        <TonicMenu
-          handleTonicChange={handleTonicChange}
-          handleTonicMenuWindow={handleTonicMenuWindow}
-          showTonicMenu={showTonicMenu}
-        />
-        <ScalesMenu
-          handleScaleChange={handleScaleChange}
-          handleScaleMenuWindow={handleScaleMenuWindow}
-          showScaleMenu={showScaleMenu}
-        />
+      <TonicMenu/>
+      <ScalesMenu/>
       <div className="bottomUpperScales">
         <div className='keyChoice_container'>
           <span className="keyChoiceLabels">
@@ -51,15 +45,43 @@ export const MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1
           <div className="spelledScale">
             {scale ? scale.map((note, i) => (
                 note === selNote ?
-                  <span className="noteRef targetNote" key={`${i}${note}`} onClick={()=>markNote(note)}>{`   ${note}   `}</span>
+                  <span
+                    className="noteRef targetNote"
+                    key={`${i}${note}`}
+                    onClick={()=>markNote(note)}
+                  >
+                    {`   ${note}   `}
+                  </span>
                 : sharedNotes.length > 0 && sharedNotes.includes(note) ?
-                  <span className="sharedNoteInScale" key={`${i}${note}`} onClick={()=>markNote(note)}>{`   ${note}   `}</span>
+                  <span
+                    className="sharedNoteInScale"
+                    key={`${i}${note}`}
+                    onClick={()=>markNote(note)}
+                  >
+                    {`   ${note}   `}
+                  </span>
                 : currentChordTones.length > 0 && currentChordTones.includes(note) ?
-                  <span className="chord1NoteInScale" key={`${i}${note}`} onClick={()=>markNote(note)}>{`   ${note}   `}</span>
+                  <span
+                    className="chord1NoteInScale"
+                    key={`${i}${note}`}
+                    onClick={()=>markNote(note)}
+                  >
+                    {`   ${note}   `}
+                  </span>
                 : currentChordTones2.length > 0 && currentChordTones2.includes(note) ?
-                  <span className="chord2NoteInScale" key={`${i}${note}`} onClick={()=>markNote(note)}>{`   ${note}   `}</span>
+                  <span
+                    className="chord2NoteInScale"
+                    key={`${i}${note}`}
+                    onClick={()=>markNote(note)}
+                  >
+                    {`   ${note}   `}
+                  </span>
                 :
-                  <span className="noteRef" key={`${i}${note}`} onClick={()=>markNote(note)}>{`   ${note}   `}</span>
+                  <span className="noteRef"
+                    key={`${i}${note}`}
+                    onClick={()=>markNote(note)}
+                  >{`   ${note}   `}
+                  </span>
 
             )): null}
           </div>
@@ -98,52 +120,8 @@ export const MapScalesRender = ({ ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch0Alt, ch1
         </div>
       </div>
       <div className="bottomLowerScales">
-        <AlterChordOpt
-          showAlter={showAlter}
-          handleAlterChord={handleAlterChord}
-          handleAlterChordWindow={handleAlterChordWindow}
-          currentCard={currentCard}
-          list={list}
-          root={root}
-        />
-        <ScaleChords
-          keyCenter={keyCenter}
-          sevenths={sevenths}
-          selectChord={selectChord}
-          selectChord2={selectChord2}
-          currentChord={currentChord}
-          currentChord2={currentChord2}
-          chordOneSelected={chordOneSelected}
-          chordTwoSelected={chordTwoSelected}
-          currentChordTones={currentChordTones}
-          currentChordTones2={currentChordTones2}
-          compareChords={compareChords}
-          handleLock={handleLock}
-          handleAlterChordWindow={handleAlterChordWindow}
-          resetCard={resetCard}
-          setTones={setTones}
-          setTones2={setTones2}
-          sharedNotes={sharedNotes}
-          displayChordDegrees={displayChordDegrees}
-          handleChordFocus={handleChordFocus}
-          chordFocus={chordFocus}
-          selNote={selNote}
-          ch0={ch0}
-          ch1={ch1}
-          ch2={ch2}
-          ch3={ch3}
-          ch4={ch4}
-          ch5={ch5}
-          ch6={ch6}
-          ch0Alt={ch0Alt}
-          ch1Alt={ch1Alt}
-          ch2Alt={ch2Alt}
-          ch3Alt={ch3Alt}
-          ch4Alt={ch4Alt}
-          ch5Alt={ch5Alt}
-          ch6Alt={ch6Alt}
-          updateShared={updateShared}
-        />
+        <AlterChordOpt/>
+        <ScaleChords/>
       </div>
     </React.Fragment>
   )

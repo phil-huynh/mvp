@@ -1,14 +1,10 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
+import { useStoreContext } from '../StoreContext.js'
 
-export const StringsMenu = ({showStringsMenu, handleStringsMenuWindow, handleStringChoice, name}) => {
+export const StringsMenu = ({}) => {
 
-  const sharp = '#';
-  const flat = '\u266D';
-  const dblSharp = '\u{1D12A}';
-  const dblFlat = '\u{1D12B}';
-  const natural = '\u266E';
-  const dim = '\u00B0';
+  const { sharp, flat, dblSharp, dblFlat, natural, dim, showStringsMenu, handleStringsMenuWindow, handleStringChoice, name } = useStoreContext()
 
   const stringA = `A,G${dblSharp},B${dblFlat}`;
   const stringB = `B,C${flat},A${dblSharp}`;
@@ -64,7 +60,7 @@ export const StringsMenu = ({showStringsMenu, handleStringsMenuWindow, handleStr
           <h2> Choose Instrument and Tuning </h2>
         </Modal.Title>
       </Modal.Header>
-      <div className={name}>
+      <div className='stringsMenu'>
         {tunings.map((tuning, i) => (
           <div
             key={`tuning${i}`}

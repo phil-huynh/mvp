@@ -1,16 +1,12 @@
 import React from 'react'
+import { useStoreContext } from '../StoreContext.js'
 
-const sharp = '#';
-const flat = '\u266D';
-const dblSharp = '\u{1D12A}';
-const dblFlat = '\u{1D12B}';
-const natural = '\u266E'
-const dim = '\u00B0'
+export const String = ({string}) => {
 
-export const String = ({string,allStrings,stringsLeft,scale,scaleChord1,scaleChord2,view,chordOneSelected,chordTwoSelected,hideScale,solfege,scaleDegrees,chordDegrees,keyCenter,labelType,selectedChord,selectedChord2,chordFocus,displayChordDegrees,instrument,firstString,lastString,render,selNote,chordDegreesUpper,chordObjKey,chord2ObjKey,calcChord1,calcChord2,noteRefs1,noteRefs2,chordType1,chordType2,enharmonic,lowestFret,highestFret,useCapo}) => {
+  const {sharp, flat, dblSharp, dblFlat, natural, dim, strings, stringsLeft ,scale, currentChordTones, currentChordTones2, view,chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord,selectedChord2, chordFocus, displayChordDegrees, instrument,firstString, lastString, renderView, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey, calcChord1, calcChord2, noteRefs1, noteRefs2, chordType1, chordType2,enharmonic, lowestFret, highestFret, useCapo} = useStoreContext()
 
   let notes=[];
-  let currentString = allStrings[string];
+  let currentString = strings[string];
   let name = 'string';
   let openString;
   let openClass = 'open'
@@ -32,10 +28,10 @@ export const String = ({string,allStrings,stringsLeft,scale,scaleChord1,scaleCho
   let end = highestFret
 
 
-  const mapScales = render === 'Map Scales'
-  const mapChords = render === 'Map Chords'
-  const welcome = render === 'Welcome'
-  const tutorial = render === 'Tutorial'
+  const mapScales = renderView === 'Map Scales'
+  const mapChords = renderView === 'Map Chords'
+  const welcome = renderView === 'Welcome'
+  const tutorial = renderView === 'Tutorial'
 
   const trad = view === 'Traditional View'
   const mirror = view === 'Mirror View'
@@ -67,8 +63,8 @@ export const String = ({string,allStrings,stringsLeft,scale,scaleChord1,scaleCho
 
 
   if (mapScales || welcome || tutorial) {
-    chord = scaleChord1
-    chord2 = scaleChord2
+    chord = currentChordTones
+    chord2 = currentChordTones2
     keyKey = keyCenter.notesToDegrees
     labelContainer = keyCenter.tonicScaleDegrees
     if (labelType === 'Note Names') {
@@ -88,8 +84,10 @@ export const String = ({string,allStrings,stringsLeft,scale,scaleChord1,scaleCho
     noteRefs2 ? chordKey2 = noteRefs2.notesToDegs : chordKey2 = {}
   }
 
-  const hasChord1 = chord.length > 0
-  const hasChord2 = chord2.length > 0
+  let hasChord1;
+  let hasChord2
+  chord ? hasChord1 = true : hasChord1 = false
+  chord2 ? hasChord2 = true : hasChord2 = false
 
 
   if (mapChords) {
@@ -181,6 +179,10 @@ export const String = ({string,allStrings,stringsLeft,scale,scaleChord1,scaleCho
     }
   }
 
+  console.log("chord1", chord)
+  console.log("chord2", chord2)
+  console.log("sclaleChord1", currentChordTones)
+  console.log("sclaleChord2", currentChordTones2)
   const labelContainerEmpty = JSON.stringify(labelContainer) === '{}'
   const altLabelContainerEmpty = JSON.stringify(altLabelContainer) === '{}'
   const chordKeyEmpty = JSON.stringify(chordKey) === '{}'
@@ -382,14 +384,16 @@ export const String = ({string,allStrings,stringsLeft,scale,scaleChord1,scaleCho
             }
           }
           else if (mapScales) {
+            console.log('^%$^%$#chord1', chord)
+            console.log('^%$^%$#chord2', chord2)
             if(note === selNote) {
               innerClass += ' selNoteNeckToggle'
             }
-            if(chord.includes(note) && chord2.includes(note)) {
+            if(chord && chord2 && chord.includes(note) && chord2.includes(note)) {
               innerClass += ' sharedNeckNote'
               displayChordDegrees ? noteText = altLabelContainer[chordKey[note]] : noteText = labelContainer[keyKey[note]]
             }
-            else if(chord.includes(note)) {
+            else if(chord && chord.includes(note)) {
               focus2 ? innerClass += ' selectedNote unfocus' : innerClass += ' selectedNote'
               if (displayChordDegrees && (focus1 || !chordTwoSelected)) {
                 noteText = altLabelContainer[chordKey[note]]
@@ -398,7 +402,7 @@ export const String = ({string,allStrings,stringsLeft,scale,scaleChord1,scaleCho
                 noteText = labelContainer[keyKey[note]]
               }
             }
-            else if(chord2.includes(note)) {
+            else if(chord2 && chord2.includes(note)) {
               innerClass += ' selectedNote2'
               focus1 ? innerClass += ' unfocus' : ''
               if (displayChordDegrees && focus2) {

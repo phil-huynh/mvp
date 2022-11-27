@@ -1,6 +1,5 @@
 import React, { useState, createContext, useContext } from 'react';
 import axios from 'axios';
-import { createContext, useContext } from "react";
 
 const sharp = '#';
 const flat = '\u266D';
@@ -125,6 +124,11 @@ export default ({ children }) => {
   const mirror = view === "Mirror View"
   const leftyMirror = view === "Lefty Mirror View"
 
+  const mapScales = renderView === 'Map Scales'
+  const mapChords = renderView === 'Map Chords'
+  const welcome = renderView === 'Welcome'
+  const tutorial = renderView === 'Tutorial'
+
   const clear = (which) => {
     if (which === '1') {
       setCalcChord1([])
@@ -179,8 +183,17 @@ export default ({ children }) => {
 
 
   const updatedSharedNotes = () => {
-    if (calcChord1.length > 0 && calcChord2.length > 0) {
-      let [copy, copy2] = [calcChord1.slice(), calcChord2.slice()]
+    let [chord1, chord2] = [[], []]
+    if(mapChords) {
+      calcChord1 ? chord1 = calcChord1 : chord1 = []
+      calcChord2 ? chord2 = calcChord2 : chord1 = []
+    }
+    if(mapScales) {
+      currentChordTones ? chord1 = currentChordTones : chord1 = []
+      currentChordTones2 ? chord2 = currentChordTones2 : chord1 = []
+    }
+    if (chord1.length > 0 && chord2.length > 0) {
+      let [copy, copy2] = [chord1.slice(), chord2.slice()]
       let [shared, checker, checker2, final] = [[], {}, {}, {}]
 
       copy.forEach((note) => {
@@ -1022,10 +1035,11 @@ export default ({ children }) => {
     setTones2: setTones2,
     updateShared: updateShared,
  }
- <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
+  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
 
 export const useStoreContext = () => useContext(StoreContext)
+
 
 
 

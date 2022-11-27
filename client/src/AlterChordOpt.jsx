@@ -1,14 +1,10 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
+import { useStoreContext } from '../StoreContext.js'
 
-export const AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterChord, list, root}) => {
+export const AlterChordOpt = () => {
 
-  const sharp = '#';
-  const flat = '\u266D';
-  const dblSharp = '\u{1D12A}';
-  const dblFlat = '\u{1D12B}';
-  const natural = '\u266E';
-  const dim = '\u00B0';
+  const {sharp, flat, dblSharp, dblFlat, natural, dim, showAlter, handleAlterChordWindow, handleAlterChord, currentList, root} = useStoreContext()
 
   return (
     <Modal
@@ -23,7 +19,7 @@ export const AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterCho
           </h2>
         </Modal.Title>
       </Modal.Header>
-      {list ? list.map((choice) => (
+      {currentList ? currentList.map((choice) => (
         <div
           key={choice}
           className='modalMenuChoice'
@@ -38,5 +34,3 @@ export const AlterChordOpt = ({showAlter, handleAlterChordWindow, handleAlterCho
     </Modal>
   )
 }
-
-export default AlterChordOpt;

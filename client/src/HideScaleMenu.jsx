@@ -1,6 +1,9 @@
 import React from 'react';
+import { useStoreContext } from '../StoreContext.js'
 
-export const HideScaleMenu = ({name, handleHide, hideScale})  => {
+export const HideScaleMenu = ()  => {
+
+  const {handleHide, hideScale} = useStoreContext()
 
   let [scaleVisible, scaleUnfocused, scaleHidden] = ['', '', '']
   let visibleLabel;
@@ -16,7 +19,7 @@ export const HideScaleMenu = ({name, handleHide, hideScale})  => {
 
   return (
     <div
-      className={name}>
+      className='hideScaleMenu'>
       <div
         className={`hideToggle ${scaleVisible}`}
         onClick={(e) => {handleHide(e)}}

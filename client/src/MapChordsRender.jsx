@@ -1,33 +1,23 @@
 import React from 'react'
 import { ChordCalculator } from './ChordCalculator.jsx'
+import { useStoreContext } from '../StoreContext.js'
 
-export const MapChordsRender = ({handleRootChange, handleVoicingChange, root1, root2, voicing1, voicing2, chord1, chord2, clear, handleChordFocus, chordFocus, sharedNotes}) => {
+export const MapChordsRender = () => {
 
+  const {root1, root2, voicing1, voicing2, calcChord1, calcChord2} = useStoreContext()
   return (
     <div className="testContainer">
     <ChordCalculator
-      handleRootChange={handleRootChange}
-      handleVoicingChange={handleVoicingChange}
       root={root1}
       voicing={voicing1}
       whichCalculator={'1'}
-      clear={clear}
-      chord={chord1}
-      handleChordFocus={handleChordFocus}
-      chordFocus={chordFocus}
-      sharedNotes={sharedNotes}
+      chord={calcChord1}
       />
     <ChordCalculator
-      handleRootChange={handleRootChange}
-      handleVoicingChange={handleVoicingChange}
       root={root2}
       voicing={voicing2}
       whichCalculator={'2'}
-      clear={clear}
-      chord={chord2}
-      handleChordFocus={handleChordFocus}
-      chordFocus={chordFocus}
-      sharedNotes={sharedNotes}
+      chord={calcChord2}
     />
   </div>
   )

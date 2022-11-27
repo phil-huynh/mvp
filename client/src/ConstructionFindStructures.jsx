@@ -1,9 +1,10 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal } from 'react-bootstrap'
+import { useStoreContext } from '../StoreContext.js'
 
-export const ConstructionFindStructures = ({showConstructionFindStructures, handleConstructionFindStructuresWindow, handleNavChoice}) => {
-
+export const ConstructionFindStructures = () => {
+  const {showConstructionFindStructures, handleConstructionFindStructuresWindow, handleNavChoice} = useStoreContext()
   return (
     <Modal
       className='construction'

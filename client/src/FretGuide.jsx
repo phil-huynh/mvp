@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { BiArrowFromLeft } from 'react-icons/bi'
 import { BiArrowFromRight } from 'react-icons/bi'
+import { useStoreContext } from '../StoreContext.js'
 
-export const FretGuide = ({name, view, setStart, setEnd, setCapo, neckWindowMode, setWindowCycle, windowCycle}) => {
+export const FretGuide = ({name}) => {
 
+  const {view, setStart, setEnd, setCapo, neckWindowMode, setWindowCycle, windowCycle} = useStoreContext()
 
   const dot = '\u2022'
   let lefty = (view === 'Lefty Traditional View' || view === 'Lefty Mirror View')
