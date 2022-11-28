@@ -7,7 +7,7 @@ export const ViewMenu = () => {
 
   const {State, Setters, Conditions} = useStoreContext()
   const {showViewMenu} = State
-  const {handleViewMenuWindow, handleView} = Setters
+  const {setShowViewMenu, handleView} = Setters
 
   const views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View']
 
@@ -15,7 +15,7 @@ export const ViewMenu = () => {
     <Modal
       className='modalMenu'
       show={showViewMenu}
-      onHide={() => {handleViewMenuWindow()}}
+      onHide={() => {setShowViewMenu(false)}}
     >
       <Modal.Header closeButton>
         <Modal.Title>
@@ -29,7 +29,7 @@ export const ViewMenu = () => {
           key={view}
           className='modalMenuChoice'
           title = {view}
-          onClick={(e)=>{handleView(e); handleViewMenuWindow()}}
+          onClick={(e)=>{handleView(e); setShowViewMenu(false)}}
         >
           {view}
         </div>

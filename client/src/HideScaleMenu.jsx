@@ -4,7 +4,7 @@ import { useStoreContext } from '../StoreContext.js'
 export const HideScaleMenu = ()  => {
   const {State, Setters, Conditions} = useStoreContext()
 
-  const {handleHide} = Setters
+  const {setHideScale} = Setters
   const {showScale, unfocusScale, hiddenScale} = Conditions
 
   let [scaleVisible, scaleUnfocused, scaleHidden] = ['', '', '']
@@ -22,21 +22,21 @@ export const HideScaleMenu = ()  => {
       className='hideScaleMenu'>
       <div
         className={`hideToggle ${scaleVisible}`}
-        onClick={(e) => {handleHide(e)}}
+        onClick={(e) => {setHideScale(e.target.title)}}
         title='Show Scale'
       >
         {visibleLabel}
       </div>
       <div
         className={`hideToggle ${scaleUnfocused}`}
-        onClick={(e) => {handleHide(e)}}
+        onClick={(e) => {setHideScale(e.target.title)}}
         title='Unfocus Scale'
       >
         {unfocusedLabel}
       </div>
       <div
         className={`hideToggle ${scaleHidden}`}
-        onClick={(e) => {handleHide(e)}}
+        onClick={(e) => {setHideScale(e.target.title)}}
         title='Hide Scale'
       >
         {hiddenLabel}

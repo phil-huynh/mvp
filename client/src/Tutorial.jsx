@@ -7,13 +7,13 @@ export const Tutorial = () => {
 
   const {State, Setters, Conditions} = useStoreContext()
   const {showTutorial} = State
-  const {handleTutorialWindow} = Setters
+  const {setShowTutorial, setRenderView} = Setters
 
   return (
     <Modal
       className='tutorial'
       show={showTutorial}
-      onHide={() => {handleTutorialWindow()}}
+      onHide={() => { setShowTutorial(false); setRenderView("Map Scales") }}
     >
       <Modal.Header
         closeButton
@@ -56,7 +56,7 @@ export const Tutorial = () => {
           <img className="tutorialGif" src="https://media.giphy.com/media/1DZfvEO5LmFbaKh2B2/giphy.gif"/>
 
           <a className="tutorial_topic_header toggle_on" id="select_single_notes">The Single Note Marker</a>
-          <div>If no chord is selected, clicking on a note name in the scale display will <span className="targetNoteTutorial">mark</span> all locations of the selected note on the neck and will also <span className="targetNoteTutorial">highlight</span> the selected note name in all of the chord cards that contain it. Click the currently <span className="targetNoteTutorial">selected note</span> to clear selection. <a href="#top">Back to Top</a></div>
+          <div>Clicking on a note name in the scale display will <span className="targetNoteTutorial">mark</span> all locations of the selected note on the neck and will also <span className="targetNoteTutorial">highlight</span> the selected note name in all of the chord cards that contain it. Click the currently <span className="targetNoteTutorial">selected note</span> to clear selection. <a href="#top">Back to Top</a></div>
           <img className="tutorialGif" src="https://media.giphy.com/media/4vWRmkcBdV3jM0CAO6/giphy.gif"/>
 
           <a className="tutorial_topic_header toggle_on" id="label_types_and_default_voicing">Label Types and Default Voicings</a>

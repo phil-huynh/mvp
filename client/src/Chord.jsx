@@ -12,8 +12,9 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
 
   const {sevenths, selectedChord, selectedChord2, chordOneSelected, chordTwoSelected, keyCenter, compare, currentChordTones, currentChordTones2, displayChordDegrees, chordFocus, sharedNotes, selNote} = State
 
-  const {handleAlterChordWindow, setTones, setTones2, selectChord, selectChord2, resetCard, handleSingleOrCompare, handleChordFocus, setSharedNotes} = Setters
+  const {handleAlterChordWindow, setTones, setTones2, selectChord, selectChord2, resetCard, handleSingleOrCompare, setChordFocus, setSharedNotes} = Setters
 
+  const {focus1, focus2, neutral} = Conditions
 
   let name;
   let label;
@@ -45,33 +46,10 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
 
   if (isChord1 && currentChordTones !== tones) {
     setTones(tones, objKey)
-    if (both) {
-      let [checker, sharedNotes] = [{}, []]
-      currentChordTones2.forEach((tone) => {
-        checker[tone] = true
-      })
-      tones.forEach((tone) => {
-        if (checker[tone]) {
-          sharedNotes.push(tone)
-        }
-      })
-      setSharedNotes(sharedNotes)
-    }
   }
+
   if (isChord2 && currentChordTones2 !== tones) {
     setTones2(tones, objKey)
-    if (both) {
-      let [checker, sharedNotes] = [{}, []]
-      currentChordTones.forEach((tone) => {
-        checker[tone] = true
-      })
-      tones.forEach((tone) => {
-        if (checker[tone]) {
-          sharedNotes.push(tone)
-        }
-      })
-      setSharedNotes(sharedNotes)
-    }
   }
 
   if (isChord1) {
@@ -81,8 +59,6 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
   if (isChord2) {
     cardClass = `${cardClass} selectedChord2`
   }
-
-
 
   return (
     <React.Fragment>
@@ -94,7 +70,9 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
         >
         <div
           className='cardNameLabel'
-          onClick={chordOneSelected && compare ? ()=>{selectChord2(chord, tones, objKey)} : ()=>{selectChord(chord, tones, objKey)}}>
+          onClick={chordOneSelected && compare ?
+            ()=>{ selectChord2(chord, tones, objKey)} : ()=>{selectChord(chord, tones, objKey) }}
+          >
           <Card.Header
             className='triadLabel'
           >
@@ -131,29 +109,59 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
             Alter Me
           </Card.Footer>
           <Card.Footer></Card.Footer>
-          {selected && both && chordFocus === 'Neutral' ?
+          {selected && both && neutral ?
             <Card.Footer>
-              <span className="focusButton" onClick={()=>handleChordFocus('Focus 1')}>Focus</span>
+              <span
+                className="focusButton"
+                onClick={()=>setChordFocus('Focus 1')}
+              >
+                Focus
+              </span>
             </Card.Footer>
-            :selected && both && chordFocus === "Focus 1" ?
+            :selected && both && focus1 ?
             <Card.Footer>
-              <span className="focusButton toggle_on" onClick={()=>handleChordFocus('Neutral')}>Focused</span>
+              <span
+                className="focusButton toggle_on"
+                onClick={()=>setChordFocus('Neutral')}
+              >
+                Focused
+              </span>
             </Card.Footer>
-            :selected && both && chordFocus === "Focus 2" ?
+            :selected && both && focus2 ?
             <Card.Footer>
-              <span className="focusButton" onClick={()=>handleChordFocus('Focus 1')}>Unfocused</span>
+              <span
+                className="focusButton"
+                onClick={()=>setChordFocus('Focus 1')}
+              >
+                Unfocused
+              </span>
             </Card.Footer>
-            :selected2 && both && chordFocus === 'Neutral' ?
+            :selected2 && both && neutral ?
             <Card.Footer>
-              <span className="focusButton" onClick={()=>handleChordFocus('Focus 2')}>Focus</span>
+              <span
+                className="focusButton"
+                onClick={()=>setChordFocus('Focus 2')}
+              >
+                Focus
+              </span>
             </Card.Footer>
-            :selected2 && both && chordFocus === "Focus 1" ?
+            :selected2 && both && focus1 ?
             <Card.Footer>
-              <span className="focusButton" onClick={()=>handleChordFocus('Focus 2')}>Unfocused</span>
+              <span
+                className="focusButton"
+                onClick={()=>setChordFocus('Focus 2')}
+              >
+                Unfocused
+              </span>
             </Card.Footer>
-            :selected2 && both && chordFocus === "Focus 2" ?
+            :selected2 && both && focus2 ?
             <Card.Footer>
-              <span className="focusButton toggle_on" onClick={()=>handleChordFocus('Neutral')}>Focused</span>
+              <span
+                className="focusButton toggle_on"
+                onClick={()=>setChordFocus('Neutral')}
+              >
+                Focused
+              </span>
             </Card.Footer>
             :null
           }

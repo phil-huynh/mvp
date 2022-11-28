@@ -5,7 +5,7 @@ export const Header = () => {
   const {State, Setters, Conditions} = useStoreContext()
 
   const {renderView} = State
-  const {handleNavChoice} = Setters
+  const {handleNavChoice, setShowFindStructures, setRenderView, setShowTutorial} = Setters
   const {mapScales, mapChords, tutorial} = Conditions
 
   let [mapScalesToggle, mapChordsToggle, tutorialToggle] = ['', '', '']
@@ -36,14 +36,14 @@ export const Header = () => {
       </span>
       <span
         className='navOption'
-        onClick={(e)=>handleNavChoice(e)}
+        onClick={()=>{setShowFindStructures(true)}}
         title="findStructures"
         >
         Find Structures
       </span>
       <span
         className={`navOption ${tutorialToggle}`}
-        onClick={(e)=>handleNavChoice(e)}
+        onClick={()=>{setRenderView('Tutorial'); setShowTutorial(true)}}
         title="tutorial"
         >
         Tutorial

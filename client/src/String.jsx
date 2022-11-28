@@ -13,7 +13,6 @@ export const String = ({string, firstString, lastString}) => {
   const {mapChords, mapScales, welcome, tutorial, focus1, focus2, neutral, noteNameLabels, scaleDegLabels, solfegeLabels, showScale, unfocusScale, hiddenScale, lefty} = Conditions
 
 
-
   let notes=[];
   let currentString = strings[string];
   let name = 'string';

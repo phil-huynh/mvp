@@ -14,12 +14,11 @@ import { useStoreContext } from '../StoreContext.js'
 import { Constants } from '../Constants.js'
 
 
-
 const App = () => {
   const {State, Setters, Conditions} = useStoreContext()
 
   const {sharp, flat, dblSharp, dblFlat, natural, dim} = Constants
-  const {calcChord1, calcChord2, instrument, currentChordTones, currentChordTones2, defaultType} = State
+  const {calcChord1, calcChord2, instrument, currentChordTones, currentChordTones2, defaultType, renderView} = State
   const {getStrings, getDegrees, getScale, updateSharedNotes} = Setters
   const {mapChords, mapScales, lefty} = Conditions
 
@@ -31,7 +30,7 @@ const App = () => {
 
   useEffect(() => {
     updateSharedNotes()
-  }, [calcChord1, calcChord2, currentChordTones, currentChordTones2, defaultType])
+  }, [calcChord1, calcChord2, currentChordTones, currentChordTones2, defaultType, renderView])
 
 
   let [middle, stringbox] = ['inner_middle', 'stringbox']

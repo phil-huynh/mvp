@@ -7,14 +7,14 @@ export const TonicMenu = () => {
 
   const {State, Setters, Conditions} = useStoreContext()
   const {sharp, flat, dblSharp, dblFlat, natural, dim, tonics} = Constants
-  const {showTonicMenu} = State
-  const {handleTonicMenuWindow, handleTonicChange} = Setters
+  const {showTonicMenu, scaleType} = State
+  const {setShowTonicMenu, getScale} = Setters
 
   return (
     <Modal
       className='modalMenu'
       show={showTonicMenu}
-      onHide={() => {handleTonicMenuWindow()}}
+      onHide={() => {setShowTonicMenu(false)}}
     >
       <Modal.Header closeButton>
         <Modal.Title>
@@ -27,7 +27,7 @@ export const TonicMenu = () => {
         <div
           key={tonic}
           className='modalMenuChoice'
-          onClick={(e) => {handleTonicChange(e); handleTonicMenuWindow()}}
+          onClick={(e) => {getScale(e.target.title, scaleType); setShowTonicMenu(false)}}
           title={tonic}>{tonic}</div>
       ))}
     </Modal>

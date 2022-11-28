@@ -7,13 +7,13 @@ export const ConstructionFindStructures = () => {
   const {State, Setters} = useStoreContext()
 
   const {showFindStructures} = State
-  const {handleConstructionFindStructuresWindow, handleNavChoice} = Setters
+  const {setShowFindStructures, handleNavChoice} = Setters
 
   return (
     <Modal
       className='construction'
       show={showFindStructures}
-      onHide={() => {handleConstructionFindStructuresWindow()}}
+      onHide={() => {setShowFindStructures(false)}}
     >
       <Modal.Header
         closeButton
@@ -27,7 +27,7 @@ export const ConstructionFindStructures = () => {
       </Modal.Header>
         <div
           className='construction_message'
-          onClick={(e)=>{handleConstructionFindStructuresWindow()}}
+          onClick={(e)=>{setShowFindStructures(false)}}
         >
           <div className="sorry targetNoteTutorial">Sorry!</div>
           <div className="upper_construction_message">The <span className="sorry_label toggle_on">Find Structures</span> feature is in development and is not yet ready for general use. This feature will be coming soon. Please check back again. This site is frequently updated.</div>

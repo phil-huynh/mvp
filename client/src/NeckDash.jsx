@@ -11,15 +11,18 @@ export const NeckDash = () => {
 
   const {State, Setters, Conditions} = useStoreContext()
 
-  const {neckWindowMode, view, lowestFret, highestFret, renderView, selNote, chordOneSelected, resetVoicingCount, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, sharedNotes, instrument, tuning, chordDegButtonClass} = State
+  const {neckWindowMode, view, lowestFret, highestFret, renderView, selNote, chordOneSelected, resetVoicingCount, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, sharedNotes, instrument, tuning} = State
 
-  const {handleViewMenuWindow, handleStringsMenuWindow, handleChordDegrees, setNeckWindowMode, setWholeNeck, setWindowCycle, resetAll} = Setters
+  const {setShowViewMenu, setShowStringsMenu, handleChordDegrees, setNeckWindowMode, setWholeNeck, setWindowCycle, resetAll} = Setters
 
   const {lefty, mapScales, mapChords, neutral} = Conditions
 
   let [fromClass, toClass, windowClass, resetIconClass, capoClass] = ['', '', '', '', '']
   let resetClass = "reset_button resetAll"
   let iconClass = 'range_option_icons'
+  let chordDegClass = 'chordDegButton'
+
+  displayChordDegrees ? chordDegClass += ' toggle_on chordDegToggle' : chordDegClass += ''
 
   neckWindowMode === 'from start' ? fromClass = iconClass + ' icon_toggle' : fromClass = iconClass
   neckWindowMode === 'to end' ? toClass = iconClass + ' icon_toggle' : toClass = iconClass
@@ -38,7 +41,7 @@ export const NeckDash = () => {
       <div className="view_label_container">
         <span
           className="viewLabel"
-          onClick={()=>handleViewMenuWindow()}
+          onClick={()=>setShowViewMenu(true)}
         >
           {view}
         </span>
@@ -47,7 +50,7 @@ export const NeckDash = () => {
       <div className="tuning_label_container">
         <span
           className="tuningLabel"
-          onClick={()=>handleStringsMenuWindow()}
+          onClick={()=>setShowStringsMenu(true)}
         >
           {`${instrument} : ${tuning}`}
         </span>
@@ -61,7 +64,7 @@ export const NeckDash = () => {
         mapChords ?
           <div className="chordDegree_container">
             <span
-              className={chordDegButtonClass}
+              className={chordDegClass}
               onClick={()=>handleChordDegrees()}
             >
               Chord Degrees
@@ -76,7 +79,9 @@ export const NeckDash = () => {
           <div className={fromClass}>
             <BiArrowFromLeft
               size={25}
-              onClick={()=>{setNeckWindowMode('from start')}}
+              onClick={()=>{
+                neckWindowMode !== 'from start' ? setNeckWindowMode('from start') : setNeckWindowMode('none')
+              }}
             />
           </div>
           <div className={resetIconClass}>
@@ -90,13 +95,18 @@ export const NeckDash = () => {
           <div className={toClass}>
             <BiArrowFromRight
               size={25}
-              onClick={()=>{setNeckWindowMode('to end')}}
+              onClick={()=>{
+                neckWindowMode !== 'to end' ? setNeckWindowMode('to end') : setNeckWindowMode('none')
+              }}
             />
           </div>
           <div className={windowClass}>
             <CgArrowsShrinkH
               size={25}
-              onClick={()=>{setNeckWindowMode('window'); lefty ? setWindowCycle('end') : setWindowCycle('start')}}
+              onClick={()=>{
+                setWindowCycle('start');
+                neckWindowMode !== 'window' ? setNeckWindowMode('window') : setNeckWindowMode('none')
+              }}
             />
           </div>
         </div>
@@ -104,7 +114,9 @@ export const NeckDash = () => {
       <div className="capo_container">
         <div
         className={capoClass}
-        onClick={()=>{setNeckWindowMode('capo')}}
+        onClick={()=>{
+          neckWindowMode !== 'capo' ? setNeckWindowMode('capo') : setNeckWindowMode('none')
+        }}
         >
           Capo
         </div>

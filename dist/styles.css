@@ -233,6 +233,24 @@ align-content: center;
   box-shadow: 2px 2px 15px 3px white, inset 0 0 1.6rem white;
 }
 
+
+
+.chordDegButton {
+  font-size: 2.2vh;
+  border: white solid 3px;
+  border-radius: 10px;
+  padding: 1%;
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+/* .chordDegToggle {
+  -webkit-box-shadow: 2px 2px 15px 7px blue, inset 0 0 1.6rem blue;
+  box-shadow: 2px 2px 15px 7px blue, inset 0 0 1.6rem blue;
+} */
+
+
+
 .range_option_icon_row {
   display: flex;
   justify-content: space-around;
@@ -251,6 +269,7 @@ align-content: center;
   margin-bottom: 1%;
 }
 
+.chordDegButton:hover,
 .range_option_icons:hover {
   -webkit-box-shadow: 0px 0px 15px 8px white, inset 0 0 2.6rem white;
   box-shadow: 0px 0px 15px 8px white, inset 0 0 2.6rem white;
@@ -263,6 +282,8 @@ align-content: center;
               38px 19px 8px rgba(206,89,55,0);
 }
 
+.chordDegToggle,
+.chordDegToggle:hover,
 .icon_toggle,
 .icon_toggle:hover {
   filter: drop-shadow();
@@ -340,8 +361,8 @@ align-content: center;
   font-size: 2.7vh;
   font-weight: 500;
   padding: .5%;
-  padding-left: .8%;
-  padding-right: .8%;
+  padding-left: .9%;
+  padding-right: .9%;
   border-radius: 10px;;
   border: white solid 3px;
   font-family: 'Comic Neue', cursive;
@@ -1136,20 +1157,6 @@ align-content: center;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.chordDegButton {
-  font-size: 2.2vh;
-  border: white solid 3px;
-  border-radius: 10px;
-  padding: 1%;
-  padding-left: 3%;
-  padding-right: 3%;
-}
-
-.chordDegToggle {
-  -webkit-box-shadow: 2px 2px 15px 7px blue, inset 0 0 1.6rem blue;
-  box-shadow: 2px 2px 15px 7px blue, inset 0 0 1.6rem blue;
 }
 
 

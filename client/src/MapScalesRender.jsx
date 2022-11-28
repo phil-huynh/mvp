@@ -13,14 +13,18 @@ export const MapScalesRender = () => {
 
   const {State, Setters, Conditions} = useStoreContext()
 
-  const {showAlter, currentCard, currentList, sharedNotes, selNote, scale, scaleName, currentChordTones, currentChordTones2, chordOneSelected, resetVoicingCount, tonic, defaultType, chordDegButtonClass} = State
+  const {showAlter, currentCard, currentList, sharedNotes, selNote, scale, scaleName, currentChordTones, currentChordTones2, chordOneSelected, resetVoicingCount, tonic, defaultType, displayChordDegrees} = State
 
-  const {handleTonicMenuWindow, handleScaleMenuWindow, markNote, handleSevenths, handleChordDegrees, resetChords, handleAlterChord, handleAlterChordWindow} = Setters
+  const {setShowTonicMenu, setShowScaleMenu, markNote, handleSevenths, handleChordDegrees, resetChords, handleAlterChord, handleAlterChordWindow} = Setters
 
 
   if (resetVoicingCount) {
     resetClass = 'reset_button resetVoicings can_reset'
   }
+
+  let chordDegClass = 'chordDegButton'
+
+  displayChordDegrees ? chordDegClass += ' toggle_on chordDegToggle' : chordDegClass += ''
 
   return (
     <React.Fragment>
@@ -34,13 +38,13 @@ export const MapScalesRender = () => {
             </span>
             <span
               className="dashTonicLabel"
-              onClick={()=>handleTonicMenuWindow()}
+              onClick={()=>setShowTonicMenu(true)}
             >
               {` ${tonic}   `}
             </span>
             <span
               className="dashScaleLabel"
-              onClick={()=>handleScaleMenuWindow()}
+              onClick={()=>setShowScaleMenu(true)}
             >
               {scaleName}
             </span>
@@ -48,47 +52,33 @@ export const MapScalesRender = () => {
         </div>
         <div className="spelledScale_container">
           <div className="spelledScale">
-            {scale ? scale.map((note, i) => (
-                note === selNote ?
-                  <span
-                    className="noteRef targetNote"
+            {scale ? scale.map((note, i) => {
+              let noteClass;
+              if (note === selNote) {
+                noteClass = 'noteRef targetNote'
+              }
+              else if (sharedNotes.length > 0 && sharedNotes.includes(note)) {
+                noteClass = 'sharedNoteInScale'
+              }
+              else if (currentChordTones.length > 0 && currentChordTones.includes(note)) {
+                noteClass = 'chord1NoteInScale'
+              }
+              else if (currentChordTones2.length > 0 && currentChordTones2.includes(note)) {
+                noteClass = 'chord2NoteInScale'
+              }
+              else {
+                noteClass = 'noteRef'
+              }
+              return (
+                <span
+                    className={noteClass}
                     key={`${i}${note}`}
                     onClick={()=>markNote(note)}
                   >
                     {`   ${note}   `}
                   </span>
-                : sharedNotes.length > 0 && sharedNotes.includes(note) ?
-                  <span
-                    className="sharedNoteInScale"
-                    key={`${i}${note}`}
-                    onClick={()=>markNote(note)}
-                  >
-                    {`   ${note}   `}
-                  </span>
-                : currentChordTones.length > 0 && currentChordTones.includes(note) ?
-                  <span
-                    className="chord1NoteInScale"
-                    key={`${i}${note}`}
-                    onClick={()=>markNote(note)}
-                  >
-                    {`   ${note}   `}
-                  </span>
-                : currentChordTones2.length > 0 && currentChordTones2.includes(note) ?
-                  <span
-                    className="chord2NoteInScale"
-                    key={`${i}${note}`}
-                    onClick={()=>markNote(note)}
-                  >
-                    {`   ${note}   `}
-                  </span>
-                :
-                  <span className="noteRef"
-                    key={`${i}${note}`}
-                    onClick={()=>markNote(note)}
-                  >{`   ${note}   `}
-                  </span>
-
-            )): null}
+              )
+            }): null}
           </div>
         </div>
         <div className="defaultChordLabel_container">
@@ -102,7 +92,7 @@ export const MapScalesRender = () => {
         {chordOneSelected ?
           <div className="chordDegree_container">
             <span
-              className={chordDegButtonClass}
+              className={chordDegClass}
               onClick={()=>handleChordDegrees()}
             >
               Chord Degrees

@@ -8,13 +8,13 @@ export const ScalesMenu = () => {
   const {State, Setters, Conditions} = useStoreContext()
   const {sharp, flat, dblSharp, dblFlat, natural, dim, labels, titles} = Constants
   const {showScaleMenu} = State
-  const {handleScaleMenuWindow, handleScaleChange} = Setters
+  const {setShowScaleMenu, handleScaleChange} = Setters
 
   return (
     <Modal
       className='modalMenu'
       show={showScaleMenu}
-      onHide={() => {handleScaleMenuWindow()}}
+      onHide={() => {setShowScaleMenu(false)}}
     >
       <Modal.Header closeButton>
         <Modal.Title>
@@ -27,7 +27,7 @@ export const ScalesMenu = () => {
         <div
           key={`${i}${label}`}
           className="modalMenuChoice"
-          onClick={(e) => {handleScaleChange(e); handleScaleMenuWindow()}}
+          onClick={(e) => {handleScaleChange(e); setShowScaleMenu(false)}}
           title={titles[i]}>{label}</div>
       ))}
     </Modal>

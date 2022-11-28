@@ -8,13 +8,13 @@ export const StringsMenu = ({}) => {
   const {State, Setters, Conditions} = useStoreContext()
   const {sharp, flat, dblSharp, dblFlat, natural, dim, tunings} = Constants
   const {showStringsMenu} = State
-  const {handleStringsMenuWindow, handleStringChoice} = Setters
+  const {setShowStringsMenu, handleStringChoice} = Setters
 
   return (
     <Modal
       className='modalMenu'
       show={showStringsMenu}
-      onHide={() => {handleStringsMenuWindow()}}
+      onHide={() => {setShowStringsMenu(false)}}
     >
       <Modal.Header closeButton>
         <Modal.Title>
@@ -26,7 +26,7 @@ export const StringsMenu = ({}) => {
           <div
             key={`tuning${i}`}
             className="modalMenuChoice"
-            onClick={(e) => {handleStringChoice(e); handleStringsMenuWindow()}}
+            onClick={(e) => {handleStringChoice(e); setShowStringsMenu(false)}}
             title={tuning[1][0]}
           >
             {tuning[0]}

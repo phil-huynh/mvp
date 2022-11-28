@@ -6,7 +6,7 @@ export const LabelMenu = ()  => {
   const {State, Setters, Conditions} = useStoreContext()
 
   const {labelType} = State
-  const {handleNeckNotes} = Setters
+  const {setLabelType} = Setters
   const {noteNameLabels, scaleDegLabels, solfegeLabels} = Conditions
 
   let [noteNamesClass, scaleDegreesClass, solfegeClass] = ['', '', ''];
@@ -20,21 +20,21 @@ export const LabelMenu = ()  => {
       <span className='labelMenu'>
         <span
           className={`labelToggle ${noteNamesClass}`}
-          onClick={(e) => {handleNeckNotes(e)}}
+          onClick={(e) => {setLabelType(e.target.title)}}
           title='Note Names'
         >
           Note Names
         </span>
         <span
           className={`labelToggle ${scaleDegreesClass}`}
-          onClick={(e) => {handleNeckNotes(e)}}
+          onClick={(e) => {setLabelType(e.target.title)}}
           title='Scale Degrees'
         >
           Scale Degrees
         </span>
         <span
           className={`labelToggle ${solfegeClass}`}
-          onClick={(e) => {handleNeckNotes(e)}}
+          onClick={(e) => {setLabelType(e.target.title)}}
           title='Solfege'
         >
           Solfege

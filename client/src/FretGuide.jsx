@@ -8,9 +8,18 @@ export const FretGuide = ({name}) => {
   const {State, Setters, Conditions} = useStoreContext()
   const {view, neckWindowMode, windowCycle} = State
   const {setLowestFret, setHighestFret, setCapo, updateWindowCycle} = Setters
+  const {lefty} = Conditions
 
   const dot = '\u2022'
-  let lefty = (view === 'Lefty Traditional View' || view === 'Lefty Mirror View')
+
+  const [guideboxLabel3, setGuideboxLabel3] = useState(dot)
+  const [guideboxLabel5, setGuideboxLabel5] = useState(dot)
+  const [guideboxLabel7, setGuideboxLabel7] = useState(dot)
+  const [guideboxLabel9, setGuideboxLabel9] = useState(dot)
+  const [guideboxLabel15, setGuideboxLabel15] = useState(dot)
+  const [guideboxLabel17, setGuideboxLabel17] = useState(dot)
+  const [guideboxLabel12, setGuideboxLabel12] = useState(':')
+
   let guideboxClass = 'guidebox';
   let unMarkedClass = 'unmarked';
   let setFret;
@@ -22,44 +31,44 @@ export const FretGuide = ({name}) => {
   let endMode = neckWindowMode === 'to end'
   let cycleStart = windowCycle === 'start'
   let cycleEnd = windowCycle === 'end'
-  let active = neckWindowMode !== 'none'
-  let capo = neckWindowMode === 'capo'
+  let capoMode = neckWindowMode === 'capo'
+  let modeActive = neckWindowMode !== 'none'
+  let marked = [3, 5 , 7, 9, 12, 15, 17]
+  let guides = [
+    [guideboxLabel3, setGuideboxLabel3],
+    [guideboxLabel5, setGuideboxLabel5],
+    [guideboxLabel7, setGuideboxLabel7],
+    [guideboxLabel9, setGuideboxLabel9],
+    [guideboxLabel12, setGuideboxLabel12],
+    [guideboxLabel15, setGuideboxLabel15],
+    [guideboxLabel17, setGuideboxLabel17],
+  ]
 
-  const [guideboxLabel3, setGuideboxLabel3] = useState(dot)
-  const [guideboxLabel5, setGuideboxLabel5] = useState(dot)
-  const [guideboxLabel7, setGuideboxLabel7] = useState(dot)
-  const [guideboxLabel9, setGuideboxLabel9] = useState(dot)
-  const [guideboxLabel15, setGuideboxLabel15] = useState(dot)
-  const [guideboxLabel17, setGuideboxLabel17] = useState(dot)
-  const [guideboxLabel12, setGuideboxLabel12] = useState(':')
+  const fretBoard = (() => {
+    let index = 0
+    let array = []
+    while (index <= 17) {
+      array.push(index)
+      index++
+    }
+    return array
+  })()
 
-
-  if(lefty) {
+  if (lefty) {
+    marked = [0, 2, 5, 8, 10, 12, 14]
+    guides.reverse()
     name += '_left'
   } else {
     name += '_right'
   }
 
+
   if (windowMode) {
-    if (lefty) {
-      if(cycleEnd) {
-        nextCycle= 'start'
-      }
-      if(cycleStart) {
-        nextCycle= 'off'
-      }
-    }
-    if (!lefty) {
-      if(cycleStart) {
-        nextCycle= 'end'
-      }
-      if(cycleEnd) {
-        nextCycle= 'off'
-      }
-    }
+    if(cycleStart) { nextCycle= 'end' }
+    if(cycleEnd) { nextCycle= 'off' }
   }
 
-  if (capo) {
+  if (capoMode) {
     setFret = setCapo
     guideboxClass += ' capo_guide_marker'
     unMarkedClass += ' capo_guide_marker'
@@ -96,261 +105,41 @@ export const FretGuide = ({name}) => {
 
   return (
     <div className={name}>
-      {lefty ?
       <React.Fragment>
-        <span></span>
-        <span
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(0) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel17(marker) : ()=>setGuideboxLabel17(dot)}
-          onMouseLeave={()=>setGuideboxLabel17(dot)}
-        >
-          {guideboxLabel17}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(1) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-        <span
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(2) : null ; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel15(marker) : ()=>setGuideboxLabel15(dot)}
-          onMouseLeave={()=>setGuideboxLabel15(dot)}
-        >
-          {guideboxLabel15}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(3) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(4) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-        <span
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(5) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel12(marker) : ()=>setGuideboxLabel12(':')}
-          onMouseLeave={()=>setGuideboxLabel12(':')}
-        >
-          {guideboxLabel12}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(6) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(7) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-        <span
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(8) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel9(marker) : ()=>setGuideboxLabel9(dot)}
-          onMouseLeave={()=>setGuideboxLabel9(dot)}
-        >
-          {guideboxLabel9}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(9) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-        <span
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(10) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel7(marker) : ()=>setGuideboxLabel7(dot)}
-          onMouseLeave={()=>setGuideboxLabel7(dot)}
-        >
-          {guideboxLabel7}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(11) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-        <span
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(12) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel5(marker) : ()=>setGuideboxLabel5(dot)}
-          onMouseLeave={()=>setGuideboxLabel5(dot)}
-        >
-          {guideboxLabel5}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(13) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-        <span
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(14) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel3(marker) : ()=>setGuideboxLabel3(dot)}
-          onMouseLeave={()=>setGuideboxLabel3(dot)}
-        >
-          {guideboxLabel3}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(15) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(16) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-        <span
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(17) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </span>
-      </React.Fragment>:
-      <React.Fragment>
-        <div
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(0) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </div>
-        <div
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(1) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </div>
-        <div
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(2) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </div>
-        <div
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(3) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel3(marker) : ()=>setGuideboxLabel3(dot)}
-          onMouseLeave={()=>setGuideboxLabel3(dot)}
-        >
-          {guideboxLabel3}
-        </div>
-        <div
-          onClick={()=>{active ? setFret(4) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          className={unMarkedClass}
-          >{marker}</div>
-        <div
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(5) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel5(marker) : ()=>setGuideboxLabel5(dot)}
-          onMouseLeave={()=>setGuideboxLabel5(dot)}
-        >
-          {guideboxLabel5}
-        </div>
-        <div
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(6) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </div>
-        <div
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(7) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel7(marker) : ()=>setGuideboxLabel7(dot)}
-          onMouseLeave={()=>setGuideboxLabel7(dot)}
-        >
-          {guideboxLabel7}
-        </div>
-        <div
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(8) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </div>
-        <div
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(9) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel9(marker) : ()=>setGuideboxLabel9(dot)}
-          onMouseLeave={()=>setGuideboxLabel9(dot)}
-        >
-          {guideboxLabel9}
-        </div>
-        <div
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(10) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </div>
-        <div
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(11) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </div>
-        <div
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(12) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel12(marker) : ()=>setGuideboxLabel12(':')}
-          onMouseLeave={()=>setGuideboxLabel12(':')}
-        >
-          {guideboxLabel12}
-        </div>
-        <div
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(13) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </div>
-        <div
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(14) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </div>
-        <div
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(15) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel15(marker) : ()=>setGuideboxLabel15(dot)}
-          onMouseLeave={()=>setGuideboxLabel15(dot)}
-        >
-          {guideboxLabel15}
-        </div>
-        <div
-          className={unMarkedClass}
-          onClick={()=>{active ? setFret(16) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-        >
-          {marker}
-        </div>
-        <div
-          className={guideboxClass}
-          onClick={()=>{active ? setFret(17) : null; windowMode ? updateWindowCycle(nextCycle) : null}}
-          onMouseEnter={on ? ()=>setGuideboxLabel17(marker) : ()=>setGuideboxLabel17(dot)}
-          onMouseLeave={()=>setGuideboxLabel17(dot)}
-        >
-          {guideboxLabel17}
-        </div>
+        {lefty ? <span></span> : null}
+        {fretBoard.map((fret) => {
+          if (marked.includes(fret)) {
+            let i = marked.indexOf(fret)
+            return (
+              <span
+                key={fret}
+                className={guideboxClass}
+                onClick={()=>{
+                    modeActive ? setFret(fret) : null;
+                    windowMode ? updateWindowCycle(nextCycle) : null
+                  }}
+                onMouseEnter={modeActive ? ()=>guides[i][1](marker) : ()=>guides[i][1](dot)}
+                onMouseLeave={()=>guides[i][1](dot)}
+              >
+                {guides[i][0]}
+              </span>
+            )
+          } else {
+            return (
+              <span
+              key={fret}
+                className={unMarkedClass}
+                onClick={()=>
+                  {modeActive ? setFret(fret) : null;
+                    windowMode ? updateWindowCycle(nextCycle) : null
+                  }}
+              >
+                {marker}
+              </span>
+            )
+          }
+        })}
       </React.Fragment>
-      }
     </div>
   )
 }
-
-
-
-
-
-

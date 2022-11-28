@@ -8,7 +8,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
   const {State, Setters, Conditions} = useStoreContext()
   const {sharp, flat, dblSharp, dblFlat, natural, dim, rows, rowClasses, chromatic} = Constants
   const {chordDegrees, chordDegreesUpper, chordFocus, sharedNotes} = State
-  const {handleRootChange, handleVoicingChange, handleChordFocus} = Setters
+  const {handleRootChange, handleVoicingChange, setChordFocus} = Setters
   const {neutral} = Conditions
 
   let chordNameClass = `calc_chord_name${whichCalculator}`
@@ -46,7 +46,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
           {neutral ?
             <div
               className="types_col"
-              onClick={()=>{handleChordFocus(`Focus ${whichCalculator}`)}}
+              onClick={()=>{setChordFocus(`Focus ${whichCalculator}`)}}
             >
               Focus
             </div>
@@ -54,7 +54,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
             chordFocus === `Focus ${whichCalculator}` ?
               <div
                 className="types_col calc_toggle_on"
-                onClick={()=>{handleChordFocus('Neutral')}}
+                onClick={()=>{setChordFocus('Neutral')}}
               >
                 Focused
               </div>
@@ -62,7 +62,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
             !neutral && chordFocus !== `Focus ${whichCalculator}` ?
               <div
                 className="types_col"
-                onClick={()=>{handleChordFocus(`Focus ${whichCalculator}`)}}
+                onClick={()=>{setChordFocus(`Focus ${whichCalculator}`)}}
               >
                 Unfocused
               </div>

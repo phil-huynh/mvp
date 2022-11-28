@@ -7,14 +7,14 @@ export const Welcome = () => {
 
   const {State, Setters, Conditions} = useStoreContext()
   const {showWelcome} = State
-  const {handleNavChoice, handleWelcomeWindow} = Setters
+  const {handleNavChoice, setShowWelcome, setHideScale, setShowTutorial, setRenderView} = Setters
 
   return (
     <Modal
       className='welcome'
       show={showWelcome}
       backdrop="static"
-      onHide={() => {handleWelcomeWindow()}}
+      onHide={() => {setHideScale('Show Scale'); setShowWelcome(false)}}
     >
       <Modal.Header>
         <Modal.Title>
@@ -34,22 +34,31 @@ export const Welcome = () => {
             <span
               title="mapChords"
               className='construction_choice toggle_on'
-              onClick={(e)=>{handleNavChoice(e); handleWelcomeWindow()}}
-              >
+              onClick={(e)=>{
+                handleNavChoice(e);
+                setHideScale('Show Scale');
+                setShowWelcome(false)}
+              }>
               Map Chords
             </span>
             <span
               title="mapScales"
               className='construction_choice toggle_on'
-              onClick={(e)=>{handleNavChoice(e); handleWelcomeWindow()}}
-              >
+              onClick={(e)=>{
+                handleNavChoice(e);
+                setHideScale('Show Scale');
+                setShowWelcome(false)}
+              }>
               Map Scales
             </span>
             <span
               title="tutorial"
               className='construction_choice toggle_on'
-              onClick={(e)=>{handleNavChoice(e); handleWelcomeWindow()}}
-            >
+              onClick={(e)=>{
+                setRenderView('Tutorial');
+                setShowTutorial(true);
+                setShowWelcome(false)}
+              }>
               Tutorial
             </span>
           </div>

@@ -19,18 +19,12 @@ export const StringSet = ()  => {
   return (
 
     <div className={`${neckClass}`}>
-      {list ? list.map((string, i) => {
-        i === 0 ? firstString = true : firstString = false
-        i === list.length - 1 ? lastString = true : lastString = false
-        return (
+      {list ? list.map((string, i) => (
           <String
             key={i}
             string={string}
-            // firstString={firstString}
-            // lastString={lastString}
           />
-        )
-      }): null}
+      )): null}
     </div>
 
   )
