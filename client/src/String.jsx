@@ -10,6 +10,8 @@ export const String = ({string, firstString, lastString}) => {
 
   const {strings, stringsLeft , scale, currentChordTones, currentChordTones2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, renderView, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey, calcChord1, calcChord2, noteRefs1, noteRefs2, chordType1, chordType2, lowestFret, highestFret, useCapo} = State
 
+  const {markNote} = Setters
+
   const {mapChords, mapScales, welcome, tutorial, focus1, focus2, neutral, noteNameLabels, scaleDegLabels, solfegeLabels, showScale, unfocusScale, hiddenScale, lefty} = Conditions
 
 
@@ -155,12 +157,6 @@ export const String = ({string, firstString, lastString}) => {
   const chordKey2Empty = JSON.stringify(chordKey2) === '{}'
   const twoChordsSelected = chordOneSelected === true && chordTwoSelected === true;
 
-  console.log('!!!!!', chord);
-  console.log('!!!!!', chord.length);
-  console.log('!!!!!', hasChord1);
-  console.log('!!!!!', chord2);
-  console.log('!!!!!', chord2.length);
-  console.log('!!!!!', hasChord2);
 
 
 
@@ -316,7 +312,6 @@ export const String = ({string, firstString, lastString}) => {
               )
             }
             else {
-              console.log("%$%$%$ 17");
               return (
                 <span key={i} className={`${outerClass}`}>_________________________________________________________________________________________________________________
                   <span className={`${innerClass}`}>
@@ -377,7 +372,10 @@ export const String = ({string, firstString, lastString}) => {
             if (open) {
               return (
                 <span key={i} className={`${outerClass}`}>
-                  <span className={`${innerClass}`}>
+                  <span
+                    className={`${innerClass} interact`}
+                    onClick={()=>markNote(note)}
+                  >
                     {noteText}
                   </span>
                 </span>
@@ -386,7 +384,10 @@ export const String = ({string, firstString, lastString}) => {
             else {
               return (
               <span key={i} className={`${outerClass}`}> _________________________________________________________________________________________________________________
-                <span className={`${innerClass}`}>
+                <span
+                  className={`${innerClass} interact`}
+                  onClick={()=>markNote(note)}
+                >
                   {noteText}
                 </span>
               _________________________________________________________________________________________________________________

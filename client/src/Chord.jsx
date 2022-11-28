@@ -91,10 +91,9 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
           <Card.Text>{tones.map ((tone, i) => (
             sharedNotes.length > 0 && sharedNotes.includes(tone) && (isChord1 || isChord2) ?
             <span className="sharedCardNote" key={`${i}${tone}`}>&nbsp;{tone}&nbsp;</span>
-            : noneSelected && tone === selNote ?
+            : tone === selNote ?
             <span className="targetNote" key={`${i}${tone}`}>&nbsp;{tone}&nbsp;</span>
             :
-
             <span key={`${i}${tone}`}>&nbsp;{tone}&nbsp;</span>
           ))}
           </Card.Text>

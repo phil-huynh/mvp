@@ -906,7 +906,6 @@ align-content: center;
   align-items: center;
   color: white;
   font-size: 2rem;
-  opacity: ;
   border: white solid 1px;
   border-radius: 5px;
   -webkit-box-shadow: 2px 2px 20px 5px white, inset 0 0 2.6rem white;
@@ -1140,6 +1139,20 @@ box-shadow: 0 0 .2rem #fff,
   0 0 0.5rem red,
   0 0 0.2rem red,
   0 0 1.4rem red,
+}
+
+.interact {
+  cursor: pointer;
+}
+
+.interact:hover {
+  -webkit-box-shadow: 0px 0px 10px 4px white, inset 0 0 1.6rem white;
+  box-shadow: 0px 0px 10px 4px white, inset 0 0 1.6rem white;
+  text-shadow: 0 0 5px white,
+              0 0 10px white,
+              0 0 15px white,
+              0 0 20px white,
+              38px 19px 8px rgba(206,89,55,0);
 }
 
 .unfocus {

@@ -11,23 +11,35 @@ export const NeckDash = () => {
 
   const {State, Setters, Conditions} = useStoreContext()
 
-  const {neckWindowMode, view, lowestFret, highestFret, renderView, selNote, chordOneSelected, resetVoicingCount, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, sharedNotes, instrument, tuning} = State
+  const {neckWindowMode, view, lowestFret, highestFret, renderView, selNote, chordOneSelected, resetVoicingCount, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, sharedNotes, instrument, tuning, calcChord1, currentChordTones} = State
 
   const {setShowViewMenu, setShowStringsMenu, handleChordDegrees, setNeckWindowMode, setWholeNeck, setWindowCycle, resetAll} = Setters
 
-  const {lefty, mapScales, mapChords, neutral} = Conditions
+  const {lefty, mapScales, mapChords, neutral, windowMode, startMode, endMode, cycleStart, cycleEnd, capoMode} = Conditions
 
   let [fromClass, toClass, windowClass, resetIconClass, capoClass] = ['', '', '', '', '']
   let resetClass = "reset_button resetAll"
   let iconClass = 'range_option_icons'
   let chordDegClass = 'chordDegButton'
 
-  displayChordDegrees ? chordDegClass += ' toggle_on chordDegToggle' : chordDegClass += ''
 
-  neckWindowMode === 'from start' ? fromClass = iconClass + ' icon_toggle' : fromClass = iconClass
-  neckWindowMode === 'to end' ? toClass = iconClass + ' icon_toggle' : toClass = iconClass
-  neckWindowMode === 'window' ? windowClass = iconClass + ' icon_toggle' : windowClass = iconClass
-  neckWindowMode === 'capo' ? capoClass = iconClass + ' capo_toggle capo' : capoClass = iconClass + ' capo'
+  let sharedCount = 0
+  if (sharedNotes.length > 0) {
+    if(mapScales) {
+      sharedCount = sharedNotes.length
+    }
+    if(mapChords) {
+      let checker = {}
+      calcChord1.forEach((note) => {checker[note] = true});
+      sharedNotes.forEach((note) => {checker[note] ? sharedCount++: null})
+    }
+  }
+
+  displayChordDegrees ? chordDegClass += ' toggle_on chordDegToggle' : chordDegClass += ''
+  startMode ? fromClass = iconClass + ' icon_toggle' : fromClass = iconClass
+  endMode ? toClass = iconClass + ' icon_toggle' : toClass = iconClass
+  windowMode ? windowClass = iconClass + ' icon_toggle' : windowClass = iconClass
+  capoMode ? capoClass = iconClass + ' capo_toggle capo' : capoClass = iconClass + ' capo'
   lowestFret !== 0 || highestFret !== 17 ? resetIconClass = iconClass + ' neck_window_reset' : resetIconClass = iconClass
 
   if (neckWindowMode !== 'none' || lowestFret !== 0 || highestFret !== 17 ||
@@ -121,9 +133,9 @@ export const NeckDash = () => {
           Capo
         </div>
       </div>
-      {sharedNotes.length > 1 ?
+      {sharedCount > 1 ?
         <span className="sharedLight_container">
-          <span className="sharedLight">{`${sharedNotes.length} Shared Notes`}</span>
+          <span className="sharedLight">{`${sharedCount} Shared Notes`}</span>
         </span>
         : sharedNotes.length === 1 ?
         <span className="sharedLight_container">
