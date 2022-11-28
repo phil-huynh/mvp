@@ -112,6 +112,13 @@ export default ({ children }) => {
   const scaleDegLabels = labelType === 'Scale Degrees';
   const solfegeLabels = labelType === 'Solfege';
 
+  const windowMode = neckWindowMode === 'window'
+  const startMode = neckWindowMode === 'from start'
+  const endMode = neckWindowMode === 'to end'
+  const cycleStart = windowCycle === 'start'
+  const cycleEnd = windowCycle === 'end'
+  const capoMode = neckWindowMode === 'capo'
+  const modeActive = neckWindowMode !== 'none'
 
 
   const clear = (which) => {
@@ -617,7 +624,14 @@ export default ({ children }) => {
       unfocusScale: unfocusScale,
       noteNameLabels: noteNameLabels,
       scaleDegLabels: scaleDegLabels,
-      solfegeLabels: solfegeLabels
+      solfegeLabels: solfegeLabels,
+      windowMode: windowMode,
+      startMode: startMode,
+      endMode: endMode,
+      cycleStart: cycleStart,
+      cycleEnd: cycleEnd,
+      capoMode: capoMode,
+      modeActive: modeActive
     }
  }
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>

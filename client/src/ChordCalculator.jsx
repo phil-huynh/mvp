@@ -8,7 +8,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
   const {State, Setters, Conditions} = useStoreContext()
   const {sharp, flat, dblSharp, dblFlat, natural, dim, rows, rowClasses, chromatic} = Constants
   const {chordDegrees, chordDegreesUpper, chordFocus, sharedNotes} = State
-  const {handleRootChange, handleVoicingChange, setChordFocus} = Setters
+  const {handleRootChange, handleVoicingChange, setChordFocus, clear} = Setters
   const {neutral} = Conditions
 
   let chordNameClass = `calc_chord_name${whichCalculator}`
@@ -100,9 +100,9 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
             )
           }
           else {
-            let upper, lower = ['blackNoteName', 'blackNoteName']
+            let [upper, lower] = ['blackNoteName', 'blackNoteName']
             if (root && note[0] === root) {upper += ' selectedRoot'}
-            if (root && note[1] === root) {upper += ' selectedRoot'}
+            if (root && note[1] === root) {lower += ' selectedRoot'}
             return (
               <div className="blackNote" key={`note${i}-${note}`}>
                 <div className="blackNoteContainer">
@@ -154,7 +154,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
   )
 }
 
-export default ChordCalculator;
+
 
 
 

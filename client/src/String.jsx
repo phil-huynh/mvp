@@ -50,25 +50,28 @@ export const String = ({string, firstString, lastString}) => {
     [chord, chord2] = [currentChordTones, currentChordTones2];
     keyKey = keyCenter.notesToDegrees;
     labelContainer = keyCenter.tonicScaleDegrees;
-    if (noteNameLabels) {
-      labelContainer = keyCenter.tonicScaleDegrees;
-    }
-    if (scaleDegLabels) {
-      labelContainer = scaleDegrees;
-    }
-    if (solfegeLabels) {
-      labelContainer = solfege;
-    }
+    if (scaleDegLabels) { labelContainer = scaleDegrees; }
+    if (solfegeLabels) { labelContainer = solfege; }
   }
 
   if (mapChords) {
     [chord, chord2] = [calcChord1, calcChord2]
     noteRefs1 ? chordKey = noteRefs1.notesToDegs : chordKey = {}
     noteRefs2 ? chordKey2 = noteRefs2.notesToDegs : chordKey2 = {}
-    if (displayChordDegrees && (focus1 || (neutral && chord && !chord2))) {
+  }
+
+  const hasChord1 = chord.length > 0
+  const hasChord2 = chord2.length > 0
+
+
+  if (mapChords) {
+    [chord, chord2] = [calcChord1, calcChord2]
+    noteRefs1 ? chordKey = noteRefs1.notesToDegs : chordKey = {}
+    noteRefs2 ? chordKey2 = noteRefs2.notesToDegs : chordKey2 = {}
+    if (displayChordDegrees && (focus1 || (neutral && hasChord1 && !hasChord2))) {
       chordType1.useUpper ? altLabelContainer = chordDegreesUpper : altLabelContainer = chordDegrees
     }
-    if (displayChordDegrees  && (focus2 || (neutral && chord2 && !chord))) {
+    if (displayChordDegrees  && (focus2 || (neutral && hasChord2 && !hasChord1))) {
       chordType2.useUpper ? altLabelContainer = chordDegreesUpper : altLabelContainer = chordDegrees
     }
   }
@@ -152,6 +155,14 @@ export const String = ({string, firstString, lastString}) => {
   const chordKey2Empty = JSON.stringify(chordKey2) === '{}'
   const twoChordsSelected = chordOneSelected === true && chordTwoSelected === true;
 
+  console.log('!!!!!', chord);
+  console.log('!!!!!', chord.length);
+  console.log('!!!!!', hasChord1);
+  console.log('!!!!!', chord2);
+  console.log('!!!!!', chord2.length);
+  console.log('!!!!!', hasChord2);
+
+
 
   (lefty) ? openString = notes.length - 1 : openString = 0;
 
@@ -169,7 +180,7 @@ export const String = ({string, firstString, lastString}) => {
         }
         if (inRange) {
           if (mapChords && !(chordKeyEmpty && chordKey2Empty)) {
-            if ((!chord && !chord2) || ((chord && chord2) && (!chord.includes(note) && !chord2.includes(note) && !multiName)) || ((chord && !chord2) && (!chord.includes(note))) || ((chord2 && !chord) && (!chord2.includes(note)))) {
+            if (((!chord.includes(note) && !chord2.includes(note) && !multiName))) {
               if (open) {
                 return (
                   <span key={i} className={`${outerClass}`}></span>
@@ -184,103 +195,78 @@ export const String = ({string, firstString, lastString}) => {
 
               }
             }
-            if (chord && chord2) {
+            if (hasChord1 && hasChord2) {
               if (multiName) {
+                let one; let two
                 if (chord.includes(note[0]) && chord2.includes(note[1])) {
-                  if ((neutral)) {
-                    if (open) {
-                      return (
-                        <span key={i} className={`${openClass}`}>
-                          <span className={`${openNoteClass} sharedNeckNote doubleName`}>
-                            <span className="fromOne">{note[0]}</span>
-                            <span className="divider">|</span>
-                            <span className="fromTwo">{note[1]}</span>
-                          </span>
-                        </span>
-                      )
-                    }
-                    else {
-                      return (
-                        <span key={i} className={`${fretClass}`}>_________________________________________________________________________________________________________________
-                        <span className={`${noteClass} sharedNeckNote doubleName`}>
-                          <span className="fromOne">{note[0]}</span>
-                          <span className="divider">|</span>
-                          <span className="fromTwo">{note[1]}</span>
-                        </span>_________________________________________________________________________________________________________________
-                      </span>
-                      )
-                    }
-
-                  }
-                  if (displayChordDegrees && altLabelContainer) {
-                    (focus1 && chordKey) ? noteText = altLabelContainer[chordKey[note[0]]] : noteText = note[0]
-                    (focus2 && chordKey2) ? noteText = altLabelContainer[chordKey2[note[1]]] : noteText = note[1]
-                  }
-                  else {
-                    if(focus1) { noteText = note[0] }
-                    if(focus2) { noteText = note[1] }
-                  }
-                  innerClass += ' sharedNeckNote'
+                  [one, two] = [note[0], note[1]]
                 }
-
                 if (chord.includes(note[1]) && chord2.includes(note[0])) {
-                  if ((neutral)) {
-                    if (open) {
-                      return (
-                        <span key={i} className={`${openClass}`}>
-                          <span className={`${openNoteClass} sharedNeckNote doubleName`}>
-                            <span className="fromOne">{note[1]}</span>
-                            <span className="divider">|</span>
-                            <span className="fromTwo">{note[0]}</span>
-                          </span>
+                  [one, two] = [note[1], note[0]]
+                }
+                if ((neutral)) {
+                  if (open) {
+                    return (
+                      <span key={i} className={`${openClass}`}>
+                        <span className={`${openNoteClass} sharedNeckNote doubleName`}>
+                          <span className="fromOne">{one}</span>
+                          <span className="divider">|</span>
+                          <span className="fromTwo">{two}</span>
                         </span>
-                      )
-                    }
-                    else {
-                      return (
-                        <span key={i} className={`${fretClass}`}>_________________________________________________________________________________________________________________
-                          <span className={`${noteClass} sharedNeckNote doubleName`}>
-                            <span className="fromOne">{note[1]}</span>
-                            <span className="divider">|</span>
-                            <span className="fromTwo">{note[0]}</span>
-                          </span>_________________________________________________________________________________________________________________
-                        </span>
-                      )
-                    }
-
-
-                  }
-                  if (displayChordDegrees && altLabelContainer) {
-                    (focus1 && chordKey) ? noteText = altLabelContainer[chordKey[note[1]]] : noteText = note[1]
-                    (focus2 && chordKey2) ? noteText = altLabelContainer[chordKey2[note[0]]] : noteText = note[0]
+                      </span>
+                    )
                   }
                   else {
-                    if(focus1) { noteText = note[1] }
-                    if(focus2) { noteText = note[0] }
+                    return (
+                      <span key={i} className={`${fretClass}`}>_________________________________________________________________________________________________________________
+                      <span className={`${noteClass} sharedNeckNote doubleName`}>
+                        <span className="fromOne">{one}</span>
+                        <span className="divider">|</span>
+                        <span className="fromTwo">{two}</span>
+                      </span>_________________________________________________________________________________________________________________
+                    </span>
+                    )
                   }
-                  innerClass += ' sharedNeckNote'
                 }
+                innerClass += ' sharedNeckNote'
+                if (displayChordDegrees && altLabelContainer) {
+                  if (focus1) {
+                    chordKey ? noteText = altLabelContainer[chordKey[one]] : noteText = one;
+                  }
+                  if (focus2) {
+                    chordKey2 ? noteText = altLabelContainer[chordKey2[two]] : noteText = two;
+                  }
+                }
+                else {
+                  if (focus1) { noteText = one; }
+                  if (focus2) { noteText = two; }
+                }
+
               }
               else {
                 if (chord.includes(note) && chord2.includes(note)) {
+                  innerClass += ' sharedNeckNote'
                   if (displayChordDegrees && !neutral && altLabelContainer) {
-                    (focus1 && chordKey) ? noteText = altLabelContainer[chordKey[note]] : noteText = note;
-                    (focus2 && chordKey2) ? noteText = altLabelContainer[chordKey2[note]] : noteText = note;
+                    if(focus1) {
+                      chordKey ? noteText = altLabelContainer[chordKey[note]] : noteText = note;
+                    }
+                    if(focus2) {
+                      chordKey2 ? noteText = altLabelContainer[chordKey2[note]] : noteText = note;
+                    }
                   }
-                  else if (neutral || !displayChordDegrees) {
+                  else {
                     noteText = note
                   }
-                  innerClass += ' sharedNeckNote'
                 }
                 else if (chord.includes(note)) {
+                  innerClass += ' selectedNote'
                   if (displayChordDegrees && !neutral && altLabelContainer){
-                    if (focus1 && chordKey) {
-                      noteText = altLabelContainer[chordKey[note]]
-                      innerClass += ' selectedNote'
+                    if (focus1) {
+                      chordKey ? noteText = altLabelContainer[chordKey[note]] : noteText = note
                     }
                     if (focus2) {
                       noteText = note
-                      innerClass += ' selectedNote unfocus'
+                      innerClass += ' unfocus'
                     }
                   }
                   else {
@@ -289,14 +275,14 @@ export const String = ({string, firstString, lastString}) => {
                   }
                 }
                 else if (chord2.includes(note)) {
+                  innerClass += ' selectedNote2'
                   if (displayChordDegrees && !neutral && altLabelContainer){
                     if (focus2 && chordKey2) {
-                      noteText = altLabelContainer[chordKey2[note]]
-                      innerClass += ' selectedNote2'
+                      chordKey2 ? noteText = altLabelContainer[chordKey2[note]] : noteText = note
                     }
                     if (focus1) {
                       noteText = note
-                      innerClass += ' selectedNote2 unfocus'
+                      innerClass += ' unfocus'
                     }
                   }
                   else {
@@ -306,23 +292,19 @@ export const String = ({string, firstString, lastString}) => {
                 }
               }
             }
-            else if (chord && !chord2) {
+            else if (hasChord1) {
+              innerClass += ' selectedNote'
               if (displayChordDegrees && altLabelContainer && chordKey) {
                 noteText = altLabelContainer[chordKey[note]]
               }
-              else {
-                noteText = note
-              }
-              innerClass += ' selectedNote'
+              else { noteText = note }
             }
-            else if (!chord && chord2) {
+            else if (hasChord2) {
+              innerClass += ' selectedNote2'
               if (displayChordDegrees && altLabelContainer && chordKey2) {
                 noteText = altLabelContainer[chordKey2[note]]
               }
-              else {
-                noteText = note
-              }
-              innerClass += ' selectedNote2'
+              else {noteText = note}
             }
             if(open) {
               return (
@@ -334,6 +316,7 @@ export const String = ({string, firstString, lastString}) => {
               )
             }
             else {
+              console.log("%$%$%$ 17");
               return (
                 <span key={i} className={`${outerClass}`}>_________________________________________________________________________________________________________________
                   <span className={`${innerClass}`}>
@@ -345,14 +328,18 @@ export const String = ({string, firstString, lastString}) => {
             }
           }
           else if (mapScales) {
-            if(note === selNote) {
+            if(selNote && note === selNote) {
               innerClass += ' selNoteNeckToggle'
+              if(chord.includes(note) && chord2.includes(note)) {innerClass += ' sel_and_shared'}
+              else if(chord.includes(note)) {innerClass += ' sel_and_one'}
+              else if(chord2.includes(note)) {innerClass += ' sel_and_two'}
+              displayChordDegrees ? noteText = altLabelContainer[chordKey[note]] : noteText = labelContainer[keyKey[note]]
             }
-            if(chord && chord2 && chord.includes(note) && chord2.includes(note)) {
+            else if(chord.includes(note) && chord2.includes(note)) {
               innerClass += ' sharedNeckNote'
               displayChordDegrees ? noteText = altLabelContainer[chordKey[note]] : noteText = labelContainer[keyKey[note]]
             }
-            else if(chord && chord.includes(note)) {
+            else if(chord.includes(note)) {
               focus2 ? innerClass += ' selectedNote unfocus' : innerClass += ' selectedNote'
               if (displayChordDegrees && (focus1 || !chordTwoSelected)) {
                 noteText = altLabelContainer[chordKey[note]]
@@ -361,7 +348,7 @@ export const String = ({string, firstString, lastString}) => {
                 noteText = labelContainer[keyKey[note]]
               }
             }
-            else if(chord2 && chord2.includes(note)) {
+            else if(chord2.includes(note)) {
               innerClass += ' selectedNote2'
               focus1 ? innerClass += ' unfocus' : ''
               if (displayChordDegrees && focus2) {
