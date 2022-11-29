@@ -61,3 +61,56 @@ test('should sharp a triple flat note correctly', () => {
 test('should flat a note with no natural flat correctly', () => {
   expect(flatNote('F')).toBe(`F${flat}`);
 });
+
+
+
+// Tests for findEnharmonicEquivalent()
+test('should find enharmonic for sharped note with no natural sharp', () => {
+  expect(findEnharmonicEquivalent(`B${sharp}`)).toBe(`C`)
+})
+test('should find enharmonic for flatted note with no natural flat', () => {
+  expect(findEnharmonicEquivalent(`F${flat}`)).toBe(`E`)
+})
+test('should find enharmonic flat name for sharp note', () => {
+  expect(findEnharmonicEquivalent(`F${sharp}`)).toBe(`G${flat}`)
+})
+test('should find enharmonic sharp name for a flat note', () => {
+  expect(findEnharmonicEquivalent(`E${flat}`)).toBe(`D${sharp}`)
+})
+test('should find enharmonic for double flat white note', () => {
+  expect(findEnharmonicEquivalent(`A${dblFlat}`)).toBe(`G`)
+})
+test('should find enharmonic or double sharp white note', () => {
+  expect(findEnharmonicEquivalent(`C${dblSharp}`)).toBe(`D`)
+})
+test('should find enharmonic for double sharp white note with no sharp', () => {
+  expect(findEnharmonicEquivalent(`B${dblSharp}`)).toBe(`C${sharp}`)
+})
+test('should find enharmonic for double flat white note with no flat', () => {
+  expect(findEnharmonicEquivalent(`F${dblFlat}`)).toBe(`E${flat}`)
+})
+test('should find enharmonic for triple sharp note', () => {
+  expect(findEnharmonicEquivalent(`F${dblSharp}${sharp}`)).toBe(`G${sharp}`)
+})
+test('should find enharmonic for triple flat note', () => {
+  expect(findEnharmonicEquivalent(`B${dblFlat}${flat}`)).toBe(`A${flat}`)
+})
+test('should find enharmonic for quadruple sharp note', () => {
+  expect(findEnharmonicEquivalent(`F${dblSharp}${dblSharp}`)).toBe(`A`)
+})
+test('should find enharmonic for quadruple flat note', () => {
+  expect(findEnharmonicEquivalent(`B${dblFlat}${dblFlat}`)).toBe(`G`)
+})
+test('should find enharmonic for extreme sharp', () => {
+  expect(findEnharmonicEquivalent(`F${dblSharp}${dblSharp}${dblSharp}${sharp}`)).toBe(`C`)
+})
+test('should find enharmonic for extreme flat', () => {
+  expect(findEnharmonicEquivalent(`B${dblFlat}${dblFlat}${dblFlat}`)).toBe(`F`)
+})
+
+
+// Tests for shiftNotes()
+test('should throw error if note not in scale', () => {
+  let scale = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
+  expect(() => shiftNotes(`F${sharp}`, scale)).toThrow(`Note F${sharp} not in scale C,D,E,F,G,A,B!`)
+})

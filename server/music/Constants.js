@@ -266,6 +266,9 @@ const findEnharmonicEquivalent = (note) => {
 }
 
 const shiftNotes = (note, scale) => {
+  if(!scale.includes(note)) {
+    throw (`Note ${note} not in scale ${scale}!`)
+  }
   let shiftedScale = [];
   if (scale[0] === note) {
     return scale;
