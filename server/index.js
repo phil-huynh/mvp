@@ -3,9 +3,7 @@ const app = express();
 const path = require('path');
 const port = 3000
 const morgan = require('morgan');
-const db = require('../database')
-const model = require('../database/model.js')
-const Music = require('./music.js')
+const Music = require('./music/music_Main.js')
 
 app.listen(port, () => {
   console.log(`Music App server listening on: ${port}`);
@@ -22,8 +20,8 @@ app.get('/scales', (req, res) => {
   var objKey = scale.split(' ')
   if (objKey.length > 1) {
     for (var i = 1; i < objKey.length; i++) {
-      var capital = objKey[i].slice(0, 1)
-      var rest = objKey[i].slice(1)
+      let capital = objKey[i].slice(0, 1)
+      let rest = objKey[i].slice(1)
       capital = capital.toUpperCase();
       objKey[i] = `${capital}${rest}`
     }
@@ -77,13 +75,3 @@ app.get('/choices', (req, res) => {
 })
 
 
-app.post('/notes', (req, res) => {
-  const { user, notes } = req.body
-  model.addNotes(user, notes)
-    .then((response) => {
-      res.json(response)
-    })
-    .catch((err) => {
-    console.log("🚀 ~ file: index.js ~ line 42 ~ app.post ~ err", err)
-    })
-})

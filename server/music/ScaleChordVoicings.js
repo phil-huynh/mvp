@@ -1,6 +1,8 @@
-  // (voicing, objKey, listName, name, label, quality, useUpper)
+const Constants = require('./Constants.js');
 
-const voicings = [
+const { sharp, flat } = Constants;
+
+module.exports.voicingsList = [
   [
     ['one', 'two', 'five'],
     'sus2',
@@ -430,5 +432,5 @@ const voicings = [
     '',
     false
   ]
-]
+];
 
