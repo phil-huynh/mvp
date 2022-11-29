@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { StringSet } from './StringSet.jsx'
-import { StringsMenu } from './StringsMenu.jsx'
-import { ViewMenu } from './ViewMenu.jsx'
-import { Header } from './Header.jsx'
-import { NeckDash } from './NeckDash.jsx'
-import { MapScalesRender } from './MapScalesRender.jsx'
-import { MapChordsRender } from './MapChordsRender.jsx'
-import { FretGuide } from './FretGuide.jsx'
-import { Tutorial } from './Tutorial.jsx'
-import { Welcome } from './Welcome.jsx'
-import { ConstructionFindStructures } from './ConstructionFindStructures.jsx'
-import { useStoreContext } from '../StoreContext.js'
-import { Constants } from '../Constants.js'
+import { StringSet } from './neckComponents/StringSet.jsx';
+import { StringsMenu } from './menus/StringsMenu.jsx';
+import { ViewMenu } from './menus/ViewMenu.jsx';
+import { Header } from './dashboards/Header.jsx';
+import { NeckDash } from './dashboards/NeckDash.jsx';
+import { MapScalesRender } from './mapScalesComponents/MapScalesRender.jsx';
+import { MapChordsRender } from './mapChordsComponents/MapChordsRender.jsx';
+import { FretGuide } from './neckComponents/FretGuide.jsx';
+import { Tutorial } from './messagesAndInfo/Tutorial.jsx';
+import { Welcome } from './messagesAndInfo/Welcome.jsx';
+import { ConstructionFindStructures } from './messagesAndInfo/ConstructionFindStructures.jsx';
+import { useStoreContext } from '../Providers/StoreContext.js';
+import { Constants } from '../Providers/Constants.js';
 
 
 const App = () => {
-  const {State, Setters, Conditions} = useStoreContext()
+  const {State, Setters, Conditions} = useStoreContext();
 
-  const {sharp, flat, dblSharp, dblFlat, natural, dim} = Constants
-  const {calcChord1, calcChord2, instrument, currentChordTones, currentChordTones2, defaultType, renderView} = State
-  const {getStrings, getDegrees, getScale, updateSharedNotes} = Setters
-  const {mapChords, mapScales, lefty} = Conditions
+  const {sharp, flat, dblSharp, dblFlat, natural, dim} = Constants;
+  const {calcChord1, calcChord2, currentChordTones, currentChordTones2, defaultType, renderView, instrument} = State;
+  const {getStrings, getDegrees, getScale, updateSharedNotes} = Setters;
+  const {mapChords, mapScales, lefty} = Conditions;
 
   useEffect(() => {
     getStrings();
@@ -29,13 +29,13 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    updateSharedNotes()
+    updateSharedNotes();
   }, [calcChord1, calcChord2, currentChordTones, currentChordTones2, defaultType, renderView])
 
 
-  let [middle, stringbox] = ['inner_middle', 'stringbox']
+  let [middle, stringbox] = ['inner_middle', 'stringbox'];
   if (lefty) {
-    [middle, stringbox] = ['inner_middle_left', 'stringbox_left']
+    [middle, stringbox] = ['inner_middle_left', 'stringbox_left'];
   }
 
   return (
