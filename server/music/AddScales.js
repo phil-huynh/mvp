@@ -144,12 +144,6 @@ add7NoteScale(
 );
 
 add7NoteScale(
-  'altered',
-  ['one', 'flatTwo', 'sharpTwo', 'three', 'flatFive', 'sharpFive', 'flatSeven'],
-  false
-); // 2 3 4 5 6 7
-
-add7NoteScale(
   'gypsy',
   ['one', 'flatTwo', 'three', 'four', 'five', 'flatSix', 'seven'],
   true

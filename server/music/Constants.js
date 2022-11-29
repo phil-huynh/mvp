@@ -190,17 +190,16 @@ const chordDegreesUpper = {
 };
 
 const sharpNote = (note) => {
-  if (note.length === 1 || note.slice(note.length -2) === `${dblSharp}`) {
+  if (note.length === 1 || note.slice(note.length - 2) === `${dblSharp}`) {
     note = `${note}${sharp}`;
   } else if (note[note.length - 1] === `${sharp}`) {
     note = note.replace(`${sharp}`, `${dblSharp}`);
   }
-  if (note[note.length - 1] === `${flat}`) {
-    note = note.substring(0, note.length - 1);
-  }
   if (note.slice(note.length - 2) === `${dblFlat}`) {
       note = note.substring(0, note.length - 2);
       note = `${note}${flat}`;
+  } else if (note[note.length - 1] === `${flat}`) {
+    note = note.substring(0, note.length - 1);
   }
   return note;
 }
@@ -211,12 +210,11 @@ const flatNote = (note) => {
   } else if (note[note.length - 1] === `${flat}`) {
       note = note.replace(`${flat}`, `${dblFlat}`);
   }
-  if (note[note.length - 1] === `${sharp}`) {
-      note = note.substring(0, note.length - 1);
-  }
   if (note.slice(note.length - 2) === `${dblSharp}`) {
       note = note.substring(0, note.length - 2);
       note = `${note}${sharp}`;
+  } else if (note[note.length - 1] === `${sharp}`) {
+      note = note.substring(0, note.length - 1);
   }
   return note;
 }
