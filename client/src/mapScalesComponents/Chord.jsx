@@ -1,64 +1,62 @@
-import React from 'react'
-import { Card, Button } from 'react-bootstrap'
-import { useStoreContext } from '../../Providers/StoreContext.js'
-import { Constants } from '../../Providers/Constants.js'
+import React from 'react';
+import { Card, Button } from 'react-bootstrap';
+import { useStoreContext } from '../../Providers/StoreContext.js';
+import { Constants } from '../../Providers/Constants.js';
 
 
 export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
 
-  const {State, Setters, Conditions} = useStoreContext()
+  const {State, Setters, Conditions} = useStoreContext();
 
-  const {sharp, flat, dblSharp, dblFlat, natural, dim} = Constants
+  const {sharp, flat, dblSharp, dblFlat, natural, dim} = Constants;
 
-  const {sevenths, selectedChord, selectedChord2, chordOneSelected, chordTwoSelected, keyCenter, compare, currentChordTones, currentChordTones2, displayChordDegrees, chordFocus, sharedNotes, selNote} = State
+  const {sevenths, selectedChord, selectedChord2, chordOneSelected, chordTwoSelected, keyCenter, compare, currentChordTones, currentChordTones2, displayChordDegrees, chordFocus, sharedNotes, selNote} = State;
 
-  const {handleAlterChordWindow, setTones, setTones2, selectChord, selectChord2, resetCard, handleSingleOrCompare, setChordFocus, setSharedNotes} = Setters
+  const {handleAlterChordWindow, setTones, setTones2, selectChord, selectChord2, resetCard, handleSingleOrCompare, setChordFocus, setSharedNotes} = Setters;
 
-  const {focus1, focus2, neutral} = Conditions
+  const {focus1, focus2, neutral} = Conditions;
 
   let name;
   let label;
-  let objKey=''
-  let cardClass='text-center chordCard'
   let tones;
-  let root = chord.root.note
-  let list = chord.options.list
-  let isChord1 = chord === selectedChord
-  let isChord2 = chord === selectedChord2
-  let selected = chord === selectedChord
-  let selected2 = chord === selectedChord2
-  let noneSelected = (!chordOneSelected && !chordTwoSelected)
-  let both = (chordOneSelected && chordTwoSelected)
+  let objKey='';
+  let cardClass='text-center chordCard';
+  let root = chord.root.note;
+  let list = chord.options.list;
+  let selected = chord === selectedChord;
+  let selected2 = chord === selectedChord2;
+  let both = (chordOneSelected && chordTwoSelected);
 
   if (chord) {
     sevenths && !wasAltered ?
-    (name=chord.options.seventhChord.name, label=chord.options.seventhChord.label, tones=chord.options.seventhChord.notes, objKey=chord.options.seventhChord.voicingObjKey) :
-    (name=chord.options.triad.name, label=chord.options.triad.label, tones=chord.options.triad.notes, objKey=chord.options.triad.voicingObjKey)
+    (
+      name=chord.options.seventhChord.name,
+      label=chord.options.seventhChord.label,
+      tones=chord.options.seventhChord.notes,
+      objKey=chord.options.seventhChord.voicingObjKey
+    )
+    :
+    (
+      name=chord.options.triad.name,
+      label=chord.options.triad.label,
+      tones=chord.options.triad.notes,
+      objKey=chord.options.triad.voicingObjKey
+    )
   }
 
   if (chord.options[type]) {
-    name=chord.options[type].name
-    label=chord.options[type].label
-    tones=chord.options[type].notes
-    objKey=chord.options[type].voicingObjKey
+    name=chord.options[type].name;
+    label=chord.options[type].label;
+    tones=chord.options[type].notes;
+    objKey=chord.options[type].voicingObjKey;
   }
 
 
-  if (isChord1 && currentChordTones !== tones) {
-    setTones(tones, objKey)
-  }
+  if (selected && currentChordTones !== tones) { setTones(tones, objKey); }
+  if (selected2 && currentChordTones2 !== tones) { setTones2(tones, objKey); }
 
-  if (isChord2 && currentChordTones2 !== tones) {
-    setTones2(tones, objKey)
-  }
-
-  if (isChord1) {
-    cardClass = `${cardClass} selectedChord`
-  }
-
-  if (isChord2) {
-    cardClass = `${cardClass} selectedChord2`
-  }
+  if (selected) { cardClass = `${cardClass} selectedChord`; }
+  if (selected2) { cardClass = `${cardClass} selectedChord2`; }
 
   return (
     <React.Fragment>
@@ -71,7 +69,7 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
         <div
           className='cardNameLabel'
           onClick={chordOneSelected && compare ?
-            ()=>{ selectChord2(chord, tones, objKey)} : ()=>{selectChord(chord, tones, objKey) }}
+            ()=>{ selectChord2(chord, tones, objKey); } : ()=>{selectChord(chord, tones, objKey); }}
           >
           <Card.Header
             className='triadLabel'
@@ -89,7 +87,7 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
           className='cardBody'
           onClick={chordOneSelected && compare ? ()=>{selectChord2(chord, tones, objKey)} : ()=>{selectChord(chord, tones, objKey)}}>
           <Card.Text>{tones.map ((tone, i) => (
-            sharedNotes.length > 0 && sharedNotes.includes(tone) && (isChord1 || isChord2) ?
+            sharedNotes.length > 0 && sharedNotes.includes(tone) && (selected || selected2) ?
             <span className="sharedCardNote" key={`${i}${tone}`}>&nbsp;{tone}&nbsp;</span>
             : tone === selNote ?
             <span className="targetNote" key={`${i}${tone}`}>&nbsp;{tone}&nbsp;</span>

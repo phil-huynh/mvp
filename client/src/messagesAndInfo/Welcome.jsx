@@ -1,13 +1,13 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Modal } from 'react-bootstrap'
-import { useStoreContext } from '../../Providers/StoreContext.js'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal } from 'react-bootstrap';
+import { useStoreContext } from '../../Providers/StoreContext.js';
 
 export const Welcome = () => {
 
-  const {State, Setters, Conditions} = useStoreContext()
-  const {showWelcome} = State
-  const {handleNavChoice, setShowWelcome, setHideScale, setShowTutorial, setRenderView} = Setters
+  const {State, Setters, Conditions} = useStoreContext();
+  const {showWelcome} = State;
+  const {handleNavChoice, setShowWelcome, setHideScale, setShowTutorial, setRenderView} = Setters;
 
   return (
     <Modal

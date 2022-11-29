@@ -278,7 +278,7 @@ const makeChordsFor7NoteScale = (scale, tonic) => {
         if (useUpper) {
           chords[key].options[objKey].useUpper = useUpper;
         }
-        chords[key].options.list.push([`${listName}`, objKey])
+        chords[key].options.list.push([`${listName}`, objKey]);
       }
     }
 

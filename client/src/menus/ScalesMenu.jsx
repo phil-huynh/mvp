@@ -1,14 +1,14 @@
-import React from 'react'
-import { Modal } from 'react-bootstrap'
-import { Constants } from '../../Providers/Constants.js'
-import { useStoreContext } from '../../Providers/StoreContext.js'
+import React from 'react';
+import { Modal } from 'react-bootstrap';
+import { Constants } from '../../Providers/Constants.js';
+import { useStoreContext } from '../../Providers/StoreContext.js';
 
 export const ScalesMenu = () => {
 
-  const {State, Setters, Conditions} = useStoreContext()
-  const {sharp, flat, dblSharp, dblFlat, natural, dim, labels, titles} = Constants
-  const {showScaleMenu} = State
-  const {setShowScaleMenu, handleScaleChange} = Setters
+  const {State, Setters, Conditions} = useStoreContext();
+  const {sharp, flat, dblSharp, dblFlat, natural, dim, labels, titles} = Constants;
+  const {showScaleMenu} = State;
+  const {setShowScaleMenu, handleScaleChange} = Setters;
 
   return (
     <Modal

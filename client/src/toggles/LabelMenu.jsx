@@ -1,13 +1,13 @@
 import React from 'react';
-import { useStoreContext } from '../../Providers/StoreContext.js'
+import { useStoreContext } from '../../Providers/StoreContext.js';
 
 export const LabelMenu = ()  => {
 
-  const {State, Setters, Conditions} = useStoreContext()
+  const {State, Setters, Conditions} = useStoreContext();
 
-  const {labelType} = State
-  const {setLabelType} = Setters
-  const {noteNameLabels, scaleDegLabels, solfegeLabels} = Conditions
+  const {labelType} = State;
+  const {setLabelType} = Setters;
+  const {noteNameLabels, scaleDegLabels, solfegeLabels} = Conditions;
 
   let [noteNamesClass, scaleDegreesClass, solfegeClass] = ['', '', ''];
 

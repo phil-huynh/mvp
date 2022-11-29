@@ -1,15 +1,14 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Modal } from 'react-bootstrap'
-import { useStoreContext } from '../../Providers/StoreContext.js'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal } from 'react-bootstrap';
+import { useStoreContext } from '../../Providers/StoreContext.js';
 
 export const ViewMenu = () => {
 
-  const {State, Setters, Conditions} = useStoreContext()
-  const {showViewMenu} = State
-  const {setShowViewMenu, handleView} = Setters
-
-  const views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View']
+  const {State, Setters, Conditions} = useStoreContext();
+  const {showViewMenu} = State;
+  const {setShowViewMenu, handleView} = Setters;
+  const views = ['Traditional View', 'Mirror View', 'Lefty Traditional View', 'Lefty Mirror View'];
 
   return (
     <Modal

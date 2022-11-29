@@ -142,6 +142,7 @@ export default ({ children }) => {
     }
   }
 
+
   const getChord = (root, type, which) => {
     axios.get('/chord', { params: { root: root, type: type } })
       .then((res) => {
@@ -160,6 +161,7 @@ export default ({ children }) => {
         console.log("🚀 ~ file: App.jsx ~ line 213 ~ App ~ getChord ~ err", err)
       })
   }
+
 
   const updateSharedNotes = () => {
     let shared = [];
@@ -208,6 +210,7 @@ export default ({ children }) => {
     setSharedNotes(shared);
   }
 
+
   const getDegrees = () => {
     axios.get('/degrees')
       .then((res) => {
@@ -235,6 +238,7 @@ export default ({ children }) => {
       })
   }
 
+
   const getStrings = () => {
     axios.get('/strings')
     .then((res) => {
@@ -245,6 +249,7 @@ export default ({ children }) => {
       console.log("🚀 ~ file: App.jsx ~ line 29 ~ App ~ getStrings ~ err", err);
     })
   }
+
 
   const handleAlterChord = (e) => {
     const type = e.target.title;
@@ -280,6 +285,7 @@ export default ({ children }) => {
     if (!displayChordDegrees) { setDisplayChordDegrees(true); }
   }
 
+
   const handleNavChoice = (e) => {
     setDisplayChordDegrees(false);
     setChordFocus('Neutral');
@@ -287,12 +293,14 @@ export default ({ children }) => {
     if (e.target.title === 'mapScales') { setRenderView('Map Scales'); }
   }
 
+
   const handleScaleChange = (e) => {
     let [scale, name] = [e.target.title, e.target.outerText];
     setScaleType(scale);
     setScaleName(name);
     getScale(tonic, scale);
   }
+
 
   const handleSevenths = () => {
     sevenths ? setSevenths(false) : (setSevenths(true))
@@ -305,11 +313,11 @@ export default ({ children }) => {
     if(!compare) { setCompare(true); }
   }
 
+
   const handleStringChoice = (e) => {
     let dataArray = e.target.title.split('.');
     let [instrument, tuning] = [dataArray[0], dataArray[1]];
     let [strings, mirrored] = [dataArray.slice(2), []];
-
     strings.forEach((string) => { mirrored.unshift(string) });
 
     setCurrentStrings(strings);
@@ -317,6 +325,7 @@ export default ({ children }) => {
     setInstrument(instrument);
     setTuning(tuning);
   }
+
 
   const handleRootChange = (e, which) => {
     let root = e.target.outerText;
@@ -330,6 +339,7 @@ export default ({ children }) => {
     }
   }
 
+
   const handleVoicingChange = (e, which) => {
     let spelling = e.target.outerText;
     if(which === '1') {
@@ -342,8 +352,12 @@ export default ({ children }) => {
     }
   }
 
+
   const handleView = (e) => { setView(e.target.title);  setWholeNeck(); }
+
+
   const markNote = (note) => { selNote === note ? setSelNote('') : setSelNote(note) }
+
 
   const resetCard = (chord) => {
     const count = resetVoicingCount - 1;
@@ -355,6 +369,7 @@ export default ({ children }) => {
     altFunc[index](false);
     setResetVoicingCount(count);
   }
+
 
   const resetChords = () => {
     setCh0('Triad');
@@ -374,12 +389,14 @@ export default ({ children }) => {
     setResetVoicingCount(0);
   }
 
+
   const setWholeNeck = () => {
     setLowestFret(0);
     setHighestFret(17);
     setNeckWindowMode('none');
     setUseCapo(false);
   }
+
 
   const resetAll = () => {
     setWholeNeck();
@@ -399,6 +416,7 @@ export default ({ children }) => {
     }
   }
 
+
   const resetSelectedChord = () => {
     setSelectedChord({});
     setCurrentChordTones([]);
@@ -408,6 +426,7 @@ export default ({ children }) => {
 
   }
 
+
   const resetSelectedChord2 = () => {
     setSelectedChord2({});
     setCurrentChordTones2([]);
@@ -416,6 +435,7 @@ export default ({ children }) => {
     setChordFocus('Neutral');
     setSharedNotes([]);
   }
+
 
   const selectChord = (chord, tones, key) => {
     if(chord === selectedChord && compare && !chordTwoSelected) {
@@ -432,6 +452,7 @@ export default ({ children }) => {
       resetSelectedChord();
     }
   }
+
 
   const selectChord2 = (chord, tones, key) => {
     let [notes, checker, shared] = [currentChordTones, {}, []];
@@ -461,6 +482,7 @@ export default ({ children }) => {
     setNeckWindowMode('none');
   }
 
+
   const changeNeckWindowMode = (choice) => {
     choice !== neckWindowMode ? setNeckWindowMode(choice) : setNeckWindowMode('none')
     if((!lefty && choice === 'from start') || (lefty && choice === 'to end') || choice === 'window') {
@@ -468,15 +490,17 @@ export default ({ children }) => {
     }
   }
 
+
   const updateWindowCycle = (stage) => {
     setWindowCycle(stage);
     if (stage === 'off') { setNeckWindowMode('none') }
   }
 
+
   const setTones = (tones, key) => { setCurrentChordTones(tones);  setChordObjKey(key); }
+
+
   const setTones2 = (tones, key) => { setCurrentChordTones2(tones); setChord2ObjKey(key); }
-
-
 
 
   const store = {

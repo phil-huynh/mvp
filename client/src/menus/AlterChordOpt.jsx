@@ -1,14 +1,14 @@
-import React from 'react'
-import { Modal } from 'react-bootstrap'
-import { useStoreContext } from '../../Providers/StoreContext.js'
-import { Constants } from '../../Providers/Constants.js'
+import React from 'react';
+import { Modal } from 'react-bootstrap';
+import { useStoreContext } from '../../Providers/StoreContext.js';
+import { Constants } from '../../Providers/Constants.js';
 
 export const AlterChordOpt = () => {
 
-  const {State, Setters, Conditions} = useStoreContext()
-  const {sharp, flat, dblSharp, dblFlat, natural, dim } = Constants
-  const {showAlter, currentList, chordOptRoot} = State
-  const {handleAlterChordWindow, handleAlterChord } = Setters
+  const {State, Setters, Conditions} = useStoreContext();
+  const {sharp, flat, dblSharp, dblFlat, natural, dim } = Constants;
+  const {showAlter, currentList, chordOptRoot} = State;
+  const {handleAlterChordWindow, handleAlterChord } = Setters;
 
   return (
     <Modal

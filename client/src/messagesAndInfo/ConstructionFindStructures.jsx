@@ -1,13 +1,13 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Modal } from 'react-bootstrap'
-import { useStoreContext } from '../../Providers/StoreContext.js'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal } from 'react-bootstrap';
+import { useStoreContext } from '../../Providers/StoreContext.js';
 
 export const ConstructionFindStructures = () => {
-  const {State, Setters} = useStoreContext()
+  const {State, Setters} = useStoreContext();
 
-  const {showFindStructures} = State
-  const {setShowFindStructures, handleNavChoice} = Setters
+  const {showFindStructures} = State;
+  const {setShowFindStructures, handleNavChoice} = Setters;
 
   return (
     <Modal

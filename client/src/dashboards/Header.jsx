@@ -1,18 +1,18 @@
-import React from 'react'
-import { useStoreContext } from '../../Providers/StoreContext.js'
+import React from 'react';
+import { useStoreContext } from '../../Providers/StoreContext.js';
 
 export const Header = () => {
-  const {State, Setters, Conditions} = useStoreContext()
+  const {State, Setters, Conditions} = useStoreContext();
 
-  const {renderView} = State
-  const {handleNavChoice, setShowFindStructures, setRenderView, setShowTutorial} = Setters
-  const {mapScales, mapChords, tutorial} = Conditions
+  const {renderView} = State;
+  const {handleNavChoice, setShowFindStructures, setRenderView, setShowTutorial} = Setters;
+  const {mapScales, mapChords, tutorial} = Conditions;
 
-  let [mapScalesToggle, mapChordsToggle, tutorialToggle] = ['', '', '']
+  let [mapScalesToggle, mapChordsToggle, tutorialToggle] = ['', '', ''];
 
-  mapScales ? mapScalesToggle = 'toggle_on' : ''
-  mapChords ? mapChordsToggle = 'toggle_on' : ''
-  tutorial ? tutorialToggle = 'toggle_on' : ''
+  mapScales ? mapScalesToggle = 'toggle_on' : '';
+  mapChords ? mapChordsToggle = 'toggle_on' : '';
+  tutorial ? tutorialToggle = 'toggle_on' : '';
 
   return (
     <span className="navbar">

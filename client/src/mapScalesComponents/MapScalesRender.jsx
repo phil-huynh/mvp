@@ -1,29 +1,24 @@
-import React from 'react'
-import { TonicMenu } from '../menus/TonicMenu.jsx'
-import { ScalesMenu } from '../menus/ScalesMenu.jsx'
-import { AlterChordOpt } from '../menus/AlterChordOpt.jsx'
-import { ScaleChords } from './ScaleChords.jsx'
-import { useStoreContext } from '../../Providers/StoreContext.js'
+import React from 'react';
+import { TonicMenu } from '../menus/TonicMenu.jsx';
+import { ScalesMenu } from '../menus/ScalesMenu.jsx';
+import { AlterChordOpt } from '../menus/AlterChordOpt.jsx';
+import { ScaleChords } from './ScaleChords.jsx';
+import { useStoreContext } from '../../Providers/StoreContext.js';
 
 
 export const MapScalesRender = () => {
 
-  let resetClass = 'reset_button resetVoicings '
+  const {State, Setters, Conditions} = useStoreContext();
 
-  const {State, Setters, Conditions} = useStoreContext()
+  const {showAlter, currentCard, currentList, sharedNotes, selNote, scale, scaleName, currentChordTones, currentChordTones2, chordOneSelected, resetVoicingCount, tonic, defaultType, displayChordDegrees} = State;
 
-  const {showAlter, currentCard, currentList, sharedNotes, selNote, scale, scaleName, currentChordTones, currentChordTones2, chordOneSelected, resetVoicingCount, tonic, defaultType, displayChordDegrees} = State
+  const {setShowTonicMenu, setShowScaleMenu, markNote, handleSevenths, handleChordDegrees, resetChords, handleAlterChord, handleAlterChordWindow} = Setters;
 
-  const {setShowTonicMenu, setShowScaleMenu, markNote, handleSevenths, handleChordDegrees, resetChords, handleAlterChord, handleAlterChordWindow} = Setters
+  let resetClass = 'reset_button resetVoicings ';
+  resetVoicingCount ? resetClass += ' can_reset' : null;
 
-
-  if (resetVoicingCount) {
-    resetClass = 'reset_button resetVoicings can_reset'
-  }
-
-  let chordDegClass = 'chordDegButton'
-
-  displayChordDegrees ? chordDegClass += ' toggle_on chordDegToggle' : chordDegClass += ''
+  let chordDegClass = 'chordDegButton';
+  displayChordDegrees ? chordDegClass += ' toggle_on chordDegToggle' : null;
 
   return (
     <React.Fragment>
@@ -54,19 +49,19 @@ export const MapScalesRender = () => {
             {scale ? scale.map((note, i) => {
               let noteClass;
               if (note === selNote) {
-                noteClass = 'noteRef targetNote'
+                noteClass = 'noteRef targetNote';
               }
               else if (sharedNotes.length > 0 && sharedNotes.includes(note)) {
-                noteClass = 'sharedNoteInScale'
+                noteClass = 'sharedNoteInScale';
               }
               else if (currentChordTones.length > 0 && currentChordTones.includes(note)) {
-                noteClass = 'chord1NoteInScale'
+                noteClass = 'chord1NoteInScale';
               }
               else if (currentChordTones2.length > 0 && currentChordTones2.includes(note)) {
-                noteClass = 'chord2NoteInScale'
+                noteClass = 'chord2NoteInScale';
               }
               else {
-                noteClass = 'noteRef'
+                noteClass = 'noteRef';
               }
               return (
                 <span

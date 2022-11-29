@@ -1,27 +1,27 @@
-import React from 'react'
-import { useStoreContext } from '../../Providers/StoreContext.js'
-import { Constants } from '../../Providers/Constants.js'
+import React from 'react';
+import { useStoreContext } from '../../Providers/StoreContext.js';
+import { Constants } from '../../Providers/Constants.js';
 
 
 export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
 
-  const {State, Setters, Conditions} = useStoreContext()
-  const {sharp, flat, dblSharp, dblFlat, natural, dim, rows, rowClasses, chromatic} = Constants
-  const {chordDegrees, chordDegreesUpper, chordFocus, sharedNotes} = State
-  const {handleRootChange, handleVoicingChange, setChordFocus, clear} = Setters
-  const {neutral} = Conditions
+  const {State, Setters, Conditions} = useStoreContext();
+  const {sharp, flat, dblSharp, dblFlat, natural, dim, rows, rowClasses, chromatic} = Constants;
+  const {chordDegrees, chordDegreesUpper, chordFocus, sharedNotes} = State;
+  const {handleRootChange, handleVoicingChange, setChordFocus, clear} = Setters;
+  const {neutral} = Conditions;
 
-  let chordNameClass = `calc_chord_name${whichCalculator}`
-  let chordNoteClass = `calc_notes${whichCalculator}`
-  let clearClass = 'clear_button'
+  let chordNameClass = `calc_chord_name${whichCalculator}`;
+  let chordNoteClass = `calc_notes${whichCalculator}`;
+  let clearClass = 'clear_button';
 
 
   if (root || voicing) {
-    chordNameClass += ` calc_header_on_${whichCalculator}`
-    clearClass += ' clear_on'
+    chordNameClass += ` calc_header_on_${whichCalculator}`;
+    clearClass += ' clear_on';
   }
   if(chord && chord.length > 0) {
-    chordNoteClass += ` calc_header_on_${whichCalculator}`
+    chordNoteClass += ` calc_header_on_${whichCalculator}`;
   }
 
   return (
@@ -101,8 +101,8 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
           }
           else {
             let [upper, lower] = ['blackNoteName', 'blackNoteName']
-            if (root && note[0] === root) {upper += ' selectedRoot'}
-            if (root && note[1] === root) {lower += ' selectedRoot'}
+            if (root && note[0] === root) { upper += ' selectedRoot'; }
+            if (root && note[1] === root) { lower += ' selectedRoot'; }
             return (
               <div className="blackNote" key={`note${i}-${note}`}>
                 <div className="blackNoteContainer">
@@ -130,9 +130,9 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
         {rows.map((row, i) => (
           <div key={`row-${i+2}`} className={`types_row ${rowClasses[i]}`}>
             {row.map((type) => {
-              let buttonClass = 'types_col'
+              let buttonClass = 'types_col';
               if (voicing && type === voicing) {
-                buttonClass += " selectedVoicing"
+                buttonClass += " selectedVoicing";
               }
               return (
                 <div

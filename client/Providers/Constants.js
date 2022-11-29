@@ -52,7 +52,7 @@ const enharmonic = (note) => {
       }
   }
   return enharmonicEquivalent;
-}
+};
 
 const titles = [
     'major',
@@ -84,7 +84,7 @@ const titles = [
     'neapolitan major',
     'neapolitan minor',
     'arabian'
-]
+];
 
 const labels = [
     'Major',
@@ -116,7 +116,7 @@ const labels = [
     'Neapolitan Major',
     'Neapolitan Minor',
     'Arabian'
-]
+];
 
 const stringA = `A,G${dblSharp},B${dblFlat}`;
 const stringB = `B,C${flat},A${dblSharp}`;
@@ -223,7 +223,7 @@ const chromatic = [
     'A',
     [`A${sharp}`, `B${flat}`],
     'B'
-]
+];
 
 const rowTwo = [
     'maj',
@@ -235,7 +235,8 @@ const rowTwo = [
     'sus4',
     '7sus4',
     'maj7(sus4)'
-]
+];
+
 const rowThree = [
     '6',
     'm6',
@@ -246,7 +247,8 @@ const rowThree = [
     `maj7(9, ${sharp}11)`,
     'maj7(9, 13)',
     `maj7(${sharp}11, 13)`
-]
+];
+
 const rowFour = [
     'maj7',
     'm(maj7)',
@@ -257,7 +259,8 @@ const rowFour = [
     `maj7(${sharp}11)`,
     'maj7(13)',
     'maj13'
-]
+];
+
 const rowFive = [
     '7',
     'm7',
@@ -268,7 +271,8 @@ const rowFive = [
     `7(${sharp}11)`,
     '7(13)',
     'Whole Tone Scale'
-]
+];
+
 const rowSix = [
     'm9',
     'm7(11)',
@@ -279,7 +283,8 @@ const rowSix = [
     'm7(9, 11, 13)',
     'Half/Whole Scale',
     'Whole/Half Scale'
-]
+];
+
 const rowSeven = [
     `7(${flat}9)`,
     `7(${sharp}9)`,
@@ -290,7 +295,8 @@ const rowSeven = [
     `7(9, ${sharp}11, 13)`,
     `7(9, ${sharp}11, ${flat}13)`,
     'Altered Scale'
-]
+];
+
 const rowEight = [
     'maj Pentatonic',
     'min Pentatonic',
@@ -301,10 +307,10 @@ const rowEight = [
     'm(maj7) Pentatonic',
     'Japanese Pentatonic',
     'Egyptian Pentatonic'
-]
+];
 
-const rows = [rowTwo, rowThree, rowFour, rowFive, rowSix, rowSeven, rowEight]
-const rowClasses = ['row_two', 'row_three', 'row_four', 'row_five', 'row_six', 'row_seven', 'row_eight']
+const rows = [rowTwo, rowThree, rowFour, rowFive, rowSix, rowSeven, rowEight];
+const rowClasses = ['row_two', 'row_three', 'row_four', 'row_five', 'row_six', 'row_seven', 'row_eight'];
 
 export const Constants = {
   sharp: sharp,
@@ -338,6 +344,6 @@ export const Constants = {
   titles: titles,
   tunings: tunings,
   enharmonic: enharmonic,
-}
+};
 
 
