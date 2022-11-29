@@ -266,26 +266,23 @@ const findEnharmonicEquivalent = (note) => {
 }
 
 const shiftNotes = (note, scale) => {
-  if(!scale.includes(note)) {
-    throw (`Note ${note} not in scale ${scale}!`)
-  }
   let shiftedScale = [];
   if (scale[0] === note) {
     return scale;
   }
-  for (var i = 0; i < scale.length; i++) {
+  for (let i = 0; i < scale.length; i++) {
     if (scale[i] === note) {
       var newStartIndex = i;
     } else if (Array.isArray(scale[i]) && scale[i].length >= 2) {
-      for (var j = 0; j < scale[i].length; j++) {
+      for (let j = 0; j < scale[i].length; j++) {
         if (scale[i][j] === note) {
           newStartIndex = i;
         }
       }
     } else { continue; }
   }
-  var back = scale.slice(0, newStartIndex);
-  var front = scale.slice(newStartIndex);
+  let back = scale.slice(0, newStartIndex);
+  let front = scale.slice(newStartIndex);
   shiftedScale = front.concat(back);
 
   return shiftedScale;

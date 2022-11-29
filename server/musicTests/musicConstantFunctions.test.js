@@ -1,6 +1,6 @@
 const Constants = require('../music/Constants.js');
 
-const {sharpNote, flatNote, findEnharmonicEquivalent, shiftNotes, sharp, flat, dblSharp, dblFlat, natural, dim} = Constants
+const {sharpNote, flatNote, findEnharmonicEquivalent, shiftNotes, sharp, flat, dblSharp, dblFlat, natural, dim, chromaticScale} = Constants
 
 
 // Tests for sharpNote()
@@ -110,7 +110,104 @@ test('should find enharmonic for extreme flat', () => {
 
 
 // Tests for shiftNotes()
-test('should throw error if note not in scale', () => {
-  let scale = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
-  expect(() => shiftNotes(`F${sharp}`, scale)).toThrow(`Note F${sharp} not in scale C,D,E,F,G,A,B!`)
+test('should return orignal scale if note is tonic', () => {
+  let scale = ['D', 'E', `F${sharp}`, 'G', 'A', 'B', `C${sharp}`]
+  expect(shiftNotes('D', scale)).toEqual(scale)
 })
+test('should shift notes within octave', () => {
+  let scale = ['G', 'A', 'B', 'C', 'D', 'E', `F${sharp}`]
+  expect(shiftNotes('B', scale)).toEqual(['B', 'C', 'D', 'E', `F${sharp}`, 'G', 'A'])
+})
+test('should find white notes in array', () => {
+  let scale = chromaticScale
+  expect(shiftNotes('G', scale)).toEqual([
+    ["G", `F${dblSharp}`, `A${dblFlat}`],
+    [`G${sharp}`, `A${flat}`, `F${dblSharp}${sharp}`],
+    ["A", `G${dblSharp}`, `B${dblFlat}`],
+    [`A${sharp}`, `B${flat}`, `C${dblFlat}`],
+    ["B", `C${flat}`, `A${dblSharp}`],
+    ['C', `B${sharp}`, `D${dblFlat}`],
+    [`C${sharp}`, `D${flat}`, `B${dblSharp}`],
+    ["D", `C${dblSharp}`, `E${dblFlat}`],
+    [`D${sharp}`, `E${flat}`, `F${dblFlat}`],
+    ["E", `F${flat}`, `D${dblSharp}`],
+    ["F", `E${sharp}`, `G${dblFlat}`],
+    [`F${sharp}`, `G${flat}`, `E${dblSharp}`],
+  ])
+})
+test('should find sharp notes in array', () => {
+  let scale = chromaticScale
+  expect(shiftNotes(`F${sharp}`, scale)).toEqual([
+    [`F${sharp}`, `G${flat}`, `E${dblSharp}`],
+    ["G", `F${dblSharp}`, `A${dblFlat}`],
+    [`G${sharp}`, `A${flat}`, `F${dblSharp}${sharp}`],
+    ["A", `G${dblSharp}`, `B${dblFlat}`],
+    [`A${sharp}`, `B${flat}`, `C${dblFlat}`],
+    ["B", `C${flat}`, `A${dblSharp}`],
+    ['C', `B${sharp}`, `D${dblFlat}`],
+    [`C${sharp}`, `D${flat}`, `B${dblSharp}`],
+    ["D", `C${dblSharp}`, `E${dblFlat}`],
+    [`D${sharp}`, `E${flat}`, `F${dblFlat}`],
+    ["E", `F${flat}`, `D${dblSharp}`],
+    ["F", `E${sharp}`, `G${dblFlat}`],
+  ])
+})
+test('should find flat notes in array', () => {
+  let scale = chromaticScale
+  expect(shiftNotes(`E${flat}`, scale)).toEqual([
+    [`D${sharp}`, `E${flat}`, `F${dblFlat}`],
+    ["E", `F${flat}`, `D${dblSharp}`],
+    ["F", `E${sharp}`, `G${dblFlat}`],
+    [`F${sharp}`, `G${flat}`, `E${dblSharp}`],
+    ["G", `F${dblSharp}`, `A${dblFlat}`],
+    [`G${sharp}`, `A${flat}`, `F${dblSharp}${sharp}`],
+    ["A", `G${dblSharp}`, `B${dblFlat}`],
+    [`A${sharp}`, `B${flat}`, `C${dblFlat}`],
+    ["B", `C${flat}`, `A${dblSharp}`],
+    ['C', `B${sharp}`, `D${dblFlat}`],
+    [`C${sharp}`, `D${flat}`, `B${dblSharp}`],
+    ["D", `C${dblSharp}`, `E${dblFlat}`],
+  ])
+})
+test('should find double flat notes in array', () => {
+  let scale = chromaticScale
+  expect(shiftNotes(`A${dblFlat}`, scale)).toEqual([
+    ["G", `F${dblSharp}`, `A${dblFlat}`],
+    [`G${sharp}`, `A${flat}`, `F${dblSharp}${sharp}`],
+    ["A", `G${dblSharp}`, `B${dblFlat}`],
+    [`A${sharp}`, `B${flat}`, `C${dblFlat}`],
+    ["B", `C${flat}`, `A${dblSharp}`],
+    ['C', `B${sharp}`, `D${dblFlat}`],
+    [`C${sharp}`, `D${flat}`, `B${dblSharp}`],
+    ["D", `C${dblSharp}`, `E${dblFlat}`],
+    [`D${sharp}`, `E${flat}`, `F${dblFlat}`],
+    ["E", `F${flat}`, `D${dblSharp}`],
+    ["F", `E${sharp}`, `G${dblFlat}`],
+    [`F${sharp}`, `G${flat}`, `E${dblSharp}`],
+  ])
+})
+test('should find double sharp notes in array', () => {
+  let scale = chromaticScale
+  expect(shiftNotes(`F${dblSharp}`, scale)).toEqual([
+    ["G", `F${dblSharp}`, `A${dblFlat}`],
+    [`G${sharp}`, `A${flat}`, `F${dblSharp}${sharp}`],
+    ["A", `G${dblSharp}`, `B${dblFlat}`],
+    [`A${sharp}`, `B${flat}`, `C${dblFlat}`],
+    ["B", `C${flat}`, `A${dblSharp}`],
+    ['C', `B${sharp}`, `D${dblFlat}`],
+    [`C${sharp}`, `D${flat}`, `B${dblSharp}`],
+    ["D", `C${dblSharp}`, `E${dblFlat}`],
+    [`D${sharp}`, `E${flat}`, `F${dblFlat}`],
+    ["E", `F${flat}`, `D${dblSharp}`],
+    ["F", `E${sharp}`, `G${dblFlat}`],
+    [`F${sharp}`, `G${flat}`, `E${dblSharp}`],
+  ])
+})
+
+
+
+
+
+
+
+
