@@ -452,6 +452,7 @@ const chordTypes = (() => {
     'Altered Scale',
     false
   );
+
   return chordTypes;
 })()
 
