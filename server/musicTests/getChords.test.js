@@ -2,7 +2,7 @@ const Constants = require('../music/Constants.js');
 const Main = require('../music/music_Main.js');
 
 const {sharp, flat, dblSharp, dblFlat, natural, dim, chromaticScale} = Constants
-const { getChord, getScale} = Main
+const { getChord } = Main
 
 const getNotes = (root, type) =>{
   let chordObject = getChord(root, type)

@@ -133,8 +133,8 @@ add7NoteScale(
 
 add7NoteScale(
   'mixolydian flat13',
-  ['one', 'two', 'three', 'four', 'five', 'flatSix', 'flatSeven']
-  ,true
+  ['one', 'two', 'three', 'four', 'five', 'flatSix', 'flatSeven'],
+  true
 );
 
 add7NoteScale(

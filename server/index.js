@@ -16,10 +16,10 @@ app.use(morgan("dev"));
 
 
 app.get('/scales', (req, res) => {
-  const key = req.query.key;
-  const scaleName = req.query.scale;
-  const scale = Music.getScale(key, scaleName)
-  res.json(scale);
+  let key = req.query.key
+  let scale = req.query.scale
+  let scaleObject = Music.getScale(key, scale)
+  res.json(scaleObject)
 })
 
 app.get('/chord', (req, res) => {

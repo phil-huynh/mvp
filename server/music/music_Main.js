@@ -19,17 +19,16 @@ const degrees ={
   chordDegreesUpper: chordDegreesUpper
 }
 
-
 const getScale = (key, scale) => {
-  let scaleName = scale.split(' ');
+  var scaleName = scale.split(' ')
   if (scaleName.length > 1) {
-    scaleName.forEach((word, i, scaleName) => {
-      let capital = word.slice(0, 1);
-      let rest = word.slice(1);
+    for (let i = 1; i < scaleName.length; i++) {
+      let capital = scaleName[i].slice(0, 1)
+      let rest = scaleName[i].slice(1)
       capital = capital.toUpperCase();
-      scaleName[i] = `${capital}${rest}`;
-    })
-    scaleName = scaleName.join('');
+      scaleName[i] = `${capital}${rest}`
+    }
+    scaleName = scaleName.join('')
   } else {
     scaleName = scale;
   }
