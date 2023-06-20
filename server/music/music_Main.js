@@ -26,7 +26,6 @@ const getScale = (key, scale) => {
   } else {
     scaleName = scale;
   }
-  console.log(allScales[key][scaleName])
   return allScales[key][scaleName]
 }
 

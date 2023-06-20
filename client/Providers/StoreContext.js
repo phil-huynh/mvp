@@ -458,9 +458,7 @@ export default ({ children }) => {
     let [notes, checker, shared] = [currentChordTones, {}, []];
     notes.forEach((note) => { checker[note] = true });
     tones.forEach((tone) => { if (checker[tone]) { shared.push(tone) } });
-    console.log("CONDITION CHECK", chord === selectedChord2)
     if(chord == selectedChord2) {
-      console.log('HIT THE IF STATEMENT IN THE SELECTCHORD2 FUNCTION!!!!')
       resetSelectedChord2();
     }
     else if (chord === selectedChord) {
