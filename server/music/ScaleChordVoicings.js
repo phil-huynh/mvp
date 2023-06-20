@@ -1,6 +1,4 @@
-const Constants = require('./Constants.js');
-
-const { sharp, flat } = Constants;
+const { sharp, flat } = require('./Constants.js');
 
 module.exports.voicingsList = [
   [

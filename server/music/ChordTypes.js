@@ -1,15 +1,14 @@
-const Constants = require('./Constants.js');
+const {sharp, flat, dim} = require('./Constants.js');
 
-const {sharp, flat, dim} = Constants;
-
-const chordTypes = (() => {
+module.exports.chordTypes = (() => {
   let chordTypes = {};
 
   const addChordType = (key, degrees, label, useUpper)=> {
-    chordTypes[key] = {};
-    chordTypes[key].degrees = degrees;
-    chordTypes[key].label = label;
-    chordTypes[key].useUpper = useUpper;
+    chordTypes[key] = {
+      degrees: degrees,
+      label: label,
+      useUpper: useUpper,
+    };
   }
 
   addChordType(
@@ -456,4 +455,4 @@ const chordTypes = (() => {
   return chordTypes;
 })()
 
-module.exports.chordTypes = chordTypes;
+

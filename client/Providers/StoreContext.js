@@ -428,12 +428,12 @@ export default ({ children }) => {
 
 
   const resetSelectedChord2 = () => {
-    setSelectedChord2({});
-    setCurrentChordTones2([]);
-    setChordTwoSelected(false);
-    setChord2ObjKey('');
-    setChordFocus('Neutral');
-    setSharedNotes([]);
+  setSelectedChord2({});
+  setCurrentChordTones2([]);
+  setChordTwoSelected(false);
+  setChord2ObjKey('');
+  setChordFocus('Neutral');
+  setSharedNotes([]);
   }
 
 
@@ -458,10 +458,12 @@ export default ({ children }) => {
     let [notes, checker, shared] = [currentChordTones, {}, []];
     notes.forEach((note) => { checker[note] = true });
     tones.forEach((tone) => { if (checker[tone]) { shared.push(tone) } });
-    if(!compare || (chord === selectedChord2)) {
+    console.log("CONDITION CHECK", chord === selectedChord2)
+    if(chord == selectedChord2) {
+      console.log('HIT THE IF STATEMENT IN THE SELECTCHORD2 FUNCTION!!!!')
       resetSelectedChord2();
     }
-    if (chord === selectedChord) {
+    else if (chord === selectedChord) {
       resetSelectedChord();
       resetSelectedChord2();
       setCompare(false);

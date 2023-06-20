@@ -1,16 +1,14 @@
-const Constants = require('./Constants.js');
-const AddScales = require('./AddScales.js');
-
-const { tonicsToUse } = Constants;
-const { allScales } = AddScales;
+const { tonicsToUse } = require('./Constants.js');
+const { allScales } = require('./AddScales.js');
 
 module.exports.noteRefs = (() => {
-  let noteRefs = {};
+  const noteRefs = {};
   for (let tonic in allScales) {
     if (tonicsToUse.includes(tonic)) {
-      noteRefs[tonic] = {};
-      noteRefs[tonic].degsToNotes = allScales[tonic].scaleDegrees;
-      noteRefs[tonic].notesToDegs = allScales[tonic].major.notesToDegrees;
+      noteRefs[tonic] = {
+        degsToNotes: allScales[tonic].scaleDegrees,
+        notesToDegs: allScales[tonic].major.notesToDegrees,
+      };
     }
   }
   return noteRefs;

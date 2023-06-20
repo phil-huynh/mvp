@@ -1,48 +1,33 @@
-const Constants = require('./Constants.js');
-const ScaleChords = require('./BuildScaleChords.js');
+const { tonicsToUse,  allScales } = require('./Constants.js');
+const { makeChordsFor7NoteScale } = require('./BuildScaleChords.js');
 
-const { tonicsToUse,  allScales } = Constants;
-const { makeChordsFor7NoteScale } = ScaleChords;
 
-const add7NoteScale = (name, degrees, makeChords) => {
-  let objKey = name.split(' ');
-  if (objKey.length > 1) {
-    for (let i = 1; i < objKey.length; i++) {
-      let capital = objKey[i].slice(0, 1);
-      let rest = objKey[i].slice(1);
-      capital = capital.toUpperCase();
-      objKey[i] = `${capital}${rest}`;
-    }
-    objKey = objKey.join('');
-  } else {
-    objKey = name;
-  }
+module.exports.add7NoteScale = (name, degrees, makeChords) => {
 
-  let checker = {};
-  tonicsToUse.forEach((note) => { checker[note] = true });
+  let scaleType = name.split(' ')
+    .map((word, i) => i === 0 ? word : `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`)
+    .join('')
 
-  for (let tonic in allScales) {
-    if (checker[tonic]) {
-      allScales[tonic][objKey] = {};
-      allScales[tonic][objKey].tonic = tonic;
-      allScales[tonic][objKey].type = name;
-      allScales[tonic][objKey].tonicScaleDegrees = allScales[tonic].scaleDegrees;
-      allScales[tonic][objKey].scaleDegrees = [];
-      allScales[tonic][objKey].notesToDegrees = {};
-      allScales[tonic][objKey].scale = [];
+  tonicsToUse.forEach(tonic => {
+    const scaleDegs = allScales[tonic].scaleDegrees
 
-      for (let key in allScales[tonic].scaleDegrees) {
-        allScales[tonic][objKey].notesToDegrees[allScales[tonic].scaleDegrees[key]] = key;
-      }
-      for (let j = 0; j < degrees.length; j++) {
-        let note = allScales[tonic].scaleDegrees[degrees[j]];
-        allScales[tonic][objKey].scale.push(note);
-        allScales[tonic][objKey].scaleDegrees.push(degrees[j]);
-      }
-      if (makeChords){
-        allScales[tonic][objKey].chords = makeChordsFor7NoteScale(allScales[tonic][objKey].scale, tonic);
-      }
-    }
-  };
+    allScales[tonic][scaleType] = {
+      tonic: tonic,
+      type: name,
+      tonicScaleDegrees: scaleDegs,
+      scaleDegrees: [],
+      notesToDegrees: {},
+      scale: [],
+    };
+    let keyCenter = allScales[tonic][scaleType]
+
+    Object.keys(scaleDegs).forEach(key => keyCenter.notesToDegrees[scaleDegs[key]] = key)
+
+    degrees.forEach(degree => {
+      keyCenter.scale.push(scaleDegs[degree]);
+      keyCenter.scaleDegrees.push(degree);
+    })
+
+    if (makeChords) keyCenter.chords = makeChordsFor7NoteScale(keyCenter.scale, tonic);
+  })
 };
-module.exports.add7NoteScale = add7NoteScale

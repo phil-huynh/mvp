@@ -1,23 +1,17 @@
-const Constants = require('./Constants.js');
-const ChordTypes = require('./ChordTypes.js');
+const { tonicsToUse, solfege, scaleDegrees, chordDegrees, chordDegreesUpper, intervals } = require('./Constants.js');
+const { chordTypes } = require('./ChordTypes.js');
+const { allScales }  = require('./AddScales.js');
+const { stringGroups } = require('./Strings.js');
+const { noteRefs } = require('./NoteRefs.js');
 const ScaleChords = require('./BuildScaleChords.js');
-const AddScales = require('./AddScales.js');
-const Strings = require('./Strings.js');
-const NoteRefs = require('./NoteRefs.js');
-
-const { tonicsToUse, solfege, scaleDegrees, chordDegrees, chordDegreesUpper, intervals } = Constants;
-const { chordTypes } = ChordTypes;
-const { allScales } = AddScales;
-const { stringGroups } = Strings;
-const { noteRefs } = NoteRefs;
 
 
-const degrees ={
+const degrees = {
   solfege: solfege,
   scaleDegrees: scaleDegrees,
   chordDegrees: chordDegrees,
   chordDegreesUpper: chordDegreesUpper
-}
+};
 
 const getScale = (key, scale) => {
   var scaleName = scale.split(' ')
@@ -32,34 +26,38 @@ const getScale = (key, scale) => {
   } else {
     scaleName = scale;
   }
+  console.log(allScales[key][scaleName])
   return allScales[key][scaleName]
 }
 
-
 const getChord = (root, type) => {
-  const obj = {};
-  let refs = noteRefs[root].degsToNotes;
-  let degs = chordTypes[type].degrees;
-  let chordNotes = [];
+  const refs = noteRefs[root].degsToNotes;
+  const degs = chordTypes[type].degrees;
+  const chordNotes = [];
 
   degs.forEach((chordDegree) => { chordNotes.push(refs[chordDegree]); })
 
-  obj.chordNotes = chordNotes;
-  obj.noteRefs = noteRefs[root];
-  obj.type = chordTypes[type];
-  return obj
+  return (
+    {
+      chordNotes: chordNotes,
+      noteRefs: noteRefs[root],
+      type: chordTypes[type],
+    }
+  )
 }
 
 
-module.exports.scales = allScales;
-module.exports.stringGroups = stringGroups
-module.exports.intervals = intervals;
-module.exports.degrees = degrees;
-module.exports.chordTypes = chordTypes;
-module.exports.noteRefs = noteRefs;
-module.exports.tonicsToUse =tonicsToUse;
-module.exports.getScale = getScale
-module.exports.getChord = getChord;
+module.exports = {
+  scales: allScales,
+  stringGroups: stringGroups,
+  intervals: intervals,
+  degrees: degrees,
+  chordTypes: chordTypes,
+  noteRefs: noteRefs,
+  tonicsToUse:tonicsToUse,
+  getScale: getScale,
+  getChord: getChord,
+}
 
 
 

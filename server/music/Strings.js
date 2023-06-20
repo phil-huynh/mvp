@@ -1,20 +1,18 @@
-const Constants = require('./Constants.js');
+const { chromaticScale, shiftNotes } = require('./Constants.js');
 
-const { chromaticScale, shiftNotes } = Constants;
-
-const stringGroups = (() => {
-  let [stringGroups, strings, stringsLeft] = [{}, {}, {}];
+module.exports.stringGroups = (() => {
+  const strings = {}, stringsLeft = {}
 
   chromaticScale.forEach((note) => {
     let firstOctave = shiftNotes(note, chromaticScale);
     let extraNotes = firstOctave.slice(0,6);
 
-    strings[note] = firstOctave.concat(extraNotes);
-    stringsLeft[note] = firstOctave.concat(extraNotes).reverse();
+    strings[note] = [...firstOctave, ...extraNotes];
+    stringsLeft[note] = [...firstOctave, ...extraNotes].reverse();
   })
-  stringGroups.right = strings;
-  stringGroups.left = stringsLeft;
-  return stringGroups;
-})();
+  return {
+    right: strings,
+    left: stringsLeft
+  };
+})()
 
-module.exports.stringGroups = stringGroups;

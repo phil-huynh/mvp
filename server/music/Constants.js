@@ -7,6 +7,7 @@ const dim = '\u00B0';
 
 const whiteNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 
+
 const clockwise = [
   'G',
   'D',
@@ -30,6 +31,7 @@ const clockwise = [
   `F${dblSharp}${sharp}`
 ];
 
+
 const counterClockwise = [
   "F",
   `B${flat}`,
@@ -52,6 +54,7 @@ const counterClockwise = [
   `D${dblFlat}${flat}`
 ];
 
+
 const chromaticScale = [
   ['C', `B${sharp}`, `D${dblFlat}`],
   [`C${sharp}`, `D${flat}`, `B${dblSharp}`],
@@ -67,7 +70,8 @@ const chromaticScale = [
   ["B", `C${flat}`, `A${dblSharp}`]
 ];
 
-const chromaticScaleSimple = [
+
+const simpleChrm = [
   "C",
   [`C${sharp}`, `D${flat}`],
   "D",
@@ -81,6 +85,7 @@ const chromaticScaleSimple = [
   [`A${sharp}`, `B${flat}`],
   "B"
 ];
+
 
 const tonicsToUse = [
   'C',
@@ -106,6 +111,7 @@ const tonicsToUse = [
   `B${sharp}`
 ];
 
+
 const solfege = {
   one: 'Do',
   sharpOne: 'Di',
@@ -125,6 +131,7 @@ const solfege = {
   flatSeven: 'Te',
   seven: 'Ti'
 };
+
 
 const scaleDegrees = {
   one: '1',
@@ -147,6 +154,7 @@ const scaleDegrees = {
   seven: '7'
 };
 
+
 const chordDegrees = {
   one: 'R',
   sharpOne: `${sharp}1`,
@@ -167,6 +175,7 @@ const chordDegrees = {
   flatSeven: `${flat}7`,
   seven: '7'
 };
+
 
 const chordDegreesUpper = {
   one: 'R',
@@ -189,267 +198,198 @@ const chordDegreesUpper = {
   seven: '7'
 };
 
-const sharpNote = (note) => {
-  if (note.length === 1 || note.slice(note.length - 2) === `${dblSharp}`) {
-    note = `${note}${sharp}`;
-  } else if (note[note.length - 1] === `${sharp}`) {
-    note = note.replace(`${sharp}`, `${dblSharp}`);
+const addAccidental = (note, single, dble, opp, dblOpp) => {
+  if (note.length === 1 || note.slice(note.length - 2) === dble) {
+    return `${note}${single}`;
   }
-  if (note.slice(note.length - 2) === `${dblFlat}`) {
-      note = note.substring(0, note.length - 2);
-      note = `${note}${flat}`;
-  } else if (note[note.length - 1] === `${flat}`) {
-    note = note.substring(0, note.length - 1);
+  if (note[note.length - 1] === single) {
+    return note.replace(single, dble);
   }
-  return note;
+  if (note.slice(note.length - 2) === dblOpp) {
+    return `${note.slice(0, note.length - 2)}${opp}`;
+  }
+  if (note[note.length - 1] === `${opp}`) {
+    return  note.slice(0, note.length - 1);
+  }
 }
 
-const flatNote = (note) => {
-  if (note.length === 1 || note.slice(note.length - 2) === `${dblFlat}`) {
-      note = `${note}${flat}`;
-  } else if (note[note.length - 1] === `${flat}`) {
-      note = note.replace(`${flat}`, `${dblFlat}`);
-  }
-  if (note.slice(note.length - 2) === `${dblSharp}`) {
-      note = note.substring(0, note.length - 2);
-      note = `${note}${sharp}`;
-  } else if (note[note.length - 1] === `${sharp}`) {
-      note = note.substring(0, note.length - 1);
-  }
-  return note;
-}
+const sharpNote = (note) => addAccidental(note, sharp, dblSharp, flat, dblFlat)
+const flatNote = (note) => addAccidental(note, flat, dblFlat, sharp, dblSharp)
+
 
 const findEnharmonicEquivalent = (note) => {
-  let [noteBase, distanceToMove, enharmonicEquivalent] = [note[0], 0, ''];
-  let indexOfNoteBase = chromaticScaleSimple.indexOf(noteBase);
+  let [noteBase, distance] = [note[0], 0];
+  let baseNoteIdx = simpleChrm.indexOf(noteBase);
   for (var i = 1; i < note.length; i++) {
-      if (note[i] === `${flat}`) {
-          distanceToMove--;
-      } else if (note[i] === `${sharp}`) {
-          distanceToMove++;
-      } else if ((note[i] + note[i + 1]) === `${dblSharp}`) {
-          distanceToMove += 2;
-      } else if ((note[i] + note[i + 1]) === `${dblFlat}`) {
-          distanceToMove -= 2;
-      } else if ((note[i - 1] + note[i]) === `${dblSharp}`) {
-          continue;
-      } else if ((note[i - 1] + note[i]) === `${dblFlat}`) {
-          continue;
-      }
+    if (note[i] === `${flat}`) { distance--; }
+    else if (note[i] === `${sharp}`) { distance++; }
+    else if ((note[i] + note[i + 1]) === `${dblSharp}`) { distance += 2; }
+    else if ((note[i] + note[i + 1]) === `${dblFlat}`) { distance -= 2; }
   }
-  var newIndex = indexOfNoteBase + distanceToMove;
-  if (newIndex >= chromaticScaleSimple.length) {
-      newIndex = indexOfNoteBase - (12 - distanceToMove);
-  } else if (newIndex < 0) {
-      newIndex = indexOfNoteBase + (distanceToMove + 12);
+
+  let newIndex = baseNoteIdx + distance;
+  if (newIndex >= simpleChrm.length) { newIndex = baseNoteIdx - (12 - distance); }
+  else if (newIndex < 0) { newIndex = baseNoteIdx + (distance + 12); }
+
+  if (distance === 0) {
+    return noteBase;
   }
-  if (distanceToMove === 0) {
-      enharmonicEquivalent = noteBase;
-  } else if (note.length > 1 && (note[1] === `${sharp}` || note.includes(`${dblSharp}`))) {
-      if (distanceToMove === 1 && chromaticScaleSimple[newIndex].length === 2) {
-          enharmonicEquivalent = chromaticScaleSimple[newIndex][1];
-      } else if (chromaticScaleSimple[newIndex].length === 2) {
-          enharmonicEquivalent = chromaticScaleSimple[newIndex][0];
-      } else {
-          enharmonicEquivalent = chromaticScaleSimple[newIndex];
-      }
-  } else if (note.length > 1 && note[1] === `${flat}` || note.includes(`${dblFlat}`)) {
-      if (distanceToMove === -1 && chromaticScaleSimple[newIndex].length === 2) {
-          enharmonicEquivalent = chromaticScaleSimple[newIndex][0];
-      } else if (chromaticScaleSimple[newIndex].length === 2) {
-          enharmonicEquivalent = chromaticScaleSimple[newIndex][1];
-      } else {
-          enharmonicEquivalent = chromaticScaleSimple[newIndex];
-      }
+  if (note.length > 1 && (note[1] === `${sharp}` || note.includes(`${dblSharp}`))) {
+    if (distance === 1 && simpleChrm[newIndex].length === 2) {
+      return simpleChrm[newIndex][1];
+    }
+    if (simpleChrm[newIndex].length === 2) {
+      return simpleChrm[newIndex][0];
+    }
+    return simpleChrm[newIndex];
   }
-  return enharmonicEquivalent;
+  if (note.length > 1 && note[1] === `${flat}` || note.includes(`${dblFlat}`)) {
+    if (distance === -1 && simpleChrm[newIndex].length === 2) {
+      return simpleChrm[newIndex][0];
+    }
+    if (simpleChrm[newIndex].length === 2) {
+      return simpleChrm[newIndex][1];
+    }
+    return simpleChrm[newIndex];
+  }
 }
+
 
 const shiftNotes = (note, scale) => {
-  let shiftedScale = [];
-  if (scale[0] === note) {
-    return scale;
-  }
-  for (let i = 0; i < scale.length; i++) {
-    if (scale[i] === note) {
-      var newStartIndex = i;
-    } else if (Array.isArray(scale[i]) && scale[i].length >= 2) {
-      for (let j = 0; j < scale[i].length; j++) {
-        if (scale[i][j] === note) {
-          newStartIndex = i;
-        }
+  let index = scale.indexOf(note)
+  if (index === -1) {
+    for (let i = 0; i < scale.length; i++) {
+      if (Array.isArray(scale[i]) && scale[i].includes(note)) {
+        index = i;
+        break;
       }
-    } else { continue; }
+    }
   }
-  let back = scale.slice(0, newStartIndex);
-  let front = scale.slice(newStartIndex);
-  shiftedScale = front.concat(back);
-
-  return shiftedScale;
+  return [...scale.slice(index), ...scale.slice(0, index)]
 }
+
+
+const getScaleDegrees = (scaleDegree) => (
+  {
+    one: scaleDegree[0],
+    sharpOne: sharpNote(scaleDegree[0]),
+    flatTwo: flatNote(scaleDegree[1]),
+    two: scaleDegree[1],
+    sharpTwo: sharpNote(scaleDegree[1]),
+    flatThree: flatNote(scaleDegree[2]),
+    three: scaleDegree[2],
+    flatFour: flatNote(scaleDegree[3]),
+    four: scaleDegree[3],
+    sharpFour: sharpNote(scaleDegree[3]),
+    flatFive: flatNote(scaleDegree[4]),
+    five: scaleDegree[4],
+    sharpFive: sharpNote(scaleDegree[4]),
+    flatSix: flatNote(scaleDegree[5]),
+    six: scaleDegree[5],
+    sharpSix: sharpNote(scaleDegree[5]),
+    dblFlatSeven: flatNote(flatNote(scaleDegree[6])),
+    flatSeven: flatNote(scaleDegree[6]),
+    seven: scaleDegree[6]
+  }
+)
+
 
 const allScales = (() => {
 
-  let allScales = {};
-
-  allScales.C = {};
-  allScales.C.tonic = "C";
-  allScales.C.natScaleDegrees = whiteNotes;
-  allScales.C.scaleDegrees = {};
-
-  let sd = allScales.C.scaleDegrees;
-  let scaleDegree = allScales.C.natScaleDegrees;
-
-  sd.one = scaleDegree[0];
-  sd.sharpOne = sharpNote(scaleDegree[0]);
-  sd.flatTwo = flatNote(scaleDegree[1]);
-  sd.two = scaleDegree[1];
-  sd.sharpTwo = sharpNote(scaleDegree[1]);
-  sd.flatThree = flatNote(scaleDegree[2]);
-  sd.three = scaleDegree[2];
-  sd.flatFour = flatNote(scaleDegree[3]);
-  sd.four = scaleDegree[3];
-  sd.sharpFour = sharpNote(scaleDegree[3]);
-  sd.flatFive = flatNote(scaleDegree[4]);
-  sd.five = scaleDegree[4];
-  sd.sharpFive = sharpNote(scaleDegree[4]);
-  sd.flatSix = flatNote(scaleDegree[5]);
-  sd.six = scaleDegree[5];
-  sd.sharpSix = sharpNote(scaleDegree[5]);
-  sd.dblFlatSeven = flatNote(flatNote(scaleDegree[6]));
-  sd.flatSeven = flatNote(scaleDegree[6]);
-  sd.seven = scaleDegree[6];
+  const scales = {};
+  const addTonic = (tonic, scale) => {
+    scales[tonic] = {
+      tonic: tonic,
+      natScaleDegrees: scale,
+      scaleDegrees: getScaleDegrees(scale)
+    };
+  }
+  addTonic('C', whiteNotes)
 
   let clockwiseScale = whiteNotes.slice();
   for (var i = 0; i < clockwise.length; i++) {
     clockwiseScale = shiftNotes(clockwise[i], clockwiseScale);
     clockwiseScale[6] = sharpNote(clockwiseScale[6]);
-    allScales[`${clockwise[i]}`] = {};
-    allScales[`${clockwise[i]}`].tonic = `${clockwise[i]}`;
-    allScales[`${clockwise[i]}`].scaleDegrees = {};
-    allScales[`${clockwise[i]}`].natScaleDegrees = clockwiseScale;
-
-    let currentSD = allScales[`${clockwise[i]}`].scaleDegrees
-    let scaleDegree = allScales[`${clockwise[i]}`].natScaleDegrees;
-
-    currentSD.one = scaleDegree[0];
-    currentSD.sharpOne = sharpNote(scaleDegree[0]);
-    currentSD.flatTwo = flatNote(scaleDegree[1]);
-    currentSD.two = scaleDegree[1];
-    currentSD.sharpTwo = sharpNote(scaleDegree[1]);
-    currentSD.flatThree = flatNote(scaleDegree[2]);
-    currentSD.three = scaleDegree[2];
-    currentSD.flatFour = flatNote(scaleDegree[3])
-    currentSD.four = scaleDegree[3];
-    currentSD.sharpFour = sharpNote(scaleDegree[3]);
-    currentSD.flatFive = flatNote(scaleDegree[4]);
-    currentSD.five = scaleDegree[4];
-    currentSD.sharpFive = sharpNote(scaleDegree[4]);
-    currentSD.flatSix = flatNote(scaleDegree[5]);
-    currentSD.six = scaleDegree[5];
-    currentSD.sharpSix = sharpNote(scaleDegree[5]);
-    currentSD.dblFlatSeven = flatNote(flatNote(scaleDegree[6]))
-    currentSD.flatSeven = flatNote(scaleDegree[6]);
-    currentSD.seven = scaleDegree[6];
+    addTonic(clockwise[i], clockwiseScale)
   }
 
   let counterClockwiseScale = whiteNotes.slice();
   for (var i = 0; i < counterClockwise.length; i++) {
     counterClockwiseScale = shiftNotes(counterClockwise[i], counterClockwiseScale);
     counterClockwiseScale[3] = flatNote(counterClockwiseScale[3]);
-    allScales[`${counterClockwise[i]}`] = {};
-    allScales[`${counterClockwise[i]}`].tonic = `${counterClockwise[i]}`;
-    allScales[`${counterClockwise[i]}`].scaleDegrees = {};
-    allScales[`${counterClockwise[i]}`].natScaleDegrees = counterClockwiseScale;
-
-    let currentSD = allScales[`${counterClockwise[i]}`].scaleDegrees
-    let scaleDegree = allScales[`${counterClockwise[i]}`].natScaleDegrees;
-
-    currentSD.one = scaleDegree[0];
-    currentSD.sharpOne = sharpNote(scaleDegree[0]);
-    currentSD.flatTwo = flatNote(scaleDegree[1]);
-    currentSD.two = scaleDegree[1];
-    currentSD.sharpTwo = sharpNote(scaleDegree[1]);
-    currentSD.flatThree = flatNote(scaleDegree[2]);
-    currentSD.three = scaleDegree[2];
-    currentSD.flatFour = flatNote(scaleDegree[3])
-    currentSD.four = scaleDegree[3];
-    currentSD.sharpFour = sharpNote(scaleDegree[3]);
-    currentSD.flatFive = flatNote(scaleDegree[4]);
-    currentSD.five = scaleDegree[4];
-    currentSD.sharpFive = sharpNote(scaleDegree[4]);
-    currentSD.flatSix = flatNote(scaleDegree[5]);
-    currentSD.six = scaleDegree[5];
-    currentSD.sharpSix = sharpNote(scaleDegree[5]);
-    currentSD.dblFlatSeven = flatNote(flatNote(scaleDegree[6]))
-    currentSD.flatSeven = flatNote(scaleDegree[6]);
-    currentSD.seven = scaleDegree[6];
-
+    addTonic(counterClockwise[i], counterClockwiseScale)
   }
-  return allScales;
+  return scales;
 })()
 
 
 const intervals = (() => {
-    let intervals = {};
+  const i = {
+    aug1: {},
+    min2: {},
+    maj2: {},
+    aug2: {},
+    min3: {},
+    maj3: {},
+    p4: {},
+    aug4: {},
+    dim5: {},
+    p5: {},
+    aug5: {},
+    min6: {},
+    maj6: {},
+    aug6: {},
+    dim7: {},
+    min7: {},
+    maj7: {}
+  };
 
-    intervals.aug1 = {};
-    intervals.min2 = {};
-    intervals.maj2 = {};
-    intervals.aug2 = {};
-    intervals.min3 = {};
-    intervals.maj3 = {};
-    intervals.p4 = {};
-    intervals.aug4 = {};
-    intervals.dim5 = {};
-    intervals.p5 = {};
-    intervals.aug5 = {};
-    intervals.min6 = {};
-    intervals.maj6 = {};
-    intervals.aug6 = {};
-    intervals.min7 = {};
-    intervals.maj7 = {};
 
     for (let key in allScales) {
-    intervals.aug1[allScales[key].tonic] = allScales[key].scaleDegrees.sharpOne;
-    intervals.min2[allScales[key].tonic] = allScales[key].scaleDegrees.flatTwo;
-    intervals.maj2[allScales[key].tonic] = allScales[key].scaleDegrees.two;
-    intervals.aug2[allScales[key].tonic] = allScales[key].scaleDegrees.sharpTwo;
-    intervals.min3[allScales[key].tonic] = allScales[key].scaleDegrees.flatThree;
-    intervals.maj3[allScales[key].tonic] = allScales[key].scaleDegrees.three;
-    intervals.p4[allScales[key].tonic] = allScales[key].scaleDegrees.four;
-    intervals.aug4[allScales[key].tonic] = allScales[key].scaleDegrees.sharpFour;
-    intervals.dim5[allScales[key].tonic] = allScales[key].scaleDegrees.flatFive;
-    intervals.p5[allScales[key].tonic] = allScales[key].scaleDegrees.five;
-    intervals.aug5[allScales[key].tonic] = allScales[key].scaleDegrees.sharpFive;
-    intervals.min6[allScales[key].tonic] = allScales[key].scaleDegrees.flatSix;
-    intervals.maj6[allScales[key].tonic] = allScales[key].scaleDegrees.six;
-    intervals.aug6[allScales[key].tonic] = allScales[key].scaleDegrees.sharpSix;
-    intervals.min7[allScales[key].tonic] = allScales[key].scaleDegrees.flatSeven;
-    intervals.maj7[allScales[key].tonic] = allScales[key].scaleDegrees.seven;
+      let tonic = allScales[key].tonic
+      let interval = allScales[key].scaleDegrees
+      i.aug1[tonic] = interval.sharpOne;
+      i.min2[tonic] = interval.flatTwo;
+      i.maj2[tonic] = interval.two;
+      i.aug2[tonic] = interval.sharpTwo;
+      i.min3[tonic] = interval.flatThree;
+      i.maj3[tonic] = interval.three;
+      i.p4[tonic] = interval.four;
+      i.aug4[tonic] = interval.sharpFour;
+      i.dim5[tonic] = interval.flatFive;
+      i.p5[tonic] = interval.five;
+      i.aug5[tonic] = interval.sharpFive;
+      i.min6[tonic] = interval.flatSix;
+      i.maj6[tonic] = interval.six;
+      i.aug6[tonic] = interval.sharpSix;
+      i.dim7[tonic] = interval.dblFlatSeven;
+      i.min7[tonic] = interval.flatSeven;
+      i.maj7[tonic] = interval.seven;
     }
-    return intervals;
+    return i;
 })()
 
 
-module.exports.sharp = sharp;
-module.exports.flat = flat;
-module.exports.dblSharp = dblSharp;
-module.exports.dblFlat = dblFlat;
-module.exports.natural = natural;
-module.exports.dim = dim;
-module.exports.clockwise = clockwise;
-module.exports.counterClockwise = counterClockwise;
-module.exports.chromaticScale = chromaticScale;
-module.exports.chromaticScaleSimple = chromaticScaleSimple;
-module.exports.tonicsToUse = tonicsToUse;
-module.exports.solfege = solfege;
-module.exports.scaleDegrees = scaleDegrees;
-module.exports.chordDegrees = chordDegrees;
-module.exports.chordDegreesUpper = chordDegreesUpper;
-module.exports.sharpNote = sharpNote;
-module.exports.flatNote = flatNote;
-module.exports.findEnharmonicEquivalent = findEnharmonicEquivalent;
-module.exports.shiftNotes = shiftNotes;
-module.exports.allScales = allScales;
-module.exports.intervals = intervals;
+module.exports = {
+  sharp: sharp,
+  flat: flat,
+  dblSharp: dblSharp,
+  dblFlat: dblFlat,
+  natural: natural,
+  dim: dim,
+  clockwise: clockwise,
+  counterClockwise: counterClockwise,
+  chromaticScale: chromaticScale,
+  simpleChrm: simpleChrm,
+  tonicsToUse: tonicsToUse,
+  solfege: solfege,
+  scaleDegrees: scaleDegrees,
+  chordDegrees: chordDegrees,
+  chordDegreesUpper: chordDegreesUpper,
+  sharpNote: sharpNote,
+  flatNote: flatNote,
+  findEnharmonicEquivalent: findEnharmonicEquivalent,
+  shiftNotes: shiftNotes,
+  allScales: allScales,
+  intervals: intervals,
+}

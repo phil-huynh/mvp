@@ -85,7 +85,7 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
         <Card.Body>
           <div
           className='cardBody'
-          onClick={chordOneSelected && compare ? ()=>{selectChord2(chord, tones, objKey)} : ()=>{selectChord(chord, tones, objKey)}}>
+          onClick={chordOneSelected && compare ? ()=> selectChord2(chord, tones, objKey) : ()=>{selectChord(chord, tones, objKey)}}>
           <Card.Text>{tones.map ((tone, i) => (
             sharedNotes.length > 0 && sharedNotes.includes(tone) && (selected || selected2) ?
             <span className="sharedCardNote" key={`${i}${tone}`}>&nbsp;{tone}&nbsp;</span>
