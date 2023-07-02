@@ -6,7 +6,7 @@ import { Constants } from '../../Providers/Constants.js';
 export const TonicMenu = () => {
 
   const {State, Setters, Conditions} = useStoreContext();
-  const {sharp, flat, dblSharp, dblFlat, natural, dim, tonics} = Constants;
+  const {tonics} = Constants;
   const {showTonicMenu, scaleType} = State;
   const {setShowTonicMenu, getScale} = Setters;
 

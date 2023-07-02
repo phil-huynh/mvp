@@ -6,7 +6,7 @@ import { useStoreContext } from '../../Providers/StoreContext.js';
 export const ScalesMenu = () => {
 
   const {State, Setters, Conditions} = useStoreContext();
-  const {sharp, flat, dblSharp, dblFlat, natural, dim, labels, titles} = Constants;
+  const {labels, titles} = Constants;
   const {showScaleMenu} = State;
   const {setShowScaleMenu, handleScaleChange} = Setters;
 

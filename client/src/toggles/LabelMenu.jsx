@@ -6,9 +6,14 @@ export const LabelMenu = ()  => {
 
   const {State, Setters, Conditions} = useStoreContext();
 
-  const {labelType} = State;
-  const {setLabelType} = Setters;
-  const {noteNameLabels, scaleDegLabels, solfegeLabels} = Conditions;
+  const { labelType } = State;
+  const { setLabelType } = Setters;
+
+  const {
+    noteNameLabels,
+    scaleDegLabels,
+    solfegeLabels
+  } = Conditions;
 
 
   const noteNamesClass = noteNameLabels ? "toggle_on" : '';

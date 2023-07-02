@@ -6,7 +6,6 @@ import { Constants } from '../../Providers/Constants.js';
 export const AlterChordOpt = () => {
 
   const {State, Setters, Conditions} = useStoreContext();
-  const {sharp, flat, dblSharp, dblFlat, natural, dim } = Constants;
   const {showAlter, currentList, chordOptRoot} = State;
   const {handleAlterChordWindow, handleAlterChord } = Setters;
 
@@ -34,7 +33,6 @@ export const AlterChordOpt = () => {
         </div>
       )):  null
       }
-
     </Modal>
   )
 }

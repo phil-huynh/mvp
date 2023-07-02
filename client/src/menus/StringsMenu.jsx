@@ -6,7 +6,7 @@ import { useStoreContext } from '../../Providers/StoreContext.js';
 export const StringsMenu = ({}) => {
 
   const {State, Setters, Conditions} = useStoreContext();
-  const {sharp, flat, dblSharp, dblFlat, natural, dim, tunings} = Constants;
+  const {tunings} = Constants;
   const {showStringsMenu} = State;
   const {setShowStringsMenu, handleStringChoice} = Setters;
 
@@ -14,7 +14,7 @@ export const StringsMenu = ({}) => {
     <Modal
       className='modalMenu'
       show={showStringsMenu}
-      onHide={() => {setShowStringsMenu(false)}}
+      onHide={() => setShowStringsMenu(false)}
     >
       <Modal.Header closeButton>
         <Modal.Title>

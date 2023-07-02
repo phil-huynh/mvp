@@ -69,7 +69,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
           {neutral ?
             <div
               className="types_col"
-              onClick={()=>{setChordFocus(`Focus ${whichCalculator}`)}}
+              onClick={ ()=> setChordFocus(`Focus ${whichCalculator}`) }
             >
               Focus
             </div>
@@ -77,7 +77,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
             chordFocus === `Focus ${whichCalculator}` ?
               <div
                 className="types_col calc_toggle_on"
-                onClick={()=>{setChordFocus('Neutral')}}
+                onClick={ ()=> setChordFocus('Neutral') }
               >
                 Focused
               </div>
@@ -85,7 +85,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
             !neutral && chordFocus !== `Focus ${whichCalculator}` ?
               <div
                 className="types_col"
-                onClick={()=>{setChordFocus(`Focus ${whichCalculator}`)}}
+                onClick={ ()=> setChordFocus(`Focus ${whichCalculator}`) }
               >
                 Unfocused
               </div>
@@ -101,7 +101,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
         <div className="clear_button_container">
           <div
             className={clearClass}
-            onClick={()=>{clear(whichCalculator)}}
+            onClick={ ()=> clear(whichCalculator) }
           >clear
           </div>
         </div>
@@ -109,14 +109,13 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
       <div className="rootSelector">
         {chromatic.map((note, i) => {
           if (note.length === 1) {
-            let innerClass;
-            (root && note === root) ? innerClass = "whiteNote selectedRoot" : innerClass = "whiteNote"
+            let innerClass = (root && note === root) ? "whiteNote selectedRoot" : "whiteNote"
             return (
               <div className="whiteNoteContainer" key={`note${i}-${note}`}>
                 <div
                   className={innerClass}
                   title={note}
-                  onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+                  onClick={ e => handleRootChange(e, whichCalculator) }
                 >{note}
                 </div>
               </div>
@@ -132,7 +131,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
                   <div
                     className={upper}
                     title={note[0]}
-                    onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+                    onClick={ e => handleRootChange(e, whichCalculator) }
                   >{note[0]}
                   </div>
                 </div>
@@ -140,7 +139,7 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
                   <div
                     className={lower}
                     title={note[1]}
-                    onClick={(e)=>{handleRootChange(e, whichCalculator)}}
+                    onClick={ e => handleRootChange(e, whichCalculator) }
                   >{note[1]}
                   </div>
                 </div>
@@ -163,8 +162,8 @@ export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
                   key={`${type}-calc${whichCalculator}`}
                   >
                   <div
-                    className={buttonClass}
-                    onClick={(e)=>{handleVoicingChange(e, whichCalculator)}}
+                    className={ buttonClass }
+                    onClick={ e => handleVoicingChange(e, whichCalculator) }
                   >{type}
                   </div>
                 </div>
