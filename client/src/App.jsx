@@ -18,9 +18,29 @@ const App = () => {
   const {State, Setters, Conditions} = useStoreContext();
 
   const {sharp, flat, dblSharp, dblFlat, natural, dim} = Constants;
-  const {calcChord1, calcChord2, currentChordTones, currentChordTones2, defaultType, renderView, instrument} = State;
-  const {getStrings, getDegrees, getScale, updateSharedNotes} = Setters;
-  const {mapChords, mapScales, lefty} = Conditions;
+
+  const {
+    calcChord1,
+    calcChord2,
+    currentChordTones,
+    currentChordTones2,
+    defaultType,
+    renderView,
+    instrument
+  } = State;
+
+  const {
+    getStrings,
+    getDegrees,
+    getScale,
+    updateSharedNotes
+  } = Setters;
+
+  const {
+    mapChords,
+    mapScales,
+    lefty
+  } = Conditions;
 
   useEffect(() => {
     getStrings();
@@ -32,11 +52,8 @@ const App = () => {
     updateSharedNotes();
   }, [calcChord1, calcChord2, currentChordTones, currentChordTones2, defaultType, renderView])
 
-
-  let [middle, stringbox] = ['inner_middle', 'stringbox'];
-  if (lefty) {
-    [middle, stringbox] = ['inner_middle_left', 'stringbox_left'];
-  }
+  const middle = lefty ? 'inner_middle_left' : 'inner_middle';
+  const stringbox = lefty ? 'stringbox_left' : 'stringbox';
 
   return (
     <div className = "page">

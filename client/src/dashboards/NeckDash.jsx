@@ -11,17 +11,50 @@ export const NeckDash = () => {
 
   const {State, Setters, Conditions} = useStoreContext()
 
-  const {neckWindowMode, view, lowestFret, highestFret, renderView, selNote, chordOneSelected, resetVoicingCount, root1, root2, voicing1, voicing2, displayChordDegrees, chordFocus, sharedNotes, instrument, tuning, calcChord1, currentChordTones} = State
+  const {
+    neckWindowMode,
+    view,
+    lowestFret,
+    highestFret,
+    renderView,
+    selNote,
+    chordOneSelected,
+    resetVoicingCount,
+    root1,
+    root2,
+    voicing1,
+    voicing2,
+    displayChordDegrees,
+    chordFocus,
+    sharedNotes,
+    instrument,
+    tuning,
+    calcChord1,
+    currentChordTones
+  } = State
 
-  const {setShowViewMenu, setShowStringsMenu, handleChordDegrees, setNeckWindowMode, setWholeNeck, setWindowCycle, resetAll} = Setters
+  const {
+    setShowViewMenu,
+    setShowStringsMenu,
+    handleChordDegrees,
+    setNeckWindowMode,
+    setWholeNeck,
+    setWindowCycle,
+    resetAll
+  } = Setters
 
-  const {lefty, mapScales, mapChords, neutral, windowMode, startMode, endMode, cycleStart, cycleEnd, capoMode} = Conditions
-
-  let [fromClass, toClass, windowClass, resetIconClass, capoClass] = ['', '', '', '', '']
-  let resetClass = "reset_button resetAll"
-  let iconClass = 'range_option_icons'
-  let chordDegClass = 'chordDegButton'
-
+  const {
+    lefty,
+    mapScales,
+    mapChords,
+    neutral,
+    windowMode,
+    startMode,
+    endMode,
+    cycleStart,
+    cycleEnd,
+    capoMode
+  } = Conditions
 
   let sharedCount = 0
   if (sharedNotes.length > 0) {
@@ -30,21 +63,25 @@ export const NeckDash = () => {
     }
     if(mapChords) {
       let checker = {}
-      calcChord1.forEach((note) => {checker[note] = true});
-      sharedNotes.forEach((note) => {checker[note] ? sharedCount++: null})
+      calcChord1.forEach(note => checker[note] = true);
+      sharedNotes.forEach(note => checker[note] ? sharedCount++: null);
     }
   }
 
-  displayChordDegrees ? chordDegClass += ' toggle_on chordDegToggle' : chordDegClass += ''
-  startMode ? fromClass = iconClass + ' icon_toggle' : fromClass = iconClass
-  endMode ? toClass = iconClass + ' icon_toggle' : toClass = iconClass
-  windowMode ? windowClass = iconClass + ' icon_toggle' : windowClass = iconClass
-  capoMode ? capoClass = iconClass + ' capo_toggle capo' : capoClass = iconClass + ' capo'
-  lowestFret !== 0 || highestFret !== 17 ? resetIconClass = iconClass + ' neck_window_reset' : resetIconClass = iconClass
+  const iconClass = 'range_option_icons'
+  const fromClass = startMode ? `${iconClass} icon_toggle` : iconClass
+  const toClass = endMode ?  `${iconClass} icon_toggle` : iconClass
+  const windowClass = windowMode ? `${iconClass} icon_toggle` : iconClass
+  const capoClass = capoMode ? `${iconClass} capo_toggle capo` : `${iconClass} capo`
+  const chordDegClass = displayChordDegrees ? 'chordDegButton toggle_on chordDegToggle' : 'chordDegButton'
+  const resetIconClass = lowestFret !== 0 || highestFret !== 17 ? `${iconClass} neck_window_reset` : iconClass
 
-  if (neckWindowMode !== 'none' || lowestFret !== 0 || highestFret !== 17 ||
-    (mapScales && (selNote || chordOneSelected || resetVoicingCount)) ||
-    (mapChords && (root1 || root2 || voicing1 || voicing2 || displayChordDegrees || !neutral))) {
+  let resetClass = "reset_button resetAll"
+  if (neckWindowMode !== 'none' ||
+      lowestFret !== 0 || highestFret !== 17 ||
+      (mapScales && (selNote || chordOneSelected || resetVoicingCount)) ||
+      (mapChords && (root1 || root2 || voicing1 || voicing2 || displayChordDegrees || !neutral))) {
+
     resetClass = "reset_button resetAll can_reset"
   }
 

@@ -7,9 +7,30 @@ export const FretGuide = ({name}) => {
 
   const {State, Setters, Conditions} = useStoreContext();
   const {view, neckWindowMode, windowCycle} = State;
-  const {setLowestFret, setHighestFret, setCapo, updateWindowCycle} = Setters;
-  const {lefty, windowMode, startMode, endMode, cycleStart, cycleEnd, capoMode, modeActive} = Conditions;
 
+  const {
+    setLowestFret,
+    setHighestFret,
+    setCapo,
+    updateWindowCycle
+  } = Setters;
+
+  const {
+    lefty,
+    windowMode,
+    startMode,
+    endMode,
+    cycleStart,
+    cycleEnd,
+    capoMode,
+    modeActive
+  } = Conditions;
+
+  let setFret;
+  let nextCycle;
+  let marker;
+  let guideboxClass =  'guidebox';
+  let unMarkedClass =  'unmarked';
   const dot = '\u2022'
 
   const [guideboxLabel3, setGuideboxLabel3] = useState(dot);
@@ -20,10 +41,6 @@ export const FretGuide = ({name}) => {
   const [guideboxLabel17, setGuideboxLabel17] = useState(dot);
   const [guideboxLabel12, setGuideboxLabel12] = useState(':');
 
-  let [guideboxClass, unMarkedClass] = ['guidebox', 'unmarked'];
-  let setFret;
-  let nextCycle;
-  let marker;
   let guides = [
     [guideboxLabel3, setGuideboxLabel3],
     [guideboxLabel5, setGuideboxLabel5],
@@ -33,7 +50,7 @@ export const FretGuide = ({name}) => {
     [guideboxLabel15, setGuideboxLabel15],
     [guideboxLabel17, setGuideboxLabel17],
   ];
-  let marked = [3, 5 , 7, 9, 12, 15, 17];
+  const marked = lefty ? [0, 2, 5, 8, 10, 12, 14] : [3, 5 , 7, 9, 12, 15, 17];
 
   const fretBoard = (() => {
     let [index, array] = [0, []];
@@ -44,17 +61,12 @@ export const FretGuide = ({name}) => {
     return array;
   })()
 
-  if (lefty) {
-    marked = [0, 2, 5, 8, 10, 12, 14];
-    guides.reverse();
-    name += '_left';
-  } else {
-    name += '_right';
-  }
+  name += lefty ? '_left' : '_right';
+  if (lefty) guides.reverse();
 
   if (windowMode) {
-    if(cycleStart) { nextCycle= 'end'; }
-    if(cycleEnd) { nextCycle= 'off'; }
+    if(cycleStart) nextCycle= 'end';
+    if(cycleEnd) nextCycle= 'off';
   }
 
   if (capoMode) {

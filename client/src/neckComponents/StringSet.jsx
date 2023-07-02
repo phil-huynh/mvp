@@ -8,12 +8,12 @@ export const StringSet = ()  => {
   const {currentStrings, currentStringsMirror, view} = State;
   const {mirrorViews} = Conditions;
 
-  let [list, neckClass, firstString, lastString] = [[], '', '', ''];
+  let neckClass;
 
-  mirrorViews ? list = currentStringsMirror : list = currentStrings
-  if (list && list.length === 4){ neckClass = 'four_string_neck'; }
-  if (list && list.length === 5){ neckClass = 'five_string_neck'; }
-  if (list && list.length === 6){ neckClass = 'six_string_neck'; }
+  const list = mirrorViews ? currentStringsMirror : currentStrings
+  if (list && list.length === 4) neckClass = 'four_string_neck';
+  if (list && list.length === 5) neckClass = 'five_string_neck';
+  if (list && list.length === 6) neckClass = 'six_string_neck';
 
   return (
 

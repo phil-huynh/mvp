@@ -29,9 +29,9 @@ app.get('/chord', (req, res) => {
   res.json(chord);
 })
 
-app.get('/strings', (req, res) => { res.json(Music.stringGroups); })
+app.get('/strings', (req, res) => res.json(Music.stringGroups))
 
-app.get('/degrees', (req, res) => { res.json(Music.degrees); })
+app.get('/degrees', (req, res) =>  res.json(Music.degrees))
 
 
 

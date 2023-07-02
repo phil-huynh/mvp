@@ -8,35 +8,84 @@ export const String = ({string, firstString, lastString}) => {
 
   const {State, Setters, Conditions} = useStoreContext();
 
-  const {strings, stringsLeft , scale, currentChordTones, currentChordTones2, view, chordOneSelected, chordTwoSelected, hideScale, solfege, scaleDegrees, chordDegrees, keyCenter, labelType, selectedChord, selectedChord2, chordFocus, displayChordDegrees, instrument, renderView, selNote, chordDegreesUpper, chordObjKey, chord2ObjKey, calcChord1, calcChord2, noteRefs1, noteRefs2, chordType1, chordType2, lowestFret, highestFret, useCapo} = State;
+  const {
+    strings,
+    stringsLeft,
+    scale,
+    currentChordTones,
+    currentChordTones2,
+    view,
+    chordOneSelected,
+    chordTwoSelected,
+    hideScale,
+    solfege,
+    scaleDegrees,
+    chordDegrees,
+    keyCenter,
+    labelType,
+    selectedChord,
+    selectedChord2,
+    chordFocus,
+    displayChordDegrees,
+    instrument,
+    renderView,
+    selNote,
+    chordDegreesUpper,
+    chordObjKey,
+    chord2ObjKey,
+    calcChord1,
+    calcChord2,
+    noteRefs1,
+    noteRefs2,
+    chordType1,
+    chordType2,
+    lowestFret,
+    highestFret,
+    useCapo
+  } = State;
 
-  const {mapChords, mapScales, welcome, tutorial, focus1, focus2, neutral, noteNameLabels, scaleDegLabels, solfegeLabels, showScale, unfocusScale, hiddenScale, lefty} = Conditions;
+  const {
+    mapChords,
+    mapScales,
+    welcome,
+    tutorial,
+    focus1,
+    focus2,
+    neutral,
+    noteNameLabels,
+    scaleDegLabels,
+    solfegeLabels,
+    showScale,
+    unfocusScale,
+    hiddenScale,
+    lefty
+  } = Conditions;
 
   const {markNote} = Setters;
 
   let chord; let chord2; let chordKey; let chordKey2;
   let openString; let fretClass; let altLabelContainer; let capo;
+
   let currentString = strings[string];
   let [start, end] = [lowestFret, highestFret];
   let [keyKey, keyKey2, labelContainer, labelContainer2, notes] = [{}, {}, {}, {}, []];
-  let [name, openClass, openNoteClass, noteClass, capoClass] = ['string', 'open', 'openNote', 'note', 'capo_neck_fret'];
 
-
-  ['Violin', 'Viola', 'Cello'].includes(instrument) ? fretClass = 'orchestral' : fretClass = 'fret';
+  fretClass = ['Violin', 'Viola', 'Cello'].includes(instrument) ? 'orchestral' : 'fret';
 
 
   if (mapScales || welcome || tutorial) {
-    [chord, chord2] = [currentChordTones, currentChordTones2];
+    chord = currentChordTones
+    chord2 = currentChordTones2
     keyKey = keyCenter.notesToDegrees;
     labelContainer = keyCenter.tonicScaleDegrees;
-    if (scaleDegLabels) { labelContainer = scaleDegrees; }
-    if (solfegeLabels) { labelContainer = solfege; }
+    if (scaleDegLabels) labelContainer = scaleDegrees;
+    if (solfegeLabels) labelContainer = solfege;
   }
 
   if (mapChords) {
     [chord, chord2] = [calcChord1, calcChord2]
-    noteRefs1 ? chordKey = noteRefs1.notesToDegs : chordKey = {};
-    noteRefs2 ? chordKey2 = noteRefs2.notesToDegs : chordKey2 = {};
+    chordKey = noteRefs1 ? noteRefs1.notesToDegs : {};
+    chordKey2 = noteRefs2 ? noteRefs2.notesToDegs : {};
   }
 
   const hasChord1 = chord.length > 0;
@@ -44,24 +93,24 @@ export const String = ({string, firstString, lastString}) => {
 
   if (mapChords) {
     [chord, chord2] = [calcChord1, calcChord2];
-    noteRefs1 ? chordKey = noteRefs1.notesToDegs : chordKey = {};
-    noteRefs2 ? chordKey2 = noteRefs2.notesToDegs : chordKey2 = {};
+    chordKey = noteRefs1 ? noteRefs1.notesToDegs : {};
+    chordKey2 = noteRefs2 ? noteRefs2.notesToDegs : {};
     if (displayChordDegrees && (focus1 || (neutral && hasChord1 && !hasChord2))) {
-      chordType1.useUpper ? altLabelContainer = chordDegreesUpper : altLabelContainer = chordDegrees;
+      altLabelContainer = chordType1.useUpper ? chordDegreesUpper : chordDegrees;
     }
     if (displayChordDegrees  && (focus2 || (neutral && hasChord2 && !hasChord1))) {
-      chordType2.useUpper ? altLabelContainer = chordDegreesUpper : altLabelContainer = chordDegrees;
+      altLabelContainer = chordType2.useUpper ? chordDegreesUpper : chordDegrees;
     }
   }
 
   if (mapScales) {
     if (displayChordDegrees && focus1) {
       chordKey = selectedChord.notesToDegrees;
-      selectedChord.options[chordObjKey].useUpper !== undefined ? altLabelContainer = chordDegreesUpper : altLabelContainer = chordDegrees;
+      altLabelContainer = selectedChord.options[chordObjKey].useUpper !== undefined ? chordDegreesUpper : chordDegrees;
     }
     if (displayChordDegrees  && focus2) {
       chordKey = selectedChord2.notesToDegrees;
-      selectedChord2.options[chord2ObjKey].useUpper !== undefined ? altLabelContainer = chordDegreesUpper : altLabelContainer = chordDegrees;
+      altLabelContainer = selectedChord2.options[chord2ObjKey].useUpper !== undefined ? chordDegreesUpper : chordDegrees;
     }
     if (displayChordDegrees && neutral) {
       altLabelContainer = labelContainer;
@@ -69,22 +118,19 @@ export const String = ({string, firstString, lastString}) => {
     }
     if (displayChordDegrees  && neutral && !chordTwoSelected) {
       chordKey = selectedChord.notesToDegrees;
-      selectedChord.options[chordObjKey].useUpper !== undefined ? altLabelContainer = chordDegreesUpper : altLabelContainer = chordDegrees;
+      altLabelContainer = selectedChord.options[chordObjKey].useUpper !== undefined ?chordDegreesUpper : chordDegrees;
     }
   }
 
-  if (lefty) {
-    currentString = stringsLeft[string];
-    name = 'string-left';
-    openClass = 'open-left';
-    openNoteClass = 'openNoteLeft';
-    noteClass = 'noteLeft';
-    capoClass = 'capo_neck_fret_lefty';
-  }
+  let name = lefty ? 'string-left' : 'string';
+  let openClass = lefty ? 'open-left' : 'open';
+  let openNoteClass = lefty ? 'openNoteLeft' : 'openNote';
+  let noteClass = lefty ? 'noteLeft' : 'note';
+  let capoClass = lefty ? 'capo_neck_fret_lefty' : 'capo_neck_fret';
 
   if (currentString && (mapScales || welcome || tutorial)) {
-    for(var i = 0; i < currentString.length; i++) {
-      var containsNote = false;
+    for(let i = 0; i < currentString.length; i++) {
+      let containsNote = false;
       for(var j = 0; j < currentString[i].length; j++) {
         if(scale.includes(currentString[i][j])) {
           containsNote = true;
@@ -124,7 +170,7 @@ export const String = ({string, firstString, lastString}) => {
   const chordKey2Empty = JSON.stringify(chordKey2) === '{}'
   const twoChordsSelected = chordOneSelected === true && chordTwoSelected === true;
 
-  (lefty) ? openString = notes.length - 1 : openString = 0;
+  openString = (lefty) ? notes.length - 1 : 0;
 
   return (
     <div className={`${name}`}>

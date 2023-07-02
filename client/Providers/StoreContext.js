@@ -168,9 +168,9 @@ export default ({ children }) => {
     if(mapScales) {
       if (currentChordTones.length > 0 && currentChordTones2.length > 0) {
         let checker = {};
-        currentChordTones.forEach((note) => { checker[note] = true });
+        currentChordTones.forEach(note => checker[note] = true);
         currentChordTones2.forEach((note) => {
-          if (checker[note]) { shared.push(note); }
+          if (checker[note]) shared.push(note);
         });
       }
     }
@@ -289,8 +289,8 @@ export default ({ children }) => {
   const handleNavChoice = (e) => {
     setDisplayChordDegrees(false);
     setChordFocus('Neutral');
-    if (e.target.title === 'mapChords') { setRenderView('Map Chords'); }
-    if (e.target.title === 'mapScales') { setRenderView('Map Scales'); }
+    if (e.target.title === 'mapChords') setRenderView('Map Chords');
+    if (e.target.title === 'mapScales') setRenderView('Map Scales');
   }
 
 
@@ -310,7 +310,7 @@ export default ({ children }) => {
 
   const handleSingleOrCompare = (e) => {
     if(compare) { setCompare(false); resetSelectedChord2(); }
-    if(!compare) { setCompare(true); }
+    if(!compare) setCompare(true);
   }
 
 
@@ -318,7 +318,7 @@ export default ({ children }) => {
     let dataArray = e.target.title.split('.');
     let [instrument, tuning] = [dataArray[0], dataArray[1]];
     let [strings, mirrored] = [dataArray.slice(2), []];
-    strings.forEach((string) => { mirrored.unshift(string) });
+    strings.forEach(string => mirrored.unshift(string));
 
     setCurrentStrings(strings);
     setCurrentStringsMirror(mirrored);
@@ -331,11 +331,11 @@ export default ({ children }) => {
     let root = e.target.outerText;
     if (which === '1'){
       setRoot1(root);
-      if(voicing1) { getChord(root, voicing1, which); }
+      if(voicing1) getChord(root, voicing1, which);
     }
     if (which === '2'){
       setRoot2(root);
-      if(voicing2) { getChord(root, voicing2, which); }
+      if(voicing2) getChord(root, voicing2, which);
     }
   }
 
@@ -344,27 +344,53 @@ export default ({ children }) => {
     let spelling = e.target.outerText;
     if(which === '1') {
       setVoicing1(spelling);
-      if(root1) { getChord(root1, spelling, which); }
+      if(root1) getChord(root1, spelling, which);
     }
     if(which === '2') {
       setVoicing2(spelling);
-      if(root2) { getChord(root2, spelling, which); }
+      if(root2) getChord(root2, spelling, which);
     }
   }
 
 
-  const handleView = (e) => { setView(e.target.title);  setWholeNeck(); }
+  const handleView = e => { setView(e.target.title);  setWholeNeck(); }
 
-
-  const markNote = (note) => { selNote === note ? setSelNote('') : setSelNote(note) }
+  const markNote = note => selNote === note ? setSelNote('') : setSelNote(note);
 
 
   const resetCard = (chord) => {
+    const cards = [
+      'ch0',
+      'ch1',
+      'ch2',
+      'ch3',
+      'ch4',
+      'ch5',
+      'ch6'
+    ];
+
+    const typeFunc = [
+      setCh0,
+      setCh1,
+      setCh2,
+      setCh3,
+      setCh4,
+      setCh5,
+      setCh6
+    ];
+
+    const altFunc = [
+      setCh0Alt,
+      setCh1Alt,
+      setCh2Alt,
+      setCh3Alt,
+      setCh4Alt,
+      setCh5Alt,
+      setCh6Alt
+    ];
+
     const count = resetVoicingCount - 1;
-    const cards = ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6'];
     const index = cards.indexOf(chord);
-    const typeFunc = [setCh0, setCh1, setCh2, setCh3, setCh4, setCh5, setCh6];
-    const altFunc = [setCh0Alt, setCh1Alt, setCh2Alt, setCh3Alt, setCh4Alt, setCh5Alt, setCh6Alt];
     typeFunc[index]('Triad');
     altFunc[index](false);
     setResetVoicingCount(count);
@@ -456,8 +482,8 @@ export default ({ children }) => {
 
   const selectChord2 = (chord, tones, key) => {
     let [notes, checker, shared] = [currentChordTones, {}, []];
-    notes.forEach((note) => { checker[note] = true });
-    tones.forEach((tone) => { if (checker[tone]) { shared.push(tone) } });
+    notes.forEach(note =>  checker[note] = true);
+    tones.forEach((tone) => { if (checker[tone]) shared.push(tone) });
     if(chord == selectedChord2) {
       resetSelectedChord2();
     }
@@ -493,7 +519,7 @@ export default ({ children }) => {
 
   const updateWindowCycle = (stage) => {
     setWindowCycle(stage);
-    if (stage === 'off') { setNeckWindowMode('none') }
+    if (stage === 'off') setNeckWindowMode('none')
   }
 
 

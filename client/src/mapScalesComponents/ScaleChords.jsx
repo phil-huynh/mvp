@@ -5,14 +5,38 @@ import { useStoreContext } from '../../Providers/StoreContext.js';
 
 export const ScaleChords = () => {
   const {State, Setters, Conditions} = useStoreContext();
-  const {ch0, ch1, ch2, ch3, ch4, ch5, ch6, keyCenter, ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt} = State;
+  const {
+    ch0,
+    ch1,
+    ch2,
+    ch3,
+    ch4,
+    ch5,
+    ch6,
+    keyCenter,
+    ch0Alt,
+    ch1Alt,
+    ch2Alt,
+    ch3Alt,
+    ch4Alt,
+    ch5Alt,
+    ch6Alt
+  } = State;
 
   let [chords, keyChords] = [keyCenter.chords, []];
   const type = [ch0, ch1, ch2, ch3, ch4, ch5, ch6];
   const wasAltered = [ch0Alt, ch1Alt, ch2Alt, ch3Alt, ch4Alt, ch5Alt, ch6Alt];
 
   if(chords) {
-    keyChords = [chords.oneChord, chords.twoChord, chords.threeChord, chords.fourChord, chords.fiveChord, chords.sixChord, chords.sevenChord];
+    keyChords = [
+      chords.oneChord,
+      chords.twoChord,
+      chords.threeChord,
+      chords.fourChord,
+      chords.fiveChord,
+      chords.sixChord,
+      chords.sevenChord
+    ];
   }
 
   return (

@@ -10,15 +10,36 @@ export const MapScalesRender = () => {
 
   const {State, Setters, Conditions} = useStoreContext();
 
-  const {showAlter, currentCard, currentList, sharedNotes, selNote, scale, scaleName, currentChordTones, currentChordTones2, chordOneSelected, resetVoicingCount, tonic, defaultType, displayChordDegrees} = State;
+  const {
+    showAlter,
+    currentCard,
+    currentList,
+    sharedNotes,
+    selNote,
+    scale,
+    scaleName,
+    currentChordTones,
+    currentChordTones2,
+    chordOneSelected,
+    resetVoicingCount,
+    tonic,
+    defaultType,
+    displayChordDegrees
+  } = State;
 
-  const {setShowTonicMenu, setShowScaleMenu, markNote, handleSevenths, handleChordDegrees, resetChords, handleAlterChord, handleAlterChordWindow} = Setters;
+  const {
+    setShowTonicMenu,
+    setShowScaleMenu,
+    markNote,
+    handleSevenths,
+    handleChordDegrees,
+    resetChords,
+    handleAlterChord,
+    handleAlterChordWindow
+  } = Setters;
 
-  let resetClass = 'reset_button resetVoicings ';
-  resetVoicingCount ? resetClass += ' can_reset' : null;
-
-  let chordDegClass = 'chordDegButton';
-  displayChordDegrees ? chordDegClass += ' toggle_on chordDegToggle' : null;
+  const resetClass = resetVoicingCount ? 'reset_button resetVoicings can_reset' : 'reset_button resetVoicings'
+  const chordDegClass = displayChordDegrees ? 'chordDegButton toggle_on chordDegToggle' : 'chordDegButton'
 
   return (
     <React.Fragment>

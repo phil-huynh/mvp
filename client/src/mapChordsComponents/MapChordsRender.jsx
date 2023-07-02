@@ -5,7 +5,15 @@ import { useStoreContext } from '../../Providers/StoreContext.js';
 export const MapChordsRender = () => {
 
   const {State, Setters, Conditions} = useStoreContext();
-  const {root1, root2, voicing1, voicing2, calcChord1, calcChord2} = State;
+
+  const {
+    root1,
+    root2,
+    voicing1,
+    voicing2,
+    calcChord1,
+    calcChord2
+  } = State;
 
   return (
     <div className="testContainer">

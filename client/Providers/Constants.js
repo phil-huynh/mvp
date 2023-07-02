@@ -7,7 +7,20 @@ const dim = '\u00B0';
 
 
 const enharmonic = (note) => {
-  let chromaticScale = ["C", [`C${sharp}`, `D${flat}`], "D", [`D${sharp}`, `E${flat}`], "E", "F", [`F${sharp}`, `G${flat}`], "G", [`G${sharp}`, `A${flat}`], "A", [`A${sharp}`, `B${flat}`], "B"];
+  let chromaticScale = [
+    "C",
+    [`C${sharp}`, `D${flat}`],
+    "D",
+    [`D${sharp}`, `E${flat}`],
+    "E",
+    "F",
+    [`F${sharp}`, `G${flat}`],
+    "G",
+    [`G${sharp}`, `A${flat}`],
+    "A",
+    [`A${sharp}`, `B${flat}`],
+    "B"
+  ];
 
   let [noteBase, distanceToMove, enharmonicEquivalent] = [note[0], 0, '']
   let indexOfNoteBase = chromaticScale.indexOf(noteBase);

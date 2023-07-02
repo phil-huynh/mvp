@@ -6,23 +6,46 @@ import { Constants } from '../../Providers/Constants.js';
 export const ChordCalculator = ({root, voicing, whichCalculator, chord}) => {
 
   const {State, Setters, Conditions} = useStoreContext();
-  const {sharp, flat, dblSharp, dblFlat, natural, dim, rows, rowClasses, chromatic} = Constants;
-  const {chordDegrees, chordDegreesUpper, chordFocus, sharedNotes} = State;
-  const {handleRootChange, handleVoicingChange, setChordFocus, clear} = Setters;
-  const {neutral} = Conditions;
 
-  let chordNameClass = `calc_chord_name${whichCalculator}`;
-  let chordNoteClass = `calc_notes${whichCalculator}`;
-  let clearClass = 'clear_button';
+  const {
+    sharp,
+    flat,
+    dblSharp,
+    dblFlat,
+    natural,
+    dim,
+    rows,
+    rowClasses,
+    chromatic
+  } = Constants;
 
+  const {
+    chordDegrees,
+    chordDegreesUpper,
+    chordFocus,
+    sharedNotes
+  } = State;
 
-  if (root || voicing) {
-    chordNameClass += ` calc_header_on_${whichCalculator}`;
-    clearClass += ' clear_on';
-  }
-  if(chord && chord.length > 0) {
-    chordNoteClass += ` calc_header_on_${whichCalculator}`;
-  }
+  const {
+    handleRootChange,
+    handleVoicingChange,
+    setChordFocus,
+    clear
+  } = Setters;
+
+  const { neutral } = Conditions;
+
+  const  clearClass = root || voicing ? 'clear_button clear_on' : 'clear_button';
+
+  const  chordNameClass = root || voicing ?
+    `calc_chord_name${whichCalculator} calc_header_on_${whichCalculator}`
+    :
+    `calc_chord_name${whichCalculator}`;
+
+  const chordNoteClass = chord && chord.length > 0 ?
+    `calc_notes${whichCalculator} calc_header_on_${whichCalculator}`
+    :
+    `calc_notes${whichCalculator}`;
 
   return (
     <div className="calculatorContainer">

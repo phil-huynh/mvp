@@ -4,15 +4,24 @@ import { useStoreContext } from '../../Providers/StoreContext.js';
 export const Header = () => {
   const {State, Setters, Conditions} = useStoreContext();
 
-  const {renderView} = State;
-  const {handleNavChoice, setShowFindStructures, setRenderView, setShowTutorial} = Setters;
-  const {mapScales, mapChords, tutorial} = Conditions;
+  const { renderView } = State;
 
-  let [mapScalesToggle, mapChordsToggle, tutorialToggle] = ['', '', ''];
+  const {
+    mapScales,
+    mapChords,
+    tutorial
+  } = Conditions;
 
-  mapScales ? mapScalesToggle = 'toggle_on' : '';
-  mapChords ? mapChordsToggle = 'toggle_on' : '';
-  tutorial ? tutorialToggle = 'toggle_on' : '';
+  const {
+    handleNavChoice,
+    setShowFindStructures,
+    setRenderView,
+    setShowTutorial
+  } = Setters;
+
+  const mapScalesToggle = mapScales ? 'toggle_on' : '';
+  const mapChordsToggle = mapChords ? 'toggle_on' : '';
+  const tutorialToggle = tutorial ? 'toggle_on' : '';
 
   return (
     <span className="navbar">
