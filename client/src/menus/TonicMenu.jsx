@@ -28,7 +28,10 @@ export const TonicMenu = () => {
           key={tonic}
           className='modalMenuChoice'
           onClick={(e) => {getScale(e.target.title, scaleType); setShowTonicMenu(false)}}
-          title={tonic}>{tonic}</div>
+          title={tonic}
+        >
+          {tonic}
+        </div>
       ))}
     </Modal>
   )

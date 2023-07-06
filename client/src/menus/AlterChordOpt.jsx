@@ -22,7 +22,7 @@ export const AlterChordOpt = () => {
           </h2>
         </Modal.Title>
       </Modal.Header>
-      {currentList ? currentList.map((choice) => (
+      {currentList && currentList.map(choice => (
         <div
           key={choice}
           className='modalMenuChoice'
@@ -31,8 +31,7 @@ export const AlterChordOpt = () => {
         >
           {chordOptRoot}{choice[0]}
         </div>
-      )):  null
-      }
+      ))}
     </Modal>
   )
 }

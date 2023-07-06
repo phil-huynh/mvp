@@ -67,7 +67,7 @@ export const MapScalesRender = () => {
         </div>
         <div className="spelledScale_container">
           <div className="spelledScale">
-            {scale ? scale.map((note, i) => {
+            {scale && scale.map((note, i) => {
               let noteClass;
               if (note === selNote) {
                 noteClass = 'noteRef targetNote';
@@ -93,7 +93,7 @@ export const MapScalesRender = () => {
                     {`   ${note}   `}
                   </span>
               )
-            }): null}
+            })}
           </div>
         </div>
         <div className="defaultChordLabel_container">
@@ -104,7 +104,7 @@ export const MapScalesRender = () => {
             <span className="defaultVoicing" onClick={(e) => handleSevenths(e)}>{`${defaultType}`}</span>
           </span>
         </div>
-        {chordOneSelected ?
+        {chordOneSelected &&
           <div className="chordDegree_container">
             <span
               className={chordDegClass}
@@ -113,7 +113,6 @@ export const MapScalesRender = () => {
               Chord Degrees
             </span>
           </div>
-          : null
         }
         <div className="resetVoicings_container">
           <div

@@ -57,7 +57,7 @@ export const ScaleChords = () => {
 
   return (
     <Row>
-      {chords && keyChords ? keyChords.map((chord, i) => (
+      {(chords && keyChords) && keyChords.map((chord, i) => (
         <Col key={`${i}${chord}`}>
           <Chord
             chord={chord}
@@ -66,7 +66,7 @@ export const ScaleChords = () => {
             whichChordAmI={`ch${i}`}
           />
         </Col>
-      )): null}
+      ))}
     </Row>
   )
 }

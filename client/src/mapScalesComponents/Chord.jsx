@@ -113,9 +113,19 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
 
           <Card.Text>{tones.map ((tone, i) => (
             sharedNotes.length > 0 && sharedNotes.includes(tone) && (selected || selected2) ?
-            <span className="sharedCardNote" key={`${i}${tone}`}>&nbsp;{tone}&nbsp;</span>
+            <span
+              className="sharedCardNote"
+              key={`${i}${tone}`}
+            >
+              &nbsp;{tone}&nbsp;
+            </span>
             : tone === selNote ?
-            <span className="targetNote" key={`${i}${tone}`}>&nbsp;{tone}&nbsp;</span>
+            <span
+              className="targetNote"
+              key={`${i}${tone}`}
+            >
+              &nbsp;{tone}&nbsp;
+            </span>
             :
             <span key={`${i}${tone}`}>&nbsp;{tone}&nbsp;</span>
           ))}
@@ -199,14 +209,13 @@ export const Chord = ({chord, whichChordAmI, wasAltered, type}) => {
             : null
           }
           <Card.Footer></Card.Footer>
-          {wasAltered ?
+          {wasAltered &&
             <Card.Footer
               className='resetCardButton'
               onClick={()=>{resetCard(whichChordAmI)}}
             >
               Reset Me
             </Card.Footer>
-            : null
           }
         </div>
       </Card>:null

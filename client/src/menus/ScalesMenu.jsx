@@ -28,7 +28,10 @@ export const ScalesMenu = () => {
           key={`${i}${label}`}
           className="modalMenuChoice"
           onClick={(e) => {handleScaleChange(e); setShowScaleMenu(false)}}
-          title={titles[i]}>{label}</div>
+          title={titles[i]}
+        >
+          {label}
+        </div>
       ))}
     </Modal>
   )
