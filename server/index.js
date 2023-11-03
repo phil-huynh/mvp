@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const port = 3000;
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const Music = require('./music/music_Main.js');
 
 app.listen(port, () => {
@@ -10,8 +10,8 @@ app.listen(port, () => {
 })
 
 app.use(express.json());
+// app.use(morgan("dev"));
 app.use('/', express.static(path.join(__dirname, '../dist')));
-app.use(morgan("dev"));
 
 
 
