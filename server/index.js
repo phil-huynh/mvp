@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = 3000;
+const port = 80;
 // const morgan = require('morgan');
 const Music = require('./music/music_Main.js');
 
